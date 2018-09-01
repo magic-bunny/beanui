@@ -19,6 +19,14 @@
               <@createTable formId=formId id=o.id element=o/>
             <#elseif o.type="DatePicker">
               <@createRate formId=formId id=o.id element=o/>
+            <#elseif o.type="Alert">
+              <@createAlert formId=formId id=o.id element=o/>
+            <#elseif o.type="Slider">
+              <@createSlider formId=formId id=o.id element=o/>
+            <#elseif o.type="Checkbox">
+              <@createCheckbox formId=formId id=o.id element=o/>
+            <#elseif o.type="CheckboxGroup">
+              <@createCheckboxGroup formId=formId id=o.id element=o/>
             </#if>
             </template>
             </#list>

@@ -19,6 +19,14 @@
     <@createTable formId=formId id=object.id element=object/>
 <#elseif object.type="Rate">
     <@createRate formId=formId id=object.id element=object/>
+<#elseif object.type="Alert">
+    <@createAlert formId=formId id=object.id element=object/>
+<#elseif object.type="Slider">
+    <@createSlider formId=formId id=object.id element=object/>
+<#elseif object.type="Checkbox">
+    <@createCheckbox formId=formId id=object.id element=object/>
+<#elseif object.type="CheckboxGroup">
+    <@createCheckboxGroup formId=formId id=object.id element=object/>
 </#if>
 </#list>
 </el-form-item>

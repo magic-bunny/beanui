@@ -1,0 +1,14 @@
+title: root
+children:
+  - title: example
+    icon: example
+    children:
+    - title: demo1
+      component: demo.view.TestComponent
+      icon: star
+    - title: demo2
+      component: demo.view.ABCDComponent
+      icon: lock
+    - title: demo3
+      component: demo.view.NewComponent
+      icon: eye

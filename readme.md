@@ -5,8 +5,8 @@
 A JAVA Web framework based on Javabean
 
 ## Dependencies
-1. install nodejs or npm;
-2. install apache maven;
+1. install [nodejs](https://nodejs.org) or [npm](https://www.npmjs.com/);
+2. install [apache maven](http://maven.apache.org);
 
 ## Getting Started
 1. `cd beanui/vue`;

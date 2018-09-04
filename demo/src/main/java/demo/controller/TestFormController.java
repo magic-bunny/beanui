@@ -51,8 +51,8 @@ public class TestFormController {
     @RequestMapping(value="/demo3",  method = RequestMethod.GET)
     public TestForm test3() {
         TestForm testForm = new TestForm();
-        Map detail = new HashMap();
         List<Map<String, String>> options = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> addressData = new ArrayList<Map<String, String>>();
         options.add(new HashMap<String, String>() {{
             put("label", "text1");
             put("value", "t1");
@@ -61,9 +61,21 @@ public class TestFormController {
             put("label", "text2");
             put("value", "t2");
         }});
+        addressData.add(new HashMap<String, String>(){{
+            put("key", "1");
+            put("label", "address1");
+        }});
+        addressData.add(new HashMap<String, String>(){{
+            put("key", "2");
+            put("label", "address2");
+        }});
         testForm.setOptions(options);
         testForm.setDetail("");
         testForm.setLastDate(new Date());
+        testForm.setAddressData(addressData);
+        testForm.setAddress(new ArrayList<String>() {{
+            add("2");
+        }});
         return testForm;
     }
 }

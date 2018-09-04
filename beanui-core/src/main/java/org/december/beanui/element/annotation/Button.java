@@ -1,6 +1,6 @@
 package org.december.beanui.element.annotation;
 
-import org.december.beanui.element.ButtonSize;
+import org.december.beanui.element.Size;
 
 import java.lang.annotation.*;
 
@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Button {
     String text() default "";
-    String size() default ButtonSize.MEDIUM;//尺寸	string	medium / small / mini	—
+    String size() default Size.MEDIUM;//尺寸	string	medium / small / mini	—
     String type() default "";//类型	string	primary / success / warning / danger / info / text	—
     String plain() default "";//是否朴素按钮	boolean	—	false
     String round() default "";//是否圆角按钮	boolean	—	false

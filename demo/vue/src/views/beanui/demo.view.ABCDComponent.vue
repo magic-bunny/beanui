@@ -7,22 +7,38 @@
 >
 <el-form-item>
     <el-table :data="userQuery.users" >
-        <el-table-column prop="id" label="id" >
+        <el-table-column type="selection" prop="id" label="id" width="50" >
         </el-table-column>
         <el-table-column prop="name" label="name" >
+            <template slot-scope="scope">
+<el-input v-model="scope.row.name" size="mini" >
+</el-input>
+            </template>
         </el-table-column>
         <el-table-column prop="age" label="age" >
+            <template slot-scope="scope">
+<el-input-number v-model="scope.row.age" size="mini" >
+</el-input-number>
+            </template>
         </el-table-column>
         <el-table-column prop="stature" label="stature" >
         </el-table-column>
         <el-table-column prop="weight" label="weight" >
+            <template slot-scope="scope">
+<el-input-number v-model="scope.row.weight" size="mini" >
+</el-input-number>
+            </template>
         </el-table-column>
-        <el-table-column prop="lastDate" label="lastDate" >
+        <el-table-column prop="lastDate" label="lastDate" width="240" >
+            <template slot-scope="scope">
+<el-date-picker v-model="scope.row.lastDate" size="mini" >
+</el-date-picker>
+            </template>
         </el-table-column>
         <el-table-column prop="option" label="edit" >
             <template slot-scope="scope">
 <el-button
-    size="medium"
+    size="mini"
     text="edit"
 >
     edit

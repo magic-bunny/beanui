@@ -1,27 +1,30 @@
 package demo.view;
 
-import org.december.beanui.element.annotation.Button;
-import org.december.beanui.element.annotation.Table;
-import org.december.beanui.element.annotation.TableColum;
+import org.december.beanui.element.annotation.*;
+import org.december.beanui.element.Size;
 
 import java.util.Date;
 
 @Table
 public class User {
-    @TableColum
+    @TableColum(type = "selection", width = "50")
     private int id;
     @TableColum
+    @Input(size = Size.MINI)
     private String name;
     @TableColum
+    @InputNumber(size = Size.MINI)
     private int age;
     @TableColum
     private int stature;
     @TableColum
+    @InputNumber(size = Size.MINI)
     private int weight;
-    @TableColum
+    @TableColum(width = "240")
+    @DatePicker(size = Size.MINI)
     private Date lastDate;
     @TableColum(label = "edit")
-    @Button(text = "edit")
+    @Button(text = "edit", size = Size.MINI)
     private String option;
 
     public int getId() {

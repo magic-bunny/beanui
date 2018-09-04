@@ -31,22 +31,38 @@ label="lastDate"
 >
 <el-form-item>
     <el-table :data="testForm.users" >
-        <el-table-column prop="id" label="id" >
+        <el-table-column type="selection" prop="id" label="id" width="50" >
         </el-table-column>
         <el-table-column prop="name" label="name" >
+            <template slot-scope="scope">
+<el-input v-model="scope.row.name" size="mini" >
+</el-input>
+            </template>
         </el-table-column>
         <el-table-column prop="age" label="age" >
+            <template slot-scope="scope">
+<el-input-number v-model="scope.row.age" size="mini" >
+</el-input-number>
+            </template>
         </el-table-column>
         <el-table-column prop="stature" label="stature" >
         </el-table-column>
         <el-table-column prop="weight" label="weight" >
+            <template slot-scope="scope">
+<el-input-number v-model="scope.row.weight" size="mini" >
+</el-input-number>
+            </template>
         </el-table-column>
-        <el-table-column prop="lastDate" label="lastDate" >
+        <el-table-column prop="lastDate" label="lastDate" width="240" >
+            <template slot-scope="scope">
+<el-date-picker v-model="scope.row.lastDate" size="mini" >
+</el-date-picker>
+            </template>
         </el-table-column>
         <el-table-column prop="option" label="edit" >
             <template slot-scope="scope">
 <el-button
-    size="medium"
+    size="mini"
     text="edit"
 >
     edit
@@ -72,6 +88,19 @@ label="detail"
 </el-form-item>
 <el-form-item
 label="options"
+>
+</el-form-item>
+<el-form-item
+label="address"
+>
+<el-transfer v-model="testForm.address"
+:data="testForm.addressData"
+:titles="['1','2']"
+>
+</el-transfer>
+</el-form-item>
+<el-form-item
+label="addressData"
 >
 </el-form-item>
 <el-form-item
@@ -103,8 +132,8 @@ import request from '@/utils/request'
         var data = this.testForm;
         request({
             url: "/demo3",
-            method: "get",
-            data
+            method: "get"
+            
         }).then(res => {
             this.testForm = res.data;
         }).catch(err => {
@@ -113,7 +142,7 @@ import request from '@/utils/request'
       },
     data() {
       return {
-                testForm: {"button":"","password":"","button2":"","level":"","options":[],"isAdmin":"","detail":"","users":[],"username":"","lastDate":""}
+                testForm: {"button":"","password":"","button2":"","address":"","level":"","options":[],"isAdmin":"","detail":"","users":[],"addressData":[],"username":"","lastDate":""}
       }
     },
     methods: {

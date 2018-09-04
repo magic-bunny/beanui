@@ -183,6 +183,8 @@ public class ComponentBuilder extends Builder {
                         results.put(field.getName(), new ArrayList());
                     } else if(annotation.annotationType() == Table.class) {
                         results.put(field.getName(), new ArrayList());
+                    } else if(annotation.annotationType() == TransferData.class) {
+                        results.put(field.getName(), new ArrayList());
                     } else {
                         results.put(field.getName(), "");
                     }

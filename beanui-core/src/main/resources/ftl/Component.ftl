@@ -19,8 +19,8 @@ import request from '@/utils/request'
         var data = this.${form.id};
         request({
             url: "${event.path}",
-            method: "${event.method}",
-            data
+            method: "${event.method}"
+            <#if event.method='post'>,data</#if>
         }).then(res => {
             <#if event.method=="get">
             this.${form.id} = res.data;

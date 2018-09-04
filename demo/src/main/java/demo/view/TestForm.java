@@ -38,6 +38,12 @@ public class TestForm {
     @Option
     private List<Map<String, String>> options;
 
+    @Transfer(titles = "['1','2']", data = "addressData")
+    private List<String> address;
+
+    @TransferData
+    private List<Map<String, String>> addressData;
+
     @FormItem(prop = "test")
     @Click(rest = TestFormController.class, func = "test3")
     @Button(text = "upload", type = ButtonType.PRIMARY, icon = Icon.UPLOAD)
@@ -125,5 +131,21 @@ public class TestForm {
 
     public void setOptions(List<Map<String, String>> options) {
         this.options = options;
+    }
+
+    public List<String> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<String> address) {
+        this.address = address;
+    }
+
+    public List<Map<String, String>> getAddressData() {
+        return addressData;
+    }
+
+    public void setAddressData(List<Map<String, String>> addressData) {
+        this.addressData = addressData;
     }
 }

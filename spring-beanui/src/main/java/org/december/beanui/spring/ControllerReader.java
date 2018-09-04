@@ -1,11 +1,7 @@
 package org.december.beanui.spring;
-
-import org.december.beanui.bean.Event;
 import org.december.beanui.tool.RestReader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -14,46 +10,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class ControllerReader implements RestReader {
-    public void scan(Set<Class> classes) {
-        Map<String, Event> results = new HashMap<String, Event>();
-        for(Class clazz:classes) {
-            RestController restController = (RestController)clazz.getAnnotation(RestController.class);
-            if(restController != null) {
-                Method[] methods = clazz.getMethods();
-                for (Method method : methods) {
-                    RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
-                    RequestMethod[] requestMethods = requestMapping.method();
-                    for (RequestMethod requestMethod : requestMethods) {
-                        Event event = new Event();
-                        event.setPath(requestMapping.path().length>0?requestMapping.path()[0]:requestMapping.value()[0]);
-                        if(requestMethod == RequestMethod.GET) {
-                            event.setMethod("get");
-                            Class returnType = method.getReturnType();
-                            results.put(returnType.getName(), event);
-                        } else if(requestMethod == RequestMethod.POST) {
-                            event.setMethod("post");
-                            Annotation[][] parameterAnnotations = method.getParameterAnnotations();
-                            Class[] parameterTypes = method.getParameterTypes();
-                            for(int i=0;i<parameterAnnotations.length;i++) {
-                                Annotation[]oneParameterAnnotations = parameterAnnotations[i];
-                                for(Annotation parameterAnnotation : oneParameterAnnotations) {
-                                    if(parameterAnnotation.annotationType() == ResponseBody.class) {
-                                        Class parameterType = parameterTypes[i];
-                                        results.put(parameterType.getName(), event);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-
     public Map<String, String> readResourceSetting(Class clazz, String func) {
         Map<String, String> result = new HashMap<String, String>();
         try {

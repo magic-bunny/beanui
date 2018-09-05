@@ -14,6 +14,8 @@ public class Router {
     @JsonProperty
     private String icon;
     @JsonProperty
+    private boolean menu = true;
+    @JsonProperty
     private List<Router> children;
 
     public List<Router> getChildren() {
@@ -54,5 +56,13 @@ public class Router {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public boolean isMenu() {
+        return menu;
+    }
+
+    public void setMenu(boolean menu) {
+        this.menu = menu;
     }
 }

@@ -81,27 +81,16 @@ label="level"
 <el-form-item
 label="detail"
 >
-<el-select v-model="testForm.detail" placeholder="请选择" optionId="options" >
+<el-select v-model="testForm.detail" placeholder="请选择" :options="testForm.options" >
 <el-option v-for="item in testForm.options" :key="item.value" :label="item.label" :value="item.value">
 </el-option>
 </el-select>
 </el-form-item>
 <el-form-item
-label="options"
->
-</el-form-item>
-<el-form-item
 label="address"
 >
-<el-transfer v-model="testForm.address"
-:data="testForm.addressData"
-:titles="['1','2']"
->
+<el-transfer v-model="testForm.address" :data="testForm.addressData" :titles="['1','2']" >
 </el-transfer>
-</el-form-item>
-<el-form-item
-label="addressData"
->
 </el-form-item>
 <el-form-item
 >

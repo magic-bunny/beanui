@@ -1,5 +1,18 @@
 title: root
 children:
+  - path: login2
+    menu: false
+    component: demo.view.LoginComponent
+  - title: test
+    path:
+    icon: example
+    component: demo.view.TestComponent
+  - title: abcde
+    icon: example
+    component: demo.view.ABCDComponent
+  - title: newnewnew
+    icon: example
+    component: demo.view.NewComponent
   - title: example
     icon: example
     children:

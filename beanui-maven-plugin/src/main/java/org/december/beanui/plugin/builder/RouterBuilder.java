@@ -1,5 +1,6 @@
 package org.december.beanui.plugin.builder;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.TreeTraversingParser;
@@ -39,6 +40,7 @@ public class RouterBuilder extends Builder {
                 InputStream input = this.getClassLoader().getResourceAsStream(PluginSystem.getProperty("routerPath"));
                 YAMLFactory yamlFactory = new YAMLFactory();
                 ObjectMapper mapper = new ObjectMapper();
+                mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
                 YAMLParser yamlParser = yamlFactory.createParser(input);
                 final JsonNode node = mapper.readTree(yamlParser);
                 TreeTraversingParser treeTraversingParser = new TreeTraversingParser(node);

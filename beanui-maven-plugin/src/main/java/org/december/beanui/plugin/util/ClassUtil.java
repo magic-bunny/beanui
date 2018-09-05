@@ -1,5 +1,8 @@
 package org.december.beanui.plugin.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -163,7 +166,12 @@ public class ClassUtil {
     }
 
     public static Map annotation2map(Annotation annotation) {
+        return annotation2map(null, annotation);
+    }
+
+    public static Map annotation2map(String formId, Annotation annotation) {
         try {
+            Map results = new HashMap();
             String property = "memberValues";
             InvocationHandler invo = Proxy.getInvocationHandler(annotation);
             Field field = invo.getClass().getDeclaredField(property);
@@ -173,9 +181,16 @@ public class ClassUtil {
             while (iterator.hasNext()) {
                 String key = (String)iterator.next();
                 String value = (String)map.get(key);
-                map.put(key, value.replaceAll("_", "-"));
+                if(value.startsWith(":")) {
+                    key = ":" + key;
+                    value = value.substring(1);
+                } else if(value.startsWith("@")) {
+                    key = ":" + key;
+                    value = formId + "." + value.substring(1);
+                }
+                results.put(key.replaceAll("_", "-"), value);
             }
-            return map;
+            return results;
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

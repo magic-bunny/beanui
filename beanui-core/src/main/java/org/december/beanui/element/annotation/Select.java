@@ -8,7 +8,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Select {
     String label() default "";
-    String optionId() default "";
+    String options() default "";
     String multiple() default "";//	是否多选	boolean	—	false
     String disabled() default "";//	是否禁用	boolean	—	false
     String value_key() default "";//	作为 value 唯一标识的键名，绑定值为对象类型时必填	string	—	value

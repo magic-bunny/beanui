@@ -41,10 +41,11 @@ public class ComponentBuilder extends Builder {
                         events.add(buildEvent(formAnnotation));
                     }
                     if(formAnnotation.annotationType() == Form.class) {
-                        element.setId(formField.getName());
+                        String formId = formField.getName();
+                        element.setId(formId);
                         element.setType(formAnnotation.annotationType().getSimpleName());
-                        element.setContent(ClassUtil.annotation2map(formAnnotation));
-                        element.setChildren(buildForm(formField.getType()));
+                        element.setContent(ClassUtil.annotation2map(formId, formAnnotation));
+                        element.setChildren(buildForm(formId, formField.getType()));
                         String data = buildFormData(formField.getType());
                         datas.put(formField.getName(), data);
                     }
@@ -60,7 +61,7 @@ public class ComponentBuilder extends Builder {
         return result;
     }
 
-    private List<Element> buildForm(Class clazz) throws NoSuchFieldException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException {
+    private List<Element> buildForm(String formId, Class clazz) throws NoSuchFieldException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException {
         Field[] fields = clazz.getDeclaredFields();
         Field.setAccessible(fields, true);
         List<Element> list = new ArrayList<Element>();
@@ -73,8 +74,9 @@ public class ComponentBuilder extends Builder {
             formItemElement.setId(field.getName());
             formItemElement.setType(FormItem.class.getName());
             String prop = "";
+            Class type = null;
             if(formItem != null) {
-                Map map = ClassUtil.annotation2map(formItem);
+                Map map = ClassUtil.annotation2map(formId, formItem);
                 prop = formItem.prop();
                 formItemElement.setContent(map);
             } else {
@@ -86,13 +88,14 @@ public class ComponentBuilder extends Builder {
                 String packageName = annotation.annotationType().getPackage().getName();
                 if(Component.class.getPackage().getName().equals(packageName)) {
                     if(annotation.annotationType() != FormItem.class) {
+                        type = annotation.annotationType();
                         element.setId(field.getName());
-                        element.setType(annotation.annotationType().getSimpleName());
+                        element.setType(type.getSimpleName());
                         if(annotation.annotationType() == Table.class) {
                             ParameterizedType pt = (ParameterizedType)field.getGenericType();
-                            element.setChildren(buildTable((Class)pt.getActualTypeArguments()[0]));
+                            element.setChildren(buildTable(formId, (Class)pt.getActualTypeArguments()[0]));
                         }
-                        Map map = ClassUtil.annotation2map(annotation);
+                        Map map = ClassUtil.annotation2map(formId, annotation);
                         element.setContent(map);
                     }
                 }
@@ -115,7 +118,9 @@ public class ComponentBuilder extends Builder {
                 formItemElement.setChildren(new ArrayList<Element>() {{
                     add(element);
                 }});
-                list.add(formItemElement);
+                if(type != Option.class && type != TransferData.class) {
+                    list.add(formItemElement);
+                }
             }
         }
         return list;
@@ -136,7 +141,7 @@ public class ComponentBuilder extends Builder {
         return map;
     }
 
-    private List<Element> buildTable(Class clazz) {
+    private List<Element> buildTable(String formId, Class clazz) {
         Field[] fields = clazz.getDeclaredFields();
         Field.setAccessible(fields, true);
         List<Element> list = new ArrayList<Element>();
@@ -147,7 +152,7 @@ public class ComponentBuilder extends Builder {
             List<Element> children = new ArrayList<Element>();
             for (Annotation annotation : annotations) {
                 if(annotation.annotationType() == TableColum.class) {
-                    Map map = ClassUtil.annotation2map(annotation);
+                    Map map = ClassUtil.annotation2map(formId, annotation);
                     if(map.get("label") == null || "".equals(map.get("label"))) {
                         map.put("label", field.getName());
                     }
@@ -158,7 +163,7 @@ public class ComponentBuilder extends Builder {
                     element.setContent(map);
                 } else {
                     Element child = new Element();
-                    Map map = ClassUtil.annotation2map(annotation);
+                    Map map = ClassUtil.annotation2map(formId, annotation);
                     child.setId(field.getName());
                     child.setType(annotation.annotationType().getSimpleName());
                     child.setContent(map);

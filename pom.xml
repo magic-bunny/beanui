@@ -13,5 +13,6 @@
         <module>beanui-core</module>
         <module>spring-beanui</module>
         <module>beanui-maven-plugin-tool</module>
+        <module>demo</module>
     </modules>
 </project>

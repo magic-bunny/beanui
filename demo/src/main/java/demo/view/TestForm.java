@@ -1,7 +1,7 @@
 package demo.view;
 
 import demo.controller.TestFormController;
-import org.december.beanui.element.ButtonType;
+import org.december.beanui.element.Type;
 import org.december.beanui.element.Icon;
 import org.december.beanui.element.annotation.*;
 import org.december.beanui.event.annotation.Click;
@@ -32,13 +32,13 @@ public class TestForm {
     @Rate
     private int level;
 
-    @Select(placeholder = "请选择", optionId = "options")
+    @Select(placeholder = "请选择", options = "@options")
     private String detail;
 
     @Option
     private List<Map<String, String>> options;
 
-    @Transfer(titles = "['1','2']", data = "addressData")
+    @Transfer(titles = ":['1','2']", data = "@addressData")
     private List<String> address;
 
     @TransferData
@@ -46,7 +46,7 @@ public class TestForm {
 
     @FormItem(prop = "test")
     @Click(rest = TestFormController.class, func = "test3")
-    @Button(text = "upload", type = ButtonType.PRIMARY, icon = Icon.UPLOAD)
+    @Button(text = "upload", type = Type.PRIMARY, icon = Icon.UPLOAD)
     private String button;
 
     @FormItem(prop = "test")

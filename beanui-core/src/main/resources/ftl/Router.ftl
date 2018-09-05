@@ -43,50 +43,10 @@ export const constantRouterMap = [
     path: '/401',
     component: () => import('@/views/errorPage/401'),
     hidden: true
-  },
-  {
-    path: '',
-    component: Layout,
-    redirect: 'dashboard',
-    children: [
-      {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index'),
-        name: 'dashboard',
-        meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/documentation',
-    component: Layout,
-    redirect: '/documentation/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/documentation/index'),
-        name: 'documentation',
-        meta: { title: 'documentation', icon: 'documentation', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/guide',
-    component: Layout,
-    redirect: '/guide/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/guide/index'),
-        name: 'guide',
-        meta: { title: 'guide', icon: 'guide', noCache: true }
-      }
-    ]
   }
 ]
 
 export default new Router({
-  // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })
@@ -95,13 +55,37 @@ export const asyncRouterMap = [
     <#list router as r>
     {
         path: '/${r.path!r.title}',
-        component: Layout,
-        alwaysShow: true,
+        <#if r.menu=false>
+        component:() => import('@/views/beanui/${r.component}'),
+        hidden: true
+        <#else>
+        component: Layout
+        <#if r.component??>
+        ,redirect: <#if r.path??>
+        <#if r.path=''>''<#else>'/${r.path!r.title}/index'</#if>
+        <#else>
+        '/${r.path!r.title}/index'
+        </#if>,
+        children: [
+            {
+                path: <#if r.path??><#if r.path=''>''<#else>'index'</#if><#else>'index'</#if>,
+                component:() => import('@/views/beanui/${r.component}'),
+                name: '${r.title!r.path}',
+                meta: {
+                  title: '${r.title!r.path}'
+                  <#if r.icon??>,icon: '${r.icon}'</#if>
+                }
+            }
+        ]
+        <#else>
+        ,alwaysShow: true,
         meta: {
           title: '${r.title!r.path}'
           <#if r.icon??>,icon: '${r.icon}'</#if>
         }
         <#if r.children??>,children: <@createRouter children=r.children/></#if>
+        </#if>
+        </#if>
     }
     <#if r_has_next>,</#if>
     </#list>

@@ -26,59 +26,80 @@ export const constantRouterMap = [
     path: '/401',
     component: () => import('@/views/errorPage/401'),
     hidden: true
-  },
-  {
-    path: '',
-    component: Layout,
-    redirect: 'dashboard',
-    children: [
-      {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index'),
-        name: 'dashboard',
-        meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/documentation',
-    component: Layout,
-    redirect: '/documentation/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/documentation/index'),
-        name: 'documentation',
-        meta: { title: 'documentation', icon: 'documentation', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/guide',
-    component: Layout,
-    redirect: '/guide/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/guide/index'),
-        name: 'guide',
-        meta: { title: 'guide', icon: 'guide', noCache: true }
-      }
-    ]
   }
 ]
 
 export default new Router({
-  // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })
 
 export const asyncRouterMap = [
     {
+        path: '/login2',
+        component:() => import('@/views/beanui/demo.view.LoginComponent'),
+        hidden: true
+    }
+    ,
+    {
+        path: '/',
+        component: Layout
+        ,redirect: 
+        ''
+,
+        children: [
+            {
+                path: '',
+                component:() => import('@/views/beanui/demo.view.TestComponent'),
+                name: 'test',
+                meta: {
+                  title: 'test'
+                  ,icon: 'example'
+                }
+            }
+        ]
+    }
+    ,
+    {
+        path: '/abcde',
+        component: Layout
+        ,redirect:         '/abcde/index'
+        ,
+        children: [
+            {
+                path: 'index',
+                component:() => import('@/views/beanui/demo.view.ABCDComponent'),
+                name: 'abcde',
+                meta: {
+                  title: 'abcde'
+                  ,icon: 'example'
+                }
+            }
+        ]
+    }
+    ,
+    {
+        path: '/newnewnew',
+        component: Layout
+        ,redirect:         '/newnewnew/index'
+        ,
+        children: [
+            {
+                path: 'index',
+                component:() => import('@/views/beanui/demo.view.NewComponent'),
+                name: 'newnewnew',
+                meta: {
+                  title: 'newnewnew'
+                  ,icon: 'example'
+                }
+            }
+        ]
+    }
+    ,
+    {
         path: '/example',
-        component: Layout,
-        alwaysShow: true,
+        component: Layout
+        ,alwaysShow: true,
         meta: {
           title: 'example'
           ,icon: 'example'

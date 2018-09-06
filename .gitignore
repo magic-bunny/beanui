@@ -17,7 +17,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 
-/package-lock.json
+demo/vue/package-lock.json
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Maven template

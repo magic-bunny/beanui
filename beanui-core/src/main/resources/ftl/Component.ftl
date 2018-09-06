@@ -1,12 +1,14 @@
 <#include "/Form.ftl">
 
 <template>
-<div class="app-container">
+<div class="${component.id}-container">
+<div class="${component.id}-inner-container">
 <#list elements as object>
     <#if object.type="Form">
         <@createForm id=object.id children=object.children/>
     </#if>
 </#list>
+</div>
 </div>
 </template>
 <script>
@@ -33,11 +35,11 @@ import request from '@/utils/request'
     </#list>
     data() {
       return {
-        <#list datas?keys as key>
-            <#if key_has_next>
-                ${key}: ${datas[key]},
+        <#list elements as form>
+            <#if form_has_next>
+                ${form.id}: {},
             <#else>
-                ${key}: ${datas[key]}
+                ${form.id}: {}
             </#if>
         </#list>
       }
@@ -71,3 +73,27 @@ import request from '@/utils/request'
     }
   }
 </script>
+<style rel="stylesheet/scss" lang="scss">
+    .${component.id}-container {
+        <#if component.content.background!=''>
+        background-color: ${component.content.background};
+        </#if>
+        <#if component.content.center!=''>
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        </#if>
+    }
+    .${component.id}-inner-container {
+        margin: 20px;
+        <#if component.content.width!=''>
+        width: ${component.content.width};
+        </#if>
+        <#if component.content.center!=''>
+        margin: 120px auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+        </#if>
+    }
+</style>

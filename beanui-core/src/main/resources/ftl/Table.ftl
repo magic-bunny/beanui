@@ -1,6 +1,6 @@
 <#macro createTable formId,id,element>
 <el-form-item>
-    <el-table :data="${formId}.${id}" <#list element.content?keys as key><#if element.content[key]!=''>${key}="${element.content[key]}" </#if></#list>>
+    <el-table <#list element.content?keys as key><#if element.content[key]!=''>${key}="${element.content[key]}" </#if></#list>>
     <#list element.children as o>
         <el-table-column <#list o.content?keys as key><#if o.content[key]!=''>${key}="${o.content[key]}" </#if></#list>>
         <#list o.children as object>

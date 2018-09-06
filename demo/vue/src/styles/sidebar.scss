@@ -11,9 +11,9 @@
     transition: width 0.28s;
     width: 180px !important;
     height: 100%;
-    position: fixed;
+    position: absolute;
     font-size: 0px;
-    top: 0;
+    top: 50px;
     bottom: 0;
     left: 0;
     z-index: 1001;

@@ -1,7 +1,8 @@
 
 
 <template>
-<div class="app-container">
+<div class="NewComponent-container">
+<div class="NewComponent-inner-container">
     <el-form ref="testForm" :model="testForm" label-width="80px">
 <el-form-item
 label="username"
@@ -30,7 +31,7 @@ label="lastDate"
 <el-form-item
 >
 <el-form-item>
-    <el-table :data="testForm.users" >
+    <el-table >
         <el-table-column type="selection" prop="id" label="id" width="50" >
         </el-table-column>
         <el-table-column prop="name" label="name" >
@@ -95,7 +96,6 @@ label="address"
 <el-form-item
 >
 <el-button
-    size="medium"
     icon="el-icon-upload"
     text="upload"
     type="primary"
@@ -104,13 +104,13 @@ label="address"
     upload
 </el-button>
 <el-button
-    size="medium"
     text="clear"
 >
     clear
 </el-button>
 </el-form-item>
     </el-form>
+</div>
 </div>
 </template>
 <script>
@@ -131,7 +131,7 @@ import request from '@/utils/request'
       },
     data() {
       return {
-                testForm: {"button":"","password":"","button2":"","address":"","level":"","options":[],"isAdmin":"","detail":"","users":[],"addressData":[],"username":"","lastDate":""}
+                testForm: {}
       }
     },
     methods: {
@@ -150,3 +150,10 @@ import request from '@/utils/request'
     }
   }
 </script>
+<style rel="stylesheet/scss" lang="scss">
+    .NewComponent-container {
+    }
+    .NewComponent-inner-container {
+        margin: 20px;
+    }
+</style>

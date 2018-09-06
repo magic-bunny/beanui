@@ -29,16 +29,18 @@ public class TestForm {
     @Table()
     private List<User> users;
 
+    private String test;
+
     @Rate
     private int level;
 
-    @Select(placeholder = "请选择", options = "@options")
+    @Select(placeholder = "请选择", options = "$options")
     private String detail;
 
     @Option
     private List<Map<String, String>> options;
 
-    @Transfer(titles = ":['1','2']", data = "@addressData")
+    @Transfer(titles = ":['1','2']", data = "$addressData")
     private List<String> address;
 
     @TransferData
@@ -147,5 +149,13 @@ public class TestForm {
 
     public void setAddressData(List<Map<String, String>> addressData) {
         this.addressData = addressData;
+    }
+
+    public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test;
     }
 }

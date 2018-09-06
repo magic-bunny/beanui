@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Button {
     String text() default "";
-    String size() default Size.MEDIUM;//尺寸	string	medium / small / mini	—
+    String size() default "";//尺寸	string	medium / small / mini	—
     String type() default "";//类型	string	primary / success / warning / danger / info / text	—
     String plain() default "";//是否朴素按钮	boolean	—	false
     String round() default "";//是否圆角按钮	boolean	—	false
@@ -20,4 +20,5 @@ public @interface Button {
     String icon() default "";//图标类名	string	—	—
     String autofocus() default "";//是否默认聚焦	boolean	—	false
     String native_type() default "";//原生 type 属性	string	button / submit / reset	button
+    String style() default "";
 }

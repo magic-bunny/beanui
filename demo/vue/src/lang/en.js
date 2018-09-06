@@ -70,13 +70,11 @@ export default {
     theme: 'theme'
   },
   login: {
-    title: 'Login Form',
-    logIn: 'Log in',
+    title: 'Examplle',
+    logIn: 'Sign in',
     username: 'Username',
     password: 'Password',
-    any: 'any',
-    thirdparty: 'Or connect with',
-    thirdpartyTips: 'Can not be simulated on local, so please combine you own business simulation! ! !'
+    thirdparty: 'Other',
   },
   documentation: {
     documentation: 'Documentation',

@@ -184,9 +184,13 @@ public class ClassUtil {
                 if(value.startsWith(":")) {
                     key = ":" + key;
                     value = value.substring(1);
-                } else if(value.startsWith("@")) {
+                } else if(value.startsWith("$")) {
                     key = ":" + key;
-                    value = formId + "." + value.substring(1);
+                    if(value.contains(".")) {
+                        value = value.substring(1);
+                    } else{
+                        value = formId + "." + value.substring(1);
+                    }
                 }
                 results.put(key.replaceAll("_", "-"), value);
             }

@@ -1,7 +1,8 @@
 
 
 <template>
-<div class="app-container">
+<div class="ABCDComponent-container">
+<div class="ABCDComponent-inner-container">
     <el-form ref="userQuery" :model="userQuery" label-width="80px">
 <el-form-item
 >
@@ -50,8 +51,10 @@
 </el-form-item>
 <el-form-item
 >
+</el-form-item>
+<el-form-item
+>
 <el-button
-    size="medium"
     icon="el-icon-search"
     text="query"
     type="primary"
@@ -62,6 +65,7 @@
 </el-form-item>
     </el-form>
 </div>
+</div>
 </template>
 <script>
 import request from '@/utils/request'
@@ -69,7 +73,7 @@ import request from '@/utils/request'
   export default {
     data() {
       return {
-                userQuery: {"button":"","users":[]}
+                userQuery: {}
       }
     },
     methods: {
@@ -88,3 +92,10 @@ import request from '@/utils/request'
     }
   }
 </script>
+<style rel="stylesheet/scss" lang="scss">
+    .ABCDComponent-container {
+    }
+    .ABCDComponent-inner-container {
+        margin: 20px;
+    }
+</style>

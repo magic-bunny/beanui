@@ -1,7 +1,6 @@
 package org.december.beanui.plugin.builder;
 
 import freemarker.template.Template;
-import freemarker.template.TemplateException;
 import org.december.beanui.element.annotation.*;
 import org.december.beanui.event.annotation.Click;
 import org.december.beanui.event.annotation.Created;
@@ -11,7 +10,6 @@ import org.december.beanui.plugin.exception.ComponentBuilderException;
 import org.december.beanui.plugin.util.ClassUtil;
 import org.december.beanui.tool.RestReader;
 
-import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
@@ -25,11 +23,11 @@ import java.util.Map;
 public class ComponentBuilder extends Builder {
     private static RestReader pathBuilder;
 
-    public ComponentBuilder(String name, Class clazz, ClassLoader classLoader, String distPath) throws IOException, TemplateException, NoSuchFieldException, IllegalAccessException, InstantiationException, ClassNotFoundException, NoSuchMethodException {
+    public ComponentBuilder(String name, Class clazz, ClassLoader classLoader, String distPath) {
         super(name, clazz, classLoader, distPath);
     }
 
-    public Object run(Template template, Class clazz) throws BuilderException {
+    public Map run(Template template, Class clazz) throws BuilderException {
         Map result = new HashMap();
         try {
             Element component = new Element();
@@ -40,6 +38,7 @@ public class ComponentBuilder extends Builder {
             boolean isForm = false;
             component.setId(clazz.getSimpleName());
             component.setType(Component.class.getSimpleName());
+            component.setName(Component.class.getName());
             for(Annotation annotation:annotations) {
                 if(annotation.annotationType() == Component.class) {
                     component.setContent(ClassUtil.annotation2map(annotation));
@@ -63,6 +62,7 @@ public class ComponentBuilder extends Builder {
                     }
                     if(formAnnotation.annotationType() == Form.class) {
                         String formId = clazz.getSimpleName();
+                        component.setName(clazz.getName());
                         element.setId(formId);
                         element.setType(formAnnotation.annotationType().getSimpleName());
                         element.setContent(ClassUtil.annotation2map(formId, formAnnotation));
@@ -83,6 +83,7 @@ public class ComponentBuilder extends Builder {
                         if(formAnnotation.annotationType() == Form.class) {
                             String formId = formField.getName();
                             element.setId(formId);
+                            element.setName(formField.getType().getName());
                             element.setType(formAnnotation.annotationType().getSimpleName());
                             element.setContent(ClassUtil.annotation2map(formId, formAnnotation));
                             element.setChildren(buildForm(formId, formField.getType()));
@@ -109,8 +110,10 @@ public class ComponentBuilder extends Builder {
             Element formItemElement = new Element();
             List<Map> events = new ArrayList<Map>();
             Annotation[] annotations = field.getDeclaredAnnotations();
-            FormItem formItem = (FormItem)field.getAnnotation(FormItem.class);
+            FormItem formItem = field.getAnnotation(FormItem.class);
+            I18N i18n = field.getAnnotation(I18N.class);
             formItemElement.setId(field.getName());
+            formItemElement.setName(field.getType().getName());
             formItemElement.setType(FormItem.class.getName());
             String prop = "";
             Class type = null;
@@ -123,6 +126,9 @@ public class ComponentBuilder extends Builder {
                 map.put("label", "");
                 formItemElement.setContent(map);
             }
+            if(i18n != null) {
+                formItemElement.setI18n(ClassUtil.annotation2map(i18n));
+            }
             boolean isComponent = false;
             for (Annotation annotation : annotations) {
                 String packageName = annotation.annotationType().getPackage().getName();
@@ -131,6 +137,7 @@ public class ComponentBuilder extends Builder {
                     if(annotation.annotationType() != FormItem.class) {
                         type = annotation.annotationType();
                         element.setId(field.getName());
+                        element.setName(field.getType().getName());
                         element.setType(type.getSimpleName());
                         if(annotation.annotationType() == Table.class) {
                             if(field.getType() == List.class) {
@@ -196,7 +203,12 @@ public class ComponentBuilder extends Builder {
             Annotation[] annotations = field.getDeclaredAnnotations();
             Element element = new Element();
             element.setId(field.getName());
+            element.setName(field.getType().getName());
             List<Element> children = new ArrayList<Element>();
+            I18N i18n = field.getAnnotation(I18N.class);
+            if(i18n != null) {
+                element.setI18n(ClassUtil.annotation2map(i18n));
+            }
             boolean isCompoent = false;
             for (Annotation annotation : annotations) {
                 if(annotation.annotationType() == TableColum.class) {

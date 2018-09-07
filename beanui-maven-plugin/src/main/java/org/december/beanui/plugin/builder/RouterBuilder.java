@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.node.TreeTraversingParser;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLParser;
 import freemarker.template.Template;
-import freemarker.template.TemplateException;
 import org.december.beanui.element.annotation.Component;
 import org.december.beanui.plugin.bean.Router;
 import org.december.beanui.plugin.exception.BuilderException;
@@ -16,7 +15,6 @@ import org.december.beanui.plugin.util.ClassUtil;
 import org.december.beanui.plugin.util.PluginSystem;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.util.*;
@@ -28,7 +26,7 @@ public class RouterBuilder extends Builder {
         super(name, classLoader, distPath);
     }
 
-    public Object run(Template template) throws BuilderException {
+    public Map run(Template template) throws BuilderException {
         Map result = new HashMap();
         try {
             String routerPath = PluginSystem.getProperty("routerPath");
@@ -54,7 +52,7 @@ public class RouterBuilder extends Builder {
         return result;
     }
 
-    public void search(ClassLoader classLoader, Router router) throws TemplateException, NoSuchFieldException, IllegalAccessException, IOException, ClassNotFoundException, InstantiationException, NoSuchMethodException {
+    public void search(ClassLoader classLoader, Router router) throws ClassNotFoundException {
         if(router.getComponent() != null) {
             Class clazz = classLoader.loadClass(router.getComponent());
             Annotation[] annos = clazz.getAnnotations();

@@ -43,6 +43,7 @@
     text="edit"
 >
     edit
+
 </el-button>
             </template>
         </el-table-column>
@@ -61,6 +62,7 @@
     @click="click_button"
 >
     query
+
 </el-button>
 </el-form-item>
     </el-form>

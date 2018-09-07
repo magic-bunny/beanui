@@ -5,7 +5,9 @@ import java.util.Map;
 
 public class Element {
     private String id;
+    private String Name;
     private String type;
+    private Map i18n;
     private Map content;
     private List<Map> events;
     private List<Element> children;
@@ -64,5 +66,21 @@ public class Element {
 
     public void setEvents(List<Map> events) {
         this.events = events;
+    }
+
+    public Map getI18n() {
+        return i18n;
+    }
+
+    public void setI18n(Map i18n) {
+        this.i18n = i18n;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
     }
 }

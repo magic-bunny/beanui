@@ -3,7 +3,7 @@
 <template>
 <div class="LoginComponent-container">
 <div class="LoginComponent-inner-container">
-    <el-form ref="LoginComponent" :model="LoginComponent" label-width="80px">
+    <el-form ref="LoginComponent" :model="LoginComponent" label-width="120px">
 <el-form-item
 label=" "
 >

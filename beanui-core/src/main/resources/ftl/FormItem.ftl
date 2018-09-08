@@ -1,8 +1,11 @@
 <#macro createFormItem formId,element>
 <el-form-item
+<#if element.children[0].i18n??>
+:label="${r'$'}t('${element.children[0].i18n}')"
+<#else>
 <#if element.children[0].content.label??>
 <#if element.children[0].content.label=''>label="${element.children[0].id}"<#else>label="${element.children[0].content.label}"</#if>
-</#if>>
+</#if></#if>>
 <#list element.children as object>
 <#if object.type="Input">
     <@createInput formId=formId id=object.id element=object/>

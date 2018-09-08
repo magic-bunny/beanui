@@ -38,7 +38,6 @@ public class ComponentBuilder extends Builder {
             boolean isForm = false;
             component.setId(clazz.getSimpleName());
             component.setType(Component.class.getSimpleName());
-            component.setName(Component.class.getName());
             for(Annotation annotation:annotations) {
                 if(annotation.annotationType() == Component.class) {
                     component.setContent(ClassUtil.annotation2map(annotation));
@@ -62,7 +61,6 @@ public class ComponentBuilder extends Builder {
                     }
                     if(formAnnotation.annotationType() == Form.class) {
                         String formId = clazz.getSimpleName();
-                        component.setName(clazz.getName());
                         element.setId(formId);
                         element.setType(formAnnotation.annotationType().getSimpleName());
                         element.setContent(ClassUtil.annotation2map(formId, formAnnotation));
@@ -83,7 +81,6 @@ public class ComponentBuilder extends Builder {
                         if(formAnnotation.annotationType() == Form.class) {
                             String formId = formField.getName();
                             element.setId(formId);
-                            element.setName(formField.getType().getName());
                             element.setType(formAnnotation.annotationType().getSimpleName());
                             element.setContent(ClassUtil.annotation2map(formId, formAnnotation));
                             element.setChildren(buildForm(formId, formField.getType()));
@@ -111,9 +108,7 @@ public class ComponentBuilder extends Builder {
             List<Map> events = new ArrayList<Map>();
             Annotation[] annotations = field.getDeclaredAnnotations();
             FormItem formItem = field.getAnnotation(FormItem.class);
-            I18N i18n = field.getAnnotation(I18N.class);
             formItemElement.setId(field.getName());
-            formItemElement.setName(field.getType().getName());
             formItemElement.setType(FormItem.class.getName());
             String prop = "";
             Class type = null;
@@ -126,10 +121,8 @@ public class ComponentBuilder extends Builder {
                 map.put("label", "");
                 formItemElement.setContent(map);
             }
-            if(i18n != null) {
-                formItemElement.setI18n(ClassUtil.annotation2map(i18n));
-            }
             boolean isComponent = false;
+            I18N i18n = field.getAnnotation(I18N.class);
             for (Annotation annotation : annotations) {
                 String packageName = annotation.annotationType().getPackage().getName();
                 if(Component.class.getPackage().getName().equals(packageName)) {
@@ -137,7 +130,9 @@ public class ComponentBuilder extends Builder {
                     if(annotation.annotationType() != FormItem.class) {
                         type = annotation.annotationType();
                         element.setId(field.getName());
-                        element.setName(field.getType().getName());
+                        if(i18n != null) {
+                            element.setI18n(clazz.getName()+"."+field.getName());
+                        }
                         element.setType(type.getSimpleName());
                         if(annotation.annotationType() == Table.class) {
                             if(field.getType() == List.class) {
@@ -200,15 +195,14 @@ public class ComponentBuilder extends Builder {
         Field.setAccessible(fields, true);
         List<Element> list = new ArrayList<Element>();
         for (Field field : fields) {
+            I18N i18n = field.getAnnotation(I18N.class);
             Annotation[] annotations = field.getDeclaredAnnotations();
             Element element = new Element();
             element.setId(field.getName());
-            element.setName(field.getType().getName());
-            List<Element> children = new ArrayList<Element>();
-            I18N i18n = field.getAnnotation(I18N.class);
             if(i18n != null) {
-                element.setI18n(ClassUtil.annotation2map(i18n));
+                element.setI18n(clazz.getName()+"."+field.getName());
             }
+            List<Element> children = new ArrayList<Element>();
             boolean isCompoent = false;
             for (Annotation annotation : annotations) {
                 if(annotation.annotationType() == TableColum.class) {

@@ -2,7 +2,11 @@
 <el-form-item>
     <el-table <#list element.content?keys as key><#if element.content[key]!=''>${key}="${element.content[key]}" </#if></#list>>
     <#list element.children as o>
-        <el-table-column <#list o.content?keys as key><#if o.content[key]!=''>${key}="${o.content[key]}" </#if></#list>>
+        <el-table-column
+        <#list o.content?keys as key><#if o.content[key]!=''>${key}="${o.content[key]}" </#if></#list>
+        <#if o.i18n??>
+        :label="${r'$'}t('${o.i18n}')"
+        </#if>>
         <#list o.children as object>
             <template slot-scope="scope">
             <#if object.type="Input">

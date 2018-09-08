@@ -22,7 +22,7 @@
 <#include "/Autocomplete.ftl">
 
 <#macro createForm id,children>
-    <el-form ref="${id}" :model="${id}" label-width="80px">
+    <el-form ref="${id}" :model="${id}" label-width="120px">
         <#list children as object>
             <@createFormItem formId=id element=object/>
         </#list>

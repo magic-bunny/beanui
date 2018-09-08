@@ -3,15 +3,15 @@
 <template>
 <div class="NewComponent-container">
 <div class="NewComponent-inner-container">
-    <el-form ref="testForm" :model="testForm" label-width="80px">
+    <el-form ref="testForm" :model="testForm" label-width="120px">
 <el-form-item
-label="username"
+:label="$t('demo.view.TestForm.username')"
 >
 <el-input v-model="testForm.username" >
 </el-input>
 </el-form-item>
 <el-form-item
-label="password"
+:label="$t('demo.view.TestForm.password')"
 >
 <el-input v-model="testForm.password" >
 </el-input>
@@ -32,35 +32,49 @@ label="lastDate"
 >
 <el-form-item>
     <el-table >
-        <el-table-column type="selection" prop="id" label="id" width="50" >
+        <el-table-column
+        type="selection" prop="id" label="id" width="50" 
+>
         </el-table-column>
-        <el-table-column prop="name" label="name" >
+        <el-table-column
+        prop="name" label="name" 
+>
             <template slot-scope="scope">
 <el-input v-model="scope.row.name" size="mini" >
 </el-input>
             </template>
         </el-table-column>
-        <el-table-column prop="age" label="age" >
+        <el-table-column
+        prop="age" label="age" 
+>
             <template slot-scope="scope">
 <el-input-number v-model="scope.row.age" size="mini" >
 </el-input-number>
             </template>
         </el-table-column>
-        <el-table-column prop="stature" label="stature" >
+        <el-table-column
+        prop="stature" label="stature" 
+>
         </el-table-column>
-        <el-table-column prop="weight" label="weight" >
+        <el-table-column
+        prop="weight" label="weight" 
+>
             <template slot-scope="scope">
 <el-input-number v-model="scope.row.weight" size="mini" >
 </el-input-number>
             </template>
         </el-table-column>
-        <el-table-column prop="lastDate" label="lastDate" width="240" >
+        <el-table-column
+        prop="lastDate" label="lastDate" width="240" 
+>
             <template slot-scope="scope">
 <el-date-picker v-model="scope.row.lastDate" size="mini" >
 </el-date-picker>
             </template>
         </el-table-column>
-        <el-table-column prop="option" label="edit" >
+        <el-table-column
+        prop="option" label="edit" 
+>
             <template slot-scope="scope">
 <el-button
     size="mini"

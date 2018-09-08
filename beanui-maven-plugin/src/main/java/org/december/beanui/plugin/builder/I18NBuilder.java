@@ -1,15 +1,14 @@
 package org.december.beanui.plugin.builder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.template.Template;
 import org.december.beanui.element.annotation.I18N;
 import org.december.beanui.plugin.exception.BuilderException;
 import org.december.beanui.plugin.util.ClassUtil;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class I18NBuilder extends Builder {
     public I18NBuilder(String name, ClassLoader classLoader, String distPath) {
@@ -18,6 +17,8 @@ public class I18NBuilder extends Builder {
 
     @Override
     public Map run(Template template) throws BuilderException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map tree = new HashMap();
         Map results = new HashMap();
         Set<Class> classes = ClassUtil.getClasses(super.getClassLoader());
         for(Class clazz:classes) {
@@ -31,27 +32,39 @@ public class I18NBuilder extends Builder {
                     while(iterator.hasNext()) {
                         String key = (String)iterator.next();
                         String value = (String)map.get(key);
-                        if(results.containsKey(key)) {
-                            Map formMap = (Map)results.get(key);
-                            if(formMap.containsKey(clazz.getName())) {
-                                Map valueMap = (Map)formMap.get(clazz.getName());
-                                valueMap.put(field.getName(), value);
-                            } else {
-                                Map valueMap = new HashMap();
-                                valueMap.put(field.getName(), value);
-                                formMap.put(clazz.getName(), valueMap);
-                            }
-                        } else {
-                            Map formMap = new HashMap();
-                            Map valueMap = new HashMap();
-                            valueMap.put(field.getName(), value);
-                            formMap.put(clazz.getName(), valueMap);
-                            results.put(key, formMap);
+                        if(!"".equals(value)) {
+                            Map lastTree = buildTree(key+"."+clazz.getName(), tree);
+                            lastTree.put(field.getName(), value);
                         }
                     }
                 }
             }
         }
+
+        try {
+            Iterator iterator = tree.keySet().iterator();
+            while(iterator.hasNext()) {
+                String key = (String)iterator.next();
+                Object value = tree.get(key);
+                results.put(key, objectMapper.writeValueAsString(value));
+            }
+        } catch (JsonProcessingException e) {
+            throw new BuilderException(e);
+        }
+
         return results;
+    }
+
+    private Map buildTree(String className, Map tree) {
+        String[] pkgs = className.split("\\.");
+        Map lastTree = tree;
+        for(String pkg:pkgs) {
+            if(!lastTree.containsKey(pkg)) {
+                lastTree.put(pkg, new HashMap());
+            }
+            lastTree = (Map)lastTree.get(pkg);
+
+        }
+        return lastTree;
     }
 }

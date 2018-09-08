@@ -14,9 +14,11 @@ import java.util.Map;
 @Created(rest = TestFormController.class, func="test3")
 @Form
 public class TestForm {
+    @I18N(en = "user name", zh_CN = "用户名")
     @Input
     private String username;
 
+    @I18N(en = "password", zh_CN = "密码")
     @Input
     private String password;
 

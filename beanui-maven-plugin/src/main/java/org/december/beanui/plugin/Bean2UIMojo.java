@@ -73,6 +73,9 @@ public class Bean2UIMojo extends AbstractMojo {
             String i18nIndexDistPath = PluginSystem.getProperty("workPath") + File.separator + "src" + File.separator + "lang" + File.separator + "index.js";
             new I18NIndexBuilder("I18NIndex.ftl", classLoader, i18nIndexDistPath);
 
+            String langSelectDistPath = PluginSystem.getProperty("workPath") + File.separator + "src" + File.separator + "components" + File.separator + "LangSelect" + File.separator + "index.vue";
+            new I18NIndexBuilder("LangSelect.ftl", classLoader, langSelectDistPath);
+
             String os = System.getProperty("os.name");
             boolean isWin = false;
             if(os.toLowerCase().startsWith("win")){

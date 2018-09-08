@@ -35,23 +35,6 @@ public class Builder {
         }
     }
 
-    public Builder(String name, List<Class> classes, ClassLoader classLoader, String distPath) {
-        this.classLoader = classLoader;
-        Configuration configuration = new Configuration(Configuration.getVersion());
-        configuration.setClassForTemplateLoading(this.getClass(), "/ftl");
-        configuration.setDefaultEncoding("utf-8");
-        try {
-            Template template = configuration.getTemplate(name);
-            data = run(template, classes);
-            if(distPath != null && !"".equals(distPath))
-                buildData(data, distPath, template);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (BuilderException e) {
-            e.printStackTrace();
-        }
-    }
-
     public Builder(String name, Class clazz, ClassLoader classLoader, String distPath) {
         this.classLoader = classLoader;
         Configuration configuration = new Configuration(Configuration.getVersion());
@@ -75,7 +58,7 @@ public class Builder {
             Iterator iterator = map.keySet().iterator();
             while (iterator.hasNext()) {
                 String key = (String)iterator.next();
-                Object value = iterator.next();
+                Object value = map.get(key);
                 Map datas = new HashMap();
                 datas.put("datas", value);
                 outputFile(template, datas, distPath.replace("*", key));
@@ -106,10 +89,6 @@ public class Builder {
     }
 
     public Map run(Template template, Class clazz) throws BuilderException {
-        return null;
-    }
-
-    public Map run(Template template, List<Class> classes) throws BuilderException {
         return null;
     }
 

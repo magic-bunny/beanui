@@ -5,7 +5,7 @@ import Cookies from 'js-cookie'
 import enElementLocale from 'element-ui/lib/locale/lang/en'
 <#else>
 <#list langs as lang>
-import {langs?replace('-', '_')}ElementLocale from 'element-ui/lib/locale/lang/${lang}'
+import ${lang?replace('-', '_')}ElementLocale from 'element-ui/lib/locale/lang/${lang}'
 import ${lang?replace('-', '_')}Locale from './${lang}'
 </#list>
 </#if>

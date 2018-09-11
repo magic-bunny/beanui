@@ -1,7 +1,7 @@
 package org.december.beanui.plugin.builder;
 
 import freemarker.template.Template;
-import org.december.beanui.plugin.exception.BuilderException;
+import org.december.beanui.plugin.tool.exception.BuilderException;
 
 import java.util.*;
 

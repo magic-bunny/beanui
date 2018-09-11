@@ -1,4 +1,4 @@
-package org.december.beanui.tool;
+package org.december.beanui.plugin.tool;
 
 import java.util.Map;
 

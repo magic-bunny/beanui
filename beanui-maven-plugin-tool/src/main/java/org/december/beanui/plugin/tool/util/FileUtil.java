@@ -1,4 +1,4 @@
-package org.december.beanui.plugin.util;
+package org.december.beanui.plugin.tool.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -52,6 +52,7 @@ public class FileUtil {
     }
 
     public static boolean deleteDir(String path){
+        path = Path.e(path);
         File file = new File(path);
         if(!file.exists()){//判断是否待删除目录是否存在
             System.err.println("The dir are not exists!");

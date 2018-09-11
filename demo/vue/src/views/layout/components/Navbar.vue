@@ -1,5 +1,6 @@
 <template>
   <el-menu class="navbar" mode="horizontal">
+    <logo></logo>
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
     <breadcrumb class="breadcrumb-container"></breadcrumb>
 
@@ -23,17 +24,10 @@
         </div>
         <el-dropdown-menu slot="dropdown">
           <router-link to="/">
-            <el-dropdown-item>
-              {{$t('navbar.dashboard')}}
-            </el-dropdown-item>
+            <el-dropdown-item>Your settings</el-dropdown-item>
           </router-link>
-          <a target='_blank' href="https://github.com/PanJiaChen/vue-element-admin/">
-            <el-dropdown-item>
-              {{$t('navbar.github')}}
-            </el-dropdown-item>
-          </a>
           <el-dropdown-item divided>
-            <span @click="logout" style="display:block;">{{$t('navbar.logOut')}}</span>
+            <span @click="logout" style="display:block;">Sign out</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -43,6 +37,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Logo from '@/components/Logo'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import ErrorLog from '@/components/ErrorLog'
@@ -52,6 +47,7 @@ import ThemePicker from '@/components/ThemePicker'
 
 export default {
   components: {
+    Logo,
     Breadcrumb,
     Hamburger,
     ErrorLog,

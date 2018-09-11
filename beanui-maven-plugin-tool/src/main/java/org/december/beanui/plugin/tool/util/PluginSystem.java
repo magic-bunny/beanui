@@ -1,4 +1,4 @@
-package org.december.beanui.plugin.util;
+package org.december.beanui.plugin.tool.util;
 
 import java.util.Properties;
 

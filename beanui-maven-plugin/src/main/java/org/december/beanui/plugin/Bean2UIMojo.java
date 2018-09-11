@@ -6,17 +6,20 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 import org.december.beanui.plugin.bean.Router;
-import org.december.beanui.plugin.builder.I18NIndexBuilder;
-import org.december.beanui.plugin.builder.IndexBuilder;
 import org.december.beanui.plugin.builder.I18NBuilder;
+import org.december.beanui.plugin.builder.I18NIndexBuilder;
+import org.december.beanui.plugin.builder.ProjectNameBuilder;
 import org.december.beanui.plugin.builder.RouterBuilder;
-import org.december.beanui.plugin.util.FileUtil;
-import org.december.beanui.plugin.util.PluginSystem;
-import java.io.*;
+import org.december.beanui.plugin.tool.util.FileUtil;
+import org.december.beanui.plugin.tool.util.PluginSystem;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
 import java.util.List;
 
 @Mojo(name="bean2ui", requiresDependencyResolution = ResolutionScope.TEST)
@@ -55,26 +58,37 @@ public class Bean2UIMojo extends AbstractMojo {
             }
             ClassLoader classLoader = new URLClassLoader(runtimeUrls, Thread.currentThread().getContextClassLoader());
 
-            FileUtil.deleteDir( workPath + File.separator + "index.html");
-            FileUtil.deleteDir( workPath + File.separator + "src" + File.separator + "router");
-            FileUtil.deleteDir( workPath + File.separator + "src" + File.separator + "views" + File.separator + "beanui");
-            String routerDistPath = workPath + File.separator + "src" + File.separator + "router" + File.separator + "index.js";
-            String indexDistPath = workPath + File.separator + "index.html";
-            IndexBuilder baseBuilder = new IndexBuilder("index.ftl", classLoader, indexDistPath);
+            FileUtil.deleteDir( "${workPath}/index.html");
+            FileUtil.deleteDir( "${workPath}/src/router");
+            FileUtil.deleteDir( "${workPath}/src/views/beanui");
+            String routerDistPath = "${workPath}/src/router/index.js";
+            String indexDistPath = "${workPath}/index.html";
+            String logoDistPath = "${workPath}/src/components/Logo/index.vue";
+            String i18nDistPath = "${workPath}/src/lang/*.js";
+            String i18nIndexDistPath = "${workPath}/src/lang/index.js";
+            String langSelectDistPath = "${workPath}/src/components/LangSelect/Logo.ftl";
+
+            ProjectNameBuilder indexBuilder = new ProjectNameBuilder("Index.ftl", classLoader, indexDistPath);
+            indexBuilder.create();
+
+            ProjectNameBuilder logoBuilder = new ProjectNameBuilder("Logo.ftl", classLoader, logoDistPath);
+            logoBuilder.create();
+
             RouterBuilder routerBuilder = new RouterBuilder("Router.ftl", classLoader, routerDistPath);
+            routerBuilder.create();
 
             List<Router> routers = routerBuilder.getRouter().getChildren();
             for(Router router:routers) {
                 routerBuilder.search(classLoader, router);
             }
-            String i18nDistPath = PluginSystem.getProperty("workPath") + File.separator + "src" + File.separator + "lang" + File.separator + "*.js";
-            new I18NBuilder("I18N.ftl", classLoader, i18nDistPath);
+            I18NBuilder i18NBuilder = new I18NBuilder("I18N.ftl", classLoader, i18nDistPath);
+            i18NBuilder.create();
 
-            String i18nIndexDistPath = PluginSystem.getProperty("workPath") + File.separator + "src" + File.separator + "lang" + File.separator + "index.js";
-            new I18NIndexBuilder("I18NIndex.ftl", classLoader, i18nIndexDistPath);
+            I18NIndexBuilder i18NIndexBuilder = new I18NIndexBuilder("I18NIndex.ftl", classLoader, i18nIndexDistPath);
+            i18NIndexBuilder.create();
 
-            String langSelectDistPath = PluginSystem.getProperty("workPath") + File.separator + "src" + File.separator + "components" + File.separator + "LangSelect" + File.separator + "index.vue";
-            new I18NIndexBuilder("LangSelect.ftl", classLoader, langSelectDistPath);
+            I18NIndexBuilder langSelectBuilder = new I18NIndexBuilder("LangSelect.ftl", classLoader, langSelectDistPath);
+            langSelectBuilder.create();
 
             String os = System.getProperty("os.name");
             boolean isWin = false;

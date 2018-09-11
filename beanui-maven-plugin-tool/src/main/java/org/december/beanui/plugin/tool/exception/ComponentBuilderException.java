@@ -1,4 +1,4 @@
-package org.december.beanui.plugin.exception;
+package org.december.beanui.plugin.tool.exception;
 
 public class ComponentBuilderException extends BuilderException {
     public ComponentBuilderException() {

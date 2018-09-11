@@ -1,5 +1,5 @@
 package org.december.beanui.spring;
-import org.december.beanui.tool.RestReader;
+import org.december.beanui.plugin.tool.RestReader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 

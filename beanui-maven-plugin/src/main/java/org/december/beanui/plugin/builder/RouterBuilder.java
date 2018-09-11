@@ -9,10 +9,11 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLParser;
 import freemarker.template.Template;
 import org.december.beanui.element.annotation.Component;
 import org.december.beanui.plugin.bean.Router;
-import org.december.beanui.plugin.exception.BuilderException;
-import org.december.beanui.plugin.exception.RouterBuilderException;
-import org.december.beanui.plugin.util.ClassUtil;
-import org.december.beanui.plugin.util.PluginSystem;
+import org.december.beanui.plugin.tool.Builder;
+import org.december.beanui.plugin.tool.exception.BuilderException;
+import org.december.beanui.plugin.tool.exception.RouterBuilderException;
+import org.december.beanui.plugin.tool.util.ClassUtil;
+import org.december.beanui.plugin.tool.util.PluginSystem;
 
 import java.io.File;
 import java.io.InputStream;
@@ -58,8 +59,10 @@ public class RouterBuilder extends Builder {
             Annotation[] annos = clazz.getAnnotations();
             for (Annotation anno : annos) {
                 if("Component".equals(anno.annotationType().getSimpleName())) {
-                    String distPath = PluginSystem.getProperty("workPath") + File.separator + "src" + File.separator + "views" + File.separator + "beanui" + File.separator + clazz.getName() + ".vue";
-                    new ComponentBuilder("Component.ftl", clazz, classLoader, distPath);
+                    String distPath = "${workPath}/src/views/beanui/" + clazz.getName() + ".vue";
+                    ComponentBuilder componentBuilder = new ComponentBuilder("Component.ftl", classLoader, distPath);
+                    componentBuilder.setTemplateClass(clazz);
+                    componentBuilder.create();
                     break;
                 }
             }

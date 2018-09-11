@@ -1,48 +1,42 @@
-package org.december.beanui.plugin.builder;
+package org.december.beanui.plugin.tool;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import org.december.beanui.plugin.exception.BuilderException;
+import org.december.beanui.plugin.tool.exception.BuilderException;
+import org.december.beanui.plugin.tool.util.Path;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
-public class Builder {
+public abstract class Builder {
+    public static String TEMPLATE_DIR = "/ftl";
+
     private ClassLoader classLoader;
+
+    private String templateName;
+
+    private String distPath;
 
     private Map data;
 
-    public Builder(String name, ClassLoader classLoader, String distPath) {
+    public Builder(String templateName, ClassLoader classLoader, String distPath) {
+        this.templateName = templateName;
         this.classLoader = classLoader;
-        Configuration configuration = new Configuration(Configuration.getVersion());
-        configuration.setClassForTemplateLoading(this.getClass(), "/ftl");
-        configuration.setDefaultEncoding("utf-8");
-        try {
-            Template template = configuration.getTemplate(name);
-            data = run(template);
-            if(distPath != null && !"".equals(distPath))
-                buildData(data, distPath, template);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (BuilderException e) {
-            e.printStackTrace();
-        }
+        this.distPath = Path.e(distPath);
+
     }
 
-    public Builder(String name, Class clazz, ClassLoader classLoader, String distPath) {
-        this.classLoader = classLoader;
+    public void create() {
         Configuration configuration = new Configuration(Configuration.getVersion());
-        configuration.setClassForTemplateLoading(this.getClass(), "/ftl");
+        configuration.setClassForTemplateLoading(this.getClass(), TEMPLATE_DIR);
         configuration.setDefaultEncoding("utf-8");
         try {
-            Template template = configuration.getTemplate(name);
-            data = run(template, clazz);
+            Template template = configuration.getTemplate(templateName);
+            data = run(template);
             if(distPath != null && !"".equals(distPath))
                 buildData(data, distPath, template);
         } catch (IOException e) {
@@ -59,9 +53,7 @@ public class Builder {
             while (iterator.hasNext()) {
                 String key = (String)iterator.next();
                 Object value = map.get(key);
-                Map datas = new HashMap();
-                datas.put("datas", value);
-                outputFile(template, datas, distPath.replace("*", key));
+                outputFile(template, value, distPath.replace("*", key));
             }
         } else {
             outputFile(template, data, distPath);
@@ -84,13 +76,7 @@ public class Builder {
         }
     }
 
-    public Map run(Template template) throws BuilderException {
-        return null;
-    }
-
-    public Map run(Template template, Class clazz) throws BuilderException {
-        return null;
-    }
+    public abstract Map run(Template template) throws BuilderException;
 
     public ClassLoader getClassLoader() {
         return classLoader;
@@ -106,5 +92,13 @@ public class Builder {
 
     public void setData(Map data) {
         this.data = data;
+    }
+
+    public String getTemplateName() {
+        return templateName;
+    }
+
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName;
     }
 }

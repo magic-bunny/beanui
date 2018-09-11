@@ -4,11 +4,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.template.Template;
 import org.december.beanui.element.annotation.I18N;
-import org.december.beanui.plugin.exception.BuilderException;
-import org.december.beanui.plugin.util.ClassUtil;
+import org.december.beanui.plugin.tool.Builder;
+import org.december.beanui.plugin.tool.exception.BuilderException;
+import org.december.beanui.plugin.tool.util.ClassUtil;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 public class I18NBuilder extends Builder {
     public I18NBuilder(String name, ClassLoader classLoader, String distPath) {
@@ -33,7 +37,7 @@ public class I18NBuilder extends Builder {
                         String key = (String)iterator.next();
                         String value = (String)map.get(key);
                         if(!"".equals(value)) {
-                            Map lastTree = buildTree(key+"."+clazz.getName(), tree);
+                            Map lastTree = buildTree(key+".datas."+clazz.getName(), tree);
                             lastTree.put(field.getName(), value);
                         }
                     }
@@ -45,8 +49,9 @@ public class I18NBuilder extends Builder {
             Iterator iterator = tree.keySet().iterator();
             while(iterator.hasNext()) {
                 String key = (String)iterator.next();
-                Object value = tree.get(key);
-                results.put(key, objectMapper.writeValueAsString(value));
+                Map value = (Map)tree.get(key);
+                value.put("datas", objectMapper.writeValueAsString(value.get("datas")));
+                results.put(key, value);
             }
         } catch (JsonProcessingException e) {
             throw new BuilderException(e);

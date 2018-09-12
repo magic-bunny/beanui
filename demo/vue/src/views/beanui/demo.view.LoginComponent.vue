@@ -3,7 +3,7 @@
 <template>
 <div class="LoginComponent-container">
 <div class="LoginComponent-inner-container">
-    <el-form ref="LoginComponent" :model="LoginComponent" label-width="120px">
+    <el-form ref="LoginComponent" :model="LoginComponent" >
 <el-form-item
 label=" "
 >
@@ -17,11 +17,12 @@ label=" "
 </el-input>
 </el-form-item>
 <el-form-item
+label=""
 >
 <el-button
+    type="primary"
     style="width:100%;margin-bottom:30px;"
     text="login"
-    type="primary"
 >
     login
 

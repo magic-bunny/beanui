@@ -14,4 +14,5 @@ public @interface Alert {
     String center() default "";//	文字是否居中	boolean	—	true
     String close_text() default "";//	关闭按钮自定义文本	string	—	—
     String show_icon() default "";//	是否显示图标	boolean	—	false
+    String label() default "";
 }

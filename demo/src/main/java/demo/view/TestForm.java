@@ -45,7 +45,6 @@ public class TestForm {
     @Transfer(titles = ":['1','2']", data = "$addressData")
     private List<String> address;
 
-    @TransferData
     private List<Map<String, String>> addressData;
 
     @FormItem(prop = "test")

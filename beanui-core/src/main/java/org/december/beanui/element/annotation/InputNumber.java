@@ -18,5 +18,4 @@ public @interface InputNumber {
     String controls_position() default "";//	控制按钮位置	string	right	_
     String name() default "";//	原生属性	string	—	—
     String label() default "";//	输入框关联的label文字	string	—	—
-
 }

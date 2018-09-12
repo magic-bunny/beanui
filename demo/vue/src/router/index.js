@@ -37,12 +37,14 @@ export default new Router({
 export const asyncRouterMap = [
     {
         path: '/login2',
+        name: 'login2',
         component:() => import('@/views/beanui/demo.view.LoginComponent'),
         hidden: true
     }
     ,
     {
         path: '/',
+        name: 'test',
         component: Layout
         ,redirect: 
         ''
@@ -62,6 +64,7 @@ export const asyncRouterMap = [
     ,
     {
         path: '/abcde',
+        name: 'abcde',
         component: Layout
         ,redirect:         '/abcde/index'
         ,
@@ -80,6 +83,7 @@ export const asyncRouterMap = [
     ,
     {
         path: '/newnewnew',
+        name: 'newnewnew',
         component: Layout
         ,redirect:         '/newnewnew/index'
         ,
@@ -98,6 +102,7 @@ export const asyncRouterMap = [
     ,
     {
         path: '/example',
+        name: 'example',
         component: Layout
         ,alwaysShow: true,
         meta: {
@@ -134,6 +139,53 @@ export const asyncRouterMap = [
         ,meta: {
           title: 'demo3'
           ,icon: 'eye'
+        }
+        
+      }
+      
+]
+
+    }
+    ,
+    {
+        path: '/table',
+        name: 'Table',
+        component: Layout
+        ,alwaysShow: true,
+        meta: {
+          title: 'Table'
+          ,icon: 'table'
+        }
+        ,children: [
+      {
+        path: 'dynamic-table',
+        name: 'Dynamic Table'
+        ,component: () => import('@/views/beanui/demo.view.DynamicTableComponent')
+        ,meta: {
+          title: 'Dynamic Table'
+          
+        }
+        
+      }
+      ,
+      {
+        path: 'drag-table',
+        name: 'Drag Table'
+        ,component: () => import('@/views/beanui/demo.view.DragTableComponent')
+        ,meta: {
+          title: 'Drag Table'
+          
+        }
+        
+      }
+      ,
+      {
+        path: 'inline-edit-table',
+        name: 'Inline Edit'
+        ,component: () => import('@/views/beanui/demo.view.InlineEditTableComponent')
+        ,meta: {
+          title: 'Inline Edit'
+          
         }
         
       }

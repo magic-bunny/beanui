@@ -7,8 +7,8 @@
         <#if o.i18n??>
         :label="${r'$'}t('${o.i18n}')"
         </#if>>
+        <template slot-scope="scope">
         <#list o.children as object>
-            <template slot-scope="scope">
             <#if object.type="Input">
                 <@createInput formId="scope.row" id=object.id element=object/>
             <#elseif object.type="Select">
@@ -25,7 +25,7 @@
                 <@createDateTimePicker formId="scope.row" id=object.id element=object/>
             <#elseif object.type="Table">
                 <@createTable formId="scope.row" id=object.id element=object/>
-            <#elseif object.type="DatePicker">
+            <#elseif object.type="Rate">
                 <@createRate formId="scope.row" id=object.id element=object/>
             <#elseif object.type="Alert">
                 <@createAlert formId="scope.row" id=object.id element=object/>
@@ -49,11 +49,13 @@
                 <@createProgress formId="scope.row" id=object.id element=object/>
             <#elseif object.type="Autocomplete">
                 <@createAutocomplete formId="scope.row" id=object.id element=object/>
+            <#elseif object.type="Element">
+                <@createElement formId="scope.row" id=object.id element=object/>
             <#elseif object.type="Pagination">
                 <@createPagination element=object/>
             </#if>
-            </template>
         </#list>
+         </template>
         </el-table-column>
     </#list>
     </el-table>

@@ -3,55 +3,66 @@
 <template>
 <div class="ABCDComponent-container">
 <div class="ABCDComponent-inner-container">
-    <el-form ref="userQuery" :model="userQuery" label-width="120px">
+    <el-form ref="userQuery" :model="userQuery" >
 <el-form-item
+label=""
 >
 <el-form-item>
     <el-table :data="userQuery.users" >
         <el-table-column
-        type="selection" prop="id" label="id" width="50" 
+        type="selection" width="50" 
 >
+        <template slot-scope="scope">
+<span >
+{{scope.row.id}}
+</span>
+         </template>
         </el-table-column>
         <el-table-column
-        prop="name" label="name" 
+        
 >
-            <template slot-scope="scope">
+        <template slot-scope="scope">
 <el-input v-model="scope.row.name" size="mini" >
 </el-input>
-            </template>
+         </template>
         </el-table-column>
         <el-table-column
-        prop="age" label="age" 
+        
 >
-            <template slot-scope="scope">
+        <template slot-scope="scope">
 <el-input-number v-model="scope.row.age" size="mini" >
 </el-input-number>
-            </template>
+         </template>
         </el-table-column>
         <el-table-column
-        prop="stature" label="stature" 
+        
 >
+        <template slot-scope="scope">
+<span >
+{{scope.row.stature}}
+</span>
+         </template>
         </el-table-column>
         <el-table-column
-        prop="weight" label="weight" 
+        
 >
-            <template slot-scope="scope">
+        <template slot-scope="scope">
 <el-input-number v-model="scope.row.weight" size="mini" >
 </el-input-number>
-            </template>
+         </template>
         </el-table-column>
         <el-table-column
-        prop="lastDate" label="lastDate" width="240" 
+        width="240" 
 >
-            <template slot-scope="scope">
+        <template slot-scope="scope">
 <el-date-picker v-model="scope.row.lastDate" size="mini" >
 </el-date-picker>
-            </template>
+         </template>
         </el-table-column>
         <el-table-column
-        prop="option" label="edit" 
+        label="edit" 
 >
-            <template slot-scope="scope">
+        <template slot-scope="scope">
 <el-button
     size="mini"
     text="edit"
@@ -59,20 +70,18 @@
     edit
 
 </el-button>
-            </template>
+         </template>
         </el-table-column>
     </el-table>
 </el-form-item>
 </el-form-item>
 <el-form-item
->
-</el-form-item>
-<el-form-item
+label=""
 >
 <el-button
     icon="el-icon-search"
-    text="query"
     type="primary"
+    text="query"
     @click="click_button"
 >
     query

@@ -55,6 +55,7 @@ export const asyncRouterMap = [
     <#list router as r>
     {
         path: '/${r.path!r.title}',
+        name: '${r.title!r.path}',
         <#if r.menu=false>
         component:() => import('@/views/beanui/${r.component}'),
         hidden: true

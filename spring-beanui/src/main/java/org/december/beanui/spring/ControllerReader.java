@@ -1,7 +1,9 @@
 package org.december.beanui.spring;
 import org.december.beanui.plugin.tool.RestReader;
+import org.december.beanui.plugin.tool.exception.SpringReaderException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -12,7 +14,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ControllerReader implements RestReader {
-    public Map<String, String> readResourceSetting(Class clazz, String func) {
+    public Map<String, String> readResourceSetting(Class clazz, String func) throws SpringReaderException {
+        RestController restController = (RestController)clazz.getAnnotation(RestController.class);
+        RequestMapping requestMapping = (RequestMapping)clazz.getAnnotation(RequestMapping.class);
+        if(restController == null) {
+            throw new SpringReaderException(clazz.getName() + " is not a spring mvc controller!");
+        }
         Map<String, String> result = new HashMap<String, String>();
         try {
             Method[] methods = clazz.getDeclaredMethods();
@@ -31,7 +38,11 @@ public class ControllerReader implements RestReader {
                             } else if(ms[0] == RequestMethod.POST) {
                                 m = "post";
                             }
-                            result.put("path", paths.length>0?paths[0]:values[0]);
+                            if(requestMapping == null) {
+                                result.put("path", paths.length>0?paths[0]:values[0]);
+                            } else {
+                                result.put("path", (requestMapping.path().length>0?requestMapping.path()[0]:requestMapping.value()[0]) + (paths.length>0?paths[0]:values[0]));
+                            }
                             result.put("method", m);
                             return result;
                         }

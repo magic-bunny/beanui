@@ -1,19 +1,12 @@
 <template>
   <div class="app-wrapper" :class="classObj">
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside"></div>
-
-<el-container>
-  <el-header style="height: 50px;padding: 0;">
-  <navbar></navbar>
-  </el-header>
-  <el-container>
-    <el-aside style="width:180px !important;"><sidebar class="sidebar-container"></sidebar></el-aside>
-    <el-main style="padding: 0;">
+    <sidebar class="sidebar-container"></sidebar>
+    <div class="main-container">
+      <navbar></navbar>
       <tags-view></tags-view>
       <app-main></app-main>
-    </el-main>
-  </el-container>
-</el-container>
+    </div>
   </div>
 </template>
 

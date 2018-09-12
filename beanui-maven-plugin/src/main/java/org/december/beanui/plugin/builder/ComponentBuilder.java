@@ -9,6 +9,7 @@ import org.december.beanui.plugin.tool.Builder;
 import org.december.beanui.plugin.tool.RestReader;
 import org.december.beanui.plugin.tool.exception.BuilderException;
 import org.december.beanui.plugin.tool.exception.ComponentBuilderException;
+import org.december.beanui.plugin.tool.exception.SpringReaderException;
 import org.december.beanui.plugin.tool.util.ClassUtil;
 
 import java.lang.annotation.Annotation;
@@ -101,7 +102,7 @@ public class ComponentBuilder extends Builder {
         return result;
     }
 
-    private List<Element> buildForm(String formId, Class clazz) throws NoSuchFieldException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException {
+    private List<Element> buildForm(String formId, Class clazz) throws SpringReaderException {
         Field[] fields = clazz.getDeclaredFields();
         Field.setAccessible(fields, true);
         List<Element> list = new ArrayList<Element>();
@@ -169,26 +170,33 @@ public class ComponentBuilder extends Builder {
                     formItemElement.setChildren(new ArrayList<Element>() {{
                         add(element);
                     }});
-                    if (type != Option.class && type != TransferData.class) {
-                        list.add(formItemElement);
-                    }
+                    list.add(formItemElement);
                 }
             }
         }
         return list;
     }
 
-    private Map buildEvent(Annotation annotation) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
-        Map map = eventAnnotation2map(annotation);
-        map.put("type", annotation.annotationType().getSimpleName().toLowerCase());
-        String path = (String) map.get("path");
-        if ("".equals(path)) {
-            Class clz = (Class) map.get("rest");
-            String func = (String) map.get("func");
-            Class controllerClazz = this.getClassLoader().loadClass(clz.getName());
-            Map<String, String> results = readSetting(controllerClazz, func, path);
-            map.put("path", results.get("path"));
-            map.put("method", results.get("method"));
+    private Map buildEvent(Annotation annotation) throws SpringReaderException {
+        Map map = new HashMap();
+        try {
+            map = eventAnnotation2map(annotation);
+            map.put("type", annotation.annotationType().getSimpleName().toLowerCase());
+            String path = (String) map.get("path");
+            if ("".equals(path)) {
+                Class clz = (Class) map.get("rest");
+                String func = (String) map.get("func");
+                Class controllerClazz = this.getClassLoader().loadClass(clz.getName());
+                Map<String, String> results = readSetting(controllerClazz, func, path);
+                map.put("path", results.get("path"));
+                map.put("method", results.get("method"));
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
         }
         return map;
     }
@@ -197,41 +205,76 @@ public class ComponentBuilder extends Builder {
         Field[] fields = clazz.getDeclaredFields();
         Field.setAccessible(fields, true);
         List<Element> list = new ArrayList<Element>();
+
         for (Field field : fields) {
+            final Element tableColumnElement = new Element();
+            tableColumnElement.setType(TableColum.class.getSimpleName());
+            tableColumnElement.setId(field.getName());
+            TableColum tableColum = field.getAnnotation(TableColum.class);
+            String prop = "";
+            if (tableColum != null) {
+                Map map = ClassUtil.annotation2map(formId, tableColum);
+                prop = tableColum.prop();
+                tableColumnElement.setContent(map);
+            } else {
+                Map map = new HashMap();
+                map.put("label", "");
+                tableColumnElement.setContent(map);
+            }
             I18N i18n = field.getAnnotation(I18N.class);
             Annotation[] annotations = field.getDeclaredAnnotations();
-            Element element = new Element();
-            element.setId(field.getName());
+
+            tableColumnElement.setId(field.getName());
             if (i18n != null) {
-                element.setI18n(clazz.getName() + "." + field.getName());
+                tableColumnElement.setI18n(clazz.getName() + "." + field.getName());
             }
-            List<Element> children = new ArrayList<Element>();
             boolean isCompoent = false;
+            final Element element = new Element();
+
+            boolean isWord = true;
             for (Annotation annotation : annotations) {
-                if (annotation.annotationType() == TableColum.class) {
+                if (annotation.annotationType() != TableColum.class && annotation.annotationType() != I18N.class) {
+                    isWord = false;
                     isCompoent = true;
                     Map map = ClassUtil.annotation2map(formId, annotation);
-                    if (map.get("label") == null || "".equals(map.get("label"))) {
-                        map.put("label", field.getName());
-                    }
-                    if (map.get("prop") == null || "".equals(map.get("prop"))) {
-                        map.put("prop", field.getName());
-                    }
+                    element.setId(field.getName());
                     element.setType(annotation.annotationType().getSimpleName());
                     element.setContent(map);
-                } else {
-                    isCompoent = true;
-                    Element child = new Element();
-                    Map map = ClassUtil.annotation2map(formId, annotation);
-                    child.setId(field.getName());
-                    child.setType(annotation.annotationType().getSimpleName());
-                    child.setContent(map);
-                    children.add(child);
+                    if (i18n != null) {
+                        element.setI18n(clazz.getName() + "." + field.getName());
+                    }
                 }
             }
+
+            if(isWord) {
+                isCompoent = true;
+                element.setId(field.getName());
+                element.setType("Element");
+                element.setTag("span");
+                element.setContent(new HashMap());
+                if (i18n != null) {
+                    element.setI18n(clazz.getName() + "." + field.getName());
+                }
+            }
+
             if (isCompoent) {
-                element.setChildren(children);
-                list.add(element);
+                boolean hasProp = false;
+                if (!"".equals(prop)) {
+                    for (Element f : list) {
+                        if (prop.equals(f.getContent().get("prop"))) {
+                            f.getChildren().add(element);
+                            hasProp = true;
+                            break;
+                        }
+                    }
+                }
+                if (!hasProp) {
+                    tableColumnElement.setChildren(new ArrayList<Element>() {{
+                        add(element);
+                    }});
+                    list.add(tableColumnElement);
+                }
+
             }
         }
         return list;
@@ -246,7 +289,7 @@ public class ComponentBuilder extends Builder {
         return map;
     }
 
-    private Map<String, String> readSetting(Class clazz, String func, String path) {
+    private Map<String, String> readSetting(Class clazz, String func, String path) throws SpringReaderException {
         Map<String, String> results = new HashMap<String, String>();
         try {
             if (pathBuilder == null) {

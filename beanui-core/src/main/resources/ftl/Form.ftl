@@ -1,3 +1,4 @@
+<#include "/Element.ftl">
 <#include "/Input.ftl">
 <#include "/InputNumber.ftl">
 <#include "/Select.ftl">
@@ -21,8 +22,8 @@
 <#include "/Pagination.ftl">
 <#include "/Autocomplete.ftl">
 
-<#macro createForm id,children>
-    <el-form ref="${id}" :model="${id}" label-width="120px">
+<#macro createForm id, element, children>
+    <el-form ref="${id}" :model="${id}" <#list element.content?keys as key><#if element.content[key]!=''>${key}="${element.content[key]}" </#if></#list>>
         <#list children as object>
             <@createFormItem formId=id element=object/>
         </#list>

@@ -13,4 +13,6 @@ public @interface CheckboxGroup {
     String max() default "";//	可被勾选的 checkbox 的最大数量	number	—	—
     String text_color() default "";//	按钮形式的 Checkbox 激活时的文本颜色	string	—	#ffffff
     String fill() default "";//	按钮形式的 Checkbox 激活时的填充色和边框色	string	—	#409EFF
+    String data() default "";
+    String label() default "";
 }

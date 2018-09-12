@@ -5,7 +5,7 @@
 <div class="${component.id}-inner-container">
 <#list elements as object>
     <#if object.type="Form">
-        <@createForm id=object.id children=object.children/>
+        <@createForm id=object.id element=object children=object.children/>
     </#if>
 </#list>
 </div>

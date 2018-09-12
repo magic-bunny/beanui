@@ -7,6 +7,7 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Pagination {
+    String label() default "";
     String small() default "";//	是否使用小型分页样式	boolean	—	false
     String background() default "";//	是否为分页按钮添加背景色	boolean	—	false
     String page_size() default "";//	每页显示条目个数，支持 .sync 修饰符	number	—	10

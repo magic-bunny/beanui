@@ -7,6 +7,7 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Input {
+    String style() default "";
     String type() default "";//	类型	string	text，textarea 和其他 原生 input 的 type 值	text
     String value() default "";//	绑定值	string / number	—	—
     String maxlength() default "";//	原生属性，最大输入长度	number	—	—

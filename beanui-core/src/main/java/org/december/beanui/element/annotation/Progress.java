@@ -7,6 +7,7 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Progress {
+    String label() default "";
     String percentage() default "";//	百分比（必填）	number	0_100	0
     String type() default "";//	进度条类型	string	line/circle	line
     String stroke_width() default "";//	进度条的宽度，单位 px	number	—	6

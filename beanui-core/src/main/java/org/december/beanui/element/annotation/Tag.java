@@ -7,6 +7,7 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Tag {
+    String label() default "";
     String type() default "";//	主题	string	success/info/warning/danger	—
     String closable() default "";//	是否可关闭	boolean	—	false
     String disable_transitions() default "";//	是否禁用渐变动画	boolean	—	false

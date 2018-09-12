@@ -7,6 +7,7 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Table {
+    String label() default "";
     String data() default "";//	显示的数据	array	—	—
     String height() default "";//	Table 的高度，默认为自动高度。如果 height 为 number 类型，单位 px；如果 height 为 string 类型，则这个高度会设置为 Table 的 style.height 的值，Table 的高度会受控于外部样式。	string/number	—	—
     String max_height() default "";//	Table 的最大高度	string/number	—	—

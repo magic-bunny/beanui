@@ -7,6 +7,7 @@ public class Element {
     private String id;
     private String i18n;
     private String type;
+    private String tag;
     private Map content;
     private List<Map> events;
     private List<Element> children;
@@ -73,5 +74,13 @@ public class Element {
 
     public void setI18n(String i18n) {
         this.i18n = i18n;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

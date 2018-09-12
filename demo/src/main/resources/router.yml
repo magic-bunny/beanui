@@ -25,3 +25,16 @@ children:
     - title: demo3
       component: demo.view.NewComponent
       icon: eye
+  - title: Table
+    icon: table
+    path: table
+    children:
+    - title: Dynamic Table
+      path: dynamic-table
+      component: demo.view.DynamicTableComponent
+    - title: Drag Table
+      path: drag-table
+      component: demo.view.DragTableComponent
+    - title: Inline Edit
+      path: inline-edit-table
+      component: demo.view.InlineEditTableComponent

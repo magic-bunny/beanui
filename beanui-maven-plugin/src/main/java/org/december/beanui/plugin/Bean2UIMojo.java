@@ -63,16 +63,12 @@ public class Bean2UIMojo extends AbstractMojo {
             FileUtil.deleteDir( "${workPath}/src/views/beanui");
             String routerDistPath = "${workPath}/src/router/index.js";
             String indexDistPath = "${workPath}/index.html";
-            String logoDistPath = "${workPath}/src/components/Logo/index.vue";
             String i18nDistPath = "${workPath}/src/lang/*.js";
             String i18nIndexDistPath = "${workPath}/src/lang/index.js";
             String langSelectDistPath = "${workPath}/src/components/LangSelect/Logo.ftl";
 
             ProjectNameBuilder indexBuilder = new ProjectNameBuilder("Index.ftl", classLoader, indexDistPath);
             indexBuilder.create();
-
-            ProjectNameBuilder logoBuilder = new ProjectNameBuilder("Logo.ftl", classLoader, logoDistPath);
-            logoBuilder.create();
 
             RouterBuilder routerBuilder = new RouterBuilder("Router.ftl", classLoader, routerDistPath);
             routerBuilder.create();

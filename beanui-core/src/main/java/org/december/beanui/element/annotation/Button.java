@@ -21,4 +21,5 @@ public @interface Button {
     String autofocus() default "";//是否默认聚焦	boolean	—	false
     String native_type() default "";//原生 type 属性	string	button / submit / reset	button
     String style() default "";
+    String label() default "";
 }

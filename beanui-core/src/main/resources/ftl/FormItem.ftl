@@ -1,11 +1,10 @@
-<#macro createFormItem formId,element>
+ <#macro createFormItem formId,element>
 <el-form-item
 <#if element.children[0].i18n??>
 :label="${r'$'}t('${element.children[0].i18n}')"
 <#else>
-<#if element.children[0].content.label??>
-<#if element.children[0].content.label=''>label="${element.children[0].id}"<#else>label="${element.children[0].content.label}"</#if>
-</#if></#if>>
+label="${element.children[0].content.label}"
+</#if>>
 <#list element.children as object>
 <#if object.type="Input">
     <@createInput formId=formId id=object.id element=object/>
@@ -47,6 +46,8 @@
     <@createProgress formId=formId id=object.id element=object/>
 <#elseif object.type="Autocomplete">
     <@createAutocomplete formId=formId id=object.id element=object/>
+<#elseif object.type="Element">
+    <@createElement formId=formId id=object.id element=object/>
 <#elseif object.type="Pagination">
     <@createPagination element=object/>
 </#if>

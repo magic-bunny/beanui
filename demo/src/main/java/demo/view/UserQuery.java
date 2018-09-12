@@ -6,7 +6,6 @@ import org.december.beanui.element.Icon;
 import org.december.beanui.element.annotation.Button;
 import org.december.beanui.element.annotation.Form;
 import org.december.beanui.element.annotation.Table;
-import org.december.beanui.element.annotation.TableData;
 import org.december.beanui.event.annotation.Click;
 
 import java.util.List;
@@ -16,7 +15,6 @@ public class UserQuery {
     @Table(data = "$users")
     private User user;
 
-    @TableData
     private List<User> users;
 
     @Click(rest = TestFormController.class, func = "test2")

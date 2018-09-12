@@ -3,7 +3,7 @@
 <template>
 <div class="TestComponent-container">
 <div class="TestComponent-inner-container">
-    <el-form ref="testForm" :model="testForm" label-width="120px">
+    <el-form ref="testForm" :model="testForm" >
 <el-form-item
 :label="$t('demo.view.TestForm.username')"
 >
@@ -17,65 +17,76 @@
 </el-input>
 </el-form-item>
 <el-form-item
-label="isAdmin"
+label=""
 >
 <el-switch v-model="testForm.isAdmin" >
 </el-switch>
 </el-form-item>
 <el-form-item
-label="lastDate"
+label=""
 >
 <el-date-picker v-model="testForm.lastDate" >
 </el-date-picker>
 </el-form-item>
 <el-form-item
+label=""
 >
 <el-form-item>
     <el-table >
         <el-table-column
-        type="selection" prop="id" label="id" width="50" 
+        type="selection" width="50" 
 >
+        <template slot-scope="scope">
+<span >
+{{scope.row.id}}
+</span>
+         </template>
         </el-table-column>
         <el-table-column
-        prop="name" label="name" 
+        
 >
-            <template slot-scope="scope">
+        <template slot-scope="scope">
 <el-input v-model="scope.row.name" size="mini" >
 </el-input>
-            </template>
+         </template>
         </el-table-column>
         <el-table-column
-        prop="age" label="age" 
+        
 >
-            <template slot-scope="scope">
+        <template slot-scope="scope">
 <el-input-number v-model="scope.row.age" size="mini" >
 </el-input-number>
-            </template>
+         </template>
         </el-table-column>
         <el-table-column
-        prop="stature" label="stature" 
+        
 >
+        <template slot-scope="scope">
+<span >
+{{scope.row.stature}}
+</span>
+         </template>
         </el-table-column>
         <el-table-column
-        prop="weight" label="weight" 
+        
 >
-            <template slot-scope="scope">
+        <template slot-scope="scope">
 <el-input-number v-model="scope.row.weight" size="mini" >
 </el-input-number>
-            </template>
+         </template>
         </el-table-column>
         <el-table-column
-        prop="lastDate" label="lastDate" width="240" 
+        width="240" 
 >
-            <template slot-scope="scope">
+        <template slot-scope="scope">
 <el-date-picker v-model="scope.row.lastDate" size="mini" >
 </el-date-picker>
-            </template>
+         </template>
         </el-table-column>
         <el-table-column
-        prop="option" label="edit" 
+        label="edit" 
 >
-            <template slot-scope="scope">
+        <template slot-scope="scope">
 <el-button
     size="mini"
     text="edit"
@@ -83,19 +94,19 @@ label="lastDate"
     edit
 
 </el-button>
-            </template>
+         </template>
         </el-table-column>
     </el-table>
 </el-form-item>
 </el-form-item>
 <el-form-item
-label="level"
+label=""
 >
 <el-rate v-model="testForm.level" >
 </el-rate>
 </el-form-item>
 <el-form-item
-label="detail"
+label=""
 >
 <el-select v-model="testForm.detail" placeholder="请选择" :options="testForm.options" >
 <el-option v-for="item in testForm.options" :key="item.value" :label="item.label" :value="item.value">
@@ -103,17 +114,22 @@ label="detail"
 </el-select>
 </el-form-item>
 <el-form-item
-label="address"
+label=""
+>
+</el-form-item>
+<el-form-item
+label=""
 >
 <el-transfer v-model="testForm.address" :data="testForm.addressData" :titles="['1','2']" >
 </el-transfer>
 </el-form-item>
 <el-form-item
+label=""
 >
 <el-button
     icon="el-icon-upload"
-    text="upload"
     type="primary"
+    text="upload"
     @click="click_button"
 >
     upload

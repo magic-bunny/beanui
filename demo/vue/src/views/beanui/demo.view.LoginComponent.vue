@@ -1,5 +1,6 @@
 
 
+
 <template>
 <div class="LoginComponent-container">
 <div class="LoginComponent-inner-container">
@@ -36,12 +37,49 @@ label=""
 import request from '@/utils/request'
 
   export default {
+    created: function() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        },
     data() {
       return {
                 LoginComponent: {}
       }
     },
     methods: {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
   }
 </script>

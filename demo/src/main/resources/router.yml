@@ -38,3 +38,6 @@ children:
     - title: Inline Edit
       path: inline-edit-table
       component: demo.view.InlineEditTableComponent
+    - title: Complex Table
+      path: complex-table
+      component: demo.view.ComplexTableComponent

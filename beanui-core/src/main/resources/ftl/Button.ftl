@@ -1,4 +1,4 @@
-<#macro createButton element>
+<#macro createButton formId, id, element>
 <el-button
     <#list element.content?keys as key>
     <#if element.content[key]!=''>

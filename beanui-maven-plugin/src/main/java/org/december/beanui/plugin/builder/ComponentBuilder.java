@@ -17,10 +17,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ComponentBuilder extends Builder {
     private static RestReader pathBuilder;
@@ -83,11 +80,29 @@ public class ComponentBuilder extends Builder {
                             events.add(buildEvent(formAnnotation));
                         }
                         if (formAnnotation.annotationType() == Form.class) {
-                            String formId = formField.getName();
-                            element.setId(formId);
-                            element.setType(formAnnotation.annotationType().getSimpleName());
-                            element.setContent(ClassUtil.annotation2map(formId, formAnnotation));
-                            element.setChildren(buildForm(formId, formField.getType()));
+                            Dialog dialog = formField.getType().getAnnotation(Dialog.class);
+                            if(dialog != null) {
+                                String formId = formField.getName();
+                                element.setId(formId);
+                                element.setType(Dialog.class.getSimpleName());
+                                element.setContent(ClassUtil.annotation2map(formId, dialog));
+
+                                final Element formElement = new Element();
+                                formElement.setId(formId);
+                                formElement.setType(formAnnotation.annotationType().getSimpleName());
+                                formElement.setContent(ClassUtil.annotation2map(formId, formAnnotation));
+                                formElement.setChildren(buildForm(formId, formField.getType()));
+
+                                element.setChildren(new ArrayList<Element>() {{
+                                    add(formElement);
+                                }});
+                            } else {
+                                String formId = formField.getName();
+                                element.setId(formId);
+                                element.setType(formAnnotation.annotationType().getSimpleName());
+                                element.setContent(ClassUtil.annotation2map(formId, formAnnotation));
+                                element.setChildren(buildForm(formId, formField.getType()));
+                            }
                         }
                     }
                     element.setEvents(events);
@@ -188,8 +203,9 @@ public class ComponentBuilder extends Builder {
                 String func = (String) map.get("func");
                 Class controllerClazz = this.getClassLoader().loadClass(clz.getName());
                 Map<String, String> results = readSetting(controllerClazz, func, path);
-                map.put("path", results.get("path"));
-                map.put("method", results.get("method"));
+//                map.put("path", results.get("path"));
+//                map.put("method", results.get("method"));
+                map.putAll(results);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -201,13 +217,14 @@ public class ComponentBuilder extends Builder {
         return map;
     }
 
-    private List<Element> buildTable(String formId, Class clazz) {
+    private List<Element> buildTable(String formId, Class clazz) throws SpringReaderException {
         Field[] fields = clazz.getDeclaredFields();
         Field.setAccessible(fields, true);
         List<Element> list = new ArrayList<Element>();
 
         for (Field field : fields) {
             final Element tableColumnElement = new Element();
+            List<Map> events = new ArrayList<Map>();
             tableColumnElement.setType(TableColum.class.getSimpleName());
             tableColumnElement.setId(field.getName());
             TableColum tableColum = field.getAnnotation(TableColum.class);
@@ -230,19 +247,24 @@ public class ComponentBuilder extends Builder {
             }
             boolean isCompoent = false;
             final Element element = new Element();
-
             boolean isWord = true;
             for (Annotation annotation : annotations) {
-                if (annotation.annotationType() != TableColum.class && annotation.annotationType() != I18N.class) {
-                    isWord = false;
-                    isCompoent = true;
-                    Map map = ClassUtil.annotation2map(formId, annotation);
-                    element.setId(field.getName());
-                    element.setType(annotation.annotationType().getSimpleName());
-                    element.setContent(map);
-                    if (i18n != null) {
-                        element.setI18n(clazz.getName() + "." + field.getName());
+                String packageName = annotation.annotationType().getPackage().getName();
+                if (Component.class.getPackage().getName().equals(packageName)) {
+                    if (annotation.annotationType() != TableColum.class && annotation.annotationType() != I18N.class) {
+                        isWord = false;
+                        isCompoent = true;
+                        Map map = ClassUtil.annotation2map(formId, annotation);
+                        element.setId(field.getName());
+                        element.setType(annotation.annotationType().getSimpleName());
+                        element.setContent(map);
+                        if (i18n != null) {
+                            element.setI18n(clazz.getName() + "." + field.getName());
+                        }
                     }
+                }
+                if (Click.class.getPackage().getName().equals(packageName)) {
+                    events.add(buildEvent(annotation));
                 }
             }
 
@@ -258,6 +280,7 @@ public class ComponentBuilder extends Builder {
             }
 
             if (isCompoent) {
+                element.setEvents(events);
                 boolean hasProp = false;
                 if (!"".equals(prop)) {
                     for (Element f : list) {

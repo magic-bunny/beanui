@@ -14,7 +14,7 @@
             <#elseif object.type="Select">
                 <@createSelect formId="scope.row" id=object.id element=object/>
             <#elseif object.type="Button">
-                <@createButton element=object/>
+                <@createButton formId="scope.row" id=object.id element=object/>
             <#elseif object.type="Switch">
                 <@createSwitch formId="scope.row" id=object.id element=object/>
             <#elseif object.type="TimerPicker">

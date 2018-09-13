@@ -22,10 +22,10 @@
 <#include "/Pagination.ftl">
 <#include "/Autocomplete.ftl">
 
-<#macro createForm id, element, children>
-    <el-form ref="${id}" :model="${id}" <#list element.content?keys as key><#if element.content[key]!=''>${key}="${element.content[key]}" </#if></#list>>
-        <#list children as object>
-            <@createFormItem formId=id element=object/>
+<#macro createForm element>
+    <el-form ref="${element.id}" :model="${element.id}" <#list element.content?keys as key><#if element.content[key]!=''>${key}="${element.content[key]}" </#if></#list>>
+        <#list element.children as object>
+            <@createFormItem formId=element.id element=object/>
         </#list>
     </el-form>
 </#macro>

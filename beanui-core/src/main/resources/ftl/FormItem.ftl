@@ -11,7 +11,7 @@ label="${element.children[0].content.label}"
 <#elseif object.type="Select">
     <@createSelect formId=formId id=object.id element=object/>
 <#elseif object.type="Button">
-    <@createButton element=object/>
+    <@createButton formId=formId id=object.id element=object/>
 <#elseif object.type="Switch">
     <@createSwitch formId=formId id=object.id element=object/>
 <#elseif object.type="TimePicker">

@@ -1,5 +1,6 @@
 
 
+
 <template>
 <div class="DynamicTableComponent-container">
 <div class="DynamicTableComponent-inner-container">
@@ -135,23 +136,171 @@ import request from '@/utils/request'
 
   export default {
     created: function() {
-        var data = this.DynamicTableComponent;
-        request({
-            url: "/dynamic-table/init",
-            method: "get"
-            
-        }).then(res => {
-            this.DynamicTableComponent = res.data;
-        }).catch(err => {
+    this.created_DynamicTableComponent();
 
-        })
-      },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        },
     data() {
       return {
                 DynamicTableComponent: {}
       }
     },
     methods: {
+
+    
+    created_DynamicTableComponent() {
+        request({
+            url: "/dynamic-table/init",
+            method: "get"
+        }).then(res => {
+            this.DynamicTableComponent = res.data;
+        }).catch(err => {
+
+        })
+      }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
   }
 </script>

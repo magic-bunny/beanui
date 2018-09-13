@@ -189,6 +189,17 @@ export const asyncRouterMap = [
         }
         
       }
+      ,
+      {
+        path: 'complex-table',
+        name: 'Complex Table'
+        ,component: () => import('@/views/beanui/demo.view.ComplexTableComponent')
+        ,meta: {
+          title: 'Complex Table'
+          
+        }
+        
+      }
       
 ]
 

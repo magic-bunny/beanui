@@ -5,7 +5,6 @@ import org.december.beanui.element.Size;
 
 import java.util.Date;
 
-@Table
 public class User {
     @TableColum(type = "selection", width = "50")
     private int id;

@@ -1,5 +1,6 @@
 
 
+
 <template>
 <div class="DragTableComponent-container">
 <div class="DragTableComponent-inner-container">
@@ -83,23 +84,111 @@ import request from '@/utils/request'
 
   export default {
     created: function() {
-        var data = this.DragTableComponent;
-        request({
-            url: "/drag-table/init",
-            method: "get"
-            
-        }).then(res => {
-            this.DragTableComponent = res.data;
-        }).catch(err => {
+    this.created_DragTableComponent();
 
-        })
-      },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        },
     data() {
       return {
                 DragTableComponent: {}
       }
     },
     methods: {
+
+    
+    created_DragTableComponent() {
+        request({
+            url: "/drag-table/init",
+            method: "get"
+        }).then(res => {
+            this.DragTableComponent = res.data;
+        }).catch(err => {
+
+        })
+      }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
   }
 </script>

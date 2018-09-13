@@ -1,11 +1,77 @@
 <#include "/Form.ftl">
+<#include "/Dialog.ftl">
+
+<#macro buildCreatedEvent formId, element>
+<#if element??>
+<#if element.events??>
+<#if element.events?size gt 0>
+    <#list element.events as event>
+    <#if event.type='created'>
+    this.${event.type}_${element.id}();
+    </#if>
+    </#list>
+</#if>
+</#if>
+
+<#if element.children??>
+<#list element.children as object>
+<@buildCreatedEvent formId=formId element=object/>
+</#list>
+</#if>
+
+</#if>
+</#macro>
+
+<#macro buildEvent formId, element, isFirst>
+<#if element??>
+
+<#if element.events??>
+<#if element.events?size gt 0>
+    <#if isFirst=false>,</#if>
+    <#local isFirst=false>
+    <#list element.events as event>
+    ${event.type}_${element.id}() {
+        request({
+            url: "${event.path}",
+            method: "${event.method}"
+            <#if event.method=="post">
+            <#if event.requestForm!=''>
+            ,this.${event.requestForm?substring(1)};
+            <#else>
+            ,this.${formId};
+            </#if>
+            </#if>
+        }).then(res => {
+            <#if event.responseForm!=''>
+            this.${event.responseForm?substring(1)} = res.data;
+            <#else>
+            this.${formId} = res.data;
+            </#if>
+        }).catch(err => {
+
+        })
+      }
+    <#if event_has_next>,</#if>
+    </#list>
+</#if>
+</#if>
+
+<#if element.children??>
+<#list element.children as object><@buildEvent formId=formId element=object isFirst=isFirst/></#list>
+</#if>
+
+</#if>
+</#macro>
 
 <template>
 <div class="${component.id}-container">
 <div class="${component.id}-inner-container">
 <#list elements as object>
     <#if object.type="Form">
-        <@createForm id=object.id element=object children=object.children/>
+        <@createForm element=object/>
+    </#if>
+    <#if object.type='Dialog'>
+        <@createDialog element=object/>
     </#if>
 </#list>
 </div>
@@ -15,24 +81,11 @@
 import request from '@/utils/request'
 
   export default {
-    <#list elements as form>
-    <#list form.events as event>
-    ${event.type}: function() {
-        var data = this.${form.id};
-        request({
-            url: "${event.path}",
-            method: "${event.method}"
-            <#if event.method='post'>,data</#if>
-        }).then(res => {
-            <#if event.method=="get">
-            this.${form.id} = res.data;
-            </#if>
-        }).catch(err => {
-
-        })
-      },
-    </#list>
-    </#list>
+    created: function() {
+        <#list elements as element>
+            <@buildCreatedEvent formId=element.id element=element/>
+        </#list>
+        },
     data() {
       return {
         <#list elements as form>
@@ -45,30 +98,11 @@ import request from '@/utils/request'
       }
     },
     methods: {
-    <#list elements as form>
-        <#list form.children as formItem>
-            <#list formItem.children as o>
-            <#list o.events as event>
-            ${event.type}_${o.id}() {
-                var data = this.${form.id};
-                request({
-                    url: "${event.path}",
-                    method: "${event.method}",
-                    data
-                }).then(res => {
-                    <#if event.method=="get">
-                    this.${form.id} = res.data;
-                    </#if>
-                }).catch(err => {
-
-                })
-              }
-            <#if form_has_next>
-            ,
-            </#if>
-            </#list>
-        </#list>
-        </#list>
+    <#list elements as element>
+        <#if element.type='Dialog'>
+            <#assign element=element.children[0]>
+        </#if>
+        <@buildEvent formId=element.id element=element isFirst=true/>
     </#list>
     }
   }

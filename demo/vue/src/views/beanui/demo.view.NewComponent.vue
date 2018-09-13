@@ -1,5 +1,6 @@
 
 
+
 <template>
 <div class="NewComponent-container">
 <div class="NewComponent-inner-container">
@@ -151,35 +152,218 @@ import request from '@/utils/request'
 
   export default {
     created: function() {
-        var data = this.testForm;
-        request({
-            url: "/demo3",
-            method: "get"
-            
-        }).then(res => {
-            this.testForm = res.data;
-        }).catch(err => {
+    this.created_testForm();
 
-        })
-      },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        },
     data() {
       return {
                 testForm: {}
       }
     },
     methods: {
-            click_button() {
-                var data = this.testForm;
-                request({
-                    url: "/demo3",
-                    method: "get",
-                    data
-                }).then(res => {
-                    this.testForm = res.data;
-                }).catch(err => {
 
-                })
-              }
+    
+    created_testForm() {
+        request({
+            url: "/demo3",
+            method: "get"
+        }).then(res => {
+            this.testForm = res.data;
+        }).catch(err => {
+
+        })
+      }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ,
+    click_button() {
+        request({
+            url: "/demo3",
+            method: "get"
+        }).then(res => {
+            this.testForm = res.data;
+        }).catch(err => {
+
+        })
+      }
+    
+
+
+
+
+
+
+
     }
   }
 </script>

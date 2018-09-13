@@ -1,5 +1,6 @@
 
 
+
 <template>
 <div class="InlineEditTableComponent-container">
 <div class="InlineEditTableComponent-inner-container">
@@ -107,23 +108,126 @@ import request from '@/utils/request'
 
   export default {
     created: function() {
-        var data = this.InlineEditTableComponent;
-        request({
-            url: "/inline-edit-table/init",
-            method: "get"
-            
-        }).then(res => {
-            this.InlineEditTableComponent = res.data;
-        }).catch(err => {
+    this.created_InlineEditTableComponent();
 
-        })
-      },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        },
     data() {
       return {
                 InlineEditTableComponent: {}
       }
     },
     methods: {
+
+    
+    created_InlineEditTableComponent() {
+        request({
+            url: "/inline-edit-table/init",
+            method: "get"
+        }).then(res => {
+            this.InlineEditTableComponent = res.data;
+        }).catch(err => {
+
+        })
+      }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
   }
 </script>

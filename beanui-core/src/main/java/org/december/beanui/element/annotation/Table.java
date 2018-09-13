@@ -3,7 +3,7 @@ package org.december.beanui.element.annotation;
 import java.lang.annotation.*;
 
 @Documented
-@Target({ElementType.FIELD, ElementType.TYPE})
+@Target({ElementType.FIELD})
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Table {

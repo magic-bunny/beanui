@@ -11,6 +11,8 @@ import java.lang.annotation.*;
 public @interface Click {
     Class rest();
     String func();
+    String requestForm() default "";
+    String responseForm() default "";
     String path() default "";
     String method() default Method.GET;
     String modifier() default "";

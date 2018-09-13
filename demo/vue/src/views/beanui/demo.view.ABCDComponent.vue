@@ -1,5 +1,6 @@
 
 
+
 <template>
 <div class="ABCDComponent-container">
 <div class="ABCDComponent-inner-container">
@@ -96,24 +97,121 @@ label=""
 import request from '@/utils/request'
 
   export default {
+    created: function() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        },
     data() {
       return {
                 userQuery: {}
       }
     },
     methods: {
-            click_button() {
-                var data = this.userQuery;
-                request({
-                    url: "/demo2",
-                    method: "get",
-                    data
-                }).then(res => {
-                    this.userQuery = res.data;
-                }).catch(err => {
 
-                })
-              }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    click_button() {
+        request({
+            url: "/demo2",
+            method: "get"
+        }).then(res => {
+            this.userQuery = res.data;
+        }).catch(err => {
+
+        })
+      }
+    
+
+
+
+
     }
   }
 </script>

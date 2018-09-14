@@ -189,7 +189,7 @@ public class ClassUtil {
                         value = formId + "." + value.substring(1);
                     }
                 }
-                results.put(key.replaceAll("_", "-"), value);
+                results.put(key.replaceAll("_", "-").toLowerCase(), value);
             }
             return results;
         } catch (NoSuchFieldException e) {

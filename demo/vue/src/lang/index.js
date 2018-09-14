@@ -3,8 +3,8 @@ import VueI18n from 'vue-i18n'
 import Cookies from 'js-cookie'
 import enElementLocale from 'element-ui/lib/locale/lang/en'
 import enLocale from './en'
-import zh_CNElementLocale from 'element-ui/lib/locale/lang/zh-CN'
-import zh_CNLocale from './zh-CN'
+import zh_cnElementLocale from 'element-ui/lib/locale/lang/zh-cn'
+import zh_cnLocale from './zh-cn'
 
 Vue.use(VueI18n)
 
@@ -13,9 +13,9 @@ const messages = {
     ...enLocale,
     ...enElementLocale
   },
-  'zh-CN': {
-    ...zh_CNLocale,
-    ...zh_CNElementLocale
+  'zh-cn': {
+    ...zh_cnLocale,
+    ...zh_cnElementLocale
   }
 }
 

@@ -1,1 +1,1 @@
-export default {"demo":{"view":{"table":{"DynamicRow":{"banana":"fruit name","orange":"fruit name","apple":"fruit name","fruitName":"fruit name"}},"TestForm":{"password":"password","username":"user name"}}}}
+export default {"demo":{"view":{"form":{"TestForm":{"password":"password","username":"user name"}},"table":{"DynamicRow":{"banana":"fruit name","orange":"fruit name","apple":"fruit name","fruitName":"fruit name"}}}}}

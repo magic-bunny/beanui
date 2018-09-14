@@ -1,9 +1,12 @@
 package org.december.beanui.plugin.builder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.template.Template;
 import org.december.beanui.element.annotation.*;
 import org.december.beanui.event.annotation.Click;
 import org.december.beanui.event.annotation.Created;
+import org.december.beanui.i18n.annotation.I18N;
 import org.december.beanui.plugin.bean.Element;
 import org.december.beanui.plugin.tool.Builder;
 import org.december.beanui.plugin.tool.RestReader;
@@ -11,6 +14,8 @@ import org.december.beanui.plugin.tool.exception.BuilderException;
 import org.december.beanui.plugin.tool.exception.ComponentBuilderException;
 import org.december.beanui.plugin.tool.exception.SpringReaderException;
 import org.december.beanui.plugin.tool.util.ClassUtil;
+import org.december.beanui.rule.annotation.Rule;
+import org.december.beanui.rule.annotation.Rules;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -64,8 +69,9 @@ public class ComponentBuilder extends Builder {
                         String formId = templateClass.getSimpleName();
                         element.setId(formId);
                         element.setType(formAnnotation.annotationType().getSimpleName());
-                        element.setContent(ClassUtil.annotation2map(formId, formAnnotation));
-                        element.setChildren(buildForm(formId, templateClass));
+                        Map map = ClassUtil.annotation2map(formId, formAnnotation);
+                        element.setChildren(buildForm(formId, templateClass, map));
+                        element.setContent(map);
                     }
                 }
                 element.setEvents(events);
@@ -90,9 +96,9 @@ public class ComponentBuilder extends Builder {
                                 final Element formElement = new Element();
                                 formElement.setId(formId);
                                 formElement.setType(formAnnotation.annotationType().getSimpleName());
-                                formElement.setContent(ClassUtil.annotation2map(formId, formAnnotation));
-                                formElement.setChildren(buildForm(formId, formField.getType()));
-
+                                Map map = ClassUtil.annotation2map(formId, formAnnotation);
+                                formElement.setChildren(buildForm(formId, formField.getType(), map));
+                                formElement.setContent(map);
                                 element.setChildren(new ArrayList<Element>() {{
                                     add(formElement);
                                 }});
@@ -100,8 +106,9 @@ public class ComponentBuilder extends Builder {
                                 String formId = formField.getName();
                                 element.setId(formId);
                                 element.setType(formAnnotation.annotationType().getSimpleName());
-                                element.setContent(ClassUtil.annotation2map(formId, formAnnotation));
-                                element.setChildren(buildForm(formId, formField.getType()));
+                                Map map = ClassUtil.annotation2map(formId, formAnnotation);
+                                element.setChildren(buildForm(formId, formField.getType(), map));
+                                element.setContent(map);
                             }
                         }
                     }
@@ -117,10 +124,12 @@ public class ComponentBuilder extends Builder {
         return result;
     }
 
-    private List<Element> buildForm(String formId, Class clazz) throws SpringReaderException {
+    private List<Element> buildForm(String formId, Class clazz, Map formContent) throws SpringReaderException, NoSuchFieldException, IllegalAccessException, JsonProcessingException {
         Field[] fields = clazz.getDeclaredFields();
         Field.setAccessible(fields, true);
         List<Element> list = new ArrayList<Element>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        boolean hasRules = false;
         for (Field field : fields) {
             final Element element = new Element();
             Element formItemElement = new Element();
@@ -138,10 +147,29 @@ public class ComponentBuilder extends Builder {
             } else {
                 Map map = new HashMap();
                 map.put("label", "");
+                map.put("prop", field.getName());
                 formItemElement.setContent(map);
             }
             boolean isComponent = false;
             I18N i18n = field.getAnnotation(I18N.class);
+            final Rule rule = field.getAnnotation(Rule.class);
+            if(rule != null) {
+                hasRules = true;
+                List<Map> ruleList = new ArrayList<Map>();
+                Map map = annotation2map(rule);
+                ruleList.add(map);
+                formItemElement.setRules(objectMapper.writeValueAsString(ruleList));
+            }
+            Rules rules = field.getAnnotation(Rules.class);
+            if(rules != null) {
+                hasRules = true;
+                List<Map> ruleList = new ArrayList<Map>();
+                for(Rule object:rules.value()) {
+                    Map map = annotation2map(object);
+                    ruleList.add(map);
+                }
+                formItemElement.setRules(objectMapper.writeValueAsString(ruleList));
+            }
             for (Annotation annotation : annotations) {
                 String packageName = annotation.annotationType().getPackage().getName();
                 if (Component.class.getPackage().getName().equals(packageName)) {
@@ -189,22 +217,22 @@ public class ComponentBuilder extends Builder {
                 }
             }
         }
+        if(hasRules) {
+            formContent.put(":rules", formId + "_rules");
+        }
         return list;
     }
 
     private Map buildEvent(Annotation annotation) throws SpringReaderException {
         Map map = new HashMap();
         try {
-            map = eventAnnotation2map(annotation);
-            map.put("type", annotation.annotationType().getSimpleName().toLowerCase());
+            map = annotation2map(annotation);
             String path = (String) map.get("path");
             if ("".equals(path)) {
                 Class clz = (Class) map.get("rest");
                 String func = (String) map.get("func");
                 Class controllerClazz = this.getClassLoader().loadClass(clz.getName());
                 Map<String, String> results = readSetting(controllerClazz, func, path);
-//                map.put("path", results.get("path"));
-//                map.put("method", results.get("method"));
                 map.putAll(results);
             }
         } catch (ClassNotFoundException e) {
@@ -303,7 +331,7 @@ public class ComponentBuilder extends Builder {
         return list;
     }
 
-    private Map eventAnnotation2map(Annotation annotation) throws IllegalAccessException, NoSuchFieldException {
+    private Map annotation2map(Annotation annotation) throws IllegalAccessException, NoSuchFieldException {
         String property = "memberValues";
         InvocationHandler invo = Proxy.getInvocationHandler(annotation);
         Field field = invo.getClass().getDeclaredField(property);

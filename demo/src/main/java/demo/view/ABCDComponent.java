@@ -1,18 +1,17 @@
 package demo.view;
 
-import org.december.beanui.element.Icon;
+import demo.view.form.UserQueryForm;
 import org.december.beanui.element.annotation.Component;
-import org.december.beanui.element.annotation.Input;
 
-@Component(title = "User Query", path = "menu1", icon = "404", superTitle = "test", superIcon = "lock")
+@Component(title = "UserRow Query", path = "menu1", icon = "404", superTitle = "test", superIcon = "lock")
 public class ABCDComponent {
-    private UserQuery userQuery;
+    private UserQueryForm userQuery;
 
-    public UserQuery getUserQuery() {
+    public UserQueryForm getUserQuery() {
         return userQuery;
     }
 
-    public void setUserQuery(UserQuery userQuery) {
+    public void setUserQuery(UserQueryForm userQuery) {
         this.userQuery = userQuery;
     }
 }

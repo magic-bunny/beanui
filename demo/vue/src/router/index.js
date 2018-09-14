@@ -36,13 +36,6 @@ export default new Router({
 
 export const asyncRouterMap = [
     {
-        path: '/login2',
-        name: 'login2',
-        component:() => import('@/views/beanui/demo.view.LoginComponent'),
-        hidden: true
-    }
-    ,
-    {
         path: '/',
         name: 'test',
         component: Layout
@@ -56,7 +49,7 @@ export const asyncRouterMap = [
                 name: 'test',
                 meta: {
                   title: 'test'
-                  ,icon: 'example'
+                  ,icon: 'star'
                 }
             }
         ]
@@ -79,72 +72,6 @@ export const asyncRouterMap = [
                 }
             }
         ]
-    }
-    ,
-    {
-        path: '/newnewnew',
-        name: 'newnewnew',
-        component: Layout
-        ,redirect:         '/newnewnew/index'
-        ,
-        children: [
-            {
-                path: 'index',
-                component:() => import('@/views/beanui/demo.view.NewComponent'),
-                name: 'newnewnew',
-                meta: {
-                  title: 'newnewnew'
-                  ,icon: 'example'
-                }
-            }
-        ]
-    }
-    ,
-    {
-        path: '/example',
-        name: 'example',
-        component: Layout
-        ,alwaysShow: true,
-        meta: {
-          title: 'example'
-          ,icon: 'example'
-        }
-        ,children: [
-      {
-        path: 'demo1',
-        name: 'demo1'
-        ,component: () => import('@/views/beanui/demo.view.TestComponent')
-        ,meta: {
-          title: 'demo1'
-          ,icon: 'star'
-        }
-        
-      }
-      ,
-      {
-        path: 'demo2',
-        name: 'demo2'
-        ,component: () => import('@/views/beanui/demo.view.ABCDComponent')
-        ,meta: {
-          title: 'demo2'
-          ,icon: 'lock'
-        }
-        
-      }
-      ,
-      {
-        path: 'demo3',
-        name: 'demo3'
-        ,component: () => import('@/views/beanui/demo.view.NewComponent')
-        ,meta: {
-          title: 'demo3'
-          ,icon: 'eye'
-        }
-        
-      }
-      
-]
-
     }
     ,
     {

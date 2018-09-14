@@ -3,7 +3,7 @@ package org.december.beanui.plugin.builder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.template.Template;
-import org.december.beanui.element.annotation.I18N;
+import org.december.beanui.i18n.annotation.I18N;
 import org.december.beanui.plugin.tool.Builder;
 import org.december.beanui.plugin.tool.exception.BuilderException;
 import org.december.beanui.plugin.tool.util.ClassUtil;

@@ -16,6 +16,7 @@ public class ComplexRow {
     @Rate
     @TableColum(label = "Importance", width = "150")
     private int importance;
+    @Click(rest = ComplexTabelController.class, func = "initComplexTableEditForm", responseForm = "$complexTableEditForm")
     @TableColum(label = "Readings", width = "100")
     private int readings;
     @TableColum(label = "Title" , width = "300", prop = "title")

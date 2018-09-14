@@ -1,6 +1,11 @@
-<#macro createTable formId,id,element>
+<#macro createTable formId, scope, element>
 <el-form-item>
-    <el-table <#list element.content?keys as key><#if element.content[key]!=''>${key}="${element.content[key]}" </#if></#list>>
+    <el-table <#list element.content?keys as key><#if element.content[key]!=''>${key}="${element.content[key]}" </#if></#list>
+    <#if element.events??>
+    <#list element.events as event>
+    @${event.type}="${event.type}_${formId}_${element.id}"
+    </#list>
+    </#if>>
     <#list element.children as o>
         <el-table-column
         <#list o.content?keys as key><#if o.content[key]!=''>${key}="${o.content[key]}" </#if></#list>
@@ -10,49 +15,61 @@
         <template slot-scope="scope">
         <#list o.children as object>
             <#if object.type="Input">
-                <@createInput formId="scope.row" id=object.id element=object/>
+                <@createInput formId=formId scope="scope.row" element=object/>
             <#elseif object.type="Select">
-                <@createSelect formId="scope.row" id=object.id element=object/>
+                <@createSelect formId=formId scope="scope.row" element=object/>
             <#elseif object.type="Button">
-                <@createButton formId="scope.row" id=object.id element=object/>
+                <@createButton formId=formId scope="scope.row" element=object/>
             <#elseif object.type="Switch">
-                <@createSwitch formId="scope.row" id=object.id element=object/>
+                <@createSwitch formId=formId scope="scope.row" element=object/>
             <#elseif object.type="TimerPicker">
-                <@createTimerPicker formId="scope.row" id=object.id element=object/>
+                <@createTimerPicker formId=formId scope="scope.row" element=object/>
             <#elseif object.type="DatePicker">
-                <@createDatePicker formId="scope.row" id=object.id element=object/>
+                <@createDatePicker formId=formId scope="scope.row" element=object/>
             <#elseif object.type="DateTimePicker">
-                <@createDateTimePicker formId="scope.row" id=object.id element=object/>
+                <@createDateTimePicker formId=formId scope="scope.row" element=object/>
             <#elseif object.type="Table">
-                <@createTable formId="scope.row" id=object.id element=object/>
+                <@createTable formId=formId scope="scope.row" element=object/>
             <#elseif object.type="Rate">
-                <@createRate formId="scope.row" id=object.id element=object/>
+                <@createRate formId=formId scope="scope.row" element=object/>
             <#elseif object.type="Alert">
-                <@createAlert formId="scope.row" id=object.id element=object/>
+                <@createAlert formId=formId scope="scope.row" element=object/>
             <#elseif object.type="Slider">
-                <@createSlider formId="scope.row" id=object.id element=object/>
+                <@createSlider formId=formId scope="scope.row" element=object/>
             <#elseif object.type="Checkbox">
-                <@createCheckbox formId="scope.row" id=object.id element=object/>
+                <@createCheckbox formId=formId scope="scope.row" element=object/>
             <#elseif object.type="CheckboxGroup">
-                <@createCheckboxGroup formId="scope.row" id=object.id element=object/>
+                <@createCheckboxGroup formId=formId scope="scope.row" element=object/>
+            <#elseif object.type="CheckboxButton">
+                <@createCheckboxButton formId=formId scope="scope.row" element=object/>
+            <#elseif object.type="CheckboxButtonGroup">
+                <@createCheckboxButtonGroup formId=formId scope="scope.row" element=object/>
             <#elseif object.type="InputNumber">
-                <@createInputNumber formId="scope.row" id=object.id element=object/>
+                <@createInputNumber formId=formId scope="scope.row" element=object/>
             <#elseif object.type="Upload">
-                <@createUpload formId="scope.row" id=object.id element=object/>
+                <@createUpload formId=formId scope="scope.row" element=object/>
             <#elseif object.type="ColorPicker">
-                <@createColorPicker formId="scope.row" id=object.id element=object/>
+                <@createColorPicker formId=formId scope="scope.row" element=object/>
             <#elseif object.type="Transfer">
-                <@createTransfer formId="scope.row" id=object.id element=object/>
+                <@createTransfer formId=formId scope="scope.row" element=object/>
             <#elseif object.type="Tag">
-                <@createTag formId="scope.row" id=object.id element=object/>
+                <@createTag formId=formId scope="scope.row" element=object/>
             <#elseif object.type="Progress">
-                <@createProgress formId="scope.row" id=object.id element=object/>
+                <@createProgress formId=formId scope="scope.row" element=object/>
             <#elseif object.type="Autocomplete">
-                <@createAutocomplete formId="scope.row" id=object.id element=object/>
+                <@createAutocomplete formId=formId scope="scope.row" element=object/>
             <#elseif object.type="Element">
-                <@createElement formId="scope.row" id=object.id element=object/>
+                <@createElement formId=formId scope="scope.row" element=object/>
             <#elseif object.type="Pagination">
-                <@createPagination element=object/>
+                <@createPagination formId=formId scope="scope.row" element=object/>
+            <#elseif object.type="Radio">
+                <@createRadio formId=formId scope="scope.row" element=object/>
+            <#elseif object.type="RadioGroup">
+                <@createRadioGroup formId=formId scope="scope.row" element=object/>
+            <#elseif object.type="RadioButton">
+                <@createRadioButton formId=formId scope="scope.row" element=object/>
+            <#elseif object.type="RadioButtonGroup">
+                <@createRadioButtonGroup formId=formId scope="scope.row" element=object/>
             </#if>
         </#list>
          </template>

@@ -1,34 +1,40 @@
 
 
-
 <template>
 <div class="DynamicTableComponent-container">
 <div class="DynamicTableComponent-inner-container">
     <el-form ref="DynamicTableComponent" :model="DynamicTableComponent" >
-<el-form-item
+<el-form-item prop="label1" 
 label=""
 >
-<el-alert v-model="DynamicTableComponent.label1" title="Fixed header, sorted by header order" show-icon>
+<el-alert v-model="DynamicTableComponent.label1"
+title="Fixed header, sorted by header order"
+ show-icon>
 </el-alert>
 </el-form-item>
-<el-form-item
+<el-form-item prop="checkbox1" 
 label=""
 >
-<el-checkbox-group v-model="DynamicTableComponent.checkbox1" :data="DynamicTableComponent.checkboxData1">
-    <el-checkbox v-for="item in DynamicTableComponent.checkboxData1" :key="item.key" :label="item.label"></el-checkbox>
+<el-checkbox-group v-model="DynamicTableComponent.checkbox1"
+:data="DynamicTableComponent.checkboxData1"
+>
+    <el-checkbox v-for="item in DynamicTableComponent.checkboxData1" :key="item.key" :label="item.label">
+    </el-checkbox>
 </el-checkbox-group>
 </el-form-item>
-<el-form-item
+<el-form-item prop="table1" 
 label=""
 >
 <el-form-item>
-    <el-table :data="DynamicTableComponent.tableData1" >
+    <el-table :data="DynamicTableComponent.tableData1" 
+    >
         <el-table-column
         label="fruit name" 
         :label="$t('demo.view.table.DynamicRow.fruitName')"
         >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.fruitName}}
 </span>
          </template>
@@ -38,7 +44,8 @@ label=""
         :label="$t('demo.view.table.DynamicRow.apple')"
         >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.apple}}
 </span>
          </template>
@@ -48,7 +55,8 @@ label=""
         :label="$t('demo.view.table.DynamicRow.banana')"
         >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.banana}}
 </span>
          </template>
@@ -58,7 +66,8 @@ label=""
         :label="$t('demo.view.table.DynamicRow.orange')"
         >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.orange}}
 </span>
          </template>
@@ -66,30 +75,37 @@ label=""
     </el-table>
 </el-form-item>
 </el-form-item>
-<el-form-item
+<el-form-item prop="label2" 
 label=""
 >
-<el-alert v-model="DynamicTableComponent.label2" title="Not fixed header, sorted by click order" show-icon>
+<el-alert v-model="DynamicTableComponent.label2"
+title="Not fixed header, sorted by click order"
+ show-icon>
 </el-alert>
 </el-form-item>
-<el-form-item
+<el-form-item prop="checkbox2" 
 label=""
 >
-<el-checkbox-group v-model="DynamicTableComponent.checkbox2" :data="DynamicTableComponent.checkboxData2">
-    <el-checkbox v-for="item in DynamicTableComponent.checkboxData2" :key="item.key" :label="item.label"></el-checkbox>
+<el-checkbox-group v-model="DynamicTableComponent.checkbox2"
+:data="DynamicTableComponent.checkboxData2"
+>
+    <el-checkbox v-for="item in DynamicTableComponent.checkboxData2" :key="item.key" :label="item.label">
+    </el-checkbox>
 </el-checkbox-group>
 </el-form-item>
-<el-form-item
+<el-form-item prop="table2" 
 label=""
 >
 <el-form-item>
-    <el-table :data="DynamicTableComponent.tableData2" >
+    <el-table :data="DynamicTableComponent.tableData2" 
+    >
         <el-table-column
         label="fruit name" 
         :label="$t('demo.view.table.DynamicRow.fruitName')"
         >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.fruitName}}
 </span>
          </template>
@@ -99,7 +115,8 @@ label=""
         :label="$t('demo.view.table.DynamicRow.apple')"
         >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.apple}}
 </span>
          </template>
@@ -109,7 +126,8 @@ label=""
         :label="$t('demo.view.table.DynamicRow.banana')"
         >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.banana}}
 </span>
          </template>
@@ -119,7 +137,8 @@ label=""
         :label="$t('demo.view.table.DynamicRow.orange')"
         >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.orange}}
 </span>
          </template>
@@ -136,7 +155,7 @@ import request from '@/utils/request'
 
   export default {
     created: function() {
-    this.created_DynamicTableComponent();
+    this.created_DynamicTableComponent_DynamicTableComponent();
 
 
 
@@ -198,13 +217,13 @@ import request from '@/utils/request'
         },
     data() {
       return {
-                DynamicTableComponent: {}
+            DynamicTableComponent: {}
       }
     },
     methods: {
 
     
-    created_DynamicTableComponent() {
+    created_DynamicTableComponent_DynamicTableComponent() {
         request({
             url: "/dynamic-table/init",
             method: "get"

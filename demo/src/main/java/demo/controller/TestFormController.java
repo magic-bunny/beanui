@@ -1,8 +1,8 @@
 package demo.controller;
 
-import demo.view.TestForm;
-import demo.view.User;
-import demo.view.UserQuery;
+import demo.view.form.TestForm;
+import demo.view.table.UserRow;
+import demo.view.form.UserQueryForm;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,24 +20,24 @@ public class TestFormController {
     }
 
     @RequestMapping(value="/demo2",  method = RequestMethod.GET)
-    public UserQuery test2() {
-        UserQuery userQuery = new UserQuery();
-        List<User> users = new ArrayList<User>();
-        User user = new User();
+    public UserQueryForm test2() {
+        UserQueryForm userQuery = new UserQueryForm();
+        List<UserRow> users = new ArrayList<UserRow>();
+        UserRow user = new UserRow();
         user.setId(1);
         user.setName("Jack");
         user.setAge(20);
         user.setLastDate(new Date());
         users.add(user);
 
-        user = new User();
+        user = new UserRow();
         user.setId(2);
         user.setName("Mary");
         user.setAge(25);
         user.setLastDate(new Date());
         users.add(user);
 
-        user = new User();
+        user = new UserRow();
         user.setId(3);
         user.setName("eric");
         user.setAge(30);

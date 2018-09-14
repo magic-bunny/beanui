@@ -1,4 +1,4 @@
-<#macro createButton formId, id, element>
+<#macro createButton formId, scope, element>
 <el-button
     <#list element.content?keys as key>
     <#if element.content[key]!=''>
@@ -7,11 +7,9 @@
     </#list>
     <#if element.events??>
     <#list element.events as event>
-    @${event.type}="${event.type}_${element.id}"
+    @${event.type}="${event.type}_${formId}_${element.id}"
     </#list>
-    </#if>
->
+    </#if>>
     ${element.content.text}
-
 </el-button>
 </#macro>

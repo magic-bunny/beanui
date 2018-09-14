@@ -1,20 +1,21 @@
 
 
-
 <template>
 <div class="DragTableComponent-container">
 <div class="DragTableComponent-inner-container">
     <el-form ref="DragTableComponent" :model="DragTableComponent" >
-<el-form-item
+<el-form-item prop="table" 
 label=""
 >
 <el-form-item>
-    <el-table :data="DragTableComponent.tableData" fit="true" border="true" highlight-current-row="true" >
+    <el-table :data="DragTableComponent.tableData" fit="true" border="true" highlight-current-row="true" 
+    >
         <el-table-column
         label="ID" width="70" 
 >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.id}}
 </span>
          </template>
@@ -23,7 +24,8 @@ label=""
         label="Date" width="200" 
 >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.date}}
 </span>
          </template>
@@ -32,7 +34,8 @@ label=""
         label="Title" width="400" 
 >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.title}}
 </span>
          </template>
@@ -41,7 +44,8 @@ label=""
         label="Author" width="100" 
 >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.author}}
 </span>
          </template>
@@ -50,7 +54,8 @@ label=""
         label="Importance" width="200" 
 >
         <template slot-scope="scope">
-<el-rate v-model="scope.row.importance" >
+<el-rate v-model="scope.row.importance" 
+>
 </el-rate>
          </template>
         </el-table-column>
@@ -58,7 +63,8 @@ label=""
         label="Readings" width="100" 
 >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.readings}}
 </span>
          </template>
@@ -67,7 +73,8 @@ label=""
         label="Status" width="110" 
 >
         <template slot-scope="scope">
-<el-tag >
+<el-tag 
+>
 {{scope.row.status}}
 </el-tag>
          </template>
@@ -84,7 +91,7 @@ import request from '@/utils/request'
 
   export default {
     created: function() {
-    this.created_DragTableComponent();
+    this.created_DragTableComponent_DragTableComponent();
 
 
 
@@ -122,13 +129,13 @@ import request from '@/utils/request'
         },
     data() {
       return {
-                DragTableComponent: {}
+            DragTableComponent: {}
       }
     },
     methods: {
 
     
-    created_DragTableComponent() {
+    created_DragTableComponent_DragTableComponent() {
         request({
             url: "/drag-table/init",
             method: "get"

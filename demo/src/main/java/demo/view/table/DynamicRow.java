@@ -1,6 +1,6 @@
 package demo.view.table;
 
-import org.december.beanui.element.annotation.I18N;
+import org.december.beanui.i18n.annotation.I18N;
 import org.december.beanui.element.annotation.TableColum;
 
 public class DynamicRow {

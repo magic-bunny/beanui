@@ -1,30 +1,12 @@
 title: root
 children:
-  - path: login2
-    menu: false
-    component: demo.view.LoginComponent
   - title: test
     path:
-    icon: example
+    icon: star
     component: demo.view.TestComponent
   - title: abcde
     icon: example
     component: demo.view.ABCDComponent
-  - title: newnewnew
-    icon: example
-    component: demo.view.NewComponent
-  - title: example
-    icon: example
-    children:
-    - title: demo1
-      component: demo.view.TestComponent
-      icon: star
-    - title: demo2
-      component: demo.view.ABCDComponent
-      icon: lock
-    - title: demo3
-      component: demo.view.NewComponent
-      icon: eye
   - title: Table
     icon: table
     path: table

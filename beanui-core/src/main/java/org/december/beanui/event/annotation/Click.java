@@ -9,6 +9,7 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Click {
+    String type() default "click";
     Class rest();
     String func();
     String requestForm() default "";

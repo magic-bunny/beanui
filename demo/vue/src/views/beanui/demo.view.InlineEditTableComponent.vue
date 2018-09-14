@@ -1,20 +1,21 @@
 
 
-
 <template>
 <div class="InlineEditTableComponent-container">
 <div class="InlineEditTableComponent-inner-container">
     <el-form ref="InlineEditTableComponent" :model="InlineEditTableComponent" >
-<el-form-item
+<el-form-item prop="table" 
 label=""
 >
 <el-form-item>
-    <el-table :data="InlineEditTableComponent.tableData" highlight-current-row="true" >
+    <el-table :data="InlineEditTableComponent.tableData" highlight-current-row="true" 
+    >
         <el-table-column
         label="ID" width="60" 
 >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.id}}
 </span>
          </template>
@@ -23,7 +24,8 @@ label=""
         label="Date" width="150" 
 >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.date}}
 </span>
          </template>
@@ -32,7 +34,8 @@ label=""
         label="Author" width="100" 
 >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.author}}
 </span>
          </template>
@@ -41,7 +44,8 @@ label=""
         label="Importance" width="150" 
 >
         <template slot-scope="scope">
-<el-rate v-model="scope.row.importance" >
+<el-rate v-model="scope.row.importance" 
+>
 </el-rate>
          </template>
         </el-table-column>
@@ -49,7 +53,8 @@ label=""
         label="Readings" width="100" 
 >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.readings}}
 </span>
          </template>
@@ -58,7 +63,8 @@ label=""
         prop="title" label="Title" width="400" 
 >
         <template slot-scope="scope">
-<el-input v-model="scope.row.title" size="mini" style="padding-right: 100px;" >
+<el-input v-model="scope.row.title" size="mini" style="padding-right: 100px;" 
+>
 </el-input>
 <el-button
     icon="el-icon-refresh"
@@ -66,9 +72,8 @@ label=""
     size="mini"
     style="position: absolute;right: 15px;top: 10px;"
     text="cancel"
->
+    >
     cancel
-
 </el-button>
          </template>
         </el-table-column>
@@ -76,7 +81,8 @@ label=""
         label="Status" width="100" 
 >
         <template slot-scope="scope">
-<el-tag >
+<el-tag 
+>
 {{scope.row.status}}
 </el-tag>
          </template>
@@ -90,9 +96,8 @@ label=""
     type="primary"
     size="mini"
     text="Edit"
->
+    >
     Edit
-
 </el-button>
          </template>
         </el-table-column>
@@ -108,7 +113,7 @@ import request from '@/utils/request'
 
   export default {
     created: function() {
-    this.created_InlineEditTableComponent();
+    this.created_InlineEditTableComponent_InlineEditTableComponent();
 
 
 
@@ -152,13 +157,13 @@ import request from '@/utils/request'
         },
     data() {
       return {
-                InlineEditTableComponent: {}
+            InlineEditTableComponent: {}
       }
     },
     methods: {
 
     
-    created_InlineEditTableComponent() {
+    created_InlineEditTableComponent_InlineEditTableComponent() {
         request({
             url: "/inline-edit-table/init",
             method: "get"

@@ -1,5 +1,13 @@
-<#macro createCheckbox formId,id,element>
-<el-checkbox v-model="${formId}.${id}" <#list element.content?keys as key><#if element.content[key]!=''>${key}="${element.content[key]}"</#if></#list>>
-<#if element.content.text=''>${element.id}<#else>${element.content.text}</#if>
+<#macro createCheckbox formId, scope, element>
+<el-checkbox v-model="${scope}.${element.id}"
+<#list element.content?keys as key>
+<#if element.content[key]!=''>
+${key}="${element.content[key]}"
+</#if></#list>
+<#if element.events??>
+<#list element.events as event>
+@${event.type}="${event.type}_${formId}_${element.id}"
+</#list>
+</#if>>
 </el-checkbox>
 </#macro>

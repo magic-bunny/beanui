@@ -10,6 +10,7 @@ public class Element {
     private String tag;
     private Map content;
     private List<Map> events;
+    private String rules;
     private List<Element> children;
 
     public Element() {
@@ -82,5 +83,13 @@ public class Element {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getRules() {
+        return rules;
+    }
+
+    public void setRules(String rules) {
+        this.rules = rules;
     }
 }

@@ -1,44 +1,49 @@
 
 
-
 <template>
 <div class="TestComponent-container">
 <div class="TestComponent-inner-container">
-    <el-form ref="testForm" :model="testForm" >
-<el-form-item
-:label="$t('demo.view.TestForm.username')"
+    <el-form ref="testForm" :model="testForm" :rules="testForm_rules" >
+<el-form-item prop="username" 
+:label="$t('demo.view.form.TestForm.username')"
 >
-<el-input v-model="testForm.username" >
+<el-input v-model="testForm.username" 
+>
 </el-input>
 </el-form-item>
-<el-form-item
-:label="$t('demo.view.TestForm.password')"
+<el-form-item prop="password" 
+:label="$t('demo.view.form.TestForm.password')"
 >
-<el-input v-model="testForm.password" >
+<el-input v-model="testForm.password" 
+>
 </el-input>
 </el-form-item>
-<el-form-item
+<el-form-item prop="isAdmin" 
 label=""
 >
-<el-switch v-model="testForm.isAdmin" >
+<el-switch v-model="testForm.isAdmin" 
+>
 </el-switch>
 </el-form-item>
-<el-form-item
+<el-form-item prop="lastDate" 
 label=""
 >
-<el-date-picker v-model="testForm.lastDate" >
+<el-date-picker v-model="testForm.lastDate" 
+>
 </el-date-picker>
 </el-form-item>
-<el-form-item
+<el-form-item prop="users" 
 label=""
 >
 <el-form-item>
-    <el-table >
+    <el-table 
+    >
         <el-table-column
         type="selection" width="50" 
 >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.id}}
 </span>
          </template>
@@ -47,7 +52,8 @@ label=""
         
 >
         <template slot-scope="scope">
-<el-input v-model="scope.row.name" size="mini" >
+<el-input v-model="scope.row.name" size="mini" 
+>
 </el-input>
          </template>
         </el-table-column>
@@ -55,7 +61,8 @@ label=""
         
 >
         <template slot-scope="scope">
-<el-input-number v-model="scope.row.age" size="mini" >
+<el-input-number v-model="scope.row.age" size="mini" 
+>
 </el-input-number>
          </template>
         </el-table-column>
@@ -63,7 +70,8 @@ label=""
         
 >
         <template slot-scope="scope">
-<span >
+<span 
+>
 {{scope.row.stature}}
 </span>
          </template>
@@ -72,7 +80,8 @@ label=""
         
 >
         <template slot-scope="scope">
-<el-input-number v-model="scope.row.weight" size="mini" >
+<el-input-number v-model="scope.row.weight" size="mini" 
+>
 </el-input-number>
          </template>
         </el-table-column>
@@ -80,7 +89,8 @@ label=""
         width="240" 
 >
         <template slot-scope="scope">
-<el-date-picker v-model="scope.row.lastDate" size="mini" >
+<el-date-picker v-model="scope.row.lastDate" size="mini" 
+>
 </el-date-picker>
          </template>
         </el-table-column>
@@ -91,56 +101,56 @@ label=""
 <el-button
     size="mini"
     text="edit"
->
+    >
     edit
-
 </el-button>
          </template>
         </el-table-column>
     </el-table>
 </el-form-item>
 </el-form-item>
-<el-form-item
+<el-form-item prop="level" 
 label=""
 >
-<el-rate v-model="testForm.level" >
+<el-rate v-model="testForm.level" 
+>
 </el-rate>
 </el-form-item>
-<el-form-item
+<el-form-item prop="detail" 
 label=""
 >
-<el-select v-model="testForm.detail" placeholder="请选择" :options="testForm.options" >
+<el-select v-model="testForm.detail" placeholder="请选择" :options="testForm.options" 
+>
 <el-option v-for="item in testForm.options" :key="item.value" :label="item.label" :value="item.value">
 </el-option>
 </el-select>
 </el-form-item>
-<el-form-item
+<el-form-item prop="options" 
 label=""
 >
 </el-form-item>
-<el-form-item
+<el-form-item prop="address" 
 label=""
 >
-<el-transfer v-model="testForm.address" :data="testForm.addressData" :titles="['1','2']" >
+<el-transfer v-model="testForm.address" :data="testForm.addressData" :titles="['1','2']" 
+>
 </el-transfer>
 </el-form-item>
-<el-form-item
+<el-form-item prop="test" 
 label=""
 >
 <el-button
     icon="el-icon-upload"
     type="primary"
     text="upload"
-    @click="click_button"
->
+    @click="click_testForm_button"
+    >
     upload
-
 </el-button>
 <el-button
     text="clear"
->
+    >
     clear
-
 </el-button>
 </el-form-item>
     </el-form>
@@ -152,7 +162,7 @@ import request from '@/utils/request'
 
   export default {
     created: function() {
-    this.created_testForm();
+    this.created_testForm_testForm();
 
 
 
@@ -228,13 +238,25 @@ import request from '@/utils/request'
         },
     data() {
       return {
-                testForm: {}
+            testForm: {}
+            ,testForm_rules: {
+                username: [{"ENUM":"","min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
+                password: [{"ENUM":"","min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
+                
+                
+                
+                
+                
+                
+                
+                
+            }
       }
     },
     methods: {
 
     
-    created_testForm() {
+    created_testForm_testForm() {
         request({
             url: "/demo3",
             method: "get"
@@ -346,7 +368,7 @@ import request from '@/utils/request'
 
 
     ,
-    click_button() {
+    click_testForm_button() {
         request({
             url: "/demo3",
             method: "get"

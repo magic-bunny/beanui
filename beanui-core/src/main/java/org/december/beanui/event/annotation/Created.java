@@ -9,6 +9,7 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Created {
+    String type() default "created";
     Class rest();
     String func();
     String requestForm() default "";

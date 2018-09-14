@@ -1,5 +1,34 @@
 <#include "/Form.ftl">
 <#include "/Dialog.ftl">
+<#include "/Element.ftl">
+<#include "/Input.ftl">
+<#include "/InputNumber.ftl">
+<#include "/Select.ftl">
+<#include "/Button.ftl">
+<#include "/Switch.ftl">
+<#include "/TimePicker.ftl">
+<#include "/DatePicker.ftl">
+<#include "/DateTimePicker.ftl">
+<#include "/Table.ftl">
+<#include "/Rate.ftl">
+<#include "/FormItem.ftl">
+<#include "/Alert.ftl">
+<#include "/Slider.ftl">
+<#include "/Checkbox.ftl">
+<#include "/CheckboxGroup.ftl">
+<#include "/CheckboxButton.ftl">
+<#include "/CheckboxButtonGroup.ftl">
+<#include "/Upload.ftl">
+<#include "/ColorPicker.ftl">
+<#include "/Transfer.ftl">
+<#include "/Tag.ftl">
+<#include "/Progress.ftl">
+<#include "/Pagination.ftl">
+<#include "/Autocomplete.ftl">
+<#include "/Radio.ftl">
+<#include "/RadioGroup.ftl">
+<#include "/RadioButton.ftl">
+<#include "/RadioButtonGroup.ftl">
 
 <#macro buildCreatedEvent formId, element>
 <#if element??>
@@ -7,7 +36,7 @@
 <#if element.events?size gt 0>
     <#list element.events as event>
     <#if event.type='created'>
-    this.${event.type}_${element.id}();
+    this.${event.type}_${formId}_${element.id}();
     </#if>
     </#list>
 </#if>
@@ -30,7 +59,7 @@
     <#if isFirst=false>,</#if>
     <#local isFirst=false>
     <#list element.events as event>
-    ${event.type}_${element.id}() {
+    ${event.type}_${formId}_${element.id}() {
         request({
             url: "${event.path}",
             method: "${event.method}"
@@ -89,10 +118,19 @@ import request from '@/utils/request'
     data() {
       return {
         <#list elements as form>
+            <#if form.type='Dialog'>
+                <#assign form=form.children[0]>
+            </#if>
+            ${form.id}: {}
+            <#if form.content[':rules']??>
+            ,${form.content[':rules']}: {
+            <#list form.children as object>
+                <#if object.rules??>${object.id}: ${object.rules}<#if object_has_next>,</#if></#if>
+            </#list>
+            }
+            </#if>
             <#if form_has_next>
-                ${form.id}: {},
-            <#else>
-                ${form.id}: {}
+            ,
             </#if>
         </#list>
       }

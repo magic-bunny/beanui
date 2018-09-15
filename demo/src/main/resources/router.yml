@@ -1,4 +1,5 @@
-title: root
+path: login
+component: demo.view.LoginComponent
 children:
   - title: test
     path:

@@ -3,15 +3,18 @@
 <template>
 <div class="InlineEditTableComponent-container">
 <div class="InlineEditTableComponent-inner-container">
-    <el-form ref="InlineEditTableComponent" :model="InlineEditTableComponent" >
-<el-form-item prop="table" 
+    <el-form v-loading="InlineEditTableComponent_loading" ref="InlineEditTableComponent" :model="InlineEditTableComponent" >
+<el-form-item 
+prop="table" 
+
+
 label=""
 >
 <el-form-item>
     <el-table :data="InlineEditTableComponent.tableData" highlight-current-row="true" 
     >
-        <el-table-column
-        label="ID" width="60" 
+        <el-table-column width="60" 
+        label="ID"
 >
         <template slot-scope="scope">
 <span 
@@ -20,8 +23,8 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Date" width="150" 
+        <el-table-column width="150" 
+        label="Date"
 >
         <template slot-scope="scope">
 <span 
@@ -30,8 +33,8 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Author" width="100" 
+        <el-table-column width="100" 
+        label="Author"
 >
         <template slot-scope="scope">
 <span 
@@ -40,8 +43,8 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Importance" width="150" 
+        <el-table-column width="150" 
+        label="Importance"
 >
         <template slot-scope="scope">
 <el-rate v-model="scope.row.importance" 
@@ -49,8 +52,8 @@ label=""
 </el-rate>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Readings" width="100" 
+        <el-table-column width="100" 
+        label="Readings"
 >
         <template slot-scope="scope">
 <span 
@@ -59,8 +62,8 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        prop="title" label="Title" width="400" 
+        <el-table-column prop="title" width="400" 
+        label="Title"
 >
         <template slot-scope="scope">
 <el-input v-model="scope.row.title" size="mini" style="padding-right: 100px;" 
@@ -77,8 +80,8 @@ label=""
 </el-button>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Status" width="100" 
+        <el-table-column width="100" 
+        label="Status"
 >
         <template slot-scope="scope">
 <el-tag 
@@ -87,8 +90,8 @@ label=""
 </el-tag>
          </template>
         </el-table-column>
-        <el-table-column
-        label="actions" width="150" 
+        <el-table-column width="150" 
+        label="actions"
 >
         <template slot-scope="scope">
 <el-button
@@ -157,6 +160,7 @@ import request from '@/utils/request'
         },
     data() {
       return {
+            InlineEditTableComponent_loading: false,
             InlineEditTableComponent: {}
       }
     },
@@ -164,13 +168,15 @@ import request from '@/utils/request'
 
     
     created_InlineEditTableComponent_InlineEditTableComponent() {
+        this.InlineEditTableComponent_loading = true;
         request({
             url: "/inline-edit-table/init",
             method: "get"
         }).then(res => {
             this.InlineEditTableComponent = res.data;
+            this.InlineEditTableComponent_loading = false;
         }).catch(err => {
-
+            this.InlineEditTableComponent_loading = false;
         })
       }
     

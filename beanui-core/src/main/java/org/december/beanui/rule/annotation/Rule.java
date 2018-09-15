@@ -15,5 +15,4 @@ public @interface Rule {
     String max() default "";
     String pattern() default "";
     String len() default "";
-    String ENUM() default "";
 }

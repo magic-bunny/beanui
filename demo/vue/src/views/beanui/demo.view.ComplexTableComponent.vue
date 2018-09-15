@@ -3,15 +3,18 @@
 <template>
 <div class="ComplexTableComponent-container">
 <div class="ComplexTableComponent-inner-container">
-    <el-form ref="complexTableDataForm" :model="complexTableDataForm" >
-<el-form-item prop="table" 
+    <el-form v-loading="complexTableDataForm_loading" ref="complexTableDataForm" :model="complexTableDataForm" >
+<el-form-item 
+prop="table" 
+
+
 label=""
 >
 <el-form-item>
     <el-table :data="complexTableDataForm.tableData" 
     >
-        <el-table-column
-        label="ID" width="60" 
+        <el-table-column width="60" 
+        label="ID"
 >
         <template slot-scope="scope">
 <span 
@@ -20,8 +23,8 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Date" width="150" 
+        <el-table-column width="150" 
+        label="Date"
 >
         <template slot-scope="scope">
 <span 
@@ -30,8 +33,8 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Author" width="100" 
+        <el-table-column width="100" 
+        label="Author"
 >
         <template slot-scope="scope">
 <span 
@@ -40,8 +43,8 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Importance" width="150" 
+        <el-table-column width="150" 
+        label="Importance"
 >
         <template slot-scope="scope">
 <el-rate v-model="scope.row.importance" 
@@ -49,8 +52,8 @@ label=""
 </el-rate>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Readings" width="100" 
+        <el-table-column width="100" 
+        label="Readings"
 >
         <template slot-scope="scope">
 <span 
@@ -60,8 +63,8 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        prop="title" label="Title" width="300" 
+        <el-table-column prop="title" width="300" 
+        label="Title"
 >
         <template slot-scope="scope">
 <el-input v-model="scope.row.title" size="mini" 
@@ -69,8 +72,8 @@ label=""
 </el-input>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Status" width="100" 
+        <el-table-column width="100" 
+        label="Status"
 >
         <template slot-scope="scope">
 <el-tag 
@@ -79,8 +82,8 @@ label=""
 </el-tag>
          </template>
         </el-table-column>
-        <el-table-column
-        prop="actions" label="actions" width="240" 
+        <el-table-column prop="actions" width="240" 
+        label="actions"
 >
         <template slot-scope="scope">
 <el-button
@@ -118,43 +121,61 @@ label=""
     title="Edit"
 :visible.sync="complexTableEditForm.show"
 >
-    <el-form ref="complexTableEditForm" :model="complexTableEditForm" label-width="150px" >
-<el-form-item prop="type" 
+    <el-form v-loading="complexTableEditForm_loading" ref="complexTableEditForm" :model="complexTableEditForm" label-width="150px" >
+<el-form-item 
+prop="type" 
+
+
 label="Type"
 >
 <el-input v-model="complexTableEditForm.type" label="Type" 
 >
 </el-input>
 </el-form-item>
-<el-form-item prop="date" 
+<el-form-item 
+prop="date" 
+
+
 label="Date"
 >
 <el-input v-model="complexTableEditForm.date" label="Date" 
 >
 </el-input>
 </el-form-item>
-<el-form-item prop="title" 
+<el-form-item 
+prop="title" 
+
+
 label="Title"
 >
 <el-input v-model="complexTableEditForm.title" label="Title" 
 >
 </el-input>
 </el-form-item>
-<el-form-item prop="status" 
+<el-form-item 
+prop="status" 
+
+
 label="Status"
 >
 <el-input v-model="complexTableEditForm.status" label="Status" 
 >
 </el-input>
 </el-form-item>
-<el-form-item prop="imp" 
+<el-form-item 
+prop="imp" 
+
+
 label="Imp"
 >
 <el-rate v-model="complexTableEditForm.imp" label="Imp" 
 >
 </el-rate>
 </el-form-item>
-<el-form-item prop="remark" 
+<el-form-item 
+prop="remark" 
+
+
 label="Remark"
 >
 <el-input v-model="complexTableEditForm.remark" label="Remark" 
@@ -245,8 +266,10 @@ import request from '@/utils/request'
         },
     data() {
       return {
+            complexTableDataForm_loading: false,
             complexTableDataForm: {}
             ,
+            complexTableEditForm_loading: false,
             complexTableEditForm: {}
       }
     },
@@ -254,13 +277,15 @@ import request from '@/utils/request'
 
     
     created_complexTableDataForm_complexTableDataForm() {
+        this.complexTableDataForm_loading = true;
         request({
             url: "/complex-table/init-complex-table-data-form",
             method: "get"
         }).then(res => {
             this.complexTableDataForm = res.data;
+            this.complexTableDataForm_loading = false;
         }).catch(err => {
-
+            this.complexTableDataForm_loading = false;
         })
       }
     
@@ -298,13 +323,15 @@ import request from '@/utils/request'
 
     ,
     click_complexTableDataForm_readings() {
+        this.complexTableDataForm_loading = true;
         request({
             url: "/complex-table/init-complex-table-edit-form",
             method: "get"
         }).then(res => {
             this.complexTableEditForm = res.data;
+            this.complexTableDataForm_loading = false;
         }).catch(err => {
-
+            this.complexTableDataForm_loading = false;
         })
       }
     
@@ -328,13 +355,15 @@ import request from '@/utils/request'
 
     ,
     click_complexTableDataForm_actionEdit() {
+        this.complexTableDataForm_loading = true;
         request({
             url: "/complex-table/init-complex-table-edit-form",
             method: "get"
         }).then(res => {
             this.complexTableEditForm = res.data;
+            this.complexTableDataForm_loading = false;
         }).catch(err => {
-
+            this.complexTableDataForm_loading = false;
         })
       }
     

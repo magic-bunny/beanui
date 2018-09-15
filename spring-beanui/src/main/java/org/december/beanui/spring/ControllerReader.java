@@ -1,6 +1,6 @@
 package org.december.beanui.spring;
-import org.december.beanui.plugin.tool.RestReader;
-import org.december.beanui.plugin.tool.exception.SpringReaderException;
+import org.december.beanui.plugin.exception.SpringReaderException;
+import org.december.beanui.plugin.util.RestReader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;

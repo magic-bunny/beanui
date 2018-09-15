@@ -1,3 +1,4 @@
+<#include "/I18N.ftl">
 <#include "/Form.ftl">
 <#include "/Dialog.ftl">
 <#include "/Element.ftl">
@@ -60,6 +61,7 @@
     <#local isFirst=false>
     <#list element.events as event>
     ${event.type}_${formId}_${element.id}() {
+        this.${formId}_loading = true;
         request({
             url: "${event.path}",
             method: "${event.method}"
@@ -76,8 +78,9 @@
             <#else>
             this.${formId} = res.data;
             </#if>
+            this.${formId}_loading = false;
         }).catch(err => {
-
+            this.${formId}_loading = false;
         })
       }
     <#if event_has_next>,</#if>
@@ -121,6 +124,7 @@ import request from '@/utils/request'
             <#if form.type='Dialog'>
                 <#assign form=form.children[0]>
             </#if>
+            ${form.id}_loading: false,
             ${form.id}: {}
             <#if form.content[':rules']??>
             ,${form.content[':rules']}: {

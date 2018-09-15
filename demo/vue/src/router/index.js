@@ -9,12 +9,7 @@ import Layout from '@/views/layout/Layout'
 export const constantRouterMap = [
   {
     path: '/login',
-    component: () => import('@/views/login/index'),
-    hidden: true
-  },
-  {
-    path: '/authredirect',
-    component: () => import('@/views/login/authredirect'),
+    component: () => import('@/views/beanui/demo.view.LoginComponent'),
     hidden: true
   },
   {

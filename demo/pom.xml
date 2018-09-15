@@ -18,6 +18,11 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
+            <groupId>org.december</groupId>
+            <artifactId>beanui-core-plus</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>RELEASE</version>
@@ -39,12 +44,24 @@
                 <configuration>
                     <projectName>BEANUI</projectName>
                     <routerPath>router.yml</routerPath>
-                    <mode>prd</mode>
+                    <mode>dev</mode>
+                    <builders>
+                        <builder>
+                            <builderClass>org.december.beanui.plus.builder.LoginBuilder</builderClass>
+                            <templateClass>demo.view.LoginComponent</templateClass>
+                            <templateName>Login.ftl</templateName>
+                        </builder>
+                    </builders>
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.december</groupId>
                         <artifactId>spring-beanui</artifactId>
+                        <version>1.0-SNAPSHOT</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.december</groupId>
+                        <artifactId>beanui-core-plus</artifactId>
                         <version>1.0-SNAPSHOT</version>
                     </dependency>
                 </dependencies>

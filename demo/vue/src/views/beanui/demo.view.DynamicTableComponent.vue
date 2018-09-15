@@ -3,8 +3,11 @@
 <template>
 <div class="DynamicTableComponent-container">
 <div class="DynamicTableComponent-inner-container">
-    <el-form ref="DynamicTableComponent" :model="DynamicTableComponent" >
-<el-form-item prop="label1" 
+    <el-form v-loading="DynamicTableComponent_loading" ref="DynamicTableComponent" :model="DynamicTableComponent" >
+<el-form-item 
+prop="label1" 
+
+
 label=""
 >
 <el-alert v-model="DynamicTableComponent.label1"
@@ -12,7 +15,10 @@ title="Fixed header, sorted by header order"
  show-icon>
 </el-alert>
 </el-form-item>
-<el-form-item prop="checkbox1" 
+<el-form-item 
+prop="checkbox1" 
+
+
 label=""
 >
 <el-checkbox-group v-model="DynamicTableComponent.checkbox1"
@@ -22,16 +28,18 @@ label=""
     </el-checkbox>
 </el-checkbox-group>
 </el-form-item>
-<el-form-item prop="table1" 
+<el-form-item 
+prop="table1" 
+
+
 label=""
 >
 <el-form-item>
     <el-table :data="DynamicTableComponent.tableData1" 
     >
-        <el-table-column
-        label="fruit name" 
+        <el-table-column 
         :label="$t('demo.view.table.DynamicRow.fruitName')"
-        >
+>
         <template slot-scope="scope">
 <span 
 >
@@ -39,10 +47,9 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="apple" 
+        <el-table-column 
         :label="$t('demo.view.table.DynamicRow.apple')"
-        >
+>
         <template slot-scope="scope">
 <span 
 >
@@ -50,10 +57,9 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="banana" 
+        <el-table-column 
         :label="$t('demo.view.table.DynamicRow.banana')"
-        >
+>
         <template slot-scope="scope">
 <span 
 >
@@ -61,10 +67,9 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="orange" 
+        <el-table-column 
         :label="$t('demo.view.table.DynamicRow.orange')"
-        >
+>
         <template slot-scope="scope">
 <span 
 >
@@ -75,7 +80,10 @@ label=""
     </el-table>
 </el-form-item>
 </el-form-item>
-<el-form-item prop="label2" 
+<el-form-item 
+prop="label2" 
+
+
 label=""
 >
 <el-alert v-model="DynamicTableComponent.label2"
@@ -83,7 +91,10 @@ title="Not fixed header, sorted by click order"
  show-icon>
 </el-alert>
 </el-form-item>
-<el-form-item prop="checkbox2" 
+<el-form-item 
+prop="checkbox2" 
+
+
 label=""
 >
 <el-checkbox-group v-model="DynamicTableComponent.checkbox2"
@@ -93,16 +104,18 @@ label=""
     </el-checkbox>
 </el-checkbox-group>
 </el-form-item>
-<el-form-item prop="table2" 
+<el-form-item 
+prop="table2" 
+
+
 label=""
 >
 <el-form-item>
     <el-table :data="DynamicTableComponent.tableData2" 
     >
-        <el-table-column
-        label="fruit name" 
+        <el-table-column 
         :label="$t('demo.view.table.DynamicRow.fruitName')"
-        >
+>
         <template slot-scope="scope">
 <span 
 >
@@ -110,10 +123,9 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="apple" 
+        <el-table-column 
         :label="$t('demo.view.table.DynamicRow.apple')"
-        >
+>
         <template slot-scope="scope">
 <span 
 >
@@ -121,10 +133,9 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="banana" 
+        <el-table-column 
         :label="$t('demo.view.table.DynamicRow.banana')"
-        >
+>
         <template slot-scope="scope">
 <span 
 >
@@ -132,10 +143,9 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="orange" 
+        <el-table-column 
         :label="$t('demo.view.table.DynamicRow.orange')"
-        >
+>
         <template slot-scope="scope">
 <span 
 >
@@ -217,6 +227,7 @@ import request from '@/utils/request'
         },
     data() {
       return {
+            DynamicTableComponent_loading: false,
             DynamicTableComponent: {}
       }
     },
@@ -224,13 +235,15 @@ import request from '@/utils/request'
 
     
     created_DynamicTableComponent_DynamicTableComponent() {
+        this.DynamicTableComponent_loading = true;
         request({
             url: "/dynamic-table/init",
             method: "get"
         }).then(res => {
             this.DynamicTableComponent = res.data;
+            this.DynamicTableComponent_loading = false;
         }).catch(err => {
-
+            this.DynamicTableComponent_loading = false;
         })
       }
     

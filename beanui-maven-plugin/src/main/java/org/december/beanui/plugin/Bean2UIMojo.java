@@ -6,12 +6,10 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 import org.december.beanui.plugin.bean.Router;
-import org.december.beanui.plugin.builder.I18NBuilder;
-import org.december.beanui.plugin.builder.I18NIndexBuilder;
-import org.december.beanui.plugin.builder.ProjectNameBuilder;
-import org.december.beanui.plugin.builder.RouterBuilder;
-import org.december.beanui.plugin.tool.util.FileUtil;
-import org.december.beanui.plugin.tool.util.PluginSystem;
+import org.december.beanui.plugin.builder.*;
+import org.december.beanui.plugin.exception.BuilderException;
+import org.december.beanui.plugin.util.FileUtil;
+import org.december.beanui.plugin.util.PluginSystem;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,6 +19,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
+import java.util.Map;
 
 @Mojo(name="bean2ui", requiresDependencyResolution = ResolutionScope.TEST)
 public class Bean2UIMojo extends AbstractMojo {
@@ -39,6 +38,9 @@ public class Bean2UIMojo extends AbstractMojo {
 
     @Parameter(property = "mode")
     private String mode = "dev";
+
+    @Parameter(property = "builders")
+    private List<Map> builders;
 
     @Parameter(defaultValue="${project}", readonly=true, required=true)
     private MavenProject project;
@@ -67,24 +69,41 @@ public class Bean2UIMojo extends AbstractMojo {
             String i18nIndexDistPath = "${workPath}/src/lang/index.js";
             String langSelectDistPath = "${workPath}/src/components/LangSelect/Logo.ftl";
 
-            ProjectNameBuilder indexBuilder = new ProjectNameBuilder("Index.ftl", classLoader, indexDistPath);
+            ProjectNameBuilder indexBuilder = new ProjectNameBuilder();
+            indexBuilder.setTemplateName("Index.ftl");
+            indexBuilder.setClassLoader(classLoader);
+            indexBuilder.setDistPath(indexDistPath);
             indexBuilder.create();
 
-            RouterBuilder routerBuilder = new RouterBuilder("Router.ftl", classLoader, routerDistPath);
+            RouterBuilder routerBuilder = new RouterBuilder();
+            routerBuilder.setTemplateName("Router.ftl");
+            routerBuilder.setClassLoader(classLoader);
+            routerBuilder.setDistPath(routerDistPath);
             routerBuilder.create();
 
             List<Router> routers = routerBuilder.getRouter().getChildren();
             for(Router router:routers) {
                 routerBuilder.search(classLoader, router);
             }
-            I18NBuilder i18NBuilder = new I18NBuilder("I18N.ftl", classLoader, i18nDistPath);
-            i18NBuilder.create();
+            LangBuilder langBuilder = new LangBuilder();
+            langBuilder.setTemplateName("Lang.ftl");
+            langBuilder.setClassLoader(classLoader);
+            langBuilder.setDistPath(i18nDistPath);
+            langBuilder.create();
 
-            I18NIndexBuilder i18NIndexBuilder = new I18NIndexBuilder("I18NIndex.ftl", classLoader, i18nIndexDistPath);
-            i18NIndexBuilder.create();
+            LangIndexBuilder langIndexBuilder = new LangIndexBuilder();
+            langIndexBuilder.setTemplateName("LangIndex.ftl");
+            langIndexBuilder.setClassLoader(classLoader);
+            langIndexBuilder.setDistPath(i18nIndexDistPath);
+            langIndexBuilder.create();
 
-            I18NIndexBuilder langSelectBuilder = new I18NIndexBuilder("LangSelect.ftl", classLoader, langSelectDistPath);
+            LangIndexBuilder langSelectBuilder = new LangIndexBuilder();
+            langSelectBuilder.setTemplateName("LangSelect.ftl");
+            langSelectBuilder.setClassLoader(classLoader);
+            langSelectBuilder.setDistPath(langSelectDistPath);
             langSelectBuilder.create();
+
+            this.execBuilder(classLoader);
 
             String os = System.getProperty("os.name");
             boolean isWin = false;
@@ -110,6 +129,35 @@ public class Bean2UIMojo extends AbstractMojo {
         } catch (Exception e) {
             getLog().error(e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    private void execBuilder(ClassLoader classLoader) throws BuilderException {
+        for(Map map:builders) {
+            String templateClass = (String)map.get("templateClass");
+            String builderClass = (String)map.get("builderClass");
+            String templateName = (String)map.get("templateName");
+            String distPath = (String)map.get("distPath");
+            if(builderClass == null || "".equals(builderClass)) {
+                throw new BuilderException("No builder class can be found");
+            }
+            try {
+                Class clazz = Class.forName(builderClass);
+                Builder builder = (Builder)clazz.newInstance();//classLoader.loadClass()
+                builder.setClassLoader(classLoader);
+                builder.setDistPath(distPath);
+                builder.setTemplateName(templateName);
+                if(templateClass != null && !"".equals(templateClass)) {
+                    builder.setTemplateClass(classLoader.loadClass(templateClass));
+                }
+                builder.create();
+            } catch (InstantiationException e) {
+                throw new BuilderException(e);
+            } catch (IllegalAccessException e) {
+                throw new BuilderException(e);
+            } catch (ClassNotFoundException e) {
+                throw new BuilderException(e);
+            }
         }
     }
 

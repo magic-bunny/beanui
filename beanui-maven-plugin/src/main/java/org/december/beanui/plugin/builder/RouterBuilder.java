@@ -9,13 +9,11 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLParser;
 import freemarker.template.Template;
 import org.december.beanui.element.annotation.Component;
 import org.december.beanui.plugin.bean.Router;
-import org.december.beanui.plugin.tool.Builder;
-import org.december.beanui.plugin.tool.exception.BuilderException;
-import org.december.beanui.plugin.tool.exception.RouterBuilderException;
-import org.december.beanui.plugin.tool.util.ClassUtil;
-import org.december.beanui.plugin.tool.util.PluginSystem;
+import org.december.beanui.plugin.exception.BuilderException;
+import org.december.beanui.plugin.exception.RouterBuilderException;
+import org.december.beanui.plugin.util.ClassUtil;
+import org.december.beanui.plugin.util.PluginSystem;
 
-import java.io.File;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.util.*;
@@ -23,9 +21,7 @@ import java.util.*;
 public class RouterBuilder extends Builder {
     private Router router;
 
-    public RouterBuilder(String name, ClassLoader classLoader, String distPath) {
-        super(name, classLoader, distPath);
-    }
+    public static final String LOGIN = "login";
 
     public Map run(Template template) throws BuilderException {
         Map result = new HashMap();
@@ -45,6 +41,10 @@ public class RouterBuilder extends Builder {
                 TreeTraversingParser treeTraversingParser = new TreeTraversingParser(node);
                 Router root = mapper.readValue(treeTraversingParser, Router.class);
                 this.router = root;
+                Router login = new Router();
+                login.setComponent(root.getComponent());
+                login.setMenu(false);
+                result.put(LOGIN, login);
                 result.put("router", root.getChildren());
             }
         } catch (Exception e) {
@@ -60,7 +60,10 @@ public class RouterBuilder extends Builder {
             for (Annotation anno : annos) {
                 if("Component".equals(anno.annotationType().getSimpleName())) {
                     String distPath = "${workPath}/src/views/beanui/" + clazz.getName() + ".vue";
-                    ComponentBuilder componentBuilder = new ComponentBuilder("Component.ftl", classLoader, distPath);
+                    ComponentBuilder componentBuilder = new ComponentBuilder();
+                    componentBuilder.setTemplateName("Component.ftl");
+                    componentBuilder.setClassLoader(classLoader);
+                    componentBuilder.setDistPath(distPath);
                     componentBuilder.setTemplateClass(clazz);
                     componentBuilder.create();
                     break;
@@ -76,7 +79,7 @@ public class RouterBuilder extends Builder {
 
     private Router createRouterByClassloader(ClassLoader classLoader) {
         Router root = new Router();
-        root.setTitle("root");
+        root.setTitle(LOGIN);
         Set<Class> classes = ClassUtil.getClasses(classLoader);
         Map<String, Router> map = new HashMap();
         for(Class clazz:classes) {

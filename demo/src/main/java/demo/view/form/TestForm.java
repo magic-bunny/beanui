@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Created(rest = TestFormController.class, func="test3")
-@Form
+@Form(label_width = "120px")
 public class TestForm {
     @Rule(required = "true")
     @I18N(en = "user name", zh_CN = "用户名")

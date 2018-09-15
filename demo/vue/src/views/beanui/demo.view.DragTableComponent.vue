@@ -3,15 +3,18 @@
 <template>
 <div class="DragTableComponent-container">
 <div class="DragTableComponent-inner-container">
-    <el-form ref="DragTableComponent" :model="DragTableComponent" >
-<el-form-item prop="table" 
+    <el-form v-loading="DragTableComponent_loading" ref="DragTableComponent" :model="DragTableComponent" >
+<el-form-item 
+prop="table" 
+
+
 label=""
 >
 <el-form-item>
     <el-table :data="DragTableComponent.tableData" fit="true" border="true" highlight-current-row="true" 
     >
-        <el-table-column
-        label="ID" width="70" 
+        <el-table-column width="70" 
+        label="ID"
 >
         <template slot-scope="scope">
 <span 
@@ -20,8 +23,8 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Date" width="200" 
+        <el-table-column width="200" 
+        label="Date"
 >
         <template slot-scope="scope">
 <span 
@@ -30,8 +33,8 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Title" width="400" 
+        <el-table-column width="400" 
+        label="Title"
 >
         <template slot-scope="scope">
 <span 
@@ -40,8 +43,8 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Author" width="100" 
+        <el-table-column width="100" 
+        label="Author"
 >
         <template slot-scope="scope">
 <span 
@@ -50,8 +53,8 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Importance" width="200" 
+        <el-table-column width="200" 
+        label="Importance"
 >
         <template slot-scope="scope">
 <el-rate v-model="scope.row.importance" 
@@ -59,8 +62,8 @@ label=""
 </el-rate>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Readings" width="100" 
+        <el-table-column width="100" 
+        label="Readings"
 >
         <template slot-scope="scope">
 <span 
@@ -69,8 +72,8 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        label="Status" width="110" 
+        <el-table-column width="110" 
+        label="Status"
 >
         <template slot-scope="scope">
 <el-tag 
@@ -129,6 +132,7 @@ import request from '@/utils/request'
         },
     data() {
       return {
+            DragTableComponent_loading: false,
             DragTableComponent: {}
       }
     },
@@ -136,13 +140,15 @@ import request from '@/utils/request'
 
     
     created_DragTableComponent_DragTableComponent() {
+        this.DragTableComponent_loading = true;
         request({
             url: "/drag-table/init",
             method: "get"
         }).then(res => {
             this.DragTableComponent = res.data;
+            this.DragTableComponent_loading = false;
         }).catch(err => {
-
+            this.DragTableComponent_loading = false;
         })
       }
     

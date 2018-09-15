@@ -1,10 +1,8 @@
  <#macro createFormItem formId, element>
-<el-form-item <#list element.content?keys as key><#if element.content[key]!=''>${key}="${element.content[key]}" </#if></#list>
-<#if element.children[0].i18n??>
-:label="${r'$'}t('${element.children[0].i18n}')"
-<#else>
-label="${element.children[0].content.label}"
-</#if>>
+<el-form-item <#list element.content?keys as key>
+<#if element.content[key]!='' && key!='label' && key!=':label'>${key}="${element.content[key]}" </#if>
+</#list>
+<@createI18N element=element.children[0] attr='label'/>>
 <#list element.children as object>
 <#if object.type="Input">
     <@createInput formId=formId scope=formId element=object/>

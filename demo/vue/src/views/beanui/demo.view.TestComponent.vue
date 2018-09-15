@@ -3,43 +3,58 @@
 <template>
 <div class="TestComponent-container">
 <div class="TestComponent-inner-container">
-    <el-form ref="testForm" :model="testForm" :rules="testForm_rules" >
-<el-form-item prop="username" 
+    <el-form v-loading="testForm_loading" ref="testForm" :model="testForm" :rules="testForm_rules" label-width="120px" >
+<el-form-item 
+prop="username" 
+
+
 :label="$t('demo.view.form.TestForm.username')"
 >
 <el-input v-model="testForm.username" 
 >
 </el-input>
 </el-form-item>
-<el-form-item prop="password" 
+<el-form-item 
+prop="password" 
+
+
 :label="$t('demo.view.form.TestForm.password')"
 >
 <el-input v-model="testForm.password" 
 >
 </el-input>
 </el-form-item>
-<el-form-item prop="isAdmin" 
+<el-form-item 
+prop="isAdmin" 
+
+
 label=""
 >
 <el-switch v-model="testForm.isAdmin" 
 >
 </el-switch>
 </el-form-item>
-<el-form-item prop="lastDate" 
+<el-form-item 
+prop="lastDate" 
+
+
 label=""
 >
 <el-date-picker v-model="testForm.lastDate" 
 >
 </el-date-picker>
 </el-form-item>
-<el-form-item prop="users" 
+<el-form-item 
+prop="users" 
+
+
 label=""
 >
 <el-form-item>
     <el-table 
     >
-        <el-table-column
-        type="selection" width="50" 
+        <el-table-column type="selection" width="50" 
+        :label="$t('demo.view.table.UserRow.id')"
 >
         <template slot-scope="scope">
 <span 
@@ -48,8 +63,8 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        
+        <el-table-column 
+        :label="$t('demo.view.table.UserRow.name')"
 >
         <template slot-scope="scope">
 <el-input v-model="scope.row.name" size="mini" 
@@ -57,8 +72,8 @@ label=""
 </el-input>
          </template>
         </el-table-column>
-        <el-table-column
-        
+        <el-table-column 
+        :label="$t('demo.view.table.UserRow.age')"
 >
         <template slot-scope="scope">
 <el-input-number v-model="scope.row.age" size="mini" 
@@ -66,8 +81,8 @@ label=""
 </el-input-number>
          </template>
         </el-table-column>
-        <el-table-column
-        
+        <el-table-column 
+        :label="$t('demo.view.table.UserRow.stature')"
 >
         <template slot-scope="scope">
 <span 
@@ -76,8 +91,8 @@ label=""
 </span>
          </template>
         </el-table-column>
-        <el-table-column
-        
+        <el-table-column 
+        :label="$t('demo.view.table.UserRow.weight')"
 >
         <template slot-scope="scope">
 <el-input-number v-model="scope.row.weight" size="mini" 
@@ -85,8 +100,8 @@ label=""
 </el-input-number>
          </template>
         </el-table-column>
-        <el-table-column
-        width="240" 
+        <el-table-column width="240" 
+        :label="$t('demo.view.table.UserRow.lastDate')"
 >
         <template slot-scope="scope">
 <el-date-picker v-model="scope.row.lastDate" size="mini" 
@@ -94,8 +109,8 @@ label=""
 </el-date-picker>
          </template>
         </el-table-column>
-        <el-table-column
-        label="edit" 
+        <el-table-column 
+        :label="$t('demo.view.table.UserRow.option')"
 >
         <template slot-scope="scope">
 <el-button
@@ -109,14 +124,20 @@ label=""
     </el-table>
 </el-form-item>
 </el-form-item>
-<el-form-item prop="level" 
+<el-form-item 
+prop="level" 
+
+
 label=""
 >
 <el-rate v-model="testForm.level" 
 >
 </el-rate>
 </el-form-item>
-<el-form-item prop="detail" 
+<el-form-item 
+prop="detail" 
+
+
 label=""
 >
 <el-select v-model="testForm.detail" placeholder="请选择" :options="testForm.options" 
@@ -125,18 +146,41 @@ label=""
 </el-option>
 </el-select>
 </el-form-item>
-<el-form-item prop="options" 
+<el-form-item 
+prop="options" 
+
+
 label=""
 >
 </el-form-item>
-<el-form-item prop="address" 
+<el-form-item 
+prop="address" 
+
+
 label=""
 >
 <el-transfer v-model="testForm.address" :data="testForm.addressData" :titles="['1','2']" 
 >
 </el-transfer>
 </el-form-item>
-<el-form-item prop="test" 
+<el-form-item 
+
+
+
+
+prop="test" 
+
+
+
+
+
+
+
+
+
+
+
+
 label=""
 >
 <el-button
@@ -238,10 +282,11 @@ import request from '@/utils/request'
         },
     data() {
       return {
+            testForm_loading: false,
             testForm: {}
             ,testForm_rules: {
-                username: [{"ENUM":"","min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
-                password: [{"ENUM":"","min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
+                username: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
+                password: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
                 
                 
                 
@@ -257,13 +302,15 @@ import request from '@/utils/request'
 
     
     created_testForm_testForm() {
+        this.testForm_loading = true;
         request({
             url: "/demo3",
             method: "get"
         }).then(res => {
             this.testForm = res.data;
+            this.testForm_loading = false;
         }).catch(err => {
-
+            this.testForm_loading = false;
         })
       }
     
@@ -369,13 +416,15 @@ import request from '@/utils/request'
 
     ,
     click_testForm_button() {
+        this.testForm_loading = true;
         request({
             url: "/demo3",
             method: "get"
         }).then(res => {
             this.testForm = res.data;
+            this.testForm_loading = false;
         }).catch(err => {
-
+            this.testForm_loading = false;
         })
       }
     

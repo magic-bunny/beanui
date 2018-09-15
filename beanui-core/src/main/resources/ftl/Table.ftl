@@ -7,11 +7,8 @@
     </#list>
     </#if>>
     <#list element.children as o>
-        <el-table-column
-        <#list o.content?keys as key><#if o.content[key]!=''>${key}="${o.content[key]}" </#if></#list>
-        <#if o.i18n??>
-        :label="${r'$'}t('${o.i18n}')"
-        </#if>>
+        <el-table-column <#list o.content?keys as key><#if o.content[key]!='' && key!='label' && key!=':label'>${key}="${o.content[key]}" </#if></#list>
+        <@createI18N element=o attr='label'/>>
         <template slot-scope="scope">
         <#list o.children as object>
             <#if object.type="Input">

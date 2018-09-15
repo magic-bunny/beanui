@@ -20,7 +20,7 @@ public class TestFormController {
     }
 
     @RequestMapping(value="/demo2",  method = RequestMethod.GET)
-    public UserQueryForm test2() {
+    public UserQueryForm test2() throws InterruptedException {
         UserQueryForm userQuery = new UserQueryForm();
         List<UserRow> users = new ArrayList<UserRow>();
         UserRow user = new UserRow();
@@ -45,6 +45,7 @@ public class TestFormController {
         users.add(user);
 
         userQuery.setUsers(users);
+        Thread.sleep(2000);
         return userQuery;
     }
 

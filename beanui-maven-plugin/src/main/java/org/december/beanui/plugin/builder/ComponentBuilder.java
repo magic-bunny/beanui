@@ -8,12 +8,11 @@ import org.december.beanui.event.annotation.Click;
 import org.december.beanui.event.annotation.Created;
 import org.december.beanui.i18n.annotation.I18N;
 import org.december.beanui.plugin.bean.Element;
-import org.december.beanui.plugin.tool.Builder;
-import org.december.beanui.plugin.tool.RestReader;
-import org.december.beanui.plugin.tool.exception.BuilderException;
-import org.december.beanui.plugin.tool.exception.ComponentBuilderException;
-import org.december.beanui.plugin.tool.exception.SpringReaderException;
-import org.december.beanui.plugin.tool.util.ClassUtil;
+import org.december.beanui.plugin.util.RestReader;
+import org.december.beanui.plugin.exception.BuilderException;
+import org.december.beanui.plugin.exception.ComponentBuilderException;
+import org.december.beanui.plugin.exception.SpringReaderException;
+import org.december.beanui.plugin.util.ClassUtil;
 import org.december.beanui.rule.annotation.Rule;
 import org.december.beanui.rule.annotation.Rules;
 
@@ -27,22 +26,16 @@ import java.util.*;
 public class ComponentBuilder extends Builder {
     private static RestReader pathBuilder;
 
-    private Class templateClass;
-
-    public ComponentBuilder(String name, ClassLoader classLoader, String distPath) {
-        super(name, classLoader, distPath);
-    }
-
     public Map run(Template template) throws BuilderException {
         Map result = new HashMap();
         try {
             Element component = new Element();
             List<Element> elements = new ArrayList<Element>();
-            Field[] formFields = templateClass.getDeclaredFields();
-            Annotation[] annotations = templateClass.getAnnotations();
+            Field[] formFields = this.getTemplateClass().getDeclaredFields();
+            Annotation[] annotations = this.getTemplateClass().getAnnotations();
             boolean isComponent = false;
             boolean isForm = false;
-            component.setId(templateClass.getSimpleName());
+            component.setId(this.getTemplateClass().getSimpleName());
             component.setType(Component.class.getSimpleName());
             for (Annotation annotation : annotations) {
                 if (annotation.annotationType() == Component.class) {
@@ -54,11 +47,11 @@ public class ComponentBuilder extends Builder {
                 }
             }
             if (!isComponent) {
-                throw new BuilderException(templateClass.getName() + " is not a Component!");
+                throw new BuilderException(this.getTemplateClass().getName() + " is not a Component!");
             }
 
             if (isForm) {
-                Annotation[] formAnnotations = templateClass.getAnnotations();
+                Annotation[] formAnnotations = this.getTemplateClass().getAnnotations();
                 Element element = new Element();
                 List<Map> events = new ArrayList<Map>();
                 for (Annotation formAnnotation : formAnnotations) {
@@ -66,11 +59,11 @@ public class ComponentBuilder extends Builder {
                         events.add(buildEvent(formAnnotation));
                     }
                     if (formAnnotation.annotationType() == Form.class) {
-                        String formId = templateClass.getSimpleName();
+                        String formId = this.getTemplateClass().getSimpleName();
                         element.setId(formId);
                         element.setType(formAnnotation.annotationType().getSimpleName());
                         Map map = ClassUtil.annotation2map(formId, formAnnotation);
-                        element.setChildren(buildForm(formId, templateClass, map));
+                        element.setChildren(buildForm(formId, this.getTemplateClass(), map));
                         element.setContent(map);
                     }
                 }
@@ -358,13 +351,5 @@ public class ComponentBuilder extends Builder {
             e.printStackTrace();
         }
         return results;
-    }
-
-    public Class getTemplateClass() {
-        return templateClass;
-    }
-
-    public void setTemplateClass(Class templateClass) {
-        this.templateClass = templateClass;
     }
 }

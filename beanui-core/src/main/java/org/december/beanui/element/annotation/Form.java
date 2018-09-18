@@ -19,4 +19,6 @@ public @interface Form {
     String validate_on_rule_change() default "";//	是否在 rules 属性改变后立即触发一次验证	boolean	—	true
     String size() default "";//	用于控制该表单内组件的尺寸	string	medium / small / mini	—
     String disabled() default "";//	是否禁用该表单内的所有组件。若设置为 true，则表单内组件上的 disabled 属性不再生效	boolean	—	false
+    String tag() default "el-form";
+    String title() default "";
 }

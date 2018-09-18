@@ -7,8 +7,8 @@ public class Element {
     private String id;
     private String i18n;
     private String type;
-    private String tag;
     private Map content;
+    private Map badge;
     private List<Map> events;
     private String rules;
     private List<Element> children;
@@ -77,19 +77,19 @@ public class Element {
         this.i18n = i18n;
     }
 
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
     public String getRules() {
         return rules;
     }
 
     public void setRules(String rules) {
         this.rules = rules;
+    }
+
+    public Map getBadge() {
+        return badge;
+    }
+
+    public void setBadge(Map badge) {
+        this.badge = badge;
     }
 }

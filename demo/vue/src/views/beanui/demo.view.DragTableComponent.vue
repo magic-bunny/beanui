@@ -3,89 +3,95 @@
 <template>
 <div class="DragTableComponent-container">
 <div class="DragTableComponent-inner-container">
-    <el-form v-loading="DragTableComponent_loading" ref="DragTableComponent" :model="DragTableComponent" >
-<el-form-item 
-prop="table" 
-
-
-label=""
+<el-form v-loading="DragTableComponent_loading" ref="DragTableComponent" :model="DragTableComponent"
 >
-<el-form-item>
-    <el-table :data="DragTableComponent.tableData" fit="true" border="true" highlight-current-row="true" 
-    >
-        <el-table-column width="70" 
-        label="ID"
+<el-form-item prop="table" 
+ 
+ label=""
 >
-        <template slot-scope="scope">
-<span 
+<el-table :data="DragTableComponent.tableData" fit="true" border="true" highlight-current-row="true" 
+ 
 >
-{{scope.row.id}}
+ <el-table-column width="70" 
+ label="ID"
+>
+    <template slot-scope="scope">
+<span v-model="DragTableComponent.id" 
+ 
+>
+</@createI18N element=element attr=''>
 </span>
-         </template>
-        </el-table-column>
-        <el-table-column width="200" 
-        label="Date"
+     </template>
+    </el-table-column>
+ <el-table-column width="200" 
+ label="Date"
 >
-        <template slot-scope="scope">
-<span 
+    <template slot-scope="scope">
+<span v-model="DragTableComponent.date" 
+ 
 >
-{{scope.row.date}}
+</@createI18N element=element attr=''>
 </span>
-         </template>
-        </el-table-column>
-        <el-table-column width="400" 
-        label="Title"
+     </template>
+    </el-table-column>
+ <el-table-column width="400" 
+ label="Title"
 >
-        <template slot-scope="scope">
-<span 
+    <template slot-scope="scope">
+<span v-model="DragTableComponent.title" 
+ 
 >
-{{scope.row.title}}
+</@createI18N element=element attr=''>
 </span>
-         </template>
-        </el-table-column>
-        <el-table-column width="100" 
-        label="Author"
+     </template>
+    </el-table-column>
+ <el-table-column width="100" 
+ label="Author"
 >
-        <template slot-scope="scope">
-<span 
+    <template slot-scope="scope">
+<span v-model="DragTableComponent.author" 
+ 
 >
-{{scope.row.author}}
+</@createI18N element=element attr=''>
 </span>
-         </template>
-        </el-table-column>
-        <el-table-column width="200" 
-        label="Importance"
+     </template>
+    </el-table-column>
+ <el-table-column width="200" 
+ label="Importance"
 >
-        <template slot-scope="scope">
-<el-rate v-model="scope.row.importance" 
+    <template slot-scope="scope">
+<el-rate v-model="DragTableComponent.importance" 
+ 
 >
+</@createI18N element=element attr=''>
 </el-rate>
-         </template>
-        </el-table-column>
-        <el-table-column width="100" 
-        label="Readings"
+     </template>
+    </el-table-column>
+ <el-table-column width="100" 
+ label="Readings"
 >
-        <template slot-scope="scope">
-<span 
+    <template slot-scope="scope">
+<span v-model="DragTableComponent.readings" 
+ 
 >
-{{scope.row.readings}}
+</@createI18N element=element attr=''>
 </span>
-         </template>
-        </el-table-column>
-        <el-table-column width="110" 
-        label="Status"
+     </template>
+    </el-table-column>
+ <el-table-column width="110" 
+ label="Status"
 >
-        <template slot-scope="scope">
+    <template slot-scope="scope">
 <el-tag 
+ 
 >
 {{scope.row.status}}
 </el-tag>
-         </template>
-        </el-table-column>
-    </el-table>
+     </template>
+    </el-table-column>
+</el-table>
 </el-form-item>
-</el-form-item>
-    </el-form>
+</el-form>
 </div>
 </div>
 </template>
@@ -95,40 +101,6 @@ import request from '@/utils/request'
   export default {
     created: function() {
     this.created_DragTableComponent_DragTableComponent();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         },
     data() {
       return {
@@ -137,7 +109,6 @@ import request from '@/utils/request'
       }
     },
     methods: {
-
     
     created_DragTableComponent_DragTableComponent() {
         this.DragTableComponent_loading = true;
@@ -152,22 +123,6 @@ import request from '@/utils/request'
         })
       }
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

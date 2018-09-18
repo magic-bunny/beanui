@@ -14,4 +14,5 @@ public @interface Tag {
     String hit() default "";//	是否有边框描边	boolean	—	false
     String color() default "";//	背景色	string	—	—
     String size() default "";//	尺寸	string	medium / small / mini	—
+    String tag() default "el-tag";
 }

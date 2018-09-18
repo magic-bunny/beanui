@@ -31,4 +31,5 @@ public @interface Input {
     String form() default "";//	原生属性	string	—	—
     String label() default "";//	输入框关联的label文字	string	—	—
     String tabindex() default "";//	输入框的tabindex	string	-	-
+    String tag() default "el-input";
 }

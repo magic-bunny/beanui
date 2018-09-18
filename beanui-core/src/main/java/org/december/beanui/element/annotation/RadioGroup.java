@@ -11,5 +11,5 @@ public @interface RadioGroup {
     String disabled() default "";//	是否禁用	boolean	—	false
     String text_color() default "";//	按钮形式的 Radio 激活时的文本颜色	string	—	#ffffff
     String fill() default "";//	按钮形式的 Radio 激活时的填充色和边框色	string	—	#409EFF
-
+    String tag() default "el-radio-group";
 }

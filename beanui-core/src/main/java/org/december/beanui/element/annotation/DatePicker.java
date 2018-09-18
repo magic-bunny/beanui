@@ -29,4 +29,5 @@ public @interface DatePicker {
     String unlink_panels() default "";//	在范围选择器里取消两个日期面板之间的联动	boolean	—	false
     String prefix_icon() default "";//	自定义头部图标的类名	string	—	el_icon_date
     String clear_icon() default "";//	自定义清空图标的类名	string	—	el_icon_circle_close
+    String tag() default "el-date-picker";
 }

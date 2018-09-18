@@ -16,4 +16,5 @@ public @interface FormItem {
     String show_message() default "";//	是否显示校验错误信息	boolean	—	true
     String inline_message() default "";//	以行内形式展示校验信息	boolean	—	false
     String size() default "";//	用于控制该表单域下组件的尺寸	string	medium / small / mini
+    String tag() default "el-form-item";
 }

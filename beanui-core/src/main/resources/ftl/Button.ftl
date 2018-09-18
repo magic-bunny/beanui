@@ -1,15 +1,7 @@
 <#macro createButton formId, scope, element>
-<el-button
-    <#list element.content?keys as key>
-    <#if element.content[key]!=''>
-    ${key}="${element.content[key]}"
-    </#if>
-    </#list>
-    <#if element.events??>
-    <#list element.events as event>
-    @${event.type}="${event.type}_${formId}_${element.id}"
-    </#list>
-    </#if>>
+<@createBadge element=element>
+<el-button <@createAttrs content=element.content/> <@createEvents formId=formId element=element/>>
     ${element.content.text}
 </el-button>
+</@createBadge>
 </#macro>

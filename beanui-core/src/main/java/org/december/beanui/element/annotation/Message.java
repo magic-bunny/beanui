@@ -16,4 +16,5 @@ public @interface Message {
     String showClose() default "";//	是否显示关闭按钮	boolean	—	false
     String center() default "";//	文字是否居中	boolean	—	false
     String onClose() default "";//	关闭时的回调函数, 参数为被关闭的 message 实例	function	—	—
+    String tag() default "el-message";
 }

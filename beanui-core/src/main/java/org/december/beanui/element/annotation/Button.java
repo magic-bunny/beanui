@@ -22,4 +22,5 @@ public @interface Button {
     String native_type() default "";//原生 type 属性	string	button / submit / reset	button
     String style() default "";
     String label() default "";
+    String tag() default "el-button";
 }

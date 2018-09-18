@@ -80,11 +80,23 @@ public class ComponentBuilder extends Builder {
                         }
                         if (formAnnotation.annotationType() == Form.class) {
                             Dialog dialog = formField.getType().getAnnotation(Dialog.class);
-                            if(dialog != null) {
+                            Card card = formField.getType().getAnnotation(Card.class);
+                            Carousel carousel = formField.getType().getAnnotation(Carousel.class);
+                            if(dialog != null || card != null || carousel != null) {
                                 String formId = formField.getName();
                                 element.setId(formId);
-                                element.setType(Dialog.class.getSimpleName());
-                                element.setContent(ClassUtil.annotation2map(formId, dialog));
+                                if(dialog != null) {
+                                    element.setType(Dialog.class.getSimpleName());
+                                    element.setContent(ClassUtil.annotation2map(formId, dialog));
+                                }
+                                if(card != null) {
+                                    element.setType(Card.class.getSimpleName());
+                                    element.setContent(ClassUtil.annotation2map(formId, card));
+                                }
+                                if(carousel != null) {
+                                    element.setType(Carousel.class.getSimpleName());
+                                    element.setContent(ClassUtil.annotation2map(formId, carousel));
+                                }
 
                                 final Element formElement = new Element();
                                 formElement.setId(formId);
@@ -127,7 +139,7 @@ public class ComponentBuilder extends Builder {
             final Element element = new Element();
             Element formItemElement = new Element();
             List<Map> events = new ArrayList<Map>();
-            Annotation[] annotations = field.getDeclaredAnnotations();
+            Annotation[] annotations = field.getAnnotations();
             FormItem formItem = field.getAnnotation(FormItem.class);
             formItemElement.setId(field.getName());
             formItemElement.setType(FormItem.class.getName());
@@ -168,22 +180,26 @@ public class ComponentBuilder extends Builder {
                 if (Component.class.getPackage().getName().equals(packageName)) {
                     isComponent = true;
                     if (annotation.annotationType() != FormItem.class) {
-                        type = annotation.annotationType();
-                        element.setId(field.getName());
-                        if (i18n != null) {
-                            element.setI18n(clazz.getName() + "." + field.getName());
-                        }
-                        element.setType(type.getSimpleName());
-                        if (annotation.annotationType() == Table.class) {
-                            if (field.getType() == List.class) {
-                                ParameterizedType pt = (ParameterizedType) field.getGenericType();
-                                element.setChildren(buildTable(formId, (Class) pt.getActualTypeArguments()[0]));
-                            } else {
-                                element.setChildren(buildTable(formId, field.getType()));
+                        if(annotation.annotationType() == Badge.class) {
+                            element.setBadge(ClassUtil.annotation2map(formId, annotation));
+                        } else {
+                            type = annotation.annotationType();
+                            element.setId(field.getName());
+                            if (i18n != null) {
+                                element.setI18n(clazz.getName() + "." + field.getName());
                             }
+                            element.setType(type.getSimpleName());
+                            if (annotation.annotationType() == Table.class) {
+                                if (field.getType() == List.class) {
+                                    ParameterizedType pt = (ParameterizedType) field.getGenericType();
+                                    element.setChildren(buildTable(formId, (Class) pt.getActualTypeArguments()[0]));
+                                } else {
+                                    element.setChildren(buildTable(formId, field.getType()));
+                                }
+                            }
+                            Map map = ClassUtil.annotation2map(formId, annotation);
+                            element.setContent(map);
                         }
-                        Map map = ClassUtil.annotation2map(formId, annotation);
-                        element.setContent(map);
                     }
                 }
                 if (Click.class.getPackage().getName().equals(packageName)) {
@@ -272,15 +288,19 @@ public class ComponentBuilder extends Builder {
             for (Annotation annotation : annotations) {
                 String packageName = annotation.annotationType().getPackage().getName();
                 if (Component.class.getPackage().getName().equals(packageName)) {
-                    if (annotation.annotationType() != TableColum.class && annotation.annotationType() != I18N.class) {
-                        isWord = false;
+                    if (annotation.annotationType() != TableColum.class) {
                         isCompoent = true;
-                        Map map = ClassUtil.annotation2map(formId, annotation);
-                        element.setId(field.getName());
-                        element.setType(annotation.annotationType().getSimpleName());
-                        element.setContent(map);
-                        if (i18n != null) {
-                            element.setI18n(clazz.getName() + "." + field.getName());
+                        if(annotation.annotationType() == Badge.class) {
+                            element.setBadge(ClassUtil.annotation2map(formId, annotation));
+                        } else {
+                            isWord = false;
+                            Map map = ClassUtil.annotation2map(formId, annotation);
+                            element.setId(field.getName());
+                            element.setType(annotation.annotationType().getSimpleName());
+                            element.setContent(map);
+                            if (i18n != null) {
+                                element.setI18n(clazz.getName() + "." + field.getName());
+                            }
                         }
                     }
                 }
@@ -293,8 +313,9 @@ public class ComponentBuilder extends Builder {
                 isCompoent = true;
                 element.setId(field.getName());
                 element.setType("Element");
-                element.setTag("span");
-                element.setContent(new HashMap());
+                Map content = new HashMap();
+                content.put("tag", "span");
+                element.setContent(content);
                 if (i18n != null) {
                     element.setI18n(clazz.getName() + "." + field.getName());
                 }

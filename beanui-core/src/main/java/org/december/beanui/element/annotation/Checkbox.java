@@ -17,4 +17,5 @@ public @interface Checkbox {
     String name() default "";//	原生 name 属性	string	—	—
     String checked() default "";//	当前是否勾选	boolean	—	false
     String indeterminate() default "";//	设置 indeterminate 状态，只负责样式控制	boolean	—	false
+    String tag() default "el-checkbox";
 }

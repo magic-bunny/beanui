@@ -1,10 +1,7 @@
 <#macro createElement formId, scope, element>
-<${element.tag} <#list element.content?keys as key><#if element.content[key]!=''>${key}="${element.content[key]}" </#if></#list>
-<#if element.events??>
-<#list element.events as event>
-@${event.type}="${event.type}_${formId}_${element.id}"
-</#list>
-</#if>>
-${r'{{'}${scope}.${element.id}${r'}}'}
-</${element.tag}>
+<@createBadge element=element>
+<${element.content.tag} v-model="${formId}.${element.id}" <@createAttrs content=element.content/> <@createEvents formId=formId element=element/>>
+</@createI18N element=element attr=''>
+</${element.content.tag}>
+</@createBadge>
 </#macro>

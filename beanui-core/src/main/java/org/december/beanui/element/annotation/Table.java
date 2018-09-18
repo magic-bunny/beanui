@@ -37,4 +37,5 @@ public @interface Table {
     String summary_method() default "";//	自定义的合计计算方法	Function({ columns, data })	—	—
     String span_method() default "";//	合并行或列的计算方法	Function({ row, column, rowIndex, columnIndex })	—	—
     String select_on_indeterminate() default "";//	在多选表格中，当仅有部分行被选中时，点击表头的多选框时的行为。若为 true，则选中所有行；若为 false，则取消选择所有行	Boolean	—	true
+    String tag() default "el-table";
 }

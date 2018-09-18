@@ -14,4 +14,5 @@ public @interface ColorPicker {
     String color_format() default "";//	写入 v_model 的颜色的格式	string	hsl / hsv / hex / rgb	hex（show_alpha 为 false）/ rgb（show_alpha 为 true）
     String popper_class() default "";//	ColorPicker 下拉框的类名	string	—	—
     String predefine() default "";//	预定义颜色	array	—	—
+    String tag() default "el-color-picker";
 }

@@ -20,4 +20,5 @@ public @interface Transfer {
     String props() default "";//	数据源的字段别名	object{key, label, disabled}	—	—
     String left_default_checked() default "";//	初始状态下左侧列表的已勾选项的 key 数组	array	—	[ ]
     String right_default_checked() default "";//	初始状态下右侧列表的已勾选项的 key 数组	array	—	[ ]
+    String tag() default "el-transfer";
 }

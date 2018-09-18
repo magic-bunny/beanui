@@ -27,6 +27,7 @@ public class TestForm {
     @Input
     private String password;
 
+    @Badge(value = "20")
     @Switch
     private boolean isAdmin;
 
@@ -44,7 +45,6 @@ public class TestForm {
     @Select(placeholder = "请选择", options = "$options")
     private String detail;
 
-    @Option
     private List<Map<String, String>> options;
 
     @Transfer(titles = ":['1','2']", data = "$addressData")

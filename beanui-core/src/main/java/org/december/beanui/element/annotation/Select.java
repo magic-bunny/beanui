@@ -33,4 +33,5 @@ public @interface Select {
     String default_first_option() default "";//	在输入框按下回车，选择第一个匹配项。需配合 filterable 或 remote 使用	boolean	_	false
     String popper_append_to_body() default "";//	是否将弹出框插入至 body 元素。在弹出框的定位出现问题时，可将该属性设置为 false	boolean	_	true
     String automatic_dropdown() default "";//	对于不可搜索的 Select，是否在输入框获得焦点后自动弹出选项菜单	boolean	_	false
+    String tag() default "el-select";
 }

@@ -15,4 +15,5 @@ public @interface CheckboxGroup {
     String fill() default "";//	按钮形式的 Checkbox 激活时的填充色和边框色	string	—	#409EFF
     String data() default "";
     String label() default "";
+    String tag() default "el-checkbox-group";
 }

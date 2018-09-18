@@ -19,4 +19,5 @@ public @interface Switch {
     String inactive_color() default "";//	switch 关闭时的背景色	string	—	#C0CCDA
     String name() default "";//	switch 对应的 name 属性	string
     String label() default "";
+    String tag() default "el-switch";
 }

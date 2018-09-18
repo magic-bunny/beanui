@@ -13,4 +13,5 @@ public @interface CheckboxButton {
     String disabled() default "";//	是否禁用	boolean	—	false
     String name() default "";//	原生 name 属性	string	—	—
     String checked() default "";//	当前是否勾选	boolean	—	false
+    String tag() default "el-checkbox-button";
 }

@@ -1,37 +1,32 @@
-<#include "/I18N.ftl">
 <#include "/Form.ftl">
-<#include "/Dialog.ftl">
+<#include "/FormItem.ftl">
 <#include "/Element.ftl">
-<#include "/Input.ftl">
-<#include "/InputNumber.ftl">
 <#include "/Select.ftl">
 <#include "/Button.ftl">
-<#include "/Switch.ftl">
-<#include "/TimePicker.ftl">
-<#include "/DatePicker.ftl">
-<#include "/DateTimePicker.ftl">
 <#include "/Table.ftl">
-<#include "/Rate.ftl">
-<#include "/FormItem.ftl">
-<#include "/Alert.ftl">
-<#include "/Slider.ftl">
-<#include "/Checkbox.ftl">
 <#include "/CheckboxGroup.ftl">
-<#include "/CheckboxButton.ftl">
 <#include "/CheckboxButtonGroup.ftl">
 <#include "/Upload.ftl">
-<#include "/ColorPicker.ftl">
-<#include "/Transfer.ftl">
 <#include "/Tag.ftl">
-<#include "/Progress.ftl">
 <#include "/Pagination.ftl">
-<#include "/Autocomplete.ftl">
-<#include "/Radio.ftl">
 <#include "/RadioGroup.ftl">
-<#include "/RadioButton.ftl">
 <#include "/RadioButtonGroup.ftl">
+<#include "/I18N.ftl">
+<#include "/Dialog.ftl">
+<#include "/Badge.ftl">
+<#include "/Breadcrumb.ftl">
+<#include "/Card.ftl">
+<#include "/Carousel.ftl">
 
-<#macro buildCreatedEvent formId, element>
+<#macro createAttrs content>
+<#list content?keys as key><#if content[key]!='' && key!='label' && key!=':label' && key!='tag' && key!='text'>${key}="${content[key]}" </#if></#list>
+</#macro>
+
+<#macro createEvents formId, element>
+<#if element.events??><#list element.events as event>@${event.type}="${event.type}_${formId}_${element.id}" </#list></#if>
+</#macro>
+
+<#macro createCreatedEventMethods formId, element>
 <#if element??>
 <#if element.events??>
 <#if element.events?size gt 0>
@@ -42,19 +37,16 @@
     </#list>
 </#if>
 </#if>
-
 <#if element.children??>
 <#list element.children as object>
-<@buildCreatedEvent formId=formId element=object/>
+<@createCreatedEventMethods formId=formId element=object/>
 </#list>
 </#if>
-
 </#if>
 </#macro>
 
-<#macro buildEvent formId, element, isFirst>
+<#macro createEventMethods formId, element, isFirst>
 <#if element??>
-
 <#if element.events??>
 <#if element.events?size gt 0>
     <#if isFirst=false>,</#if>
@@ -89,7 +81,7 @@
 </#if>
 
 <#if element.children??>
-<#list element.children as object><@buildEvent formId=formId element=object isFirst=isFirst/></#list>
+<#list element.children as object><@createEventMethods formId=formId element=object isFirst=isFirst/></#list>
 </#if>
 
 </#if>
@@ -105,6 +97,12 @@
     <#if object.type='Dialog'>
         <@createDialog element=object/>
     </#if>
+    <#if object.type='Card'>
+        <@createCard element=object/>
+    </#if>
+    <#if object.type='Carousel'>
+        <@createCarousel element=object/>
+    </#if>
 </#list>
 </div>
 </div>
@@ -115,7 +113,7 @@ import request from '@/utils/request'
   export default {
     created: function() {
         <#list elements as element>
-            <@buildCreatedEvent formId=element.id element=element/>
+            <@createCreatedEventMethods formId=element.id element=element/>
         </#list>
         },
     data() {
@@ -144,7 +142,7 @@ import request from '@/utils/request'
         <#if element.type='Dialog'>
             <#assign element=element.children[0]>
         </#if>
-        <@buildEvent formId=element.id element=element isFirst=true/>
+        <@createEventMethods formId=element.id element=element isFirst=true/>
     </#list>
     }
   }

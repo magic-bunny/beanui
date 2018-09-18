@@ -3,103 +3,105 @@
 <template>
 <div class="ABCDComponent-container">
 <div class="ABCDComponent-inner-container">
-    <el-form v-loading="userQuery_loading" ref="userQuery" :model="userQuery" >
-<el-form-item 
-prop="user" 
-
-
-label=""
+<el-form v-loading="userQuery_loading" ref="userQuery" :model="userQuery"
 >
-<el-form-item>
-    <el-table :data="userQuery.users" 
-    >
-        <el-table-column type="selection" width="50" 
-        :label="$t('demo.view.table.UserRow.id')"
+<el-form-item prop="user" 
+ 
+ label=""
 >
-        <template slot-scope="scope">
-<span 
+<el-table :data="userQuery.users" 
+ 
 >
-{{scope.row.id}}
+ <el-table-column type="selection" width="50" 
+ :label="$t('demo.view.table.UserRow.id')"
+>
+    <template slot-scope="scope">
+<span v-model="userQuery.id" 
+ 
+>
+</@createI18N element=element attr=''>
 </span>
-         </template>
-        </el-table-column>
-        <el-table-column 
-        :label="$t('demo.view.table.UserRow.name')"
+     </template>
+    </el-table-column>
+ <el-table-column 
+ :label="$t('demo.view.table.UserRow.name')"
 >
-        <template slot-scope="scope">
-<el-input v-model="scope.row.name" size="mini" 
+    <template slot-scope="scope">
+<el-input v-model="userQuery.name" size="mini" 
+ 
 >
+</@createI18N element=element attr=''>
 </el-input>
-         </template>
-        </el-table-column>
-        <el-table-column 
-        :label="$t('demo.view.table.UserRow.age')"
+     </template>
+    </el-table-column>
+ <el-table-column 
+ :label="$t('demo.view.table.UserRow.age')"
 >
-        <template slot-scope="scope">
-<el-input-number v-model="scope.row.age" size="mini" 
+    <template slot-scope="scope">
+<el-input-number v-model="userQuery.age" size="mini" 
+ 
 >
+</@createI18N element=element attr=''>
 </el-input-number>
-         </template>
-        </el-table-column>
-        <el-table-column 
-        :label="$t('demo.view.table.UserRow.stature')"
+     </template>
+    </el-table-column>
+ <el-table-column 
+ :label="$t('demo.view.table.UserRow.stature')"
 >
-        <template slot-scope="scope">
-<span 
+    <template slot-scope="scope">
+<span v-model="userQuery.stature" 
+ 
 >
-{{scope.row.stature}}
+</@createI18N element=element attr=''>
 </span>
-         </template>
-        </el-table-column>
-        <el-table-column 
-        :label="$t('demo.view.table.UserRow.weight')"
+     </template>
+    </el-table-column>
+ <el-table-column 
+ :label="$t('demo.view.table.UserRow.weight')"
 >
-        <template slot-scope="scope">
-<el-input-number v-model="scope.row.weight" size="mini" 
+    <template slot-scope="scope">
+<el-input-number v-model="userQuery.weight" size="mini" 
+ 
 >
+</@createI18N element=element attr=''>
 </el-input-number>
-         </template>
-        </el-table-column>
-        <el-table-column width="240" 
-        :label="$t('demo.view.table.UserRow.lastDate')"
+     </template>
+    </el-table-column>
+ <el-table-column width="240" 
+ :label="$t('demo.view.table.UserRow.lastDate')"
 >
-        <template slot-scope="scope">
-<el-date-picker v-model="scope.row.lastDate" size="mini" 
+    <template slot-scope="scope">
+<el-date-picker v-model="userQuery.lastDate" size="mini" 
+ 
 >
+</@createI18N element=element attr=''>
 </el-date-picker>
-         </template>
-        </el-table-column>
-        <el-table-column 
-        :label="$t('demo.view.table.UserRow.option')"
+     </template>
+    </el-table-column>
+ <el-table-column 
+ :label="$t('demo.view.table.UserRow.option')"
 >
-        <template slot-scope="scope">
-<el-button
-    size="mini"
-    text="edit"
-    >
+    <template slot-scope="scope">
+<el-button size="mini" 
+ 
+>
     edit
 </el-button>
-         </template>
-        </el-table-column>
-    </el-table>
+     </template>
+    </el-table-column>
+</el-table>
 </el-form-item>
-</el-form-item>
-<el-form-item 
-prop="button" 
-
-
-label=""
+<el-form-item prop="button" 
+ 
+ label=""
 >
-<el-button
-    icon="el-icon-search"
-    type="primary"
-    text="query"
-    @click="click_userQuery_button"
-    >
+<el-button icon="el-icon-search" type="primary" 
+ @click="click_userQuery_button" 
+>
     query
 </el-button>
 </el-form-item>
-    </el-form>
+</el-form>
 </div>
 </div>
 </template>
@@ -108,44 +110,6 @@ import request from '@/utils/request'
 
   export default {
     created: function() {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         },
     data() {
       return {
@@ -154,25 +118,6 @@ import request from '@/utils/request'
       }
     },
     methods: {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

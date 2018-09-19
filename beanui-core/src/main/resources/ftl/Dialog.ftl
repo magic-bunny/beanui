@@ -9,8 +9,10 @@ ${key}="${element.content[key]}"
 </#if>
 </#if>
 </#list>>
-<#if element.children[0].type="Form">
-    <@createForm element=element.children[0]/>
+<#list element.children as child>
+<#if child.type="Form">
+    <@createForm element=child/>
 </#if>
+</#list>
 </el-dialog>
 </#macro>

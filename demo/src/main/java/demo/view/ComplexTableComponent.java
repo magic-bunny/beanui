@@ -3,11 +3,13 @@ package demo.view;
 import demo.view.form.ComplexTableDataForm;
 import demo.view.form.ComplexTableEditForm;
 import org.december.beanui.element.annotation.Component;
+import org.december.beanui.element.annotation.Dialog;
 
 @Component
 public class ComplexTableComponent {
     private ComplexTableDataForm complexTableDataForm;
 
+    @Dialog(title = "Edit", visible = "$complexTableEditForm.show")
     private ComplexTableEditForm complexTableEditForm;
 
     public ComplexTableDataForm getComplexTableDataForm() {

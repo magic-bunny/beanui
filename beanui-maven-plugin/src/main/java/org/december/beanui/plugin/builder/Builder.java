@@ -3,6 +3,7 @@ package org.december.beanui.plugin.builder;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.december.beanui.plugin.exception.BuilderException;
+import org.december.beanui.plugin.exception.SpringReaderException;
 import org.december.beanui.plugin.util.Path;
 
 import java.io.File;
@@ -39,6 +40,8 @@ public abstract class Builder {
             e.printStackTrace();
         } catch (BuilderException e) {
             e.printStackTrace();
+        } catch (SpringReaderException e) {
+            e.printStackTrace();
         }
     }
 
@@ -72,7 +75,7 @@ public abstract class Builder {
         }
     }
 
-    public abstract Map run(Template template) throws BuilderException;
+    public abstract Map run(Template template) throws BuilderException, SpringReaderException;
 
     public ClassLoader getClassLoader() {
         return classLoader;

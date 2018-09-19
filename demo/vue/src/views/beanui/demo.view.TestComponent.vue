@@ -3,6 +3,13 @@
 <template>
 <div class="TestComponent-container">
 <div class="TestComponent-inner-container">
+<el-card
+tag="el-card"
+title="test"
+>
+    <div slot="header">
+        <span>test</span>
+    </div>
 <el-form v-loading="testForm_loading" ref="testForm" :model="testForm"
 :rules="testForm_rules"
 label-width="120px"
@@ -183,6 +190,7 @@ label-width="120px"
 </el-button>
 </el-form-item>
 </el-form>
+</el-card>
 </div>
 </div>
 </template>
@@ -197,20 +205,10 @@ import request from '@/utils/request'
       return {
             testForm_loading: false,
             testForm: {}
-            ,testForm_rules: {
-                username: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
-                password: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
-                
-                
-                
-                
-                
-                
-                
-            }
       }
     },
     methods: {
+
     
     created_testForm_testForm() {
         this.testForm_loading = true;
@@ -301,6 +299,7 @@ import request from '@/utils/request'
         })
       }
     
+
 
 
 

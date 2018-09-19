@@ -46,79 +46,74 @@ public class ComponentBuilder extends Builder {
                     isForm = true;
                 }
             }
+
             if (!isComponent) {
                 throw new BuilderException(this.getTemplateClass().getName() + " is not a Component!");
             }
 
             if (isForm) {
                 Annotation[] formAnnotations = this.getTemplateClass().getAnnotations();
-                Element element = new Element();
-                List<Map> events = new ArrayList<Map>();
-                for (Annotation formAnnotation : formAnnotations) {
-                    if (Created.class.getPackage().getName().equals(formAnnotation.annotationType().getPackage().getName())) {
-                        events.add(buildEvent(formAnnotation));
-                    }
-                    if (formAnnotation.annotationType() == Form.class) {
-                        String formId = this.getTemplateClass().getSimpleName();
-                        element.setId(formId);
-                        element.setType(formAnnotation.annotationType().getSimpleName());
-                        Map map = ClassUtil.annotation2map(formId, formAnnotation);
-                        element.setChildren(buildForm(formId, this.getTemplateClass(), map));
-                        element.setContent(map);
-                    }
-                }
-                element.setEvents(events);
+                Element element = buildForm(this.getTemplateClass().getSimpleName(), this.getTemplateClass(), formAnnotations);
                 elements.add(element);
             } else {
-                for (Field formField : formFields) {
-                    Annotation[] formAnnotations = formField.getType().getAnnotations();
-                    Element element = new Element();
-                    List<Map> events = new ArrayList<Map>();
-                    for (Annotation formAnnotation : formAnnotations) {
-                        if (Created.class.getPackage().getName().equals(formAnnotation.annotationType().getPackage().getName())) {
-                            events.add(buildEvent(formAnnotation));
-                        }
-                        if (formAnnotation.annotationType() == Form.class) {
-                            Dialog dialog = formField.getType().getAnnotation(Dialog.class);
-                            Card card = formField.getType().getAnnotation(Card.class);
-                            Carousel carousel = formField.getType().getAnnotation(Carousel.class);
-                            if(dialog != null || card != null || carousel != null) {
-                                String formId = formField.getName();
-                                element.setId(formId);
-                                if(dialog != null) {
-                                    element.setType(Dialog.class.getSimpleName());
-                                    element.setContent(ClassUtil.annotation2map(formId, dialog));
+                Set<Field> formFieldSet = new HashSet<Field>();
+                for (Field field : formFields) {
+                    field.setAccessible(true);
+                    if (field.getAnnotation(Dialog.class) != null || field.getAnnotation(Card.class) != null || field.getAnnotation(Carousel.class) != null) {
+                        Element element = new Element();
+                        Annotation[] othersAnnotations = field.getAnnotations();
+                        for(Annotation annotation:othersAnnotations) {
+                            Map content = ClassUtil.annotation2map(annotation);
+                            String[] datas = (String[])content.get(":data");
+                            if(datas != null) {
+                                for(String data:datas) {
+                                    Field formField = this.getTemplateClass().getDeclaredField(data.startsWith("$")?data.substring(1):data);
+                                    formField.setAccessible(true);
+                                    formFieldSet.add(formField);
+                                    element.setId(formField.getName());
+                                    element.setType(annotation.annotationType().getSimpleName());
+                                    Annotation[] formAnnotations = formField.getType().getAnnotations();
+                                    Element formElement = buildForm(formField.getName(), formField.getType(), formAnnotations);
+                                    if(element.getChildren() == null) {
+                                        List<Element> otherElementChildren = new ArrayList<Element>();
+                                        otherElementChildren.add(formElement);
+                                        element.setChildren(otherElementChildren);
+                                    } else {
+                                        element.getChildren().add(formElement);
+                                    }
                                 }
-                                if(card != null) {
-                                    element.setType(Card.class.getSimpleName());
-                                    element.setContent(ClassUtil.annotation2map(formId, card));
-                                }
-                                if(carousel != null) {
-                                    element.setType(Carousel.class.getSimpleName());
-                                    element.setContent(ClassUtil.annotation2map(formId, carousel));
-                                }
-
-                                final Element formElement = new Element();
-                                formElement.setId(formId);
-                                formElement.setType(formAnnotation.annotationType().getSimpleName());
-                                Map map = ClassUtil.annotation2map(formId, formAnnotation);
-                                formElement.setChildren(buildForm(formId, formField.getType(), map));
-                                formElement.setContent(map);
-                                element.setChildren(new ArrayList<Element>() {{
-                                    add(formElement);
-                                }});
                             } else {
-                                String formId = formField.getName();
-                                element.setId(formId);
-                                element.setType(formAnnotation.annotationType().getSimpleName());
-                                Map map = ClassUtil.annotation2map(formId, formAnnotation);
-                                element.setChildren(buildForm(formId, formField.getType(), map));
-                                element.setContent(map);
+                                Field formField = field;
+                                formField.setAccessible(true);
+                                formFieldSet.add(formField);
+                                Annotation[] formAnnotations = formField.getType().getAnnotations();
+                                element.setId(formField.getName());
+                                element.setType(annotation.annotationType().getSimpleName());
+                                Element formElement = buildForm(formField.getName(), formField.getType(), formAnnotations);
+                                if(element.getChildren() == null) {
+                                    List<Element> otherElementChildren = new ArrayList<Element>();
+                                    otherElementChildren.add(formElement);
+                                    element.setChildren(otherElementChildren);
+                                } else {
+                                    element.getChildren().add(formElement);
+                                }
                             }
+                            element.setType(annotation.annotationType().getSimpleName());
+                            content.remove(":data");
+                            content.remove("data");
+                            element.setContent(content);
                         }
+                        elements.add(element);
                     }
-                    element.setEvents(events);
-                    elements.add(element);
+                }
+
+                for (Field formField : formFields) {
+                    formField.setAccessible(true);
+                    if(formField.getType().getAnnotation(Form.class) != null && !formFieldSet.contains(formField)) {
+                        Annotation[] formAnnotations = formField.getType().getAnnotations();
+                        Element element = buildForm(formField.getName(), formField.getType(), formAnnotations);
+                        elements.add(element);
+                    }
                 }
             }
             result.put("component", component);
@@ -129,7 +124,30 @@ public class ComponentBuilder extends Builder {
         return result;
     }
 
-    private List<Element> buildForm(String formId, Class clazz, Map formContent) throws SpringReaderException, NoSuchFieldException, IllegalAccessException, JsonProcessingException {
+    private Element buildForm(String formId, Class formType, Annotation[] formAnnotations) throws SpringReaderException, IllegalAccessException, NoSuchFieldException, JsonProcessingException, BuilderException {
+        if(formType.getAnnotation(Form.class) == null) {
+            throw new BuilderException(formType.getName() + " is note a Form");
+        }
+
+        Element element = new Element();
+        List<Map> events = new ArrayList<Map>();
+        for (Annotation formAnnotation : formAnnotations) {
+            if (Created.class.getPackage().getName().equals(formAnnotation.annotationType().getPackage().getName())) {
+                events.add(buildEvent(formAnnotation));
+            }
+            if (formAnnotation.annotationType() == Form.class) {
+                element.setId(formId);
+                element.setType(formAnnotation.annotationType().getSimpleName());
+                Map map = ClassUtil.annotation2map(formId, formAnnotation);
+                element.setChildren(buildFormChildren(formId, formType, map));
+                element.setContent(map);
+            }
+        }
+        element.setEvents(events);
+        return element;
+    }
+
+    private List<Element> buildFormChildren(String formId, Class clazz, Map formContent) throws SpringReaderException, NoSuchFieldException, IllegalAccessException, JsonProcessingException {
         Field[] fields = clazz.getDeclaredFields();
         Field.setAccessible(fields, true);
         List<Element> list = new ArrayList<Element>();
@@ -241,7 +259,7 @@ public class ComponentBuilder extends Builder {
                 Class clz = (Class) map.get("rest");
                 String func = (String) map.get("func");
                 Class controllerClazz = this.getClassLoader().loadClass(clz.getName());
-                Map<String, String> results = readSetting(controllerClazz, func, path);
+                Map<String, String> results = readSetting(controllerClazz, func);
                 map.putAll(results);
             }
         } catch (ClassNotFoundException e) {
@@ -354,7 +372,7 @@ public class ComponentBuilder extends Builder {
         return map;
     }
 
-    private Map<String, String> readSetting(Class clazz, String func, String path) throws SpringReaderException {
+    private Map<String, String> readSetting(Class clazz, String func) throws SpringReaderException {
         Map<String, String> results = new HashMap<String, String>();
         try {
             if (pathBuilder == null) {

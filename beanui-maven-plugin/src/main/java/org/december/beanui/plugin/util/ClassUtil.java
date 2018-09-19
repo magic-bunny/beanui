@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
@@ -177,19 +178,25 @@ public class ClassUtil {
             Iterator iterator = map.keySet().iterator();
             while (iterator.hasNext()) {
                 String key = (String)iterator.next();
-                String value = (String)map.get(key);
-                if(value.startsWith(":")) {
-                    key = ":" + key;
-                    value = value.substring(1);
-                } else if(value.startsWith("$")) {
-                    key = ":" + key;
-                    if(value.contains(".")) {
+                Object object = map.get(key);
+                if(object instanceof String) {
+                    String value = (String)object;
+                    if(value.startsWith(":")) {
+                        key = ":" + key;
                         value = value.substring(1);
-                    } else{
-                        value = formId + "." + value.substring(1);
+                    } else if(value.startsWith("$")) {
+                        key = ":" + key;
+                        if(value.contains(".")) {
+                            value = value.substring(1);
+                        } else{
+                            value = formId + "." + value.substring(1);
+                        }
                     }
+                    results.put(key.replaceAll("_", "-"), value);
+                } else {
+                    results.put(key.replaceAll("_", "-"), object);
                 }
-                results.put(key.replaceAll("_", "-"), value);
+
             }
             return results;
         } catch (NoSuchFieldException e) {

@@ -1,11 +1,16 @@
-<#macro createCarousel formId, scope, element>
-<@createBadge element=element>
-<el-carousel <@createAttrs content=element.content/> <@createEvents formId=formId element=element/>>
-    <el-carousel-item v-for="item in ${element.content[':data']}" :key="item.key" :label="item.label" >
-        <#if element.children[0].type="Form">
-        <@createForm element=element.children[0]/>
-        </#if>
+<#macro createCarousel element>
+<el-carousel
+<#list element.content?keys as key>
+<#if element.content[key]!=''>
+${key}="${element.content[key]}"
+</#if>
+</#list>>
+    <#list element.children as child>
+    <#if child.type="Form">
+    <el-carousel-item>
+    <@createForm element=child/>
     </el-carousel-item>
+    </#if>
+    </#list>
 </el-carousel>
-</@createBadge>
 </#macro>

@@ -5,7 +5,11 @@ import org.december.beanui.i18n.annotation.I18N;
 import org.december.beanui.plugin.bean.Element;
 import org.december.beanui.plugin.builder.Builder;
 import org.december.beanui.plugin.exception.BuilderException;
+import org.december.beanui.plugin.exception.SpringReaderException;
+import org.december.beanui.plugin.util.RestReader;
 import org.december.beanui.plus.element.annotation.Login;
+import org.december.beanui.plus.element.annotation.Logout;
+import org.december.beanui.plus.element.annotation.Userinfo;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -13,7 +17,7 @@ import java.util.Map;
 
 public class LoginBuilder extends Builder {
 
-    public Map run(Template template) throws BuilderException {
+    public Map run(Template template) throws BuilderException, SpringReaderException {
         if(super.getTemplateClass() == null) {
             throw new BuilderException("No builder template class can be found");
         }
@@ -23,9 +27,20 @@ public class LoginBuilder extends Builder {
         Map result = new HashMap();
         Element loginElement = new Element();
 
-        if(super.getTemplateClass().getAnnotation(Login.class) == null) {
+        Login login = (Login)super.getTemplateClass().getAnnotation(Login.class);
+        Logout logout = (Logout)super.getTemplateClass().getAnnotation(Logout.class);
+        Userinfo userinfo = (Userinfo)super.getTemplateClass().getAnnotation(Userinfo.class);
+        if(login == null) {
             throw new BuilderException(super.getTemplateClass().getName() + " is not a Login!");
         }
+
+        LoginAPIBuilder loginAPIBuilder = new LoginAPIBuilder();
+        loginAPIBuilder.setLogin(login);
+        loginAPIBuilder.setLogout(logout);
+        loginAPIBuilder.setUserinfo(userinfo);
+        loginAPIBuilder.setTemplateName("LoginAPI.ftl");
+        loginAPIBuilder.setDistPath("${workPath}/src/api/login.js");
+        loginAPIBuilder.create();
 
         String formId = super.getTemplateClass().getSimpleName();
         loginElement.setId(formId);

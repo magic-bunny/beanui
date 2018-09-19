@@ -3,7 +3,7 @@ package org.december.beanui.element.annotation;
 import java.lang.annotation.*;
 
 @Documented
-@Target({ElementType.TYPE})
+@Target({ElementType.FIELD})
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Dialog {
@@ -23,4 +23,5 @@ public @interface Dialog {
     String before_close() default "";//	关闭前的回调，会暂停 Dialog 的关闭	function(done)，done 用于关闭 Dialog	—	—
     String center() default "";//	是否对头部和底部采用居中布局	boolean	—	false
     String tag() default "el-dialog";
+    String[] data() default {};
 }

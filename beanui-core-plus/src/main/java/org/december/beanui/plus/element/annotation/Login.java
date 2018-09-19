@@ -7,7 +7,8 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Login {
-    String path() default "";
+    Class rest();
+    String func();
     @Documented
     @Target(ElementType.FIELD)
     @Inherited

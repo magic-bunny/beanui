@@ -16,4 +16,5 @@ public @interface Carousel {
     String arrow() default "";//	切换箭头的显示时机	string	always/hover/never	hover
     String type() default "";//	走马灯的类型	string	card	—
     String tag() default "el-carousel";
+    String[] data() default {};
 }

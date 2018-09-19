@@ -1,12 +1,10 @@
 package demo.view.form;
 
-import org.december.beanui.element.annotation.Dialog;
 import org.december.beanui.element.annotation.Form;
 import org.december.beanui.element.annotation.Input;
 import org.december.beanui.element.annotation.Rate;
 
 @Form(label_width = "150px")
-@Dialog(title = "Edit", visible = "$show")
 public class ComplexTableEditForm {
     @Input(label = "Type")
     private String type;

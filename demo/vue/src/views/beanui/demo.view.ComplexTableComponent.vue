@@ -3,6 +3,76 @@
 <template>
 <div class="ComplexTableComponent-container">
 <div class="ComplexTableComponent-inner-container">
+<el-dialog
+title="Edit"
+:visible.sync="complexTableEditForm.show"
+tag="el-dialog"
+>
+<el-form v-loading="complexTableEditForm_loading" ref="complexTableEditForm" :model="complexTableEditForm"
+label-width="150px"
+>
+<el-form-item prop="type" 
+ 
+ label="Type"
+>
+<el-input v-model="complexTableEditForm.type" 
+ 
+>
+</@createI18N element=element attr=''>
+</el-input>
+</el-form-item>
+<el-form-item prop="date" 
+ 
+ label="Date"
+>
+<el-input v-model="complexTableEditForm.date" 
+ 
+>
+</@createI18N element=element attr=''>
+</el-input>
+</el-form-item>
+<el-form-item prop="title" 
+ 
+ label="Title"
+>
+<el-input v-model="complexTableEditForm.title" 
+ 
+>
+</@createI18N element=element attr=''>
+</el-input>
+</el-form-item>
+<el-form-item prop="status" 
+ 
+ label="Status"
+>
+<el-input v-model="complexTableEditForm.status" 
+ 
+>
+</@createI18N element=element attr=''>
+</el-input>
+</el-form-item>
+<el-form-item prop="imp" 
+ 
+ label="Imp"
+>
+<el-rate v-model="complexTableEditForm.imp" 
+ 
+>
+</@createI18N element=element attr=''>
+</el-rate>
+</el-form-item>
+<el-form-item prop="remark" 
+ 
+ label="Remark"
+>
+<el-input v-model="complexTableEditForm.remark" 
+ 
+>
+</@createI18N element=element attr=''>
+</el-input>
+</el-form-item>
+</el-form>
+</el-dialog>
 <el-form v-loading="complexTableDataForm_loading" ref="complexTableDataForm" :model="complexTableDataForm"
 >
 <el-form-item prop="table" 
@@ -113,76 +183,6 @@
 </el-table>
 </el-form-item>
 </el-form>
-<el-dialog
-title="Edit"
-:visible.sync="complexTableEditForm.show"
-tag="el-dialog"
->
-<el-form v-loading="complexTableEditForm_loading" ref="complexTableEditForm" :model="complexTableEditForm"
-label-width="150px"
->
-<el-form-item prop="type" 
- 
- label="Type"
->
-<el-input v-model="complexTableEditForm.type" 
- 
->
-</@createI18N element=element attr=''>
-</el-input>
-</el-form-item>
-<el-form-item prop="date" 
- 
- label="Date"
->
-<el-input v-model="complexTableEditForm.date" 
- 
->
-</@createI18N element=element attr=''>
-</el-input>
-</el-form-item>
-<el-form-item prop="title" 
- 
- label="Title"
->
-<el-input v-model="complexTableEditForm.title" 
- 
->
-</@createI18N element=element attr=''>
-</el-input>
-</el-form-item>
-<el-form-item prop="status" 
- 
- label="Status"
->
-<el-input v-model="complexTableEditForm.status" 
- 
->
-</@createI18N element=element attr=''>
-</el-input>
-</el-form-item>
-<el-form-item prop="imp" 
- 
- label="Imp"
->
-<el-rate v-model="complexTableEditForm.imp" 
- 
->
-</@createI18N element=element attr=''>
-</el-rate>
-</el-form-item>
-<el-form-item prop="remark" 
- 
- label="Remark"
->
-<el-input v-model="complexTableEditForm.remark" 
- 
->
-</@createI18N element=element attr=''>
-</el-input>
-</el-form-item>
-</el-form>
-</el-dialog>
 </div>
 </div>
 </template>
@@ -195,14 +195,42 @@ import request from '@/utils/request'
         },
     data() {
       return {
-            complexTableDataForm_loading: false,
-            complexTableDataForm: {}
-            ,
             complexTableEditForm_loading: false,
             complexTableEditForm: {}
+            ,
+            complexTableDataForm_loading: false,
+            complexTableDataForm: {}
       }
     },
     methods: {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     created_complexTableDataForm_complexTableDataForm() {
         this.complexTableDataForm_loading = true;
@@ -277,34 +305,6 @@ import request from '@/utils/request'
         })
       }
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

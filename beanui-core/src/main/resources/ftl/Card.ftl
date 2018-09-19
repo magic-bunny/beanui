@@ -1,7 +1,19 @@
 <#macro createCard element>
-<el-card <@createAttrs content=element.content/> <@createEvents formId=formId element=element/>>
-<#if element.children[0].type="Form">
-    <@createForm element=element.children[0]/>
+<el-card
+<#list element.content?keys as key>
+<#if element.content[key]!=''>
+${key}="${element.content[key]}"
 </#if>
+</#list>>
+    <#if element.content.title!=''>
+    <div slot="header">
+        <span>${element.content.title}</span>
+    </div>
+    </#if>
+    <#list element.children as child>
+    <#if child.type="Form">
+    <@createForm element=child/>
+    </#if>
+    </#list>
 </el-card>
 </#macro>

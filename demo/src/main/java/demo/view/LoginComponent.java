@@ -1,14 +1,19 @@
 package demo.view;
 
+import demo.controller.LoginController;
 import org.december.beanui.i18n.annotation.I18N;
 import org.december.beanui.plus.element.annotation.Login;
+import org.december.beanui.plus.element.annotation.Logout;
+import org.december.beanui.plus.element.annotation.Userinfo;
 
-@Login
+@Userinfo(rest = LoginController.class, func = "info")
+@Logout(rest = LoginController.class, func = "logout")
+@Login(rest = LoginController.class, func = "login")
 public class LoginComponent {
     @I18N(en = "BEANUI SIGNIN", zh_CN = "BEANUI SIGNIN")
     @Login.Title
     private String title;
-    @I18N(en = "User name", zh_CN = "用户名")
+    @I18N(en = "Permission name", zh_CN = "用户名")
     @Login.Username
     private String username;
     @I18N(en = "Password", zh_CN = "密 码")

@@ -4,8 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.template.Template;
 import org.december.beanui.i18n.annotation.I18N;
-import org.december.beanui.plugin.exception.BuilderException;
-import org.december.beanui.plugin.util.ClassUtil;
+import org.december.beanui.plugin.face.Builder;
+import org.december.beanui.plugin.face.exception.BuilderException;
+import org.december.beanui.plugin.face.util.ClassUtil;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

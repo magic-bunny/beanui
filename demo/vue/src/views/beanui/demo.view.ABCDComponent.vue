@@ -5,84 +5,78 @@
 <div class="ABCDComponent-inner-container">
 <el-form v-loading="userQuery_loading" ref="userQuery" :model="userQuery"
 >
-<el-form-item prop="user" 
+<el-form-item prop="user"
  
  label=""
 >
-<el-table :data="userQuery.users" 
+<el-table :data="userQuery.users"
  
 >
- <el-table-column type="selection" width="50" 
+ <el-table-column type="selection"
+width="50"
  :label="$t('demo.view.table.UserRow.id')"
 >
     <template slot-scope="scope">
-<span v-model="userQuery.id" 
- 
+<span v-model="scope.row.id"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.id}}
 </span>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.UserRow.name')"
+ <el-table-column  :label="$t('demo.view.table.UserRow.name')"
 >
     <template slot-scope="scope">
-<el-input v-model="userQuery.name" size="mini" 
+<el-input v-model="scope.row.name" size="mini"
  
 >
-</@createI18N element=element attr=''>
+{{scope.row.name}}
 </el-input>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.UserRow.age')"
+ <el-table-column  :label="$t('demo.view.table.UserRow.age')"
 >
     <template slot-scope="scope">
-<el-input-number v-model="userQuery.age" size="mini" 
+<el-input-number v-model="scope.row.age" size="mini"
  
 >
-</@createI18N element=element attr=''>
+{{scope.row.age}}
 </el-input-number>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.UserRow.stature')"
+ <el-table-column  :label="$t('demo.view.table.UserRow.stature')"
 >
     <template slot-scope="scope">
-<span v-model="userQuery.stature" 
- 
+<span v-model="scope.row.stature"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.stature}}
 </span>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.UserRow.weight')"
+ <el-table-column  :label="$t('demo.view.table.UserRow.weight')"
 >
     <template slot-scope="scope">
-<el-input-number v-model="userQuery.weight" size="mini" 
+<el-input-number v-model="scope.row.weight" size="mini"
  
 >
-</@createI18N element=element attr=''>
+{{scope.row.weight}}
 </el-input-number>
      </template>
     </el-table-column>
- <el-table-column width="240" 
+ <el-table-column width="240"
  :label="$t('demo.view.table.UserRow.lastDate')"
 >
     <template slot-scope="scope">
-<el-date-picker v-model="userQuery.lastDate" size="mini" 
+<el-date-picker v-model="scope.row.lastDate" size="mini"
  
 >
-</@createI18N element=element attr=''>
+{{scope.row.lastDate}}
 </el-date-picker>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.UserRow.option')"
+ <el-table-column  :label="$t('demo.view.table.UserRow.option')"
 >
     <template slot-scope="scope">
-<el-button size="mini" 
+<el-button size="mini"
  
 >
     edit
@@ -91,11 +85,12 @@
     </el-table-column>
 </el-table>
 </el-form-item>
-<el-form-item prop="button" 
+<el-form-item prop="button"
  
  label=""
 >
-<el-button icon="el-icon-search" type="primary" 
+<el-button icon="el-icon-search"
+type="primary"
  @click="click_userQuery_button" 
 >
     query

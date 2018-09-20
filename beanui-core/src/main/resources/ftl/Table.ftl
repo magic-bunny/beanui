@@ -1,6 +1,6 @@
 <#macro createTable formId, scope, element>
-<el-table <@createAttrs content=element.content/> <@createEvents formId=formId element=element/>>
-<#list element.children as o> <el-table-column <@createAttrs content=o.content/> <@createI18N element=o attr='label'/>>
+<el-table <@createAttrs scope=scope content=element.content/> <@createEvents formId=formId element=element/>>
+<#list element.children as o> <el-table-column <@createAttrs scope=scope content=o.content/> <@createI18N element=o attr='label'/>>
     <template slot-scope="scope">
     <#list o.children as object>
     <#if object.type="Select">

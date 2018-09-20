@@ -31,19 +31,17 @@ export default new Router({
 
 export const asyncRouterMap = [
     {
-        path: '/',
-        name: 'test',
+        path: '',
+        name: 'test1',
         component: Layout
-        ,redirect: 
-        ''
-,
+        ,redirect: '/index',
         children: [
             {
-                path: '',
+                path: 'index',
                 component:() => import('@/views/beanui/demo.view.TestComponent'),
-                name: 'test',
+                name: 'test1',
                 meta: {
-                  title: 'test'
+                  title: 'test1'
                   ,icon: 'star'
                 }
             }
@@ -51,18 +49,17 @@ export const asyncRouterMap = [
     }
     ,
     {
-        path: '/abcde',
-        name: 'abcde',
+        path: '/test2',
+        name: 'test2',
         component: Layout
-        ,redirect:         '/abcde/index'
-        ,
+        ,redirect: '/test2/index',
         children: [
             {
                 path: 'index',
                 component:() => import('@/views/beanui/demo.view.ABCDComponent'),
-                name: 'abcde',
+                name: 'test2',
                 meta: {
-                  title: 'abcde'
+                  title: 'test2'
                   ,icon: 'example'
                 }
             }
@@ -80,7 +77,7 @@ export const asyncRouterMap = [
         }
         ,children: [
       {
-        path: 'dynamic-table',
+        path: '/dynamic-table',
         name: 'Dynamic Table'
         ,component: () => import('@/views/beanui/demo.view.DynamicTableComponent')
         ,meta: {
@@ -102,7 +99,7 @@ export const asyncRouterMap = [
       }
       ,
       {
-        path: 'inline-edit-table',
+        path: '/inline-edit-table',
         name: 'Inline Edit'
         ,component: () => import('@/views/beanui/demo.view.InlineEditTableComponent')
         ,meta: {
@@ -113,7 +110,7 @@ export const asyncRouterMap = [
       }
       ,
       {
-        path: 'complex-table',
+        path: '/complex-table',
         name: 'Complex Table'
         ,component: () => import('@/views/beanui/demo.view.ComplexTableComponent')
         ,meta: {

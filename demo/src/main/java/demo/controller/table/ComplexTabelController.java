@@ -3,6 +3,7 @@ package demo.controller.table;
 import demo.view.form.ComplexTableDataForm;
 import demo.view.form.ComplexTableEditForm;
 import demo.view.table.ComplexRow;
+import org.december.beanui.element.Type;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,7 @@ public class ComplexTabelController {
         complexRow.setImportance(3);
         complexRow.setReadings(3788);
         complexRow.setStatus("deleted");
+        complexRow.setStatusType(Type.DANGER);
         tableData.add(complexRow);
 
         complexRow = new ComplexRow();
@@ -34,6 +36,7 @@ public class ComplexTabelController {
         complexRow.setAuthor("William");
         complexRow.setReadings(2264);
         complexRow.setStatus("draft");
+        complexRow.setStatusType(Type.WARNING);
         complexRow.setImportance(1);
         tableData.add(complexRow);
 
@@ -45,6 +48,7 @@ public class ComplexTabelController {
         complexRow.setAuthor("William");
         complexRow.setReadings(3712);
         complexRow.setStatus("draft");
+        complexRow.setStatusType(Type.WARNING);
         tableData.add(complexRow);
 
         complexRow = new ComplexRow();
@@ -55,6 +59,7 @@ public class ComplexTabelController {
         complexRow.setAuthor("Steven");
         complexRow.setReadings(2078);
         complexRow.setStatus("published");
+        complexRow.setStatusType(Type.SUCCESS);
         tableData.add(complexRow);
 
         complexRow = new ComplexRow();
@@ -65,6 +70,7 @@ public class ComplexTabelController {
         complexRow.setAuthor("Scott");
         complexRow.setReadings(4194);
         complexRow.setStatus("draft");
+        complexRow.setStatusType(Type.WARNING);
         complexRow.setImportance(1);
         tableData.add(complexRow);
 
@@ -75,6 +81,7 @@ public class ComplexTabelController {
         complexRow.setAuthor("Elizabeth");
         complexRow.setReadings(1620);
         complexRow.setStatus("draft");
+        complexRow.setStatusType(Type.WARNING);
         complexRow.setImportance(2);
         tableData.add(complexRow);
 
@@ -85,6 +92,7 @@ public class ComplexTabelController {
         complexRow.setAuthor("Robert");
         complexRow.setReadings(2565);
         complexRow.setStatus("published");
+        complexRow.setStatusType(Type.SUCCESS);
         complexRow.setImportance(1);
         tableData.add(complexRow);
 
@@ -95,6 +103,7 @@ public class ComplexTabelController {
         complexRow.setAuthor("Thomas");
         complexRow.setReadings(3080);
         complexRow.setStatus("published");
+        complexRow.setStatusType(Type.SUCCESS);
         complexRow.setImportance(5);
         tableData.add(complexRow);
 
@@ -105,6 +114,7 @@ public class ComplexTabelController {
         complexRow.setAuthor("Sarah");
         complexRow.setReadings(3964);
         complexRow.setStatus("deleted");
+        complexRow.setStatusType(Type.DANGER);
         complexRow.setImportance(3);
         tableData.add(complexRow);
 
@@ -115,6 +125,7 @@ public class ComplexTabelController {
         complexRow.setAuthor("Michelle");
         complexRow.setReadings(4339);
         complexRow.setStatus("published");
+        complexRow.setStatusType(Type.SUCCESS);
         complexRow.setImportance(1);
         tableData.add(complexRow);
 
@@ -125,6 +136,7 @@ public class ComplexTabelController {
         complexRow.setAuthor("Donna");
         complexRow.setReadings(1911);
         complexRow.setStatus("deleted");
+        complexRow.setStatusType(Type.DANGER);
         complexRow.setImportance(5);
         tableData.add(complexRow);
 

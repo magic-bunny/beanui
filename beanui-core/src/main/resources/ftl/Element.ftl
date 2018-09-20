@@ -1,7 +1,7 @@
 <#macro createElement formId, scope, element>
-<@createBadge element=element>
-<${element.content.tag} v-model="${formId}.${element.id}" <@createAttrs content=element.content/> <@createEvents formId=formId element=element/>>
-</@createI18N element=element attr=''>
+<@createBadge scope=scope element=element>
+<${element.content.tag} v-model="${scope}.${element.id}" <@createAttrs scope=scope content=element.content/> <@createEvents formId=formId element=element/>>
+${r'{{'}${scope}.${element.id}${r'}}'}
 </${element.content.tag}>
 </@createBadge>
 </#macro>

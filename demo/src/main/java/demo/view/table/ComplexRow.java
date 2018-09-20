@@ -22,9 +22,10 @@ public class ComplexRow {
     @TableColum(label = "Title" , width = "300", prop = "title")
     @Input(size = Size.MINI)
     private String title;
-    @Tag
+    @Tag(type = "$statusType")
     @TableColum(label = "Status", width = "100")
     private String status;
+    private String statusType;
     @Click(rest = ComplexTabelController.class, func = "initComplexTableEditForm", responseForm = "$complexTableEditForm")
     @TableColum(label = "actions", width = "240", prop = "actions")
     @Button(text = "Edit", size = Size.MINI, type = Type.PRIMARY, style = "position: absolute;left: 0px;top: 10px;")
@@ -116,5 +117,13 @@ public class ComplexRow {
 
     public void setActionDelete(String actionDelete) {
         this.actionDelete = actionDelete;
+    }
+
+    public String getStatusType() {
+        return statusType;
+    }
+
+    public void setStatusType(String statusType) {
+        this.statusType = statusType;
     }
 }

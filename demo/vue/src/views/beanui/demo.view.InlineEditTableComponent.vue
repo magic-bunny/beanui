@@ -5,100 +5,102 @@
 <div class="InlineEditTableComponent-inner-container">
 <el-form v-loading="InlineEditTableComponent_loading" ref="InlineEditTableComponent" :model="InlineEditTableComponent"
 >
-<el-form-item prop="table" 
+<el-form-item prop="table"
  
  label=""
 >
-<el-table :data="InlineEditTableComponent.tableData" highlight-current-row="true" 
+<el-table :data="InlineEditTableComponent.tableData"
+highlight-current-row="true"
  
 >
- <el-table-column width="60" 
+ <el-table-column width="60"
  label="ID"
 >
     <template slot-scope="scope">
-<span v-model="InlineEditTableComponent.id" 
- 
+<span v-model="scope.row.id"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.id}}
 </span>
      </template>
     </el-table-column>
- <el-table-column width="150" 
+ <el-table-column width="150"
  label="Date"
 >
     <template slot-scope="scope">
-<span v-model="InlineEditTableComponent.date" 
- 
+<span v-model="scope.row.date"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.date}}
 </span>
      </template>
     </el-table-column>
- <el-table-column width="100" 
+ <el-table-column width="100"
  label="Author"
 >
     <template slot-scope="scope">
-<span v-model="InlineEditTableComponent.author" 
- 
+<span v-model="scope.row.author"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.author}}
 </span>
      </template>
     </el-table-column>
- <el-table-column width="150" 
+ <el-table-column width="150"
  label="Importance"
 >
     <template slot-scope="scope">
-<el-rate v-model="InlineEditTableComponent.importance" 
- 
+<el-rate v-model="scope.row.importance"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.importance}}
 </el-rate>
      </template>
     </el-table-column>
- <el-table-column width="100" 
+ <el-table-column width="100"
  label="Readings"
 >
     <template slot-scope="scope">
-<span v-model="InlineEditTableComponent.readings" 
- 
+<span v-model="scope.row.readings"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.readings}}
 </span>
      </template>
     </el-table-column>
- <el-table-column prop="title" width="400" 
+ <el-table-column prop="title"
+width="400"
  label="Title"
 >
     <template slot-scope="scope">
-<el-input v-model="InlineEditTableComponent.title" size="mini" style="padding-right: 100px;" 
+<el-input v-model="scope.row.title" size="mini"
+style="padding-right: 100px;"
  
 >
-</@createI18N element=element attr=''>
+{{scope.row.title}}
 </el-input>
-<el-button icon="el-icon-refresh" type="warning" size="mini" style="position: absolute;right: 15px;top: 10px;" 
+<el-button icon="el-icon-refresh"
+type="warning"
+size="mini"
+style="position: absolute;right: 15px;top: 10px;"
  
 >
     cancel
 </el-button>
      </template>
     </el-table-column>
- <el-table-column width="100" 
+ <el-table-column width="100"
  label="Status"
 >
     <template slot-scope="scope">
-<el-tag 
- 
+<el-tag  
 >
 {{scope.row.status}}
 </el-tag>
      </template>
     </el-table-column>
- <el-table-column width="150" 
+ <el-table-column width="150"
  label="actions"
 >
     <template slot-scope="scope">
-<el-button icon="el-icon-edit" type="primary" size="mini" 
+<el-button icon="el-icon-edit"
+type="primary"
+size="mini"
  
 >
     Edit

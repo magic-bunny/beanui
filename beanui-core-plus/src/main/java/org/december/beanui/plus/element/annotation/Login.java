@@ -43,7 +43,7 @@ public @interface Login {
     @Target(ElementType.FIELD)
     @Inherited
     @Retention(RetentionPolicy.RUNTIME)
-    @interface ThirdpartyButton {
+    @interface SignupButton {
         String label() default "";
     }
 
@@ -51,14 +51,14 @@ public @interface Login {
     @Target(ElementType.FIELD)
     @Inherited
     @Retention(RetentionPolicy.RUNTIME)
-    @interface ThirdpartyTitle {
+    @interface SignupTitle {
         String label() default "";
     }
     @Documented
     @Target(ElementType.FIELD)
     @Inherited
     @Retention(RetentionPolicy.RUNTIME)
-    @interface ThirdpartyTips {
+    @interface SignupTips {
         String label() default "";
     }
 }

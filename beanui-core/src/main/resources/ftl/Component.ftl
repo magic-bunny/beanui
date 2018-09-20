@@ -18,8 +18,14 @@
 <#include "/Card.ftl">
 <#include "/Carousel.ftl">
 
-<#macro createAttrs content>
-<#list content?keys as key><#if content[key]!='' && key!='label' && key!=':label' && key!='tag' && key!='text'>${key}="${content[key]}" </#if></#list>
+<#macro createAttrs scope, content>
+<#list content?keys as key><#if content[key]!='' && key!='label' && key!=':label' && key!='tag' && key!='text'>
+<#if key?starts_with(':') && !content[key]?contains('.') && !content[key]?starts_with('[') && !content[key]?starts_with('{')>
+${key}="${scope}.${content[key]}"
+<#else>
+${key}="${content[key]}"
+</#if>
+</#if></#list>
 </#macro>
 
 <#macro createEvents formId, element>
@@ -90,7 +96,7 @@
 <template>
 <div class="${component.id}-container">
 <div class="${component.id}-inner-container">
-<#list elements as object>
+<#list component.children as object>
     <#if object.type="Form">
         <@createForm element=object/>
     </#if>
@@ -112,13 +118,13 @@ import request from '@/utils/request'
 
   export default {
     created: function() {
-        <#list elements as element>
+        <#list component.children as element>
             <@createCreatedEventMethods formId=element.id element=element/>
         </#list>
         },
     data() {
       return {
-        <#list elements as form>
+        <#list component.children as form>
             <#if form.type='Dialog'>
                 <#assign form=form.children[0]>
             </#if>
@@ -138,7 +144,7 @@ import request from '@/utils/request'
       }
     },
     methods: {
-    <#list elements as element>
+    <#list component.children as element>
         <#if element.type='Dialog'>
             <#assign element=element.children[0]>
         </#if>

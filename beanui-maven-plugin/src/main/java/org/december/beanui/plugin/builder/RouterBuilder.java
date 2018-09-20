@@ -8,11 +8,12 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLParser;
 import freemarker.template.Template;
 import org.december.beanui.element.annotation.Component;
-import org.december.beanui.plugin.bean.Router;
-import org.december.beanui.plugin.exception.BuilderException;
-import org.december.beanui.plugin.exception.RouterBuilderException;
-import org.december.beanui.plugin.util.ClassUtil;
-import org.december.beanui.plugin.util.PluginSystem;
+import org.december.beanui.plugin.face.Builder;
+import org.december.beanui.plugin.face.bean.Router;
+import org.december.beanui.plugin.face.exception.BuilderException;
+import org.december.beanui.plugin.face.exception.RouterBuilderException;
+import org.december.beanui.plugin.face.util.ClassUtil;
+import org.december.beanui.plugin.face.util.PluginSystem;
 
 import java.io.InputStream;
 import java.lang.annotation.Annotation;

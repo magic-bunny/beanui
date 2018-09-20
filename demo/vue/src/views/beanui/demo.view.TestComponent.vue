@@ -14,127 +14,116 @@ title="test"
 :rules="testForm_rules"
 label-width="120px"
 >
-<el-form-item prop="username" 
+<el-form-item prop="username"
  
  :label="$t('demo.view.form.TestForm.username')"
 >
-<el-input v-model="testForm.username" 
- 
+<el-input v-model="testForm.username"  
 >
-</@createI18N element=element attr=''>
+{{testForm.username}}
 </el-input>
 </el-form-item>
-<el-form-item prop="password" 
+<el-form-item prop="password"
  
  :label="$t('demo.view.form.TestForm.password')"
 >
-<el-input v-model="testForm.password" 
- 
+<el-input v-model="testForm.password"  
 >
-</@createI18N element=element attr=''>
+{{testForm.password}}
 </el-input>
 </el-form-item>
-<el-form-item prop="isAdmin" 
+<el-form-item prop="isAdmin"
  
  label=""
 >
-<el-badge value="20" 
+<el-badge value="20"
 >
-<el-switch v-model="testForm.isAdmin" 
- 
+<el-switch v-model="testForm.isAdmin"  
 >
-</@createI18N element=element attr=''>
+{{testForm.isAdmin}}
 </el-switch>
 </el-badge>
 </el-form-item>
-<el-form-item prop="lastDate" 
+<el-form-item prop="lastDate"
  
  label=""
 >
-<el-date-picker v-model="testForm.lastDate" 
- 
+<el-date-picker v-model="testForm.lastDate"  
 >
-</@createI18N element=element attr=''>
+{{testForm.lastDate}}
 </el-date-picker>
 </el-form-item>
-<el-form-item prop="users" 
+<el-form-item prop="users"
  
  label=""
 >
-<el-table 
- 
+<el-table  
 >
- <el-table-column type="selection" width="50" 
+ <el-table-column type="selection"
+width="50"
  :label="$t('demo.view.table.UserRow.id')"
 >
     <template slot-scope="scope">
-<span v-model="testForm.id" 
- 
+<span v-model="scope.row.id"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.id}}
 </span>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.UserRow.name')"
+ <el-table-column  :label="$t('demo.view.table.UserRow.name')"
 >
     <template slot-scope="scope">
-<el-input v-model="testForm.name" size="mini" 
+<el-input v-model="scope.row.name" size="mini"
  
 >
-</@createI18N element=element attr=''>
+{{scope.row.name}}
 </el-input>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.UserRow.age')"
+ <el-table-column  :label="$t('demo.view.table.UserRow.age')"
 >
     <template slot-scope="scope">
-<el-input-number v-model="testForm.age" size="mini" 
+<el-input-number v-model="scope.row.age" size="mini"
  
 >
-</@createI18N element=element attr=''>
+{{scope.row.age}}
 </el-input-number>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.UserRow.stature')"
+ <el-table-column  :label="$t('demo.view.table.UserRow.stature')"
 >
     <template slot-scope="scope">
-<span v-model="testForm.stature" 
- 
+<span v-model="scope.row.stature"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.stature}}
 </span>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.UserRow.weight')"
+ <el-table-column  :label="$t('demo.view.table.UserRow.weight')"
 >
     <template slot-scope="scope">
-<el-input-number v-model="testForm.weight" size="mini" 
+<el-input-number v-model="scope.row.weight" size="mini"
  
 >
-</@createI18N element=element attr=''>
+{{scope.row.weight}}
 </el-input-number>
      </template>
     </el-table-column>
- <el-table-column width="240" 
+ <el-table-column width="240"
  :label="$t('demo.view.table.UserRow.lastDate')"
 >
     <template slot-scope="scope">
-<el-date-picker v-model="testForm.lastDate" size="mini" 
+<el-date-picker v-model="scope.row.lastDate" size="mini"
  
 >
-</@createI18N element=element attr=''>
+{{scope.row.lastDate}}
 </el-date-picker>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.UserRow.option')"
+ <el-table-column  :label="$t('demo.view.table.UserRow.option')"
 >
     <template slot-scope="scope">
-<el-button size="mini" 
+<el-button size="mini"
  
 >
     edit
@@ -143,48 +132,49 @@ label-width="120px"
     </el-table-column>
 </el-table>
 </el-form-item>
-<el-form-item prop="level" 
+<el-form-item prop="level"
  
  label=""
 >
-<el-rate v-model="testForm.level" 
- 
+<el-rate v-model="testForm.level"  
 >
-</@createI18N element=element attr=''>
+{{testForm.level}}
 </el-rate>
 </el-form-item>
-<el-form-item prop="detail" 
+<el-form-item prop="detail"
  
  label=""
 >
-<el-select v-model="testForm.detail" placeholder="请选择" :options="testForm.options" 
+<el-select v-model="testForm.detail" :data="testForm.options"
+placeholder="请选择"
  
 >
     <el-option v-for="item in testForm.options" :key="item.value" :label="item.label" :value="item.value">
     </el-option>
 </el-select>
 </el-form-item>
-<el-form-item prop="address" 
+<el-form-item prop="address"
  
  label=""
 >
-<el-transfer v-model="testForm.address" :data="testForm.addressData" :titles="['1','2']" 
+<el-transfer v-model="testForm.address" :data="testForm.addressData"
+:titles="['1','2']"
  
 >
-</@createI18N element=element attr=''>
+{{testForm.address}}
 </el-transfer>
 </el-form-item>
-<el-form-item prop="test" 
+<el-form-item prop="test"
  
  label=""
 >
-<el-button icon="el-icon-upload" type="primary" 
+<el-button icon="el-icon-upload"
+type="primary"
  @click="click_testForm_button" 
 >
     upload
 </el-button>
-<el-button 
- 
+<el-button  
 >
     clear
 </el-button>

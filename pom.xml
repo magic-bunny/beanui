@@ -15,5 +15,6 @@
         <module>demo</module>
         <module>bean-ui</module>
         <module>beanui-core-plus</module>
+        <module>beanui-maven-plugin-face</module>
     </modules>
 </project>

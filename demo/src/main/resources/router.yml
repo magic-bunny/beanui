@@ -1,26 +1,26 @@
 path: login
 component: demo.view.LoginComponent
 children:
-  - title: test
-    path:
+  - title: test1
     icon: star
     component: demo.view.TestComponent
-  - title: abcde
+  - path: /test2
+    title: test2
     icon: example
     component: demo.view.ABCDComponent
   - title: Table
     icon: table
-    path: table
+    path: /table
     children:
     - title: Dynamic Table
-      path: dynamic-table
+      path: /dynamic-table
       component: demo.view.DynamicTableComponent
     - title: Drag Table
       path: drag-table
       component: demo.view.DragTableComponent
     - title: Inline Edit
-      path: inline-edit-table
+      path: /inline-edit-table
       component: demo.view.InlineEditTableComponent
     - title: Complex Table
-      path: complex-table
+      path: /complex-table
       component: demo.view.ComplexTableComponent

@@ -5,149 +5,133 @@
 <div class="DynamicTableComponent-inner-container">
 <el-form v-loading="DynamicTableComponent_loading" ref="DynamicTableComponent" :model="DynamicTableComponent"
 >
-<el-form-item prop="label1" 
+<el-form-item prop="label1"
  
  label=""
 >
-<el-alert v-model="DynamicTableComponent.label1" title="Fixed header, sorted by header order" 
+<el-alert v-model="DynamicTableComponent.label1" title="Fixed header, sorted by header order"
  
 >
-</@createI18N element=element attr=''>
+{{DynamicTableComponent.label1}}
 </el-alert>
 </el-form-item>
-<el-form-item prop="checkbox1" 
+<el-form-item prop="checkbox1"
  
  label=""
 >
-<el-checkbox-group v-model="DynamicTableComponent.checkbox1" :data="DynamicTableComponent.checkboxData1" 
+<el-checkbox-group v-model="DynamicTableComponent.checkbox1" :data="DynamicTableComponent.checkboxData1"
  
 >
-    <el-checkbox v-for="item in DynamicTableComponent.checkboxData1" :key="item.key" :label="item.label">
+    <el-checkbox v-for="item in checkboxData1" :key="item.key" :label="item.label">
     </el-checkbox>
 </el-checkbox-group>
 </el-form-item>
-<el-form-item prop="table1" 
+<el-form-item prop="table1"
  
  label=""
 >
-<el-table :data="DynamicTableComponent.tableData1" 
+<el-table :data="DynamicTableComponent.tableData1"
  
 >
- <el-table-column 
- :label="$t('demo.view.table.DynamicRow.fruitName')"
+ <el-table-column  :label="$t('demo.view.table.DynamicRow.fruitName')"
 >
     <template slot-scope="scope">
-<span v-model="DynamicTableComponent.fruitName" 
- 
+<span v-model="scope.row.fruitName"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.fruitName}}
 </span>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.DynamicRow.apple')"
+ <el-table-column  :label="$t('demo.view.table.DynamicRow.apple')"
 >
     <template slot-scope="scope">
-<span v-model="DynamicTableComponent.apple" 
- 
+<span v-model="scope.row.apple"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.apple}}
 </span>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.DynamicRow.banana')"
+ <el-table-column  :label="$t('demo.view.table.DynamicRow.banana')"
 >
     <template slot-scope="scope">
-<span v-model="DynamicTableComponent.banana" 
- 
+<span v-model="scope.row.banana"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.banana}}
 </span>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.DynamicRow.orange')"
+ <el-table-column  :label="$t('demo.view.table.DynamicRow.orange')"
 >
     <template slot-scope="scope">
-<span v-model="DynamicTableComponent.orange" 
- 
+<span v-model="scope.row.orange"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.orange}}
 </span>
      </template>
     </el-table-column>
 </el-table>
 </el-form-item>
-<el-form-item prop="label2" 
+<el-form-item prop="label2"
  
  label=""
 >
-<el-alert v-model="DynamicTableComponent.label2" title="Not fixed header, sorted by click order" 
+<el-alert v-model="DynamicTableComponent.label2" title="Not fixed header, sorted by click order"
  
 >
-</@createI18N element=element attr=''>
+{{DynamicTableComponent.label2}}
 </el-alert>
 </el-form-item>
-<el-form-item prop="checkbox2" 
+<el-form-item prop="checkbox2"
  
  label=""
 >
-<el-checkbox-group v-model="DynamicTableComponent.checkbox2" :data="DynamicTableComponent.checkboxData2" 
+<el-checkbox-group v-model="DynamicTableComponent.checkbox2" :data="DynamicTableComponent.checkboxData2"
  
 >
-    <el-checkbox v-for="item in DynamicTableComponent.checkboxData2" :key="item.key" :label="item.label">
+    <el-checkbox v-for="item in checkboxData2" :key="item.key" :label="item.label">
     </el-checkbox>
 </el-checkbox-group>
 </el-form-item>
-<el-form-item prop="table2" 
+<el-form-item prop="table2"
  
  label=""
 >
-<el-table :data="DynamicTableComponent.tableData2" 
+<el-table :data="DynamicTableComponent.tableData2"
  
 >
- <el-table-column 
- :label="$t('demo.view.table.DynamicRow.fruitName')"
+ <el-table-column  :label="$t('demo.view.table.DynamicRow.fruitName')"
 >
     <template slot-scope="scope">
-<span v-model="DynamicTableComponent.fruitName" 
- 
+<span v-model="scope.row.fruitName"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.fruitName}}
 </span>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.DynamicRow.apple')"
+ <el-table-column  :label="$t('demo.view.table.DynamicRow.apple')"
 >
     <template slot-scope="scope">
-<span v-model="DynamicTableComponent.apple" 
- 
+<span v-model="scope.row.apple"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.apple}}
 </span>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.DynamicRow.banana')"
+ <el-table-column  :label="$t('demo.view.table.DynamicRow.banana')"
 >
     <template slot-scope="scope">
-<span v-model="DynamicTableComponent.banana" 
- 
+<span v-model="scope.row.banana"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.banana}}
 </span>
      </template>
     </el-table-column>
- <el-table-column 
- :label="$t('demo.view.table.DynamicRow.orange')"
+ <el-table-column  :label="$t('demo.view.table.DynamicRow.orange')"
 >
     <template slot-scope="scope">
-<span v-model="DynamicTableComponent.orange" 
- 
+<span v-model="scope.row.orange"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.orange}}
 </span>
      </template>
     </el-table-column>

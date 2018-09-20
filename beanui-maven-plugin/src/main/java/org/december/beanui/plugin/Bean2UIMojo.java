@@ -5,11 +5,12 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
-import org.december.beanui.plugin.bean.Router;
+import org.december.beanui.plugin.face.Builder;
+import org.december.beanui.plugin.face.bean.Router;
 import org.december.beanui.plugin.builder.*;
-import org.december.beanui.plugin.exception.BuilderException;
-import org.december.beanui.plugin.util.FileUtil;
-import org.december.beanui.plugin.util.PluginSystem;
+import org.december.beanui.plugin.face.exception.BuilderException;
+import org.december.beanui.plugin.face.util.FileUtil;
+import org.december.beanui.plugin.face.util.PluginSystem;
 
 import java.io.BufferedReader;
 import java.io.File;

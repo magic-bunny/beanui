@@ -44,7 +44,7 @@
                 <configuration>
                     <projectName>BEANUI</projectName>
                     <routerPath>router.yml</routerPath>
-                    <mode>dev</mode>
+                    <mode>prd</mode>
                     <builders>
                         <builder>
                             <builderClass>org.december.beanui.plus.builder.LoginBuilder</builderClass>

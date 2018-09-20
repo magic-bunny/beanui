@@ -5,85 +5,81 @@
 <div class="DragTableComponent-inner-container">
 <el-form v-loading="DragTableComponent_loading" ref="DragTableComponent" :model="DragTableComponent"
 >
-<el-form-item prop="table" 
+<el-form-item prop="table"
  
  label=""
 >
-<el-table :data="DragTableComponent.tableData" fit="true" border="true" highlight-current-row="true" 
+<el-table :data="DragTableComponent.tableData"
+fit="true"
+border="true"
+highlight-current-row="true"
  
 >
- <el-table-column width="70" 
+ <el-table-column width="70"
  label="ID"
 >
     <template slot-scope="scope">
-<span v-model="DragTableComponent.id" 
- 
+<span v-model="scope.row.id"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.id}}
 </span>
      </template>
     </el-table-column>
- <el-table-column width="200" 
+ <el-table-column width="200"
  label="Date"
 >
     <template slot-scope="scope">
-<span v-model="DragTableComponent.date" 
- 
+<span v-model="scope.row.date"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.date}}
 </span>
      </template>
     </el-table-column>
- <el-table-column width="400" 
+ <el-table-column width="400"
  label="Title"
 >
     <template slot-scope="scope">
-<span v-model="DragTableComponent.title" 
- 
+<span v-model="scope.row.title"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.title}}
 </span>
      </template>
     </el-table-column>
- <el-table-column width="100" 
+ <el-table-column width="100"
  label="Author"
 >
     <template slot-scope="scope">
-<span v-model="DragTableComponent.author" 
- 
+<span v-model="scope.row.author"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.author}}
 </span>
      </template>
     </el-table-column>
- <el-table-column width="200" 
+ <el-table-column width="200"
  label="Importance"
 >
     <template slot-scope="scope">
-<el-rate v-model="DragTableComponent.importance" 
- 
+<el-rate v-model="scope.row.importance"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.importance}}
 </el-rate>
      </template>
     </el-table-column>
- <el-table-column width="100" 
+ <el-table-column width="100"
  label="Readings"
 >
     <template slot-scope="scope">
-<span v-model="DragTableComponent.readings" 
- 
+<span v-model="scope.row.readings"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.readings}}
 </span>
      </template>
     </el-table-column>
- <el-table-column width="110" 
+ <el-table-column width="110"
  label="Status"
 >
     <template slot-scope="scope">
-<el-tag 
- 
+<el-tag  
 >
 {{scope.row.status}}
 </el-tag>

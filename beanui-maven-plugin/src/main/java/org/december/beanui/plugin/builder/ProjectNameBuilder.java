@@ -1,8 +1,9 @@
 package org.december.beanui.plugin.builder;
 
 import freemarker.template.Template;
-import org.december.beanui.plugin.exception.BuilderException;
-import org.december.beanui.plugin.util.PluginSystem;
+import org.december.beanui.plugin.face.Builder;
+import org.december.beanui.plugin.face.exception.BuilderException;
+import org.december.beanui.plugin.face.util.PluginSystem;
 
 import java.util.HashMap;
 import java.util.Map;

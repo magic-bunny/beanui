@@ -32,7 +32,7 @@
       <el-button type="primary" style="width:70%;" :loading="loading" @click.native.prevent="handleLogin">{{$t('demo.view.LoginComponent.loginButton')}}
 </el-button>
 
-      <el-button class="thirdparty-button" type="success" @click="showDialog=true">{{$t('demo.view.LoginComponent.thridpartyButton')}}
+      <el-button class="thirdparty-button" type="success" @click="showDialog=true">{{$t('demo.view.LoginComponent.signupButton')}}
 </el-button>
     </el-form>
 
@@ -73,7 +73,7 @@ export default {
     return {
       LoginComponent: {
         username: 'admin',
-        password: '111111'
+        password: '123456'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],

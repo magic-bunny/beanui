@@ -11,169 +11,166 @@ tag="el-dialog"
 <el-form v-loading="complexTableEditForm_loading" ref="complexTableEditForm" :model="complexTableEditForm"
 label-width="150px"
 >
-<el-form-item prop="type" 
+<el-form-item prop="type"
  
  label="Type"
 >
-<el-input v-model="complexTableEditForm.type" 
- 
+<el-input v-model="complexTableEditForm.type"  
 >
-</@createI18N element=element attr=''>
+{{complexTableEditForm.type}}
 </el-input>
 </el-form-item>
-<el-form-item prop="date" 
+<el-form-item prop="date"
  
  label="Date"
 >
-<el-input v-model="complexTableEditForm.date" 
- 
+<el-input v-model="complexTableEditForm.date"  
 >
-</@createI18N element=element attr=''>
+{{complexTableEditForm.date}}
 </el-input>
 </el-form-item>
-<el-form-item prop="title" 
+<el-form-item prop="title"
  
  label="Title"
 >
-<el-input v-model="complexTableEditForm.title" 
- 
+<el-input v-model="complexTableEditForm.title"  
 >
-</@createI18N element=element attr=''>
+{{complexTableEditForm.title}}
 </el-input>
 </el-form-item>
-<el-form-item prop="status" 
+<el-form-item prop="status"
  
  label="Status"
 >
-<el-input v-model="complexTableEditForm.status" 
- 
+<el-input v-model="complexTableEditForm.status"  
 >
-</@createI18N element=element attr=''>
+{{complexTableEditForm.status}}
 </el-input>
 </el-form-item>
-<el-form-item prop="imp" 
+<el-form-item prop="imp"
  
  label="Imp"
 >
-<el-rate v-model="complexTableEditForm.imp" 
- 
+<el-rate v-model="complexTableEditForm.imp"  
 >
-</@createI18N element=element attr=''>
+{{complexTableEditForm.imp}}
 </el-rate>
 </el-form-item>
-<el-form-item prop="remark" 
+<el-form-item prop="remark"
  
  label="Remark"
 >
-<el-input v-model="complexTableEditForm.remark" 
- 
+<el-input v-model="complexTableEditForm.remark"  
 >
-</@createI18N element=element attr=''>
+{{complexTableEditForm.remark}}
 </el-input>
 </el-form-item>
 </el-form>
 </el-dialog>
 <el-form v-loading="complexTableDataForm_loading" ref="complexTableDataForm" :model="complexTableDataForm"
 >
-<el-form-item prop="table" 
+<el-form-item prop="table"
  
  label=""
 >
-<el-table :data="complexTableDataForm.tableData" 
+<el-table :data="complexTableDataForm.tableData"
  
 >
- <el-table-column width="60" 
+ <el-table-column width="60"
  label="ID"
 >
     <template slot-scope="scope">
-<span v-model="complexTableDataForm.id" 
- 
+<span v-model="scope.row.id"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.id}}
 </span>
      </template>
     </el-table-column>
- <el-table-column width="150" 
+ <el-table-column width="150"
  label="Date"
 >
     <template slot-scope="scope">
-<span v-model="complexTableDataForm.date" 
- 
+<span v-model="scope.row.date"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.date}}
 </span>
      </template>
     </el-table-column>
- <el-table-column width="100" 
+ <el-table-column width="100"
  label="Author"
 >
     <template slot-scope="scope">
-<span v-model="complexTableDataForm.author" 
- 
+<span v-model="scope.row.author"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.author}}
 </span>
      </template>
     </el-table-column>
- <el-table-column width="150" 
+ <el-table-column width="150"
  label="Importance"
 >
     <template slot-scope="scope">
-<el-rate v-model="complexTableDataForm.importance" 
- 
+<el-rate v-model="scope.row.importance"  
 >
-</@createI18N element=element attr=''>
+{{scope.row.importance}}
 </el-rate>
      </template>
     </el-table-column>
- <el-table-column width="100" 
+ <el-table-column width="100"
  label="Readings"
 >
     <template slot-scope="scope">
-<span v-model="complexTableDataForm.readings" 
- @click="click_complexTableDataForm_readings" 
+<span v-model="scope.row.readings"  @click="click_complexTableDataForm_readings" 
 >
-</@createI18N element=element attr=''>
+{{scope.row.readings}}
 </span>
      </template>
     </el-table-column>
- <el-table-column prop="title" width="300" 
+ <el-table-column prop="title"
+width="300"
  label="Title"
 >
     <template slot-scope="scope">
-<el-input v-model="complexTableDataForm.title" size="mini" 
+<el-input v-model="scope.row.title" size="mini"
  
 >
-</@createI18N element=element attr=''>
+{{scope.row.title}}
 </el-input>
      </template>
     </el-table-column>
- <el-table-column width="100" 
+ <el-table-column width="100"
  label="Status"
 >
     <template slot-scope="scope">
-<el-tag 
+<el-tag :type="scope.row.statusType"
  
 >
 {{scope.row.status}}
 </el-tag>
      </template>
     </el-table-column>
- <el-table-column prop="actions" width="240" 
+ <el-table-column prop="actions"
+width="240"
  label="actions"
 >
     <template slot-scope="scope">
-<el-button type="primary" size="mini" style="position: absolute;left: 0px;top: 10px;" 
+<el-button type="primary"
+size="mini"
+style="position: absolute;left: 0px;top: 10px;"
  @click="click_complexTableDataForm_actionEdit" 
 >
     Edit
 </el-button>
-<el-button type="success" size="mini" style="position: absolute;left: 60px;top: 10px;" 
+<el-button type="success"
+size="mini"
+style="position: absolute;left: 60px;top: 10px;"
  
 >
     Publish
 </el-button>
-<el-button type="danger" size="mini" style="position: absolute;left: 150px;top: 10px;" 
+<el-button type="danger"
+size="mini"
+style="position: absolute;left: 150px;top: 10px;"
  
 >
     Delete

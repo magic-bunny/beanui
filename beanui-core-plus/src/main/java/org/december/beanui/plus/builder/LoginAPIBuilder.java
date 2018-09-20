@@ -1,10 +1,10 @@
 package org.december.beanui.plus.builder;
 
 import freemarker.template.Template;
-import org.december.beanui.plugin.builder.Builder;
-import org.december.beanui.plugin.exception.BuilderException;
-import org.december.beanui.plugin.exception.SpringReaderException;
-import org.december.beanui.plugin.util.RestReader;
+import org.december.beanui.plugin.face.Builder;
+import org.december.beanui.plugin.face.exception.BuilderException;
+import org.december.beanui.plugin.face.exception.SpringReaderException;
+import org.december.beanui.plugin.face.util.RestReader;
 import org.december.beanui.plus.element.annotation.Login;
 import org.december.beanui.plus.element.annotation.Logout;
 import org.december.beanui.plus.element.annotation.Userinfo;

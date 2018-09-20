@@ -29,11 +29,11 @@
 
       <el-button type="primary" style="width:70%;" :loading="loading" @click.native.prevent="handleLogin"><@createI18N element=button attr=''/></el-button>
 
-      <el-button class="thirdparty-button" type="success" @click="showDialog=true"><@createI18N element=thirdpartyButton attr=''/></el-button>
+      <el-button class="thirdparty-button" type="success" @click="showDialog=true"><@createI18N element=signupButton attr=''/></el-button>
     </el-form>
 
-    <el-dialog <@createI18N element=thirdpartyTitle attr='title'/> :visible.sync="showDialog" append-to-body>
-      <@createI18N element=thirdpartyTips attr=''/>
+    <el-dialog <@createI18N element=signupTitle attr='title'/> :visible.sync="showDialog" append-to-body>
+      <@createI18N element=signupTips attr=''/>
       <br/>
       <br/>
       <br/>
@@ -68,7 +68,7 @@ export default {
     return {
       ${login.id}: {
         ${username.id}: 'admin',
-        ${password.id}: '111111'
+        ${password.id}: '123456'
       },
       loginRules: {
         ${username.id}: [{ required: true, trigger: 'blur', validator: validateUsername }],

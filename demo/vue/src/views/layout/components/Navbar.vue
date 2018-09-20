@@ -25,16 +25,11 @@
         <el-dropdown-menu slot="dropdown">
           <router-link to="/">
             <el-dropdown-item>
-              {{$t('navbar.dashboard')}}
+              Your settings
             </el-dropdown-item>
           </router-link>
-          <a target='_blank' href="https://github.com/PanJiaChen/vue-element-admin/">
-            <el-dropdown-item>
-              {{$t('navbar.github')}}
-            </el-dropdown-item>
-          </a>
           <el-dropdown-item divided>
-            <span @click="logout" style="display:block;">{{$t('navbar.logOut')}}</span>
+            <span @click="logout" style="display:block;">Log out</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>

@@ -42,7 +42,7 @@ public class TestForm {
     @Rate
     private int level;
 
-    @Select(placeholder = "请选择", options = "$options")
+    @Select(placeholder = "请选择", data = "$options")
     private String detail;
 
     private List<Map<String, String>> options;

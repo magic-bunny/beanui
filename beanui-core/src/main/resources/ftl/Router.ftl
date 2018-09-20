@@ -2,7 +2,7 @@
 [
     <#list children as r>
       {
-        path: '${r.path!r.title}',
+        path: '${r.path}',
         name: '${r.title!r.path}'
         <#if r.component??>,component: () => import('@/views/beanui/${r.component}')</#if>
         ,meta: {
@@ -49,7 +49,7 @@ export default new Router({
 export const asyncRouterMap = [
     <#list router as r>
     {
-        path: '/${r.path!r.title}',
+        path: '${r.path}',
         name: '${r.title!r.path}',
         <#if r.menu=false>
         component:() => import('@/views/beanui/${r.component}'),
@@ -57,14 +57,10 @@ export const asyncRouterMap = [
         <#else>
         component: Layout
         <#if r.component??>
-        ,redirect: <#if r.path??>
-        <#if r.path=''>''<#else>'/${r.path!r.title}/index'</#if>
-        <#else>
-        '/${r.path!r.title}/index'
-        </#if>,
+        ,redirect: '${r.path}/index',
         children: [
             {
-                path: <#if r.path??><#if r.path=''>''<#else>'index'</#if><#else>'index'</#if>,
+                path: 'index',
                 component:() => import('@/views/beanui/${r.component}'),
                 name: '${r.title!r.path}',
                 meta: {

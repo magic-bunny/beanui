@@ -7,12 +7,13 @@ import org.december.beanui.element.annotation.*;
 import org.december.beanui.event.annotation.Click;
 import org.december.beanui.event.annotation.Created;
 import org.december.beanui.i18n.annotation.I18N;
-import org.december.beanui.plugin.bean.Element;
-import org.december.beanui.plugin.util.RestReader;
-import org.december.beanui.plugin.exception.BuilderException;
-import org.december.beanui.plugin.exception.ComponentBuilderException;
-import org.december.beanui.plugin.exception.SpringReaderException;
-import org.december.beanui.plugin.util.ClassUtil;
+import org.december.beanui.plugin.face.Builder;
+import org.december.beanui.plugin.face.bean.Element;
+import org.december.beanui.plugin.face.util.RestReader;
+import org.december.beanui.plugin.face.exception.BuilderException;
+import org.december.beanui.plugin.face.exception.ComponentBuilderException;
+import org.december.beanui.plugin.face.exception.SpringReaderException;
+import org.december.beanui.plugin.face.util.ClassUtil;
 import org.december.beanui.rule.annotation.Rule;
 import org.december.beanui.rule.annotation.Rules;
 
@@ -64,8 +65,8 @@ public class ComponentBuilder extends Builder {
                         Annotation[] othersAnnotations = field.getAnnotations();
                         for(Annotation annotation:othersAnnotations) {
                             Map content = ClassUtil.annotation2map(annotation);
-                            String[] datas = (String[])content.get(":data");
-                            if(datas != null) {
+                            String[] datas = (String[])content.get("data");
+                            if(datas.length > 0) {
                                 for(String data:datas) {
                                     Field formField = this.getTemplateClass().getDeclaredField(data.startsWith("$")?data.substring(1):data);
                                     formField.setAccessible(true);
@@ -116,8 +117,8 @@ public class ComponentBuilder extends Builder {
                     }
                 }
             }
+            component.setChildren(elements);
             result.put("component", component);
-            result.put("elements", elements);
         } catch (Exception e) {
             throw new ComponentBuilderException(e);
         }
@@ -138,7 +139,7 @@ public class ComponentBuilder extends Builder {
             if (formAnnotation.annotationType() == Form.class) {
                 element.setId(formId);
                 element.setType(formAnnotation.annotationType().getSimpleName());
-                Map map = ClassUtil.annotation2map(formId, formAnnotation);
+                Map map = ClassUtil.annotation2map(formAnnotation);
                 element.setChildren(buildFormChildren(formId, formType, map));
                 element.setContent(map);
             }
@@ -164,7 +165,7 @@ public class ComponentBuilder extends Builder {
             String prop = "";
             Class type = null;
             if (formItem != null) {
-                Map map = ClassUtil.annotation2map(formId, formItem);
+                Map map = ClassUtil.annotation2map(formItem);
                 prop = formItem.prop();
                 formItemElement.setContent(map);
             } else {
@@ -199,7 +200,7 @@ public class ComponentBuilder extends Builder {
                     isComponent = true;
                     if (annotation.annotationType() != FormItem.class) {
                         if(annotation.annotationType() == Badge.class) {
-                            element.setBadge(ClassUtil.annotation2map(formId, annotation));
+                            element.setBadge(ClassUtil.annotation2map(annotation));
                         } else {
                             type = annotation.annotationType();
                             element.setId(field.getName());
@@ -215,7 +216,7 @@ public class ComponentBuilder extends Builder {
                                     element.setChildren(buildTable(formId, field.getType()));
                                 }
                             }
-                            Map map = ClassUtil.annotation2map(formId, annotation);
+                            Map map = ClassUtil.annotation2map(annotation);
                             element.setContent(map);
                         }
                     }
@@ -283,16 +284,12 @@ public class ComponentBuilder extends Builder {
             tableColumnElement.setType(TableColum.class.getSimpleName());
             tableColumnElement.setId(field.getName());
             TableColum tableColum = field.getAnnotation(TableColum.class);
-            String prop = "";
-            if (tableColum != null) {
-                Map map = ClassUtil.annotation2map(formId, tableColum);
-                prop = tableColum.prop();
-                tableColumnElement.setContent(map);
-            } else {
-                Map map = new HashMap();
-                map.put("label", "");
-                tableColumnElement.setContent(map);
+            if (tableColum == null) {
+                continue;
             }
+            Map map = ClassUtil.annotation2map(tableColum);
+            String prop = tableColum.prop();
+            tableColumnElement.setContent(map);
             I18N i18n = field.getAnnotation(I18N.class);
             Annotation[] annotations = field.getDeclaredAnnotations();
 
@@ -309,13 +306,13 @@ public class ComponentBuilder extends Builder {
                     if (annotation.annotationType() != TableColum.class) {
                         isCompoent = true;
                         if(annotation.annotationType() == Badge.class) {
-                            element.setBadge(ClassUtil.annotation2map(formId, annotation));
+                            element.setBadge(ClassUtil.annotation2map(annotation));
                         } else {
                             isWord = false;
-                            Map map = ClassUtil.annotation2map(formId, annotation);
+                            Map content = ClassUtil.annotation2map(annotation);
                             element.setId(field.getName());
                             element.setType(annotation.annotationType().getSimpleName());
-                            element.setContent(map);
+                            element.setContent(content);
                             if (i18n != null) {
                                 element.setI18n(clazz.getName() + "." + field.getName());
                             }
@@ -333,6 +330,7 @@ public class ComponentBuilder extends Builder {
                 element.setType("Element");
                 Map content = new HashMap();
                 content.put("tag", "span");
+                content.put("label", "");
                 element.setContent(content);
                 if (i18n != null) {
                     element.setI18n(clazz.getName() + "." + field.getName());

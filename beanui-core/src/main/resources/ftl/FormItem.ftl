@@ -1,5 +1,5 @@
  <#macro createFormItem formId, element>
-<el-form-item <@createAttrs content=element.content/> <@createEvents formId=formId element=element/> <@createI18N element=element.children[0] attr='label'/>>
+<el-form-item <@createAttrs scope=formId content=element.content/> <@createEvents formId=formId element=element/> <@createI18N element=element.children[0] attr='label'/>>
 <#list element.children as object>
 <#if object.type="Select">
     <@createSelect formId=formId scope=formId element=object/>

@@ -2,11 +2,9 @@ package org.december.beanui.plus.builder;
 
 import freemarker.template.Template;
 import org.december.beanui.i18n.annotation.I18N;
-import org.december.beanui.plugin.bean.Element;
-import org.december.beanui.plugin.builder.Builder;
-import org.december.beanui.plugin.exception.BuilderException;
-import org.december.beanui.plugin.exception.SpringReaderException;
-import org.december.beanui.plugin.util.RestReader;
+import org.december.beanui.plugin.face.Builder;
+import org.december.beanui.plugin.face.bean.Element;
+import org.december.beanui.plugin.face.exception.BuilderException;
 import org.december.beanui.plus.element.annotation.Login;
 import org.december.beanui.plus.element.annotation.Logout;
 import org.december.beanui.plus.element.annotation.Userinfo;
@@ -17,7 +15,7 @@ import java.util.Map;
 
 public class LoginBuilder extends Builder {
 
-    public Map run(Template template) throws BuilderException, SpringReaderException {
+    public Map run(Template template) throws BuilderException {
         if(super.getTemplateClass() == null) {
             throw new BuilderException("No builder template class can be found");
         }
@@ -75,20 +73,20 @@ public class LoginBuilder extends Builder {
                 content.put("label", button.label());
                 result.put("button", element);
             }
-            Login.ThirdpartyButton thirdpartyButton = field.getAnnotation(Login.ThirdpartyButton.class);
+            Login.SignupButton thirdpartyButton = field.getAnnotation(Login.SignupButton.class);
             if(thirdpartyButton != null) {
                 content.put("label", thirdpartyButton.label());
-                result.put("thirdpartyButton", element);
+                result.put("signupButton", element);
             }
-            Login.ThirdpartyTitle thirdpartyTitle = field.getAnnotation(Login.ThirdpartyTitle.class);
+            Login.SignupTitle thirdpartyTitle = field.getAnnotation(Login.SignupTitle.class);
             if(thirdpartyTitle != null) {
                 content.put("label", thirdpartyTitle.label());
-                result.put("thirdpartyTitle", element);
+                result.put("signupTitle", element);
             }
-            Login.ThirdpartyTips thirdpartyTips = field.getAnnotation(Login.ThirdpartyTips.class);
+            Login.SignupTips thirdpartyTips = field.getAnnotation(Login.SignupTips.class);
             if(thirdpartyTips != null) {
                 content.put("label", thirdpartyTips.label());
-                result.put("thirdpartyTips", element);
+                result.put("signupTips", element);
             }
             element.setContent(content);
         }

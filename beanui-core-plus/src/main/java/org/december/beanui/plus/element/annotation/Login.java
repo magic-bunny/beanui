@@ -51,6 +51,14 @@ public @interface Login {
     @Target(ElementType.FIELD)
     @Inherited
     @Retention(RetentionPolicy.RUNTIME)
+    @interface Remember {
+        String label() default "";
+    }
+
+    @Documented
+    @Target(ElementType.FIELD)
+    @Inherited
+    @Retention(RetentionPolicy.RUNTIME)
     @interface SignupTitle {
         String label() default "";
     }

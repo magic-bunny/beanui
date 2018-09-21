@@ -8,6 +8,7 @@
         <h3 class="title">{{$t('demo.view.LoginComponent.title')}}
 </h3>
         <lang-select class="set-language"></lang-select>
+        <img class="user-avatar" :src="LoginComponent.userImage">
       </div>
 
       <el-form-item prop="username">
@@ -34,6 +35,9 @@
 
       <el-button class="thirdparty-button" type="success" @click="showDialog=true">{{$t('demo.view.LoginComponent.signupButton')}}
 </el-button>
+
+      <el-checkbox class="remember" v-model="LoginComponent.remember">{{$t('demo.view.LoginComponent.remember')}}
+</el-checkbox>
     </el-form>
 
     <el-dialog title=""
@@ -51,6 +55,7 @@
 <script>
 import { isvalidUsername } from '@/utils/validate'
 import LangSelect from '@/components/LangSelect'
+import Cookies from 'js-cookie'
 
 export default {
   components: { LangSelect },
@@ -72,8 +77,10 @@ export default {
     }
     return {
       LoginComponent: {
-        username: 'admin',
-        password: '123456'
+        username: Cookies.get('login-name'),
+        password: Cookies.get('password'),
+        remember: true,
+        userImage: Cookies.get('user-image')
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -96,11 +103,20 @@ export default {
       this.$refs.LoginComponent.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('LoginByUsername', this.LoginComponent).then(() => {
+          var data = {
+            username: this.LoginComponent.username,
+            password: this.LoginComponent.password,
+            remember: this.LoginComponent.remember
+          }
+          this.$store.dispatch('LoginByUsername', data).then(() => {
             this.loading = false
             this.$router.push({ path: '/' })
-          }).catch(() => {
+          }).catch((error) => {
             this.loading = false
+            this.$message({
+                message: error,
+                type: 'warning'
+            });
           })
         } else {
           console.log('error submit!!')
@@ -175,9 +191,7 @@ $light_gray:#eee;
     right: 0;
     width: 520px;
     padding: 35px 35px 35px 35px;
-    margin: 120px auto;
-    //border-radius: 10px;
-    //border: #666 1px solid;
+    margin: 50px auto;
   }
   .tips {
     font-size: 14px;
@@ -201,6 +215,7 @@ $light_gray:#eee;
   }
   .title-container {
     position: relative;
+    text-align: center;
     .title {
       font-size: 26px;
       color: $light_gray;
@@ -213,6 +228,11 @@ $light_gray:#eee;
       position: absolute;
       top: 5px;
       right: 0px;
+    }
+    img {
+       width: 150px;
+       height: 150px;
+       margin-bottom: 40px;
     }
   }
   .show-pwd {
@@ -228,6 +248,10 @@ $light_gray:#eee;
     position: absolute;
     width: 22%;
     right: 35px;
+  }
+
+  .remember {
+    margin-top: 30px
   }
 }
 </style>

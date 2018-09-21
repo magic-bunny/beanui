@@ -6,6 +6,7 @@ public class Permission {
     private String introduction;
     private String avatar;
     private String name;
+    private String message;
 
     public String[] getRoles() {
         return roles;
@@ -45,5 +46,13 @@ public class Permission {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

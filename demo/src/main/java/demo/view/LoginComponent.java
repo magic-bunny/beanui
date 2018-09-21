@@ -25,6 +25,9 @@ public class LoginComponent {
     @I18N(en = "Sign up", zh_CN = "注 册")
     @Login.SignupButton
     private String signupButton;
+    @I18N(en = "Remember password", zh_CN = "记住密码, 下次自动登录")
+    @Login.Remember
+    private boolean remember;
     @Login.SignupTitle
     private String signupTitle;
     @Login.SignupTips
@@ -84,5 +87,13 @@ public class LoginComponent {
 
     public void setSignupTips(String signupTips) {
         this.signupTips = signupTips;
+    }
+
+    public boolean isRemember() {
+        return remember;
+    }
+
+    public void setRemember(boolean remember) {
+        this.remember = remember;
     }
 }

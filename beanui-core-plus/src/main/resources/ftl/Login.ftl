@@ -3,37 +3,40 @@
 <template>
   <div class="login-container">
 
-    <el-form class="login-form" autoComplete="on" :model="${login.id}" :rules="loginRules" ref="${login.id}" label-position="left">
+    <el-form class="login-form" autoComplete="on" :model="${Login.id}" :rules="loginRules" ref="${Login.id}" label-position="left">
 
       <div class="title-container">
-        <h3 class="title"><@createI18N element=title attr=''/></h3>
+        <h3 class="title"><@createI18N element=Title attr=''/></h3>
         <lang-select class="set-language"></lang-select>
+        <img class="user-avatar" :src="${Login.id}.userImage">
       </div>
 
       <el-form-item prop="username">
         <span class="svg-container svg-container_login">
           <svg-icon icon-class="user" />
         </span>
-        <el-input name="username" type="text" v-model="${login.id}.${username.id}" autoComplete="on" <@createI18N element=username attr='placeholder'/>/>
+        <el-input name="username" type="text" v-model="${Login.id}.${Username.id}" autoComplete="on" <@createI18N element=Username attr='placeholder'/>/>
       </el-form-item>
 
       <el-form-item prop="password">
         <span class="svg-container">
           <svg-icon icon-class="password" />
         </span>
-        <el-input name="password" :type="passwordType" @keyup.enter.native="handleLogin" v-model="${login.id}.${password.id}" autoComplete="on" <@createI18N element=password attr='placeholder' />/>
+        <el-input name="password" :type="passwordType" @keyup.enter.native="handleLogin" v-model="${Login.id}.${Password.id}" autoComplete="on" <@createI18N element=Password attr='placeholder' />/>
         <span class="show-pwd" @click="showPwd">
           <svg-icon icon-class="eye" />
         </span>
       </el-form-item>
 
-      <el-button type="primary" style="width:70%;" :loading="loading" @click.native.prevent="handleLogin"><@createI18N element=button attr=''/></el-button>
+      <el-button type="primary" style="width:70%;" :loading="loading" @click.native.prevent="handleLogin"><@createI18N element=Button attr=''/></el-button>
 
-      <el-button class="thirdparty-button" type="success" @click="showDialog=true"><@createI18N element=signupButton attr=''/></el-button>
+      <el-button class="thirdparty-button" type="success" @click="showDialog=true"><@createI18N element=SignupButton attr=''/></el-button>
+
+      <el-checkbox class="remember" v-model="${Login.id}.${Remember.id}"><@createI18N element=Remember attr=''/></el-checkbox>
     </el-form>
 
-    <el-dialog <@createI18N element=signupTitle attr='title'/> :visible.sync="showDialog" append-to-body>
-      <@createI18N element=signupTips attr=''/>
+    <el-dialog <@createI18N element=SignupTitle attr='title'/> :visible.sync="showDialog" append-to-body>
+      <@createI18N element=SignupTips attr=''/>
       <br/>
       <br/>
       <br/>
@@ -46,6 +49,7 @@
 <script>
 import { isvalidUsername } from '@/utils/validate'
 import LangSelect from '@/components/LangSelect'
+import Cookies from 'js-cookie'
 
 export default {
   components: { LangSelect },
@@ -66,13 +70,15 @@ export default {
       }
     }
     return {
-      ${login.id}: {
-        ${username.id}: 'admin',
-        ${password.id}: '123456'
+      ${Login.id}: {
+        ${Username.id}: Cookies.get('login-name'),
+        ${Password.id}: Cookies.get('password'),
+        ${Remember.id}: true,
+        userImage: Cookies.get('user-image')
       },
       loginRules: {
-        ${username.id}: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        ${password.id}: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        ${Username.id}: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        ${Password.id}: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       passwordType: 'password',
       loading: false,
@@ -88,14 +94,23 @@ export default {
       }
     },
     handleLogin() {
-      this.$refs.${login.id}.validate(valid => {
+      this.$refs.${Login.id}.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('LoginByUsername', this.${login.id}).then(() => {
+          var data = {
+            username: this.${Login.id}.${Username.id},
+            password: this.${Login.id}.${Password.id},
+            remember: this.${Login.id}.remember
+          }
+          this.$store.dispatch('LoginByUsername', data).then(() => {
             this.loading = false
             this.$router.push({ path: '/' })
-          }).catch(() => {
+          }).catch((error) => {
             this.loading = false
+            this.$message({
+                message: error,
+                type: 'warning'
+            });
           })
         } else {
           console.log('error submit!!')
@@ -170,9 +185,7 @@ $light_gray:#eee;
     right: 0;
     width: 520px;
     padding: 35px 35px 35px 35px;
-    margin: 120px auto;
-    //border-radius: 10px;
-    //border: #666 1px solid;
+    margin: 50px auto;
   }
   .tips {
     font-size: 14px;
@@ -196,6 +209,7 @@ $light_gray:#eee;
   }
   .title-container {
     position: relative;
+    text-align: center;
     .title {
       font-size: 26px;
       color: $light_gray;
@@ -208,6 +222,11 @@ $light_gray:#eee;
       position: absolute;
       top: 5px;
       right: 0px;
+    }
+    img {
+       width: 150px;
+       height: 150px;
+       margin-bottom: 40px;
     }
   }
   .show-pwd {
@@ -223,6 +242,10 @@ $light_gray:#eee;
     position: absolute;
     width: 22%;
     right: 35px;
+  }
+
+  .remember {
+    margin-top: 30px
   }
 }
 </style>

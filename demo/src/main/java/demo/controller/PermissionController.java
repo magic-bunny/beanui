@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.*;
 public class PermissionController {
     @RequestMapping(value="/login",  method = RequestMethod.POST)
     public Permission login(@RequestBody LoginComponent loginComponent) {
-        if("admin".equals(loginComponent.getUsername()) && "111111".equals(loginComponent.getPassword())) {
-            Permission permission = new Permission();
+        Permission permission = new Permission();
+        if("admin".equals(loginComponent.getUsername())) {
             permission.setToken("admin");
-            return permission;
+        } else if("editor".equals(loginComponent.getUsername())) {
+            permission.setToken("editor");
         } else {
-            return null;
+            permission.setMessage("No user named " + loginComponent.getUsername());
         }
+        return permission;
     }
 
     @RequestMapping(value="/logout",  method = RequestMethod.POST)
@@ -25,14 +27,22 @@ public class PermissionController {
 
     @RequestMapping(value="/info",  method = RequestMethod.GET)
     public Permission info(@RequestParam("token") String token) {
-        System.out.println(token);
         Permission permission = new Permission();
-        String[] roles = {"admin"};
-        permission.setRoles(roles);
-        permission.setToken("admin");
-        permission.setIntroduction("我是超级管理员");
-        permission.setAvatar("https://img.zcool.cn/community/01c87a55410392000001e71bb21f65.jpg@1280w_1l_2o_100sh.webp");
-        permission.setName("Super Admin");
+        if("admin".equals(token)) {
+            String[] roles = {"admin"};
+            permission.setRoles(roles);
+            permission.setToken("admin");
+            permission.setIntroduction("我是超级管理员");
+            permission.setAvatar("https://img.zcool.cn/community/01ec7d55410392000001e71bb2f340.jpg@1280w_1l_2o_100sh.jpg");
+            permission.setName("Super Admin");
+        } else {
+            String[] roles = {"editor"};
+            permission.setRoles(roles);
+            permission.setToken(token);
+            permission.setIntroduction("");
+            permission.setAvatar("https://img.zcool.cn/community/01c87a55410392000001e71bb21f65.jpg@1280w_1l_2o_100sh.webp");
+            permission.setName("Editor");
+        }
         return permission;
     }
 }

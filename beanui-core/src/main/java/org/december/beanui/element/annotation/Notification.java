@@ -1,4 +1,4 @@
 package org.december.beanui.element.annotation;
 
-public interface Notification {
+public @interface Notification {
 }

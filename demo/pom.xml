@@ -42,7 +42,7 @@
                 <artifactId>beanui-maven-plugin</artifactId>
                 <version>1.0-SNAPSHOT</version>
                 <configuration>
-                    <projectName>BEANUI</projectName>
+                    <projectName>BEANUI example</projectName>
                     <routerPath>router.yml</routerPath>
                     <mode>prd</mode>
                     <builders>

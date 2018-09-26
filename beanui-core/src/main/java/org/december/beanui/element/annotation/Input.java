@@ -7,6 +7,24 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Input {
+    class Type {
+        public static final String TEXT = "text";
+        public static final String TEXTAREA = "textarea";
+
+        private Type() {
+        }
+    }
+
+    class Resize {
+        public static final String NONE = "none";
+        public static final String BOTH = "both";
+        public static final String HORIZONTAL = "horizontal";
+        public static final String VERTICAL = "vertical";
+
+        private Resize() {
+        }
+    }
+
     String style() default "";
     String type() default "";//	类型	string	text，textarea 和其他 原生 input 的 type 值	text
     String value() default "";//	绑定值	string / number	—	—

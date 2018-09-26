@@ -3,6 +3,8 @@ package demo.controller;
 import demo.view.form.TestForm;
 import demo.view.table.UserRow;
 import demo.view.form.UserQueryForm;
+import org.december.beanui.element.annotation.Select;
+import org.december.beanui.element.annotation.Transfer;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,52 +26,39 @@ public class TestFormController {
         UserQueryForm userQuery = new UserQueryForm();
         List<UserRow> users = new ArrayList<UserRow>();
         UserRow user = new UserRow();
-        user.setId(1);
         user.setName("Jack");
         user.setAge(20);
         user.setLastDate(new Date());
         users.add(user);
 
         user = new UserRow();
-        user.setId(2);
         user.setName("Mary");
         user.setAge(25);
         user.setLastDate(new Date());
         users.add(user);
 
         user = new UserRow();
-        user.setId(3);
         user.setName("eric");
         user.setAge(30);
         user.setLastDate(new Date());
         users.add(user);
 
         userQuery.setUsers(users);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         return userQuery;
     }
 
     @RequestMapping(value="/demo3",  method = RequestMethod.GET)
     public TestForm test3() {
         TestForm testForm = new TestForm();
-        List<Map<String, String>> options = new ArrayList<Map<String, String>>();
-        List<Map<String, String>> addressData = new ArrayList<Map<String, String>>();
-        options.add(new HashMap<String, String>() {{
-            put("label", "text1");
-            put("value", "t1");
-        }});
-        options.add(new HashMap<String, String>() {{
-            put("label", "text2");
-            put("value", "t2");
-        }});
-        addressData.add(new HashMap<String, String>(){{
-            put("key", "1");
-            put("label", "address1");
-        }});
-        addressData.add(new HashMap<String, String>(){{
-            put("key", "2");
-            put("label", "address2");
-        }});
+        List<Select.Option> options = new ArrayList<Select.Option>();
+        List<Transfer.Data> addressData = new ArrayList<Transfer.Data>();
+        options.add(new Select.Option("t1", "text1"));
+        options.add(new Select.Option("t2", "text2"));
+
+        addressData.add(new Transfer.Data("1", "address1"));
+        addressData.add(new Transfer.Data("2", "address2"));
+
         testForm.setOptions(options);
         testForm.setDetail("");
         testForm.setLastDate(new Date());
@@ -78,5 +67,18 @@ public class TestFormController {
             add("2");
         }});
         return testForm;
+    }
+
+    @RequestMapping(value="/demo4",  method = RequestMethod.POST)
+    public UserQueryForm test4(@RequestBody UserQueryForm userQueryForm) throws InterruptedException {
+        List<UserRow> list = userQueryForm.getUser();
+        if(list == null) {
+            System.out.println("No rows are selected.");
+        } else {
+            for(UserRow userRow:list) {
+                System.out.println(userRow.getName());
+            }
+        }
+        return test2();
     }
 }

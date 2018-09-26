@@ -1,11 +1,11 @@
 path: login
 component: demo.view.LoginComponent
 children:
-  - title: test1
+  - title: home
     icon: star
     component: demo.view.TestComponent
-  - path: /test2
-    title: test2
+  - path: /test
+    title: test
     icon: example
     component: demo.view.ABCDComponent
   - title: Table
@@ -15,6 +15,7 @@ children:
     - title: Dynamic Table
       path: /dynamic-table
       component: demo.view.DynamicTableComponent
+      roles: [admin]
     - title: Drag Table
       path: drag-table
       component: demo.view.DragTableComponent

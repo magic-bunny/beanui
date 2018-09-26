@@ -7,9 +7,6 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Component {
-    String background() default "";
-    String width() default "";
-    String center() default "";
     String path() default "";
     String title() default "";
     String icon() default "";

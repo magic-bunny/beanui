@@ -1,5 +1,6 @@
 <template>
   <el-scrollbar wrapClass="scrollbar-wrapper">
+    <div style="font-size: 20px; color: #fff;  text-align: center; margin: 0 0 10px 0">{{title}}</div>
     <el-menu
       mode="vertical"
       :show-timeout="200"
@@ -19,6 +20,10 @@ import { mapGetters } from 'vuex'
 import SidebarItem from './SidebarItem'
 
 export default {
+  data() { return {
+      title: "BEANUI example"
+    }
+  },
   components: { SidebarItem },
   computed: {
     ...mapGetters([
@@ -26,6 +31,11 @@ export default {
       'sidebar'
     ]),
     isCollapse() {
+      if(this.sidebar.opened) {
+        this.title = "BEANUI example"
+      } else {
+        this.title = this.title.substring(0, 1)
+      }
       return !this.sidebar.opened
     }
   }

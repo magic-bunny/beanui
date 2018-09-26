@@ -23,6 +23,10 @@
     <@createRadioButtonGroup formId=formId scope=formId element=object/>
 <#elseif object.type="Breadcrumb">
     <@createBreadcrumb formId=formId scope=formId element=object/>
+<#elseif object.type="Steps">
+    <@createSteps formId=formId scope=formId element=object/>
+<#elseif object.type="Dropdown">
+    <@createDropdown formId=formId scope=formId element=object/>
 <#else>
     <@createElement formId=formId scope=formId element=object/>
 </#if>

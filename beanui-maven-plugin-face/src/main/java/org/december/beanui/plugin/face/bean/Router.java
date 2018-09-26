@@ -8,6 +8,7 @@ public class Router {
     private String component;
     private String icon;
     private boolean menu = true;
+    private String[] roles;
     private List<Router> children;
 
     public List<Router> getChildren() {
@@ -56,5 +57,13 @@ public class Router {
 
     public void setMenu(boolean menu) {
         this.menu = menu;
+    }
+
+    public String[] getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String[] roles) {
+        this.roles = roles;
     }
 }

@@ -57,6 +57,9 @@ const user = {
             if(userInfo.remember) {
               Cookies.set('login-name', username)
               Cookies.set('password', userInfo.password)
+            } else {
+              Cookies.remove('login-name')
+              Cookies.remove('password')
             }
             commit('SET_TOKEN', data.token)
             setToken(response.data.token)

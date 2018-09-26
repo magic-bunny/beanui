@@ -8,7 +8,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Transfer {
     String label() default "";
-    String data() default "";//	Transfer 的数据源	array[{ key, label, disabled }]	—	[ ]
+    String data() default "";//	TransferData 的数据源	array[{ key, label, disabled }]	—	[ ]
     String filterable() default "";//	是否可搜索	boolean	—	false
     String filter_placeholder() default "";//	搜索框占位符	string	—	请输入搜索内容
     String filter_method() default "";//	自定义搜索方法	function	—	—
@@ -21,4 +21,46 @@ public @interface Transfer {
     String left_default_checked() default "";//	初始状态下左侧列表的已勾选项的 key 数组	array	—	[ ]
     String right_default_checked() default "";//	初始状态下右侧列表的已勾选项的 key 数组	array	—	[ ]
     String tag() default "el-transfer";
+
+    class Data {
+        public Data(String key, String label, boolean disabled) {
+            this.key = key;
+            this.label = label;
+            this.disabled = disabled;
+        }
+
+        public Data(String key, String label) {
+            this.key = key;
+            this.label = label;
+            this.disabled = false;
+        }
+
+        private String key;//	选项的值	string/number/object	—	—
+        private String label;//	选项的标签，若不设置则默认与 value 相同	string/number	—	—
+        private boolean disabled;//	是否禁用该选项	boolean	—	false
+
+        public String getKey() {
+            return key;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+
+        public void setLabel(String label) {
+            this.label = label;
+        }
+
+        public boolean isDisabled() {
+            return disabled;
+        }
+
+        public void setDisabled(boolean disabled) {
+            this.disabled = disabled;
+        }
+    }
 }

@@ -7,7 +7,6 @@ import org.december.beanui.i18n.annotation.I18N;
 import java.util.Date;
 
 public class UserRow {
-    @I18N(en = "ID", zh_CN = "编号")
     @TableColum(type = "selection", width = "50")
     private int id;
     @I18N(en = "Name", zh_CN = "姓名")

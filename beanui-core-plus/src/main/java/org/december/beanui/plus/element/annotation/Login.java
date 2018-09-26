@@ -62,11 +62,4 @@ public @interface Login {
     @interface SignupTitle {
         String label() default "";
     }
-    @Documented
-    @Target(ElementType.FIELD)
-    @Inherited
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface SignupTips {
-        String label() default "";
-    }
 }

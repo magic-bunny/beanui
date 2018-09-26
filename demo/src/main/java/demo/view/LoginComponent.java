@@ -25,13 +25,12 @@ public class LoginComponent {
     @I18N(en = "Sign up", zh_CN = "注 册")
     @Login.SignupButton
     private String signupButton;
-    @I18N(en = "Remember password", zh_CN = "记住密码, 下次自动登录")
+    @I18N(en = "Remember password", zh_CN = "记住密码, 可在Cookie中保存用户信息")
     @Login.Remember
     private boolean remember;
+    @I18N(en = "Sign up", zh_CN = "用户注册")
     @Login.SignupTitle
     private String signupTitle;
-    @Login.SignupTips
-    private String signupTips;
 
     public String getTitle() {
         return title;
@@ -73,27 +72,19 @@ public class LoginComponent {
         this.signupButton = signupButton;
     }
 
-    public String getSignupTitle() {
-        return signupTitle;
-    }
-
-    public void setSignupTitle(String signupTitle) {
-        this.signupTitle = signupTitle;
-    }
-
-    public String getSignupTips() {
-        return signupTips;
-    }
-
-    public void setSignupTips(String signupTips) {
-        this.signupTips = signupTips;
-    }
-
     public boolean isRemember() {
         return remember;
     }
 
     public void setRemember(boolean remember) {
         this.remember = remember;
+    }
+
+    public String getSignupTitle() {
+        return signupTitle;
+    }
+
+    public void setSignupTitle(String signupTitle) {
+        this.signupTitle = signupTitle;
     }
 }

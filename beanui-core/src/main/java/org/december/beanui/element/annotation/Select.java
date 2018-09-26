@@ -34,4 +34,46 @@ public @interface Select {
     String popper_append_to_body() default "";//	是否将弹出框插入至 body 元素。在弹出框的定位出现问题时，可将该属性设置为 false	boolean	_	true
     String automatic_dropdown() default "";//	对于不可搜索的 Select，是否在输入框获得焦点后自动弹出选项菜单	boolean	_	false
     String tag() default "el-select";
+
+    class Option {
+        public Option(String value, String label, boolean disabled) {
+            this.value = value;
+            this.label = label;
+            this.disabled = disabled;
+        }
+
+        public Option(String value, String label) {
+            this.value = value;
+            this.label = label;
+            this.disabled = false;
+        }
+
+        private String value;//	选项的值	string/number/object	—	—
+        private String label;//	选项的标签，若不设置则默认与 value 相同	string/number	—	—
+        private boolean disabled;//	是否禁用该选项	boolean	—	false
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+
+        public void setLabel(String label) {
+            this.label = label;
+        }
+
+        public boolean isDisabled() {
+            return disabled;
+        }
+
+        public void setDisabled(boolean disabled) {
+            this.disabled = disabled;
+        }
+    }
 }

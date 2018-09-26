@@ -9,8 +9,10 @@ public class Element {
     private String type;
     private Map content;
     private Map badge;
+    private Map tooltip;
     private List<Map> events;
     private String rules;
+    private int[] subplot;
     private List<Element> children;
 
     public Element() {
@@ -91,5 +93,21 @@ public class Element {
 
     public void setBadge(Map badge) {
         this.badge = badge;
+    }
+
+    public int[] getSubplot() {
+        return subplot;
+    }
+
+    public void setSubplot(int[] subplot) {
+        this.subplot = subplot;
+    }
+
+    public Map getTooltip() {
+        return tooltip;
+    }
+
+    public void setTooltip(Map tooltip) {
+        this.tooltip = tooltip;
     }
 }

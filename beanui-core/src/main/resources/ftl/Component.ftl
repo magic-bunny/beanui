@@ -14,9 +14,13 @@
 <#include "/I18N.ftl">
 <#include "/Dialog.ftl">
 <#include "/Badge.ftl">
+<#include "/Tooltip.ftl">
 <#include "/Breadcrumb.ftl">
 <#include "/Card.ftl">
 <#include "/Carousel.ftl">
+<#include "/Subplot.ftl">
+<#include "/Steps.ftl">
+<#include "/Dropdown.ftl">
 
 <#macro createAttrs scope, content>
 <#list content?keys as key><#if content[key]!='' && key!='label' && key!=':label' && key!='tag' && key!='text'>
@@ -28,8 +32,34 @@ ${key}="${content[key]}"
 </#if></#list>
 </#macro>
 
+<#macro createMethods methods isFirst>
+<#if methods?size gt 0>
+<#if isFirst=false>,</#if>
+<#list methods as method>
+${method.name}_${method.formId}_${method.elementId}(text) {
+    this.${r'$'}${method.name}({
+        message: text
+        <#list method.args?keys as key>
+            <#if method.args[key]!=''>
+            ,${key}: '${method.args[key]}'
+            </#if>
+        </#list>
+    });
+}
+<#if method_has_next>,</#if>
+</#list>
+</#if>
+</#macro>
+
+
 <#macro createEvents formId, element>
-<#if element.events??><#list element.events as event>@${event.type}="${event.type}_${formId}_${element.id}" </#list></#if>
+<#if element.events??>
+<#list element.events as event>
+<#if event.type!='placeholder'>
+@${event.type}="${event.type}_${formId}_${element.id}"
+</#if>
+</#list>
+</#if>
 </#macro>
 
 <#macro createCreatedEventMethods formId, element>
@@ -56,19 +86,29 @@ ${key}="${content[key]}"
 <#if element.events??>
 <#if element.events?size gt 0>
     <#if isFirst=false>,</#if>
+    <#if element.type='Table'>
+    current_change_${formId}_${element.id}(val) {
+        this.${formId}.${element.id} = [val];
+    },
+    selection_change__${formId}_${element.id}(val) {
+        this.${formId}.${element.id} = val;
+    },
+    </#if>
     <#local isFirst=false>
     <#list element.events as event>
     ${event.type}_${formId}_${element.id}() {
+        <#if event.type!='placeholder'>
         this.${formId}_loading = true;
+        <#if event.requestForm!=''>
+        var data = this.${event.requestForm?substring(1)};
+        <#else>
+        var data = this.${formId};
+        </#if>
         request({
             url: "${event.path}",
             method: "${event.method}"
             <#if event.method=="post">
-            <#if event.requestForm!=''>
-            ,this.${event.requestForm?substring(1)};
-            <#else>
-            ,this.${formId};
-            </#if>
+            ,data
             </#if>
         }).then(res => {
             <#if event.responseForm!=''>
@@ -80,6 +120,7 @@ ${key}="${content[key]}"
         }).catch(err => {
             this.${formId}_loading = false;
         })
+        </#if>
       }
     <#if event_has_next>,</#if>
     </#list>
@@ -97,6 +138,7 @@ ${key}="${content[key]}"
 <div class="${component.id}-container">
 <div class="${component.id}-inner-container">
 <#list component.children as object>
+    <@createSubplot values=object.subplot>
     <#if object.type="Form">
         <@createForm element=object/>
     </#if>
@@ -109,6 +151,7 @@ ${key}="${content[key]}"
     <#if object.type='Carousel'>
         <@createCarousel element=object/>
     </#if>
+    </@createSubplot>
 </#list>
 </div>
 </div>
@@ -149,31 +192,17 @@ import request from '@/utils/request'
             <#assign element=element.children[0]>
         </#if>
         <@createEventMethods formId=element.id element=element isFirst=true/>
+        <@createMethods methods=methods isFirst=false/>
+        <#if element_has_next>,</#if>
     </#list>
     }
   }
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .${component.id}-container {
-        <#if component.content.background!=''>
-        background-color: ${component.content.background};
-        </#if>
-        <#if component.content.center!=''>
-        position: fixed;
-        height: 100%;
-        width: 100%;
-        </#if>
+
     }
     .${component.id}-inner-container {
         margin: 20px;
-        <#if component.content.width!=''>
-        width: ${component.content.width};
-        </#if>
-        <#if component.content.center!=''>
-        margin: 120px auto;
-        position: absolute;
-        left: 0;
-        right: 0;
-        </#if>
     }
 </style>

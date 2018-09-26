@@ -40,13 +40,17 @@
 </el-checkbox>
     </el-form>
 
-    <el-dialog title=""
+    <el-dialog :title="$t('demo.view.LoginComponent.signupTitle')"
  :visible.sync="showDialog" append-to-body>
-{{}}
       <br/>
       <br/>
       <br/>
-      <social-sign />
+      <br/>
+      Comming Soon......
+      <br/>
+      <br/>
+      <br/>
+      <br/>
     </el-dialog>
 
   </div>
@@ -61,20 +65,6 @@ export default {
   components: { LangSelect },
   name: 'login',
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!isvalidUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
-      } else {
-        callback()
-      }
-    }
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
-      } else {
-        callback()
-      }
-    }
     return {
       LoginComponent: {
         username: Cookies.get('login-name'),
@@ -83,8 +73,8 @@ export default {
         userImage: Cookies.get('user-image')
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        username: [{ required: true, trigger: 'blur'}],
+        password: [{ required: true, trigger: 'blur'}]
       },
       passwordType: 'password',
       loading: false,

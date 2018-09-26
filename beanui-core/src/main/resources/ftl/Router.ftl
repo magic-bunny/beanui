@@ -8,6 +8,7 @@
         ,meta: {
           title: '${r.title!r.path}'
           <#if r.icon??>,icon: '${r.icon}'</#if>
+          <#if r.roles??>,roles: [<#list r.roles as role>'${role}'<#if role_has_next>,</#if></#list>]</#if>
         }
         <#if r.children??>,children:<@createRouter children=r.children/></#if>
       }
@@ -66,6 +67,7 @@ export const asyncRouterMap = [
                 meta: {
                   title: '${r.title!r.path}'
                   <#if r.icon??>,icon: '${r.icon}'</#if>
+                  <#if r.roles??>,roles: [<#list r.roles as role>'${role}'<#if role_has_next>,</#if></#list>]</#if>
                 }
             }
         ]
@@ -74,6 +76,7 @@ export const asyncRouterMap = [
         meta: {
           title: '${r.title!r.path}'
           <#if r.icon??>,icon: '${r.icon}'</#if>
+          <#if r.roles??>,roles: [<#list r.roles as role>'${role}'<#if role_has_next>,</#if></#list>]</#if>
         }
         <#if r.children??>,children: <@createRouter children=r.children/></#if>
         </#if>

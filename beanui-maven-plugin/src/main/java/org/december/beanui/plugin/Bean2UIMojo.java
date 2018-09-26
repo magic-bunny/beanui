@@ -66,6 +66,7 @@ public class Bean2UIMojo extends AbstractMojo {
             FileUtil.deleteDir( "${workPath}/src/views/beanui");
             String routerDistPath = "${workPath}/src/router/index.js";
             String indexDistPath = "${workPath}/index.html";
+            String sidebarDistPath = "${workPath}/src/views/layout/components/Sidebar/index.vue";
             String i18nDistPath = "${workPath}/src/lang/*.js";
             String i18nIndexDistPath = "${workPath}/src/lang/index.js";
             String langSelectDistPath = "${workPath}/src/components/LangSelect/Logo.ftl";
@@ -75,6 +76,12 @@ public class Bean2UIMojo extends AbstractMojo {
             indexBuilder.setClassLoader(classLoader);
             indexBuilder.setDistPath(indexDistPath);
             indexBuilder.create();
+
+            ProjectNameBuilder sidebarBuilder = new ProjectNameBuilder();
+            sidebarBuilder.setTemplateName("Sidebar.ftl");
+            sidebarBuilder.setClassLoader(classLoader);
+            sidebarBuilder.setDistPath(sidebarDistPath);
+            sidebarBuilder.create();
 
             RouterBuilder routerBuilder = new RouterBuilder();
             routerBuilder.setTemplateName("Router.ftl");

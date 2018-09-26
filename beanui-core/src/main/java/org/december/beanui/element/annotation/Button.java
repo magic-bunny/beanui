@@ -9,6 +9,15 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Button {
+    class NativeType {
+        public static final String BUTTON = "button";
+        public static final String SUBMIT = "submit";
+        public static final String RESET = "reset";
+
+        private NativeType() {
+        }
+    }
+
     String text() default "";
     String size() default "";//尺寸	string	medium / small / mini	—
     String type() default "";//类型	string	primary / success / warning / danger / info / text	—

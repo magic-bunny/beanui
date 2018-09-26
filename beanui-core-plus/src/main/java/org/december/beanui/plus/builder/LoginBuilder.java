@@ -63,46 +63,6 @@ public class LoginBuilder extends Builder {
                     result.put(annotation.annotationType().getSimpleName(), element);
                 }
             }
-//            Login.Title title = field.getAnnotation(Login.Title.class);
-//            if(title != null) {
-//                content.put("label", title.label());
-//                result.put("title", element);
-//            }
-//            Login.Username username = field.getAnnotation(Login.Username.class);
-//            if(username != null) {
-//                content.put("label", username.label());
-//                result.put("username", element);
-//            }
-//            Login.Password password = field.getAnnotation(Login.Password.class);
-//            if(password != null) {
-//                content.put("label", password.label());
-//                result.put("password", element);
-//            }
-//            Login.Button button = field.getAnnotation(Login.Button.class);
-//            if(button != null) {
-//                content.put("label", button.label());
-//                result.put("button", element);
-//            }
-//            Login.SignupButton thirdpartyButton = field.getAnnotation(Login.SignupButton.class);
-//            if(thirdpartyButton != null) {
-//                content.put("label", thirdpartyButton.label());
-//                result.put("signupButton", element);
-//            }
-//            Login.Remember remember = field.getAnnotation(Login.Remember.class);
-//            if(remember != null) {
-//                content.put("label", remember.label());
-//                result.put("remember", element);
-//            }
-//            Login.SignupTitle thirdpartyTitle = field.getAnnotation(Login.SignupTitle.class);
-//            if(thirdpartyTitle != null) {
-//                content.put("label", thirdpartyTitle.label());
-//                result.put("signupTitle", element);
-//            }
-//            Login.SignupTips thirdpartyTips = field.getAnnotation(Login.SignupTips.class);
-//            if(thirdpartyTips != null) {
-//                content.put("label", thirdpartyTips.label());
-//                result.put("signupTips", element);
-//            }
             element.setContent(content);
         }
         result.put("Login", loginElement);

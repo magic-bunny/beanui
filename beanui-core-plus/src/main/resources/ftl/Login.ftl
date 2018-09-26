@@ -36,11 +36,15 @@
     </el-form>
 
     <el-dialog <@createI18N element=SignupTitle attr='title'/> :visible.sync="showDialog" append-to-body>
-      <@createI18N element=SignupTips attr=''/>
       <br/>
       <br/>
       <br/>
-      <social-sign />
+      <br/>
+      Comming Soon......
+      <br/>
+      <br/>
+      <br/>
+      <br/>
     </el-dialog>
 
   </div>
@@ -55,20 +59,6 @@ export default {
   components: { LangSelect },
   name: 'login',
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!isvalidUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
-      } else {
-        callback()
-      }
-    }
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
-      } else {
-        callback()
-      }
-    }
     return {
       ${Login.id}: {
         ${Username.id}: Cookies.get('login-name'),
@@ -77,8 +67,8 @@ export default {
         userImage: Cookies.get('user-image')
       },
       loginRules: {
-        ${Username.id}: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        ${Password.id}: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        ${Username.id}: [{ required: true, trigger: 'blur'}],
+        ${Password.id}: [{ required: true, trigger: 'blur'}]
       },
       passwordType: 'password',
       loading: false,

@@ -12,11 +12,11 @@ import org.december.beanui.rule.annotation.Rule;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Created(rest = TestFormController.class, func="test3")
-@Form(label_width = "120px")
+@Form
 public class TestForm {
+    @Tooltip(content = "请输入6位以上用户名", placement = Tooltip.Placement.RIGHT)
     @Rule(required = "true")
     @I18N(en = "user name", zh_CN = "用户名")
     @Input
@@ -24,7 +24,7 @@ public class TestForm {
 
     @Rule(required = "true")
     @I18N(en = "password", zh_CN = "密码")
-    @Input
+    @Input(type = Input.Type.TEXTAREA)
     private String password;
 
     @Badge(value = "20")
@@ -45,12 +45,12 @@ public class TestForm {
     @Select(placeholder = "请选择", data = "$options")
     private String detail;
 
-    private List<Map<String, String>> options;
+    private List<Select.Option> options;
 
     @Transfer(titles = ":['1','2']", data = "$addressData")
     private List<String> address;
 
-    private List<Map<String, String>> addressData;
+    private List<Transfer.Data> addressData;
 
     @FormItem(prop = "test")
     @Click(rest = TestFormController.class, func = "test3")
@@ -133,14 +133,6 @@ public class TestForm {
         this.detail = detail;
     }
 
-    public List<Map<String, String>> getOptions() {
-        return options;
-    }
-
-    public void setOptions(List<Map<String, String>> options) {
-        this.options = options;
-    }
-
     public List<String> getAddress() {
         return address;
     }
@@ -149,13 +141,6 @@ public class TestForm {
         this.address = address;
     }
 
-    public List<Map<String, String>> getAddressData() {
-        return addressData;
-    }
-
-    public void setAddressData(List<Map<String, String>> addressData) {
-        this.addressData = addressData;
-    }
 
     public String getTest() {
         return test;
@@ -163,5 +148,21 @@ public class TestForm {
 
     public void setTest(String test) {
         this.test = test;
+    }
+
+    public List<Select.Option> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<Select.Option> options) {
+        this.options = options;
+    }
+
+    public List<Transfer.Data> getAddressData() {
+        return addressData;
+    }
+
+    public void setAddressData(List<Transfer.Data> addressData) {
+        this.addressData = addressData;
     }
 }

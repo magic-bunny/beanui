@@ -32,35 +32,37 @@ export default new Router({
 export const asyncRouterMap = [
     {
         path: '',
-        name: 'test1',
+        name: 'home',
         component: Layout
         ,redirect: '/index',
         children: [
             {
                 path: 'index',
                 component:() => import('@/views/beanui/demo.view.TestComponent'),
-                name: 'test1',
+                name: 'home',
                 meta: {
-                  title: 'test1'
+                  title: 'home'
                   ,icon: 'star'
+                  
                 }
             }
         ]
     }
     ,
     {
-        path: '/test2',
-        name: 'test2',
+        path: '/test',
+        name: 'test',
         component: Layout
-        ,redirect: '/test2/index',
+        ,redirect: '/test/index',
         children: [
             {
                 path: 'index',
                 component:() => import('@/views/beanui/demo.view.ABCDComponent'),
-                name: 'test2',
+                name: 'test',
                 meta: {
-                  title: 'test2'
+                  title: 'test'
                   ,icon: 'example'
+                  
                 }
             }
         ]
@@ -74,6 +76,7 @@ export const asyncRouterMap = [
         meta: {
           title: 'Table'
           ,icon: 'table'
+          
         }
         ,children: [
       {
@@ -83,6 +86,7 @@ export const asyncRouterMap = [
         ,meta: {
           title: 'Dynamic Table'
           
+          ,roles: ['admin']
         }
         
       }
@@ -93,6 +97,7 @@ export const asyncRouterMap = [
         ,component: () => import('@/views/beanui/demo.view.DragTableComponent')
         ,meta: {
           title: 'Drag Table'
+          
           
         }
         
@@ -105,6 +110,7 @@ export const asyncRouterMap = [
         ,meta: {
           title: 'Inline Edit'
           
+          
         }
         
       }
@@ -115,6 +121,7 @@ export const asyncRouterMap = [
         ,component: () => import('@/views/beanui/demo.view.ComplexTableComponent')
         ,meta: {
           title: 'Complex Table'
+          
           
         }
         

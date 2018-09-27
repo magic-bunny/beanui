@@ -141,17 +141,20 @@ import request from '@/utils/request'
     methods: {
     
     created_DynamicTableComponent_DynamicTableComponent() {
-        this.DynamicTableComponent_loading = true;
         var data = this.DynamicTableComponent;
-        request({
-            url: "/dynamic-table/init",
-            method: "get"
-        }).then(res => {
-            this.DynamicTableComponent = res.data;
-            this.DynamicTableComponent_loading = false;
-        }).catch(err => {
-            this.DynamicTableComponent_loading = false;
-        })
+        function submitRequest(self) {
+            self.DynamicTableComponent_loading = true;
+            request({
+                url: "/dynamic-table/init",
+                method: "get"
+            }).then(res => {
+                self.DynamicTableComponent = res.data;
+                self.DynamicTableComponent_loading = false;
+            }).catch(err => {
+                self.DynamicTableComponent_loading = false;
+            });
+        }
+        submitRequest(this);
       }
     
 

@@ -8,9 +8,9 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Click {
-    String type() default "click";
-    Class rest() default Click.class;
+public @interface Clear {
+    String type() default "clear";
+    Class rest() default Clear.class;
     String func() default "";
     String requestForm() default "";
     String responseForm() default "";

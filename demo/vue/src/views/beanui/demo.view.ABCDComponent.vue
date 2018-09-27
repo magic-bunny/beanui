@@ -186,47 +186,62 @@ import request from '@/utils/request'
 
     ,
     click_userQuery_button() {
-        this.userQuery_loading = true;
         var data = this.userQuery;
-        request({
-            url: "/demo2",
-            method: "get"
-        }).then(res => {
-            this.userQuery = res.data;
-            this.userQuery_loading = false;
-        }).catch(err => {
-            this.userQuery_loading = false;
-        })
+        function submitRequest(self) {
+            self.userQuery_loading = true;
+            request({
+                url: "/demo2",
+                method: "get"
+            }).then(res => {
+                self.userQuery = res.data;
+                self.userQuery_loading = false;
+            }).catch(err => {
+                self.userQuery_loading = false;
+            });
+        }
+        submitRequest(this);
       }
     
 
 
     ,
     click_userQuery_button2() {
-        this.userQuery_loading = true;
         var data = this.userQuery;
-        request({
-            url: "/demo4",
-            method: "post"
-            ,data
-        }).then(res => {
-            this.userQuery = res.data;
-            this.userQuery_loading = false;
-        }).catch(err => {
-            this.userQuery_loading = false;
-        })
+        function submitRequest(self) {
+            self.userQuery_loading = true;
+            request({
+                url: "/demo4",
+                method: "post"
+                ,data
+            }).then(res => {
+                self.userQuery = res.data;
+                self.userQuery_loading = false;
+                self.$message({
+                    type: 'success',
+                    message: this.$t('demo.view.message.UserQueryFormMessage.message')
+                  });
+            }).catch(err => {
+                self.userQuery_loading = false;
+            });
+        }
+        this.$confirm(this.$t('demo.view.message.UserQueryFormMessage.confirmMessage'), 'Confirm', {
+          confirmButtonText: 'Ok',
+          cancelButtonText: 'Cancel',
+          type: 'warning'
+        }).then(() => {
+          submitRequest(this);
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Cancel this option!'
+          });
+          this.userQuery_loading = false;
+        });
       }
     
 
 
 
-
-,
-message_userQuery_message(text) {
-    this.$message({
-        message: text
-    });
-}
 
         
     }

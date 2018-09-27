@@ -102,17 +102,20 @@ import request from '@/utils/request'
     methods: {
     
     created_DragTableComponent_DragTableComponent() {
-        this.DragTableComponent_loading = true;
         var data = this.DragTableComponent;
-        request({
-            url: "/drag-table/init",
-            method: "get"
-        }).then(res => {
-            this.DragTableComponent = res.data;
-            this.DragTableComponent_loading = false;
-        }).catch(err => {
-            this.DragTableComponent_loading = false;
-        })
+        function submitRequest(self) {
+            self.DragTableComponent_loading = true;
+            request({
+                url: "/drag-table/init",
+                method: "get"
+            }).then(res => {
+                self.DragTableComponent = res.data;
+                self.DragTableComponent_loading = false;
+            }).catch(err => {
+                self.DragTableComponent_loading = false;
+            });
+        }
+        submitRequest(this);
       }
     
 

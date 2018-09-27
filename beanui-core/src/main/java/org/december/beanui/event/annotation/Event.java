@@ -5,12 +5,12 @@ import org.december.beanui.event.Method;
 import java.lang.annotation.*;
 
 @Documented
-@Target(ElementType.FIELD)
+@Target({ElementType.TYPE, ElementType.FIELD})
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Click {
-    String type() default "click";
-    Class rest() default Click.class;
+public @interface Event {
+    String type();
+    Class rest() default Event.class;
     String func() default "";
     String requestForm() default "";
     String responseForm() default "";

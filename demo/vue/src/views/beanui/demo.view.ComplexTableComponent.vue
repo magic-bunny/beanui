@@ -245,17 +245,20 @@ import request from '@/utils/request'
         ,
     
     created_complexTableDataForm_complexTableDataForm() {
-        this.complexTableDataForm_loading = true;
         var data = this.complexTableDataForm;
-        request({
-            url: "/complex-table/init-complex-table-data-form",
-            method: "get"
-        }).then(res => {
-            this.complexTableDataForm = res.data;
-            this.complexTableDataForm_loading = false;
-        }).catch(err => {
-            this.complexTableDataForm_loading = false;
-        })
+        function submitRequest(self) {
+            self.complexTableDataForm_loading = true;
+            request({
+                url: "/complex-table/init-complex-table-data-form",
+                method: "get"
+            }).then(res => {
+                self.complexTableDataForm = res.data;
+                self.complexTableDataForm_loading = false;
+            }).catch(err => {
+                self.complexTableDataForm_loading = false;
+            });
+        }
+        submitRequest(this);
       }
     
 
@@ -306,17 +309,20 @@ import request from '@/utils/request'
 
     ,
     click_complexTableDataForm_readings() {
-        this.complexTableDataForm_loading = true;
         var data = this.complexTableDataForm;
-        request({
-            url: "/complex-table/init-complex-table-edit-form",
-            method: "get"
-        }).then(res => {
-            this.complexTableEditForm = res.data;
-            this.complexTableDataForm_loading = false;
-        }).catch(err => {
-            this.complexTableDataForm_loading = false;
-        })
+        function submitRequest(self) {
+            self.complexTableDataForm_loading = true;
+            request({
+                url: "/complex-table/init-complex-table-edit-form",
+                method: "get"
+            }).then(res => {
+                self.complexTableEditForm = res.data;
+                self.complexTableDataForm_loading = false;
+            }).catch(err => {
+                self.complexTableDataForm_loading = false;
+            });
+        }
+        submitRequest(this);
       }
     
 
@@ -341,17 +347,20 @@ import request from '@/utils/request'
 
     ,
     click_complexTableDataForm_actionEdit() {
-        this.complexTableDataForm_loading = true;
         var data = this.complexTableDataForm;
-        request({
-            url: "/complex-table/init-complex-table-edit-form",
-            method: "get"
-        }).then(res => {
-            this.complexTableEditForm = res.data;
-            this.complexTableDataForm_loading = false;
-        }).catch(err => {
-            this.complexTableDataForm_loading = false;
-        })
+        function submitRequest(self) {
+            self.complexTableDataForm_loading = true;
+            request({
+                url: "/complex-table/init-complex-table-edit-form",
+                method: "get"
+            }).then(res => {
+                self.complexTableEditForm = res.data;
+                self.complexTableDataForm_loading = false;
+            }).catch(err => {
+                self.complexTableDataForm_loading = false;
+            });
+        }
+        submitRequest(this);
       }
     
 

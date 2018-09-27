@@ -32,26 +32,6 @@ ${key}="${content[key]}"
 </#if></#list>
 </#macro>
 
-<#macro createMethods methods isFirst>
-<#if methods?size gt 0>
-<#if isFirst=false>,</#if>
-<#list methods as method>
-${method.name}_${method.formId}_${method.elementId}(text) {
-    this.${r'$'}${method.name}({
-        message: text
-        <#list method.args?keys as key>
-            <#if method.args[key]!=''>
-            ,${key}: '${method.args[key]}'
-            </#if>
-        </#list>
-    });
-}
-<#if method_has_next>,</#if>
-</#list>
-</#if>
-</#macro>
-
-
 <#macro createEvents formId, element>
 <#if element.events??>
 <#list element.events as event>
@@ -98,28 +78,53 @@ ${method.name}_${method.formId}_${method.elementId}(text) {
     <#list element.events as event>
     ${event.type}_${formId}_${element.id}() {
         <#if event.type!='placeholder'>
-        this.${formId}_loading = true;
         <#if event.requestForm!=''>
         var data = this.${event.requestForm?substring(1)};
         <#else>
         var data = this.${formId};
         </#if>
-        request({
-            url: "${event.path}",
-            method: "${event.method}"
-            <#if event.method=="post">
-            ,data
-            </#if>
-        }).then(res => {
-            <#if event.responseForm!=''>
-            this.${event.responseForm?substring(1)} = res.data;
-            <#else>
-            this.${formId} = res.data;
-            </#if>
-            this.${formId}_loading = false;
-        }).catch(err => {
-            this.${formId}_loading = false;
-        })
+        function submitRequest(self) {
+            self.${formId}_loading = true;
+            request({
+                url: "${event.path}",
+                method: "${event.method}"
+                <#if event.method=="post">
+                ,data
+                </#if>
+            }).then(res => {
+                <#if event.responseForm!=''>
+                self.${event.responseForm?substring(1)} = res.data;
+                <#else>
+                self.${formId} = res.data;
+                </#if>
+                self.${formId}_loading = false;
+                <#if event.message!=''>
+                self.$message({
+                    type: 'success',
+                    message: <#if event.message?starts_with('$t')>this.${event.message}<#else>'${event.message}'</#if>
+                  });
+                </#if>
+            }).catch(err => {
+                self.${formId}_loading = false;
+            });
+        }
+        <#if event.confirmMessage!=''>
+        this.$confirm(<#if event.confirmMessage?starts_with('$t')>this.${event.confirmMessage}<#else>'${event.confirmMessage}'</#if>, 'Confirm', {
+          confirmButtonText: 'Ok',
+          cancelButtonText: 'Cancel',
+          type: 'warning'
+        }).then(() => {
+          submitRequest(this);
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Cancel this option!'
+          });
+          this.${formId}_loading = false;
+        });
+        <#else>
+        submitRequest(this);
+        </#if>
         </#if>
       }
     <#if event_has_next>,</#if>
@@ -192,7 +197,6 @@ import request from '@/utils/request'
             <#assign element=element.children[0]>
         </#if>
         <@createEventMethods formId=element.id element=element isFirst=true/>
-        <@createMethods methods=methods isFirst=false/>
         <#if element_has_next>,</#if>
     </#list>
     }

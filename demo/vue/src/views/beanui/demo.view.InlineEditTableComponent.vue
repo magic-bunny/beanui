@@ -122,17 +122,20 @@ import request from '@/utils/request'
     methods: {
     
     created_InlineEditTableComponent_InlineEditTableComponent() {
-        this.InlineEditTableComponent_loading = true;
         var data = this.InlineEditTableComponent;
-        request({
-            url: "/inline-edit-table/init",
-            method: "get"
-        }).then(res => {
-            this.InlineEditTableComponent = res.data;
-            this.InlineEditTableComponent_loading = false;
-        }).catch(err => {
-            this.InlineEditTableComponent_loading = false;
-        })
+        function submitRequest(self) {
+            self.InlineEditTableComponent_loading = true;
+            request({
+                url: "/inline-edit-table/init",
+                method: "get"
+            }).then(res => {
+                self.InlineEditTableComponent = res.data;
+                self.InlineEditTableComponent_loading = false;
+            }).catch(err => {
+                self.InlineEditTableComponent_loading = false;
+            });
+        }
+        submitRequest(this);
       }
     
 

@@ -7,10 +7,8 @@ import org.december.beanui.element.annotation.*;
 import org.december.beanui.event.annotation.Click;
 import org.december.beanui.event.annotation.Created;
 import org.december.beanui.i18n.annotation.I18N;
-import org.december.beanui.method.annotation.Message;
 import org.december.beanui.plugin.face.Builder;
 import org.december.beanui.plugin.face.bean.Element;
-import org.december.beanui.plugin.face.bean.Method;
 import org.december.beanui.plugin.face.exception.BuilderException;
 import org.december.beanui.plugin.face.exception.ComponentBuilderException;
 import org.december.beanui.plugin.face.exception.SpringReaderException;
@@ -35,7 +33,6 @@ public class ComponentBuilder extends Builder {
             int[] defaultSubplot = {1, 1, 1};
             Element component = new Element();
             List<Element> elements = new ArrayList<Element>();
-            List<Method> methods = new ArrayList<Method>();
             Field[] formFields = this.getTemplateClass().getDeclaredFields();
             Annotation[] annotations = this.getTemplateClass().getAnnotations();
             boolean isComponent = false;
@@ -59,10 +56,8 @@ public class ComponentBuilder extends Builder {
             if (isForm) {
                 Annotation[] formAnnotations = this.getTemplateClass().getAnnotations();
                 Element element = buildForm(this.getTemplateClass().getSimpleName(), this.getTemplateClass(), formAnnotations);
-                List<Method> method = buildMethods(this.getTemplateClass().getSimpleName(), this.getTemplateClass());
                 element.setSubplot(defaultSubplot);
                 elements.add(element);
-                methods.addAll(method);
             } else {
                 Set<Field> formFieldSet = new HashSet<Field>();
                 for (Field field : formFields) {
@@ -107,7 +102,6 @@ public class ComponentBuilder extends Builder {
                                 element.setId(formField.getName());
                                 element.setType(annotation.annotationType().getSimpleName());
                                 Element formElement = buildForm(formField.getName(), formField.getType(), formAnnotations);
-                                List<Method> method = buildMethods(formField.getName(), formField.getType());
                                 if(element.getChildren() == null) {
                                     List<Element> otherElementChildren = new ArrayList<Element>();
                                     otherElementChildren.add(formElement);
@@ -115,7 +109,6 @@ public class ComponentBuilder extends Builder {
                                 } else {
                                     element.getChildren().add(formElement);
                                 }
-                                methods.addAll(method);
                             }
                             element.setType(annotation.annotationType().getSimpleName());
                             content.remove(":data");
@@ -132,21 +125,17 @@ public class ComponentBuilder extends Builder {
                     if(formField.getType().getAnnotation(Form.class) != null && !formFieldSet.contains(formField)) {
                         Annotation[] formAnnotations = formField.getType().getAnnotations();
                         Element element = buildForm(formField.getName(), formField.getType(), formAnnotations);
-                        List<Method> method = buildMethods(formField.getName(), formField.getType());
-
                         if(subplot == null) {
                             element.setSubplot(defaultSubplot);
                         } else {
                             element.setSubplot(subplot.value());
                         }
                         elements.add(element);
-                        methods.addAll(method);
                     }
                 }
             }
             component.setChildren(elements);
             result.put("component", component);
-            result.put("methods", methods);
         } catch (Exception e) {
             throw new ComponentBuilderException(e);
         }
@@ -291,29 +280,6 @@ public class ComponentBuilder extends Builder {
             formContent.put(":rules", formId + "_rules");
         }
         return list;
-    }
-
-    private List<Method> buildMethods(String formId, Class clazz) throws NoSuchFieldException, IllegalAccessException {
-        List<Method> methods = new ArrayList<Method>();
-        Field[] fields = clazz.getDeclaredFields();
-        Field.setAccessible(fields, true);
-        for(Field field:fields) {
-            Annotation[] annotations = field.getAnnotations();
-            for(Annotation annotation:annotations) {
-                String packageName = annotation.annotationType().getPackage().getName();
-                if (Message.class.getPackage().getName().equals(packageName)) {
-                    Map content = annotation2map(annotation);
-                    Method method = new Method();
-                    method.setFormId(formId);
-                    method.setElementId(field.getName());
-                    method.setName(content.get("methodName").toString());
-                    content.remove("methodName");
-                    method.setArgs(content);
-                    methods.add(method);
-                }
-            }
-        }
-        return methods;
     }
 
     private Map buildEvent(Annotation annotation) throws SpringReaderException {

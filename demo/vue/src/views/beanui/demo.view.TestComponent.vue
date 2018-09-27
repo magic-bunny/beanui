@@ -333,17 +333,20 @@ import request from '@/utils/request'
 
     
     created_testForm_testForm() {
-        this.testForm_loading = true;
         var data = this.testForm;
-        request({
-            url: "/demo3",
-            method: "get"
-        }).then(res => {
-            this.testForm = res.data;
-            this.testForm_loading = false;
-        }).catch(err => {
-            this.testForm_loading = false;
-        })
+        function submitRequest(self) {
+            self.testForm_loading = true;
+            request({
+                url: "/demo3",
+                method: "get"
+            }).then(res => {
+                self.testForm = res.data;
+                self.testForm_loading = false;
+            }).catch(err => {
+                self.testForm_loading = false;
+            });
+        }
+        submitRequest(this);
       }
     
 
@@ -476,17 +479,20 @@ import request from '@/utils/request'
 
     ,
     click_testForm_button() {
-        this.testForm_loading = true;
         var data = this.testForm;
-        request({
-            url: "/demo3",
-            method: "get"
-        }).then(res => {
-            this.testForm = res.data;
-            this.testForm_loading = false;
-        }).catch(err => {
-            this.testForm_loading = false;
-        })
+        function submitRequest(self) {
+            self.testForm_loading = true;
+            request({
+                url: "/demo3",
+                method: "get"
+            }).then(res => {
+                self.testForm = res.data;
+                self.testForm_loading = false;
+            }).catch(err => {
+                self.testForm_loading = false;
+            });
+        }
+        submitRequest(this);
       }
     
 
@@ -504,17 +510,20 @@ import request from '@/utils/request'
 
     
     created_testForm2_testForm2() {
-        this.testForm2_loading = true;
         var data = this.testForm2;
-        request({
-            url: "/demo3",
-            method: "get"
-        }).then(res => {
-            this.testForm2 = res.data;
-            this.testForm2_loading = false;
-        }).catch(err => {
-            this.testForm2_loading = false;
-        })
+        function submitRequest(self) {
+            self.testForm2_loading = true;
+            request({
+                url: "/demo3",
+                method: "get"
+            }).then(res => {
+                self.testForm2 = res.data;
+                self.testForm2_loading = false;
+            }).catch(err => {
+                self.testForm2_loading = false;
+            });
+        }
+        submitRequest(this);
       }
     
 
@@ -647,17 +656,20 @@ import request from '@/utils/request'
 
     ,
     click_testForm2_button() {
-        this.testForm2_loading = true;
         var data = this.testForm2;
-        request({
-            url: "/demo3",
-            method: "get"
-        }).then(res => {
-            this.testForm2 = res.data;
-            this.testForm2_loading = false;
-        }).catch(err => {
-            this.testForm2_loading = false;
-        })
+        function submitRequest(self) {
+            self.testForm2_loading = true;
+            request({
+                url: "/demo3",
+                method: "get"
+            }).then(res => {
+                self.testForm2 = res.data;
+                self.testForm2_loading = false;
+            }).catch(err => {
+                self.testForm2_loading = false;
+            });
+        }
+        submitRequest(this);
       }
     
 

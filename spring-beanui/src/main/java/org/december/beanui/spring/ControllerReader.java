@@ -1,9 +1,7 @@
 package org.december.beanui.spring;
 import org.december.beanui.plugin.face.exception.SpringReaderException;
 import org.december.beanui.plugin.face.util.RestReader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -27,25 +25,37 @@ public class ControllerReader implements RestReader {
                 if(func.equals(method.getName())) {
                     Annotation[] annotations = method.getAnnotations();
                     for(Annotation annotation:annotations) {
+                        if(annotation.annotationType()!=GetMapping.class && annotation.annotationType()!=PostMapping.class && annotation.annotationType()!=RequestMapping.class) {
+                            continue;
+                        }
+                        Map map = annotation2map(annotation);
+                        String m = "get";
+                        if(annotation.annotationType() == GetMapping.class) {
+                            m = "get";
+                        }
+
+                        if(annotation.annotationType() == PostMapping.class) {
+                            m = "post";
+                        }
+
                         if(annotation.annotationType() == RequestMapping.class) {
-                            Map map = annotation2map(annotation);
-                            String[] paths = (String[])map.get("path");
-                            String[] values = (String[])map.get("value");
                             RequestMethod[] ms = (RequestMethod[])map.get("method");
-                            String m = "get";
                             if(ms[0] == RequestMethod.GET) {
                                 m = "get";
                             } else if(ms[0] == RequestMethod.POST) {
                                 m = "post";
                             }
-                            if(requestMapping == null) {
-                                result.put("path", paths.length>0?paths[0]:values[0]);
-                            } else {
-                                result.put("path", (requestMapping.path().length>0?requestMapping.path()[0]:requestMapping.value()[0]) + (paths.length>0?paths[0]:values[0]));
-                            }
-                            result.put("method", m);
-                            return result;
                         }
+
+                        String[] paths = (String[])map.get("path");
+                        String[] values = (String[])map.get("value");
+                        if(requestMapping == null) {
+                            result.put("path", paths.length>0?paths[0]:values[0]);
+                        } else {
+                            result.put("path", (requestMapping.path().length>0?requestMapping.path()[0]:requestMapping.value()[0]) + (paths.length>0?paths[0]:values[0]));
+                        }
+                        result.put("method", m);
+                        return result;
                     }
                 }
             }

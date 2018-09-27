@@ -10,11 +10,14 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Created {
     String type() default "created";
-    Class rest();
-    String func();
+    Class rest() default Created.class;
+    String func() default "";
     String requestForm() default "";
     String responseForm() default "";
     String path() default "";
     String method() default Method.GET;
-    String jscode() default "";
+    String message() default "";
+    String confirmMessage() default "";
+    String beforeRequest() default "";
+    String afterRequest() default "";
 }

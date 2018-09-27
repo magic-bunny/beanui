@@ -5,22 +5,20 @@
     <parent>
         <artifactId>beanui</artifactId>
         <groupId>org.december</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.december</groupId>
     <artifactId>demo</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <dependencies>
         <dependency>
             <groupId>org.december</groupId>
             <artifactId>beanui-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.december</groupId>
             <artifactId>beanui-core-plus</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -40,7 +38,7 @@
             <plugin>
                 <groupId>org.december</groupId>
                 <artifactId>beanui-maven-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.0</version>
                 <configuration>
                     <projectName>BEANUI example</projectName>
                     <routerPath>router.yml</routerPath>
@@ -57,12 +55,12 @@
                     <dependency>
                         <groupId>org.december</groupId>
                         <artifactId>spring-beanui</artifactId>
-                        <version>1.0-SNAPSHOT</version>
+                        <version>1.0</version>
                     </dependency>
                     <dependency>
                         <groupId>org.december</groupId>
                         <artifactId>beanui-core-plus</artifactId>
-                        <version>1.0-SNAPSHOT</version>
+                        <version>1.0</version>
                     </dependency>
                 </dependencies>
                 <executions>

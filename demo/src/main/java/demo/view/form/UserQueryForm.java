@@ -2,6 +2,7 @@ package demo.view.form;
 
 import demo.controller.TestFormController;
 import demo.view.table.UserRow;
+import org.december.beanui.element.Size;
 import org.december.beanui.element.Type;
 import org.december.beanui.element.Icon;
 import org.december.beanui.element.annotation.*;
@@ -18,7 +19,7 @@ public class UserQueryForm {
 
     @FormItem(prop = "a")
     @Click(rest = TestFormController.class, func = "test2")
-    @Button(text = "Query", type = Type.PRIMARY, icon = Icon.SEARCH)
+    @Button(text = "Query", type = Type.PRIMARY, icon = Icon.SEARCH, size = Size.MINI)
     private String button;
 
     @FormItem(prop = "a")

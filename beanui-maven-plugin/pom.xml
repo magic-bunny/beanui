@@ -3,12 +3,11 @@
     <parent>
         <artifactId>beanui</artifactId>
         <groupId>org.december</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>beanui-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>1.0-SNAPSHOT</version>
     <name>Maven Marmalade Mojo Archetype</name>
     <url>http://maven.apache.org</url>
     <dependencies>

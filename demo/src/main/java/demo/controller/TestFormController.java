@@ -1,8 +1,8 @@
 package demo.controller;
 
 import demo.view.form.TestForm;
-import demo.view.table.UserRow;
 import demo.view.form.UserQueryForm;
+import demo.view.table.UserRow;
 import org.december.beanui.element.annotation.Select;
 import org.december.beanui.element.annotation.Transfer;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 public class TestFormController {
+
     @RequestMapping(value="/demo",  method = RequestMethod.POST)
     public String test(@RequestBody TestForm testForm) {
         System.out.println(testForm.getUsername());
@@ -22,7 +25,7 @@ public class TestFormController {
     }
 
     @RequestMapping(value="/demo2",  method = RequestMethod.GET)
-    public UserQueryForm test2() throws InterruptedException {
+    public UserQueryForm test2() {
         UserQueryForm userQuery = new UserQueryForm();
         List<UserRow> users = new ArrayList<UserRow>();
         UserRow user = new UserRow();
@@ -44,7 +47,11 @@ public class TestFormController {
         users.add(user);
 
         userQuery.setUsers(users);
-        Thread.sleep(1000);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return userQuery;
     }
 

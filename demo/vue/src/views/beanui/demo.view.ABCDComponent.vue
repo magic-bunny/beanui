@@ -78,6 +78,7 @@ width="50"
 >
 <el-button icon="el-icon-search"
 type="primary"
+size="mini"
  @click="click_userQuery_button"
 >
     Query

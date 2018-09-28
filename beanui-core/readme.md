@@ -54,73 +54,73 @@ public class MyForm {
 > 注意2： Form中的属性类型可以任意指定，并不一定非得是String
 
 ## 控件列表
-- [Alert](#Alert) 警告
-- [Autocomplete](#Autocomplete) 自动补齐输入框
-- [Badge](#Badge) 标记
-- [Breadcrumb](#Breadcrumb) 面包屑
-- [Button](#Button) 按钮
-- [Card](#Card) 卡片
-- [Carousel](#Carousel) 走马灯
-- [Cascader](#Cascader) 级联选择器
-- [Checkbox](#Checkbox) 多选框
-- [CheckboxButton](#CheckboxButton) 多选按钮
-- [CheckboxButtonGroup](#CheckboxButtonGroup) 多选按钮组
-- [CheckboxGroup](#CheckboxGroup) 多选组
-- [Collapse](#Collapse) 折叠面板
-- [ColorPicker](#ColorPicker) 颜色选择器
-- [Component](#Component) 组件
-- [DatePicker](#DatePicker) 日期选择器
-- [Dialog](#Dialog) 弹出层
-- [Dropdown](#Dropdown) 下拉菜单
-- [Element](#Element) Dom元素
-- [Form](#Form) 表单
-- [FormItem](#FormItem) 表单元素
-- [IgnoreData](#IgnoreData) 忽略渲染
-- [Input](#Input) 输入框
-- [InputNumber](#InputNumber) 数字选择器
-- [Loading](#Loading) 加载
-- [MessageBox](#MessageBox) 消息框
-- [NavMenu](#NavMenu) 导航菜单
-- [Notification](#Notification) 通知
-- [Pagination](#Pagination) 分页
-- [Popover](#Popover) 弹出框
-- [Progress](#Progress) 进度条
-- [Radio](#Radio) 单选框
-- [RadioButton](#RadioButton) 单选按钮
-- [RadioButtonGroup](#RadioButtonGroup) 单选按钮组
-- [RadioGroup](#RadioGroup) 单选组
-- [Rate](#Rate) 评分
-- [Select](#Select) 选择器
-- [Slider](#Slider) 滑块
-- [Steps](#Steps) 步凑条
-- [Subplot](#Subplot) 分栏布局
-- [Switch](#Switch) 开关
-- [Table](#Table) 表格
-- [TableColum](#TableColum) 表格列
-- [Tabs](#Tabs) 标签页
-- [Tag](#Tag) 标签
-- [TimePicker](#TimePicker) 时间选择器
-- [Tooltip](#Tooltip) 文字提示
-- [Transfer](#Transfer) 穿梭框
-- [Tree](#Tree) 树
-- [Upload](#Upload) 上传
-- [I18N](#I18N) 国际化
+- [Alert](#alert) 警告
+- [Autocomplete](#autocomplete) 自动补齐输入框
+- [Badge](#badge) 标记
+- [Breadcrumb](#breadcrumb) 面包屑
+- [Button](#button) 按钮
+- [Card](#card) 卡片
+- [Carousel](#carousel) 走马灯
+- [Cascader](#cascader) 级联选择器
+- [Checkbox](#checkbox) 多选框
+- [CheckboxButton](#checkboxbutton) 多选按钮
+- [CheckboxButtonGroup](#checkboxbuttongroup) 多选按钮组
+- [CheckboxGroup](#checkboxGroup) 多选组
+- [Collapse](#collapse) 折叠面板
+- [ColorPicker](#colorPicker) 颜色选择器
+- [Component](#component) 组件
+- [DatePicker](#datePicker) 日期选择器
+- [Dialog](#dialog) 弹出层
+- [Dropdown](#dropdown) 下拉菜单
+- [Element](#element) Dom元素
+- [Form](#form) 表单
+- [FormItem](#formItem) 表单元素
+- [IgnoreData](#ignoredata) 忽略渲染
+- [Input](#input) 输入框
+- [InputNumber](#inputnumber) 数字选择器
+- [Loading](#loading) 加载
+- [MessageBox](#messagebox) 消息框
+- [NavMenu](#navmenu) 导航菜单
+- [Notification](#notification) 通知
+- [Pagination](#pagination) 分页
+- [Popover](#popover) 弹出框
+- [Progress](#progress) 进度条
+- [Radio](#radio) 单选框
+- [RadioButton](#radioButton) 单选按钮
+- [RadioButtonGroup](#radiobuttongroup) 单选按钮组
+- [RadioGroup](#radiogroup) 单选组
+- [Rate](#rate) 评分
+- [Select](#select) 选择器
+- [Slider](#slider) 滑块
+- [Steps](#steps) 步凑条
+- [Subplot](#subplot) 分栏布局
+- [Switch](#switch) 开关
+- [Table](#table) 表格
+- [TableColum](#tablecolum) 表格列
+- [Tabs](#tabs) 标签页
+- [Tag](#tag) 标签
+- [TimePicker](#timePicker) 时间选择器
+- [Tooltip](#tooltip) 文字提示
+- [Transfer](#transfer) 穿梭框
+- [Tree](#tree) 树
+- [Upload](#upload) 上传
+- [I18N](#i18n) 国际化
 
-alert
+Alert
 ---
 ```java
 @Alert
 private String alert;
 ```
 
-autocomplete
+Autocomplete
 ---
 ```java
 @Autocomplete
 private String autocomplete;
 ```
 
-badge
+Badge
 ---
 ```java
 @Badge
@@ -128,28 +128,28 @@ badge
 private String input;
 ```
 
-breadcrumb
+Breadcrumb
 ---
 ```java
 @Breadcrumb
 private String Breadcrumb;
 ```
 
-button
+Button
 ---
 ```java
 @Button(text = "save")
 private String button;
 ```
 
-card
+Card
 ---
 ```java
 @Card(title = "title")
 private MyForm myForm;
 ```
 
-carousel
+Carousel
 ---
 ```java
 @Carousel(data = {"$myForm1", "$myForm2"})
@@ -158,28 +158,28 @@ private MyForm myForm1;
 private MyForm myForm2;
 ```
 
-cascader
+Cascader
 ---
 ```java
 @Cascader
 private String cascader;
 ```
 
-checkbox
+Checkbox
 ---
 ```java
 @Checkbox
 private String checkbox;
 ```
 
-checkboxButton
+CheckboxButton
 ---
 ```java
 @CheckboxButton
 private String checkboxButton;
 ```
 
-checkboxButtonGroup
+CheckboxButtonGroup
 ---
 ```java
 @CheckboxButtonGroup(data = "$checkboxButtonGroupData")
@@ -187,7 +187,7 @@ private String checkboxButtonGroup;
 private List<Map> checkboxButtonGroupData
 ```
 
-checkboxGroup
+CheckboxGroup
 ---
 ```java
 @CheckboxGroup(data = "checkboxGroupData")
@@ -195,21 +195,21 @@ private String checkboxGroup;
 private List<Map> checkboxGroupData
 ```
 
-collapse
+Collapse
 ---
 ```java
 @Collapse
 private String Collapse;
 ```
 
-colorPicker
+ColorPicker
 ---
 ```java
 @ColorPicker
 private String colorPicker;
 ```
 
-component
+Component
 ---
 ```java
 @Component
@@ -218,14 +218,14 @@ public class MyComponent {
 }
 ```
 
-datePicker
+DatePicker
 ---
 ```java
 @DatePicker
 private Date datePicker;
 ```
 
-dialog
+Dialog
 ---
 ```java
 @Component
@@ -235,7 +235,7 @@ public class MyComponent {
 }
 ```
 
-dropdown
+Dropdown
 ---
 ```java
 @Dropdown(data = "$dropdownData")
@@ -243,7 +243,7 @@ private String dropdown;
 private List<Map> dropdownData;
 ```
 
-element
+Element
 ---
 订制标签元素，以下代码相当于在页面建立了一个div标签
 ```java
@@ -251,7 +251,7 @@ element
 private String element;
 ```
 
-form
+Form
 ---
 ```java
 @Form
@@ -260,7 +260,7 @@ public class MyForm {
 }
 ```
 
-formItem
+FormItem
 在Form中使用，默认可以不写，一般当使用表单规则校验，以及需要将元素定位在同一行中才使用
 ---
 ```java
@@ -270,7 +270,7 @@ private String input1;
 private String input2;
 ```
 
-ignoreData
+IgnoreData
 添加该标签后，这个属性将不会渲染到页面上
 ---
 ```java
@@ -278,21 +278,21 @@ ignoreData
 private String ignoreData;
 ```
 
-input
+Input
 ---
 ```java
 @Input
 private String input;
 ```
 
-inputNumber
+InputNumber
 ---
 ```java
 @InputNumber
 private String inputNumber;
 ```
 
-loading
+Loading
 ---
 ```java
 @Loading
@@ -300,83 +300,83 @@ loading
 private String input;
 ```
 
-messagebox
+Messagebox
 ---
 
 
-navmenu
+Navmenu
 ---
 
-notification
+Notification
 ---
 
-pagination
+Pagination
 ---
 
-popover
+Popover
 ---
 
-progress
+Progress
 ---
 
-radio
+Radio
 ---
 
-radioButton
+RadioButton
 ---
 
-radioButtonGroup
+RadioButtonGroup
 ---
 
-radioGroup
+RadioGroup
 ---
 
-rate
+Rate
 ---
 
-select
+Select
 ---
 
-slider
+Slider
 ---
 
-steps
+Steps
 ---
 
-subplot
+Subplot
 ---
 
-switch
+Switch
 ---
 
-table
+Table
 ---
 
-tableColum
+TableColum
 ---
 
-tabs
+Tabs
 ---
 
-tag
+Tag
 ---
 
-timePicker
+TimePicker
 ---
 
-tooltip
+Tooltip
 ---
 
-transfer
+Transfer
 ---
 
-tree
+Tree
 ---
 
-upload
+Upload
 ---
 
-i18n
+I18N
 ---
 支持多国语言切换，只需要在属性上加入i18n注解即可
 ```java

@@ -104,22 +104,23 @@ public class MyForm {
 - [Transfer](#Transfer) 穿梭框
 - [Tree](#Tree) 树
 - [Upload](#Upload) 上传
+- [I18N](#I18N) 国际化
 
-Alert
+alert
 ---
 ```java
 @Alert
 private String alert;
 ```
 
-Autocomplete
+autocomplete
 ---
 ```java
 @Autocomplete
 private String autocomplete;
 ```
 
-Badge
+badge
 ---
 ```java
 @Badge
@@ -127,155 +128,259 @@ Badge
 private String input;
 ```
 
-Breadcrumb
+breadcrumb
 ---
 ```java
 @Breadcrumb
 private String Breadcrumb;
 ```
 
-Button
+button
 ---
 ```java
 @Button(text = "save")
 private String button;
 ```
 
-Card
+card
 ---
 ```java
 @Card(title = "title")
 private MyForm myForm;
 ```
 
-Carousel
+carousel
+---
+```java
+@Carousel(data = {"$myForm1", "$myForm2"})
+private String carousel;
+private MyForm myForm1;
+private MyForm myForm2;
+```
+
+cascader
+---
+```java
+@Cascader
+private String cascader;
+```
+
+checkbox
+---
+```java
+@Checkbox
+private String checkbox;
+```
+
+checkboxButton
+---
+```java
+@CheckboxButton
+private String checkboxButton;
+```
+
+checkboxButtonGroup
+---
+```java
+@CheckboxButtonGroup(data = "$checkboxButtonGroupData")
+private String checkboxButtonGroup;
+private List<Map> checkboxButtonGroupData
+```
+
+checkboxGroup
+---
+```java
+@CheckboxGroup(data = "checkboxGroupData")
+private String checkboxGroup;
+private List<Map> checkboxGroupData
+```
+
+collapse
+---
+```java
+@Collapse
+private String Collapse;
+```
+
+colorPicker
+---
+```java
+@ColorPicker
+private String colorPicker;
+```
+
+component
+---
+```java
+@Component
+public class MyComponent {
+
+}
+```
+
+datePicker
+---
+```java
+@DatePicker
+private Date datePicker;
+```
+
+dialog
+---
+```java
+@Component
+public class MyComponent {
+    @Dialog(title = "MyDialog")
+    private MyForm myForm;
+}
+```
+
+dropdown
+---
+```java
+@Dropdown(data = "$dropdownData")
+private String dropdown;
+private List<Map> dropdownData;
+```
+
+element
+---
+订制标签元素，以下代码相当于在页面建立了一个div标签
+```java
+@Element(tag = "div")
+private String element;
+```
+
+form
+---
+```java
+@Form
+public class MyForm {
+
+}
+```
+
+formItem
+在Form中使用，默认可以不写，一般当使用表单规则校验，以及需要将元素定位在同一行中才使用
+---
+```java
+@FormItem(prop = "g1")
+private String input1;
+@FormItem(prop = "g1")
+private String input2;
+```
+
+ignoreData
+添加该标签后，这个属性将不会渲染到页面上
+---
+```java
+@IgnoreData
+private String ignoreData;
+```
+
+input
+---
+```java
+@Input
+private String input;
+```
+
+inputNumber
+---
+```java
+@InputNumber
+private String inputNumber;
+```
+
+loading
+---
+```java
+@Loading
+@Input
+private String input;
+```
+
+messagebox
 ---
 
-Cascader
+
+navmenu
 ---
 
-Checkbox
+notification
 ---
 
-CheckboxButton
+pagination
 ---
 
-CheckboxButtonGroup
+popover
 ---
 
-CheckboxGroup
+progress
 ---
 
-Collapse
+radio
 ---
 
-ColorPicker
+radioButton
 ---
 
-Component
+radioButtonGroup
 ---
 
-DatePicker
+radioGroup
 ---
 
-Dialog
+rate
 ---
 
-Dropdown
+select
 ---
 
-Element
+slider
 ---
 
-Form
+steps
 ---
 
-FormItem
+subplot
 ---
 
-IgnoreData
+switch
 ---
 
-Input
+table
 ---
 
-InputNumber
+tableColum
 ---
 
-Loading
+tabs
 ---
 
-MessageBox
+tag
 ---
 
-NavMenu
+timePicker
 ---
 
-Notification
+tooltip
 ---
 
-Pagination
+transfer
 ---
 
-Popover
+tree
 ---
 
-Progress
+upload
 ---
 
-Radio
+i18n
 ---
-
-RadioButton
----
-
-RadioButtonGroup
----
-
-RadioGroup
----
-
-Rate
----
-
-Select
----
-
-Slider
----
-
-Steps
----
-
-Subplot
----
-
-Switch
----
-
-Table
----
-
-TableColum
----
-
-Tabs
----
-
-Tag
----
-
-TimePicker
----
-
-Tooltip
----
-
-Transfer
----
-
-Tree
----
-
-Upload
----
+支持多国语言切换，只需要在属性上加入i18n注解即可
+```java
+@I18N(en = "username", zh_CN = "用户名")
+@Input
+private String input;
+```

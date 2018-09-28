@@ -40,6 +40,8 @@
 - 快速开发
 - 具备一定程度的UI订制能力
 
+![example](example.png)
+
 ## Dependencies
 1. install [nodejs](https://nodejs.org) or [npm](https://www.npmjs.com/);
 2. install [apache maven](http://maven.apache.org);

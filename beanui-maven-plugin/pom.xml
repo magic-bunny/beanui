@@ -8,7 +8,6 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>beanui-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <name>Maven Marmalade Mojo Archetype</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>

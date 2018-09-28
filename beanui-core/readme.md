@@ -245,8 +245,8 @@ private List<Map> dropdownData;
 
 Element
 ---
-订制标签元素，以下代码相当于在页面建立了一个div标签
 ```java
+//订制标签元素，以下代码相当于在页面建立了一个div标签
 @Element(tag = "div")
 private String element;
 ```
@@ -261,9 +261,9 @@ public class MyForm {
 ```
 
 FormItem
-在Form中使用，默认可以不写，一般当使用表单规则校验，以及需要将元素定位在同一行中才使用
 ---
 ```java
+//在Form中使用，默认可以不写，一般当使用表单规则校验，以及需要将元素定位在同一行中才使用
 @FormItem(prop = "g1")
 private String input1;
 @FormItem(prop = "g1")
@@ -271,9 +271,9 @@ private String input2;
 ```
 
 IgnoreData
-添加该标签后，这个属性将不会渲染到页面上
 ---
 ```java
+//添加该标签后，这个属性将不会渲染到页面上
 @IgnoreData
 private String ignoreData;
 ```
@@ -378,8 +378,8 @@ Upload
 
 I18N
 ---
-支持多国语言切换，只需要在属性上加入i18n注解即可
 ```java
+//支持多国语言切换，只需要在属性上加入i18n注解即可
 @I18N(en = "username", zh_CN = "用户名")
 @Input
 private String input;

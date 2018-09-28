@@ -35,10 +35,10 @@
 故此，我想到了是否能够通过Java反向生成前端代码，在此之前已经有GWT等框架这么做过了，但代码入侵性过强。
 
 ## 关于BeanUI的特点
-- 纯配置式
-- 无侵入式代码
-- 快速开发
-- 具备一定程度的UI订制能力
+- **纯配置式** 完全采用Java注解来进行UI描述
+- **无侵入式代码** UI描述将不会对后端Restful service项目造成影响
+- **快速开发**
+- **具备一定程度的UI订制能力**
 
 ![example](example.png)
 
@@ -57,6 +57,11 @@
 3. `cd beanui/demo`
 4. `mvn install`
 5. `java -jar demo-[version].jar`
+
+## Javabean注解说明
+需要了解各个控件在Javabean当中的写法，请[点击](beanui-core/readme.md)
+> 注意：由于使用了Element UI（[饿了么](http://element-cn.eleme.io/#/zh-CN/component/button)），因此几乎可以完全参看Element UI的组件说明
+
 
 ## Maven Plugin Parameters
 - **routerPath**  menu config file(yaml) path

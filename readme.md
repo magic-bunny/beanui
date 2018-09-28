@@ -70,4 +70,4 @@
 - **projectName**  web project title
 
 ## License
-GPPT is licensed under the MIT license. See LICENSE for further details.
+BeanUI is licensed under the MIT license. See LICENSE for further details.

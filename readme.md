@@ -43,7 +43,7 @@
 ![example](example.png)
 
 ## Dependencies
-1. install [nodejs](https://nodejs.org) or [npm](https://www.npmjs.com/);
+1. install [nodejs 10.0.0](https://nodejs.org) or [npm 6.2.0](https://www.npmjs.com/);
 2. install [apache maven](http://maven.apache.org);
 
 ## 安装BeanUI

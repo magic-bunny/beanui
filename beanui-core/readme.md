@@ -184,7 +184,7 @@ CheckboxButtonGroup
 ```java
 @CheckboxButtonGroup(data = "$checkboxButtonGroupData")
 private String checkboxButtonGroup;
-private List<Map> checkboxButtonGroupData
+private List<CheckboxButtonGroup.CheckboxButton> checkboxButtonGroupData
 ```
 
 CheckboxGroup
@@ -192,7 +192,7 @@ CheckboxGroup
 ```java
 @CheckboxGroup(data = "checkboxGroupData")
 private String checkboxGroup;
-private List<Map> checkboxGroupData
+private List<CheckboxGroup.Checkbox> checkboxGroupData
 ```
 
 Collapse
@@ -240,7 +240,7 @@ Dropdown
 ```java
 @Dropdown(data = "$dropdownData")
 private String dropdown;
-private List<Map> dropdownData;
+private List<Dropdown.Item> dropdownData;
 ```
 
 Element
@@ -302,79 +302,183 @@ private String input;
 
 Messagebox
 ---
-
+```java
+//unimplemented
+```
 
 Navmenu
 ---
+```java
+//unimplemented
+```
 
 Notification
 ---
+```java
+//unimplemented
+```
 
 Pagination
 ---
+```java
+@Pagination
+private String pagination;
+```
 
 Popover
 ---
+```java
+@Popover
+private String popover;
+```
 
 Progress
 ---
+```java
+@Progress
+private String progress;
+```
 
 Radio
 ---
+```java
+@Radio
+private String radio;
+```
 
 RadioButton
 ---
+```java
+@RadioButton
+private String radioButton;
+```
 
 RadioButtonGroup
 ---
+```java
+@RadioButtonGroup(data = "$radioButtonGroupData")
+private String radioButtonGroup;
+private List<RadioButtonGroup.RadioButton> radioButtonGroupData;
+```
 
 RadioGroup
 ---
+```java
+@RadioGroup(data = "radioGroupData")
+private String radioGroup;
+private List<RadioGroup.Radio> radioGroupData;
+```
 
 Rate
 ---
+```java
+@Rate
+private int radioButton;
+```
 
 Select
 ---
+```java
+@Select(data = "options")
+private String radioGroup;
+private List<Select.Option> options;
+```
 
 Slider
 ---
+```java
+@Slider
+private int slider;
+```
 
 Steps
 ---
+```java
+@Steps
+private int steps;
+```
 
 Subplot
 ---
+// 取自Matlab的subplot函数，三个数字分别代表：行， 列， 序号
+@Component
+public class MyComponent {
+    @Subplot({1, 2, 1})
+    private MyForm myForm1;
+    @Subplot({1, 2, 2})
+    private MyForm myForm2;
+}
 
 Switch
 ---
+```java
+@Switch
+private boolean switch;
+```
 
 Table
 ---
+```java
+@Table
+private List<MyRow> myTabel;
+```
 
 TableColum
 ---
+```java
+public class MyRow {
+    @TableColum
+    private String col1;
+}
+```
 
 Tabs
 ---
+```java
+//unimplemented
+```
 
 Tag
 ---
+```java
+@Tag
+private String tag;
+```
 
 TimePicker
 ---
+```java
+@TimePicker
+private Date timePicker;
+```
 
 Tooltip
 ---
+```java
+@Tooltip(content = "MyTooltip")
+@TimePicker
+private Date timePicker;
+```
 
 Transfer
 ---
+```java
+@Transfer
+private String transfer;
+```
 
 Tree
 ---
+```java
+//unimplemented
+```
 
 Upload
 ---
+```java
+@Upload
+private File upload;
+```
 
 I18N
 ---

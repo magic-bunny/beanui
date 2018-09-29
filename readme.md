@@ -59,15 +59,11 @@
 5. `java -jar demo-[version].jar`
 
 ## Javabean注解说明
-需要了解各个控件在Javabean当中的写法，请[点击](beanui-core/readme.md)
+<font color="#FF0000">需要了解各个控件在Javabean当中的写法，请</font>[点击](beanui-core/readme.md)
 > 注意：由于使用了Element UI（[饿了么](http://element-cn.eleme.io/#/zh-CN/component/button)），因此几乎可以完全参看Element UI的组件说明
 
-
-## Maven Plugin Parameters
-- **routerPath**  menu config file(yaml) path
-- **workPath**  html template file path, now based on element ui
-- **staticPath**  dist to Java WEB-INF/static
-- **projectName**  web project title
+## BeanUI Maven插件说明
+<font color="#FF0000">需要了解Maven插件的用法，请</font>[点击](beanui-maven-plugin/readme.md)
 
 ## License
 BeanUI is licensed under the MIT license. See LICENSE for further details.

@@ -65,5 +65,8 @@
 ## BeanUI Maven插件说明
 <font color="#FF0000">需要了解Maven插件的用法，请</font>[点击](beanui-maven-plugin/readme.md)
 
+<font color="#FF0000">需要了解加强库的用法，请</font>[点击](beanui-core-plus/readme.md)
+
+
 ## License
 BeanUI is licensed under the MIT license. See LICENSE for further details.

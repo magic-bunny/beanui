@@ -16,7 +16,7 @@ public class WebApplication {
         SpringApplication.run(WebApplication.class, args);
     }
 
-    @GetMapping("/get")
+    @GetMapping("/test")
     public Helloworld test() {
         Helloworld helloworld = new Helloworld();
         helloworld.setInput("test");

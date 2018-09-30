@@ -22,7 +22,7 @@ public class ControllerReader implements RestReader {
         try {
             Method[] methods = clazz.getDeclaredMethods();
             for(Method method:methods) {
-                if(func == null || func.equals(method.getName())) {
+                if("".equals(func) || func.equals(method.getName())) {
                     GetMapping funcGetMapping = method.getAnnotation(GetMapping.class);
                     PostMapping funcPostMapping = method.getAnnotation(PostMapping.class);
                     RequestMapping funcRequestMapping = method.getAnnotation(RequestMapping.class);

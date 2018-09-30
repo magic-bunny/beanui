@@ -11,7 +11,7 @@
   label=""
 >
 <el-table :data="userQuery.users"
-  highlight-current-row current-change="current_change_userQuery_user" @selection-change="selection_change__userQuery_user">
+  current-change="current_change_userQuery_user" @selection-change="selection_change__userQuery_user">
  <el-table-column type="selection"
 width="50"
  label=""

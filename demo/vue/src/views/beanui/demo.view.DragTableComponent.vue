@@ -14,7 +14,7 @@
 fit="true"
 border="true"
 highlight-current-row="true"
-  highlight-current-row current-change="current_change_DragTableComponent_table" @selection-change="selection_change__DragTableComponent_table">
+  current-change="current_change_DragTableComponent_table" @selection-change="selection_change__DragTableComponent_table">
  <el-table-column width="70"
  label="ID"
 >

@@ -67,7 +67,7 @@ label-width="150px"
   label=""
 >
 <el-table :data="complexTableDataForm.tableData"
-  highlight-current-row current-change="current_change_complexTableDataForm_table" @selection-change="selection_change__complexTableDataForm_table">
+  current-change="current_change_complexTableDataForm_table" @selection-change="selection_change__complexTableDataForm_table">
  <el-table-column width="60"
  label="ID"
 >

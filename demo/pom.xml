@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.december</groupId>
     <artifactId>demo</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <dependencies>
         <dependency>
             <groupId>org.december</groupId>
@@ -39,7 +39,7 @@
                 <configuration>
                     <projectName>BEANUI example</projectName>
                     <routerPath>router.yml</routerPath>
-                    <mode>prd</mode>
+                    <mode>dev</mode>
                     <builders>
                         <builder>
                             <builderClass>org.december.beanui.plus.builder.LoginBuilder</builderClass>

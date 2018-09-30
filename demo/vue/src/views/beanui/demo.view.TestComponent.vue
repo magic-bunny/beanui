@@ -54,7 +54,7 @@ placement="right"
 <el-form-item prop="users"
   label=""
 >
-<el-table   highlight-current-row current-change="current_change_testForm_users" @selection-change="selection_change__testForm_users">
+<el-table   current-change="current_change_testForm_users" @selection-change="selection_change__testForm_users">
  <el-table-column type="selection"
 width="50"
  label=""
@@ -204,7 +204,7 @@ placement="right"
 <el-form-item prop="users"
   label=""
 >
-<el-table   highlight-current-row current-change="current_change_testForm2_users" @selection-change="selection_change__testForm2_users">
+<el-table   current-change="current_change_testForm2_users" @selection-change="selection_change__testForm2_users">
  <el-table-column type="selection"
 width="50"
  label=""

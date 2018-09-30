@@ -12,7 +12,7 @@
 >
 <el-table :data="InlineEditTableComponent.tableData"
 highlight-current-row="true"
-  highlight-current-row current-change="current_change_InlineEditTableComponent_table" @selection-change="selection_change__InlineEditTableComponent_table">
+  current-change="current_change_InlineEditTableComponent_table" @selection-change="selection_change__InlineEditTableComponent_table">
  <el-table-column width="60"
  label="ID"
 >

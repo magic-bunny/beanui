@@ -1,5 +1,5 @@
 <#macro createTable formId, scope, element>
-<el-table <@createAttrs scope=scope content=element.content/> <@createEvents formId=formId element=element/> highlight-current-row current-change="current_change_${formId}_${element.id}" @selection-change="selection_change__${formId}_${element.id}">
+<el-table <@createAttrs scope=scope content=element.content/> <@createEvents formId=formId element=element/> current-change="current_change_${formId}_${element.id}" @selection-change="selection_change__${formId}_${element.id}">
 <#list element.children as o> <el-table-column <@createAttrs scope=scope content=o.content/> <@createI18N element=o attr='label'/>>
     <#if o.content.type!='selection'>
     <template slot-scope="scope">

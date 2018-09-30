@@ -20,7 +20,7 @@
 >
 <el-checkbox-group v-model="DynamicTableComponent.checkbox1" :data="DynamicTableComponent.checkboxData1"
  >
-    <el-checkbox v-for="item in checkboxData1" :key="item.key" :label="item.label">
+    <el-checkbox v-for="item in checkboxData1" :key="item.key" :label="item.label" :disabled="item.disabled">
     </el-checkbox>
 </el-checkbox-group>
 </el-form-item>
@@ -28,7 +28,7 @@
   label=""
 >
 <el-table :data="DynamicTableComponent.tableData1"
-  highlight-current-row current-change="current_change_DynamicTableComponent_table1" @selection-change="selection_change__DynamicTableComponent_table1">
+  current-change="current_change_DynamicTableComponent_table1" @selection-change="selection_change__DynamicTableComponent_table1">
  <el-table-column  :label="$t('demo.view.table.DynamicRow.fruitName')"
 >
     <template slot-scope="scope">
@@ -76,7 +76,7 @@
 >
 <el-checkbox-group v-model="DynamicTableComponent.checkbox2" :data="DynamicTableComponent.checkboxData2"
  >
-    <el-checkbox v-for="item in checkboxData2" :key="item.key" :label="item.label">
+    <el-checkbox v-for="item in checkboxData2" :key="item.key" :label="item.label" :disabled="item.disabled">
     </el-checkbox>
 </el-checkbox-group>
 </el-form-item>
@@ -84,7 +84,7 @@
   label=""
 >
 <el-table :data="DynamicTableComponent.tableData2"
-  highlight-current-row current-change="current_change_DynamicTableComponent_table2" @selection-change="selection_change__DynamicTableComponent_table2">
+  current-change="current_change_DynamicTableComponent_table2" @selection-change="selection_change__DynamicTableComponent_table2">
  <el-table-column  :label="$t('demo.view.table.DynamicRow.fruitName')"
 >
     <template slot-scope="scope">

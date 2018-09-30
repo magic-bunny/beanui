@@ -15,7 +15,7 @@
         <dependency>
             <groupId>org.december</groupId>
             <artifactId>beanui-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.december</groupId>

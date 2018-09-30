@@ -12,7 +12,6 @@
         <module>beanui-maven-plugin</module>
         <module>beanui-core</module>
         <module>spring-beanui</module>
-        <module>bean-ui</module>
         <module>beanui-core-plus</module>
         <module>beanui-maven-plugin-face</module>
     </modules>

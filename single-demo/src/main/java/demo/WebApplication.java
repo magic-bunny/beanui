@@ -24,9 +24,9 @@ public class WebApplication {
     }
 
     // 给匿名用户授权
-    @GetMapping("/user/info")
-    public Permission info() {
-        Permission permission = new Permission();
-        return permission;
-    }
+//    @GetMapping("/user/info")
+//    public Permission info() {
+//        Permission permission = new Permission();
+//        return permission;
+//    }
 }

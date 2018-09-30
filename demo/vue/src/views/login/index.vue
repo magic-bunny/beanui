@@ -5,7 +5,6 @@ export default {
   created() {
     this.$store.dispatch('LoginByAnonymous').then(() => {
       this.$router.push({ path: '/' })
-    }).catch(() => {
     })
   }
 }

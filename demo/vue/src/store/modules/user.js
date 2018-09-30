@@ -48,7 +48,7 @@ const user = {
     LoginByAnonymous({ commit }) {
       return new Promise((resolve, reject) => {
         commit('SET_TOKEN', 'anonymous')
-        setToken('anonymous')
+        setToken('anonymous');
         resolve()
       })
     },
@@ -81,23 +81,38 @@ const user = {
     // 获取用户信息
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
-        getUserInfo(state.token).then(response => {
-          const data = response.data
-          if (!data.roles || data.roles.length == 0) {
-            data.roles = ['anonymous']
-            data.name = 'Anonymous'
+        if(state.token == 'anonymous') {
+          var response = {};
+          response.data = {
+            roles: ['anonymous'],
+            name: 'Anonymous'
           }
+          const data = response.data
           commit('SET_ROLES', data.roles)
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', data.avatar)
           commit('SET_INTRODUCTION', data.introduction)
-
-          Cookies.set('username', data.name)
-          Cookies.set('user-image', data.avatar)
           resolve(response)
-        }).catch(error => {
-          reject(error)
-        })
+        } else {
+          getUserInfo(state.token).then(response => {
+            const data = response.data
+            if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
+              commit('SET_ROLES', data.roles)
+            } else {
+              reject('getInfo: roles must be a non-null array !')
+            }
+
+            commit('SET_NAME', data.name)
+            commit('SET_AVATAR', data.avatar)
+            commit('SET_INTRODUCTION', data.introduction)
+
+            Cookies.set('username', data.name)
+            Cookies.set('user-image', data.avatar)
+            resolve(response)
+          }).catch(error => {
+            reject(error)
+          })
+        }
       })
     },
 

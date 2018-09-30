@@ -3,7 +3,7 @@ package demo.view;
 import demo.view.form.UserQueryForm;
 import org.december.beanui.element.annotation.Component;
 
-@Component(title = "UserRow Query", path = "menu1", icon = "404", superTitle = "test", superIcon = "lock")
+@Component
 public class ABCDComponent {
     private UserQueryForm userQuery;
 

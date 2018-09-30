@@ -57,6 +57,36 @@
 3. `cd beanui/demo`
 4. `mvn install`
 5. `java -jar demo-[version].jar`
+6. 打开浏览器，输入`http://localhost:8080/#`
+
+## 程序入口
+开始构建一个BeanUI工程需要建立一个[router.yml](demo/src/resources/router.yml)
+> 注意：[router.yml](demo/src/resources/router.yml)不是必须的，如果不配置，框架会扫描所有包含`@Component`的注解类并进行转换，此时需要配置`path`属性，若不配置则为`/`
+
+### 单页面router实例
+```yml
+path: /test
+component: demo.view.TestComponent
+```
+
+### 带左侧菜单router
+```yml
+name: root
+children:
+  - title: home
+    icon: star
+    component: demo.view.TestComponent
+```
+
+### 带登录页面以及菜单router
+```yml
+path: /login
+component: demo.view.LoginComponent
+children:
+  - title: home
+    icon: star
+    component: demo.view.TestComponent
+```
 
 ## Javabean注解说明
 <font color="#FF0000">需要了解各个控件在Javabean当中的写法，请</font>[点击](beanui-core/readme.md)

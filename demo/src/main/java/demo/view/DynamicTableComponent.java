@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Created(rest = DynamicTableController.class, func = "init")
-@Component
+@Component("/dynamic-table")
 @Form
 public class DynamicTableComponent {
     @Alert(title = "Fixed header, sorted by header order")

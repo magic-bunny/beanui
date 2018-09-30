@@ -10,7 +10,7 @@ import org.december.beanui.event.annotation.Created;
 import java.util.List;
 
 @Created(rest = DragTabelController.class, func = "init")
-@Component
+@Component("/drag-tabel")
 @Form
 public class DragTableComponent {
     @Table(data = "$tableData", highlight_current_row = "true", border = "true", fit = "true")

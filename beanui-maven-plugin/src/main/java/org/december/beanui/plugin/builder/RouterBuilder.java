@@ -32,6 +32,11 @@ public class RouterBuilder extends Builder {
                 Router root = createRouterByClassloader(super.getClassLoader());
                 this.router = root;
                 result.put("router", root.getChildren());
+                Router login = new Router();
+                login.setMenu(false);
+                login.setComponent("@/views/login/index");
+                login.setPath("/login");
+                result.put(LOGIN, login);
             } else{
                 InputStream input = this.getClassLoader().getResourceAsStream(PluginSystem.getProperty("routerPath"));
                 YAMLFactory yamlFactory = new YAMLFactory();
@@ -43,10 +48,22 @@ public class RouterBuilder extends Builder {
                 Router root = mapper.readValue(treeTraversingParser, Router.class);
                 this.router = root;
                 Router login = new Router();
-                login.setComponent(root.getComponent());
                 login.setMenu(false);
+                if(!"/login".equals(root.getPath())) {
+                    login.setComponent("@/views/login/index");
+                } else {
+                    login.setComponent("@/views/beanui/" + root.getComponent());
+                }
+                login.setPath("/login");
                 result.put(LOGIN, login);
-                result.put("router", root.getChildren());
+                if(root.getChildren() == null) {
+                    List<Router> singleRouter = new ArrayList<Router>();
+                    root.setMenu(false);
+                    singleRouter.add(root);
+                    result.put("router", singleRouter);
+                } else {
+                    result.put("router", root.getChildren());
+                }
             }
         } catch (Exception e) {
             throw new RouterBuilderException(e);
@@ -82,77 +99,16 @@ public class RouterBuilder extends Builder {
         Router root = new Router();
         root.setTitle(LOGIN);
         Set<Class> classes = ClassUtil.getClasses(classLoader);
-        Map<String, Router> map = new HashMap();
-        for(Class clazz:classes) {
-            Annotation[] annotations = clazz.getAnnotations();
-            for(Annotation annotation:annotations) {
-                Class annotationName = annotation.annotationType();
-                if (Component.class == annotationName) {
-                    Map<String, String> annotationKV = ClassUtil.annotation2map(annotation);
-                    String packageName = clazz.getPackage().getName();
-                    if(annotationKV.get("superPath")!=null && !"".equals(annotationKV.get("superPath"))) {
-                        packageName = annotationKV.get("superPath");
-                    }
-                    if(map.containsKey(packageName)) {
-                        Router router = (Router)map.get(packageName);
-                        Router componentRouter = new Router();
-                        if(annotationKV.get("title")==null || "".equals(annotationKV.get("title"))) {
-                            componentRouter.setTitle(clazz.getSimpleName());
-                        } else {
-                            componentRouter.setTitle(annotationKV.get("title"));
-                        }
-                        if(annotationKV.get("path")==null || "".equals(annotationKV.get("path"))) {
-                            componentRouter.setPath(clazz.getSimpleName());
-                        } else {
-                            componentRouter.setPath(annotationKV.get("path"));
-                        }
-                        if(annotationKV.get("icon")!=null && !"".equals(annotationKV.get("icon"))) {
-                            componentRouter.setIcon(annotationKV.get("icon"));
-                        }
-                        componentRouter.setComponent(clazz.getName());
-                        router.getChildren().add(componentRouter);
-                    } else {
-                        Router router = new Router();
-                        router.setTitle(packageName);
-                        router.setPath(packageName);
-                        if(annotationKV.get("superPath")!=null && !"".equals(annotationKV.get("superPath"))) {
-                            router.setPath(annotationKV.get("superPath"));
-                        }
-                        if(annotationKV.get("superTitle")!=null && !"".equals(annotationKV.get("superTitle"))) {
-                            router.setTitle(annotationKV.get("superTitle"));
-                        }
-                        if(annotationKV.get("superIcon")!=null && !"".equals(annotationKV.get("superIcon"))) {
-                            router.setIcon(annotationKV.get("superIcon"));
-                        }
-                        List<Router> children = new ArrayList<Router>();
-                        Router componentRouter = new Router();
-                        if(annotationKV.get("title")==null || "".equals(annotationKV.get("title"))) {
-                            componentRouter.setTitle(clazz.getSimpleName());
-                        } else {
-                            componentRouter.setTitle(annotationKV.get("title"));
-                        }
-                        if(annotationKV.get("path")==null || "".equals(annotationKV.get("path"))) {
-                            componentRouter.setPath(clazz.getSimpleName());
-                        } else {
-                            componentRouter.setPath(annotationKV.get("path"));
-                        }
-                        if(annotationKV.get("icon")!=null && !"".equals(annotationKV.get("icon"))) {
-                            componentRouter.setIcon(annotationKV.get("icon"));
-                        }
-                        componentRouter.setComponent(clazz.getName());
-                        children.add(componentRouter);
-                        router.setChildren(children);
-                        map.put(packageName, router);
-                    }
-                    break;
-                }
-            }
-        }
-        Iterator<String> iterator = map.keySet().iterator();
         List<Router> children = new ArrayList<Router>();
-        while(iterator.hasNext()) {
-            Router router = map.get(iterator.next());
-            children.add(router);
+        for(Class clazz:classes) {
+            Component component = (Component)clazz.getAnnotation(Component.class);
+            if(component != null) {
+                Router router = new Router();
+                router.setMenu(false);
+                router.setPath(component.value());
+                router.setComponent(clazz.getName());
+                children.add(router);
+            }
         }
         root.setChildren(children);
         return root;

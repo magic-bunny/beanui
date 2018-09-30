@@ -5,7 +5,7 @@ import org.december.beanui.element.annotation.Card;
 import org.december.beanui.element.annotation.Component;
 import org.december.beanui.element.annotation.Subplot;
 
-@Component(title = "demo", path = "menu2", icon = "qq", superTitle = "test", superIcon = "lock")
+@Component("/test")
 public class TestComponent {
     @Subplot({1, 2, 1})
     @Card(title = "test")

@@ -7,10 +7,5 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Component {
-    String path() default "";
-    String title() default "";
-    String icon() default "";
-    String superPath() default "";
-    String superTitle() default "";
-    String superIcon() default "";
+    String value() default "";
 }

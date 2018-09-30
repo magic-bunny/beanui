@@ -5,7 +5,7 @@ import demo.view.form.ComplexTableEditForm;
 import org.december.beanui.element.annotation.Component;
 import org.december.beanui.element.annotation.Dialog;
 
-@Component
+@Component("/complex-table")
 public class ComplexTableComponent {
     private ComplexTableDataForm complexTableDataForm;
 

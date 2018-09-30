@@ -10,7 +10,7 @@ import org.december.beanui.event.annotation.Created;
 import java.util.List;
 
 @Created(rest = InlineEditTabelController.class, func = "init")
-@Component
+@Component("/inline-edit-table")
 @Form
 public class InlineEditTableComponent {
     @Table(data = "$tableData", highlight_current_row = "true")

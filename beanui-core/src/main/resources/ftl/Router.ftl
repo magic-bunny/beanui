@@ -26,8 +26,8 @@ import Layout from '@/views/layout/Layout'
 
 export const constantRouterMap = [
   {
-    path: '/login',
-    component: () => import('@/views/beanui/${login.component}'),
+    path: '${login.path}',
+    component: () => import('${login.component}'),
     hidden: true
   },
   {

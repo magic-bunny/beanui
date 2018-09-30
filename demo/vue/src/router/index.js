@@ -9,7 +9,7 @@ import Layout from '@/views/layout/Layout'
 export const constantRouterMap = [
   {
     path: '/login',
-    component: () => import('@/views/beanui/demo.view.LoginComponent'),
+    component: () => import('@/views/login/index'),
     hidden: true
   },
   {
@@ -32,103 +32,44 @@ export default new Router({
 export const asyncRouterMap = [
     {
         path: '',
-        name: 'home',
-        component: Layout
-        ,redirect: '/index',
-        children: [
-            {
-                path: 'index',
-                component:() => import('@/views/beanui/demo.view.TestComponent'),
-                name: 'home',
-                meta: {
-                  title: 'home'
-                  ,icon: 'star'
-                  
-                }
-            }
-        ]
+        name: '',
+        component:() => import('@/views/beanui/demo.view.ABCDComponent'),
+        hidden: true
+    }
+    ,
+    {
+        path: '/complex-table',
+        name: '/complex-table',
+        component:() => import('@/views/beanui/demo.view.ComplexTableComponent'),
+        hidden: true
+    }
+    ,
+    {
+        path: '/drag-tabel',
+        name: '/drag-tabel',
+        component:() => import('@/views/beanui/demo.view.DragTableComponent'),
+        hidden: true
+    }
+    ,
+    {
+        path: '/dynamic-table',
+        name: '/dynamic-table',
+        component:() => import('@/views/beanui/demo.view.DynamicTableComponent'),
+        hidden: true
+    }
+    ,
+    {
+        path: '/inline-edit-table',
+        name: '/inline-edit-table',
+        component:() => import('@/views/beanui/demo.view.InlineEditTableComponent'),
+        hidden: true
     }
     ,
     {
         path: '/test',
-        name: 'test',
-        component: Layout
-        ,redirect: '/test/index',
-        children: [
-            {
-                path: 'index',
-                component:() => import('@/views/beanui/demo.view.ABCDComponent'),
-                name: 'test',
-                meta: {
-                  title: 'test'
-                  ,icon: 'example'
-                  
-                }
-            }
-        ]
-    }
-    ,
-    {
-        path: '/table',
-        name: 'Table',
-        component: Layout
-        ,alwaysShow: true,
-        meta: {
-          title: 'Table'
-          ,icon: 'table'
-          
-        }
-        ,children: [
-      {
-        path: '/dynamic-table',
-        name: 'Dynamic Table'
-        ,component: () => import('@/views/beanui/demo.view.DynamicTableComponent')
-        ,meta: {
-          title: 'Dynamic Table'
-          
-          ,roles: ['admin']
-        }
-        
-      }
-      ,
-      {
-        path: 'drag-table',
-        name: 'Drag Table'
-        ,component: () => import('@/views/beanui/demo.view.DragTableComponent')
-        ,meta: {
-          title: 'Drag Table'
-          
-          
-        }
-        
-      }
-      ,
-      {
-        path: '/inline-edit-table',
-        name: 'Inline Edit'
-        ,component: () => import('@/views/beanui/demo.view.InlineEditTableComponent')
-        ,meta: {
-          title: 'Inline Edit'
-          
-          
-        }
-        
-      }
-      ,
-      {
-        path: '/complex-table',
-        name: 'Complex Table'
-        ,component: () => import('@/views/beanui/demo.view.ComplexTableComponent')
-        ,meta: {
-          title: 'Complex Table'
-          
-          
-        }
-        
-      }
-      
-]
-
+        name: '/test',
+        component:() => import('@/views/beanui/demo.view.TestComponent'),
+        hidden: true
     }
     
 ]

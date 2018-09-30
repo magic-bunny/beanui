@@ -22,11 +22,4 @@ public class WebApplication {
         helloworld.setInput("test");
         return helloworld;
     }
-
-    // 给匿名用户授权
-//    @GetMapping("/user/info")
-//    public Permission info() {
-//        Permission permission = new Permission();
-//        return permission;
-//    }
 }

@@ -39,7 +39,6 @@
                 <artifactId>beanui-maven-plugin</artifactId>
                 <version>1.0</version>
                 <configuration>
-                    <projectName>BEANUI example</projectName>
                     <mode>prd</mode>
                 </configuration>
                 <dependencies>

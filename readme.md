@@ -57,11 +57,13 @@
 3. `cd beanui/demo`
 4. `mvn install`
 5. `java -jar demo-[version].jar`
-6. 打开浏览器，输入`http://localhost:8080/#`
+6. 打开浏览器，输入`http://localhost:8080`
 
 ## 程序入口
 开始构建一个BeanUI工程需要建立一个[router.yml](demo/src/resources/router.yml)
 > 注意：[router.yml](demo/src/resources/router.yml)不是必须的，如果不配置，框架会扫描所有包含`@Component`的注解类并进行转换，此时需要配置`path`属性，若不配置则为`/`
+
+> 如果需要一个最简单的BeanUI项目，可参看[single-demo](single-demo)
 
 ### 单页面router实例
 ```yml
@@ -89,13 +91,13 @@ children:
 ```
 
 ## Javabean注解说明
-<font color="#FF0000">需要了解各个控件在Javabean当中的写法，请</font>[点击](beanui-core/readme.md)
+需要了解各个控件在Javabean当中的写法，请[点击](beanui-core/readme.md)
 > 注意：由于使用了Element UI（[饿了么](http://element-cn.eleme.io/#/zh-CN/component/button)），因此几乎可以完全参看Element UI的组件说明
 
 ## BeanUI Maven插件说明
-<font color="#FF0000">需要了解Maven插件的用法，请</font>[点击](beanui-maven-plugin/readme.md)
+需要了解Maven插件的用法，请[点击](beanui-maven-plugin/readme.md)
 
-<font color="#FF0000">需要了解加强库的用法，请</font>[点击](beanui-core-plus/readme.md)
+需要了解加强库的用法，请[点击](beanui-core-plus/readme.md)
 
 
 ## License

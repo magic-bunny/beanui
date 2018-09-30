@@ -22,41 +22,45 @@ public class ControllerReader implements RestReader {
         try {
             Method[] methods = clazz.getDeclaredMethods();
             for(Method method:methods) {
-                if(func.equals(method.getName())) {
-                    Annotation[] annotations = method.getAnnotations();
-                    for(Annotation annotation:annotations) {
-                        if(annotation.annotationType()!=GetMapping.class && annotation.annotationType()!=PostMapping.class && annotation.annotationType()!=RequestMapping.class) {
-                            continue;
-                        }
-                        Map map = annotation2map(annotation);
-                        String m = "get";
-                        if(annotation.annotationType() == GetMapping.class) {
-                            m = "get";
-                        }
+                if(func == null || func.equals(method.getName())) {
+                    GetMapping funcGetMapping = method.getAnnotation(GetMapping.class);
+                    PostMapping funcPostMapping = method.getAnnotation(PostMapping.class);
+                    RequestMapping funcRequestMapping = method.getAnnotation(RequestMapping.class);
+                    if(funcGetMapping==null && funcPostMapping==null && funcRequestMapping==null) {
+                        continue;
+                    }
 
-                        if(annotation.annotationType() == PostMapping.class) {
+                    String m = "get";
+                    Map map = new HashMap();
+                    if(funcGetMapping != null) {
+                        m = "get";
+                        map = annotation2map(funcGetMapping);
+                    }
+
+                    if(funcPostMapping != null) {
+                        m = "post";
+                        map = annotation2map(funcPostMapping);
+                    }
+
+                    if(funcRequestMapping != null) {
+                        map = annotation2map(funcRequestMapping);
+                        RequestMethod[] ms = (RequestMethod[])map.get("method");
+                        if(ms[0] == RequestMethod.GET) {
+                            m = "get";
+                        } else if(ms[0] == RequestMethod.POST) {
                             m = "post";
                         }
-
-                        if(annotation.annotationType() == RequestMapping.class) {
-                            RequestMethod[] ms = (RequestMethod[])map.get("method");
-                            if(ms[0] == RequestMethod.GET) {
-                                m = "get";
-                            } else if(ms[0] == RequestMethod.POST) {
-                                m = "post";
-                            }
-                        }
-
-                        String[] paths = (String[])map.get("path");
-                        String[] values = (String[])map.get("value");
-                        if(requestMapping == null) {
-                            result.put("path", paths.length>0?paths[0]:values[0]);
-                        } else {
-                            result.put("path", (requestMapping.path().length>0?requestMapping.path()[0]:requestMapping.value()[0]) + (paths.length>0?paths[0]:values[0]));
-                        }
-                        result.put("method", m);
-                        return result;
                     }
+
+                    String[] paths = (String[])map.get("path");
+                    String[] values = (String[])map.get("value");
+                    if(requestMapping == null) {
+                        result.put("path", paths.length>0?paths[0]:values[0]);
+                    } else {
+                        result.put("path", (requestMapping.path().length>0?requestMapping.path()[0]:requestMapping.value()[0]) + (paths.length>0?paths[0]:values[0]));
+                    }
+                    result.put("method", m);
+                    return result;
                 }
             }
         } catch (IllegalAccessException e) {

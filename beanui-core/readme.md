@@ -1,3 +1,4 @@
+# Beanui Core
 ## 控件结构
 [router.yml](../demo/src/main/resources/router.yml)是整个UI描述的入口：
 - title: 菜单标题

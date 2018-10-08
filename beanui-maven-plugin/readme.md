@@ -1,6 +1,24 @@
+# BeanUI Maven Plugin
 > BeanUI Maven Plugin是完成从Javabean到UI的编译插件，如果需要创建一个BeanUI工程，则需要引入这个插件
 
 详细可参看demo工程的[pom.xml](../demo/pom.xml)
+
+## BeanUI的插件分别绑定了三个maven生命周期：
+1. **validate:pre-bean2ui** VUE编译环境检查和补全
+
+```shell
+cp beanui-maven-plugin/vue demo/vue
+npm install
+```
+
+2. **compile:bean2ui** 生成VUE源代码
+
+
+3. **package:post-bean2ui** 编译VUE源代码，生成HTML文件
+
+```shell
+npm run dev or npm run prod
+```
 
 ## Plugin demo
 ```xml
@@ -14,6 +32,13 @@
                 <projectName>BEANUI example</projectName>
                 <routerPath>router.yml</routerPath>
                 <mode>prd</mode>
+                <builders>
+                    <builder>
+                        <builderClass>org.december.beanui.plus.builder.LoginBuilder</builderClass>
+                        <templateClass>demo.view.LoginComponent</templateClass>
+                        <templateName>Login.ftl</templateName>
+                    </builder>
+                </builders>
             </configuration>
             <dependencies>
                 <dependency>
@@ -28,10 +53,28 @@
                 </dependency>
             </dependencies>
             <executions>
+                <!-- 拷贝vue目录，并执行npm install -->
                 <execution>
+                    <id>pre-bean2ui</id>
+                    <phase>validate</phase>
+                    <goals>
+                        <goal>pre-bean2ui</goal>
+                    </goals>
+                </execution>
+                <!-- 生成vue源代码 -->
+                <execution>
+                    <id>bean2ui</id>
                     <phase>compile</phase>
                     <goals>
                         <goal>bean2ui</goal>
+                    </goals>
+                </execution>
+                <!-- 编写vue源代码，生成html文件 -->
+                <execution>
+                    <id>post-bean2ui</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>post-bean2ui</goal>
                     </goals>
                 </execution>
             </executions>

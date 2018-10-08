@@ -3,26 +3,24 @@ package org.december.beanui.plugin;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
+import org.december.beanui.plugin.builder.LangBuilder;
+import org.december.beanui.plugin.builder.LangIndexBuilder;
+import org.december.beanui.plugin.builder.ProjectNameBuilder;
+import org.december.beanui.plugin.builder.RouterBuilder;
 import org.december.beanui.plugin.face.Builder;
 import org.december.beanui.plugin.face.bean.Router;
-import org.december.beanui.plugin.builder.*;
 import org.december.beanui.plugin.face.exception.BuilderException;
 import org.december.beanui.plugin.face.util.FileUtil;
 import org.december.beanui.plugin.face.util.PluginSystem;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.Socket;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
 import java.util.Map;
 
-@Mojo(name="bean2ui", requiresDependencyResolution = ResolutionScope.TEST)
+@Mojo(name="bean2ui")
 public class Bean2UIMojo extends AbstractMojo {
 
     @Parameter(property = "routerPath")
@@ -33,6 +31,9 @@ public class Bean2UIMojo extends AbstractMojo {
 
     @Parameter(property = "workPath")
     private String workPath = System.getProperty("user.dir") + File.separator + "vue";
+
+    @Parameter(property = "nodePath")
+    private String nodePath = System.getProperty("user.dir") + File.separator + "node";
 
     @Parameter(property = "projectName")
     private String projectName;
@@ -111,36 +112,13 @@ public class Bean2UIMojo extends AbstractMojo {
             langSelectBuilder.setDistPath(langSelectDistPath);
             langSelectBuilder.create();
 
-            this.execBuilder(classLoader);
-
-            String os = System.getProperty("os.name");
-            boolean isWin = false;
-            if(os.toLowerCase().startsWith("win")){
-                isWin = true;
-            }
-            if("dev".equals(mode)) {
-                Socket socket = null;
-                try {
-                    socket = new Socket("localhost", 9527);
-                } catch (Exception e) {
-                    execDist(isWin?"cmd /c start npm run dev":"npm run dev");
-                } finally {
-                    socket.close();
-                }
-            }
-            if("prd".equals(mode)) {
-                execDist(isWin?"cmd /c npm run build:prod":"npm run build:prod");
-                String oldPath = new File(workPath + File.separator + "dist").getPath();
-                String newPath = classLoader.getResource("").getPath() + File.separator + staticPath;
-                FileUtil.copyDir(oldPath, newPath);
-            }
+            this.exec3RDBuilder(classLoader);
         } catch (Exception e) {
             getLog().error(e.getMessage());
-            e.printStackTrace();
         }
     }
 
-    private void execBuilder(ClassLoader classLoader) throws BuilderException {
+    private void exec3RDBuilder(ClassLoader classLoader) throws BuilderException {
         for(Map map:builders) {
             String templateClass = (String)map.get("templateClass");
             String builderClass = (String)map.get("builderClass");
@@ -165,29 +143,6 @@ public class Bean2UIMojo extends AbstractMojo {
                 throw new BuilderException(e);
             } catch (ClassNotFoundException e) {
                 throw new BuilderException(e);
-            }
-        }
-    }
-
-    private void execDist(String shell) {
-        BufferedReader input = null;
-        try {
-            Process process = Runtime.getRuntime().exec(shell, null, new File(workPath));
-            input = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line = "";
-            while ((line = input.readLine()) != null) {
-                getLog().info(line);
-            }
-            process.waitFor();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                input.close();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }

@@ -15,20 +15,9 @@
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>org.december</groupId>
-            <artifactId>beanui-core-plus</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -47,17 +36,27 @@
                         <artifactId>spring-beanui</artifactId>
                         <version>1.0</version>
                     </dependency>
-                    <dependency>
-                        <groupId>org.december</groupId>
-                        <artifactId>beanui-core-plus</artifactId>
-                        <version>1.0</version>
-                    </dependency>
                 </dependencies>
                 <executions>
                     <execution>
+                        <id>pre-bean2ui</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>pre-bean2ui</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>bean2ui</id>
                         <phase>compile</phase>
                         <goals>
                             <goal>bean2ui</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-bean2ui</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>post-bean2ui</goal>
                         </goals>
                     </execution>
                 </executions>

@@ -4,6 +4,13 @@
 详细可参看demo工程的[pom.xml](../demo/pom.xml)
 
 ## BeanUI的插件分别绑定了三个maven生命周期：
+1. **clean:clean-bean2ui** 删除临时文件夹
+
+```shell
+rm -r ${project.path}/vue
+rm -r ${project.path}/node
+```
+
 1. **validate:pre-bean2ui** VUE编译环境检查和补全
 
 ```shell
@@ -53,6 +60,14 @@ npm run dev or npm run prod
                 </dependency>
             </dependencies>
             <executions>
+                <!-- 清空临时文件夹 -->
+                <execution>
+                    <id>clean-bean2ui</id>
+                    <phase>clean</phase>
+                    <goals>
+                        <goal>clean-bean2ui</goal>
+                    </goals>
+                </execution>
                 <!-- 拷贝vue目录，并执行npm install -->
                 <execution>
                     <id>pre-bean2ui</id>
@@ -86,7 +101,11 @@ npm run dev or npm run prod
 ## Maven Plugin Parameters
 - **routerPath**  menu config file(yaml) path
 - **workPath**  html template file path, now based on element ui
+- **nodePath**  npm home path
 - **staticPath**  dist to Java WEB-INF/static
 - **projectName**  web project title
 - **mode**  可选参数为dev/prd，如果您还未建立spring boot工程，则可先使用dev模式
 - **builders**  自定义扩展builder
+    1. builderClass 扩展编译类路径
+    2. templateClass  ftl模板类
+    3. templateName ftl模板文件

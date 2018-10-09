@@ -84,6 +84,9 @@ ${key}="${content[key]}"
         var data = this.${formId};
         </#if>
         function submitRequest(self) {
+            <#if event.path?starts_with('router:')>
+            this.$router.push("${event.path?replace('router:', '')}")
+            <#else>
             self.${formId}_loading = true;
             request({
                 url: "${event.path}",
@@ -107,6 +110,7 @@ ${key}="${content[key]}"
             }).catch(err => {
                 self.${formId}_loading = false;
             });
+            </#if>
         }
         <#if event.confirmMessage!=''>
         this.$confirm(<#if event.confirmMessage?starts_with('$t')>this.${event.confirmMessage}<#else>'${event.confirmMessage}'</#if>, 'Confirm', {

@@ -2,7 +2,6 @@ package org.december.beanui.plugin.builder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import freemarker.template.Template;
 import org.december.beanui.element.annotation.*;
 import org.december.beanui.event.annotation.Click;
 import org.december.beanui.event.annotation.Created;
@@ -27,7 +26,7 @@ import java.util.*;
 public class ComponentBuilder extends Builder {
     private static RestReader pathBuilder;
 
-    public Map run(Template template) throws BuilderException {
+    public Map run() throws BuilderException {
         Map result = new HashMap();
         try {
             int[] defaultSubplot = {1, 1, 1};

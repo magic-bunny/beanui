@@ -32,7 +32,7 @@ public abstract class Builder {
         configuration.setDefaultEncoding("utf-8");
         try {
             Template template = configuration.getTemplate(templateName);
-            data = run(template);
+            data = run();
             if(distPath != null && !"".equals(distPath)) {
                 buildData(data, Path.e(distPath), template);
             }
@@ -75,7 +75,7 @@ public abstract class Builder {
         }
     }
 
-    public abstract Map run(Template template) throws BuilderException, SpringReaderException;
+    public abstract Map run() throws BuilderException, SpringReaderException;
 
     public ClassLoader getClassLoader() {
         return classLoader;

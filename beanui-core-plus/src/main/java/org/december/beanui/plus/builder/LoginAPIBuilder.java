@@ -1,6 +1,5 @@
 package org.december.beanui.plus.builder;
 
-import freemarker.template.Template;
 import org.december.beanui.plugin.face.Builder;
 import org.december.beanui.plugin.face.exception.BuilderException;
 import org.december.beanui.plugin.face.exception.SpringReaderException;
@@ -19,7 +18,7 @@ public class LoginAPIBuilder extends Builder {
     private Logout logout;
     private Userinfo userinfo;
 
-    public Map run(Template template) throws BuilderException {
+    public Map run() throws BuilderException {
         Map map = new HashMap();
         try {
             if(login != null) {

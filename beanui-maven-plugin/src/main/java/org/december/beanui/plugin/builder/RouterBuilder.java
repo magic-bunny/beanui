@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.TreeTraversingParser;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLParser;
-import freemarker.template.Template;
 import org.december.beanui.element.annotation.Component;
 import org.december.beanui.plugin.face.Builder;
 import org.december.beanui.plugin.face.bean.Router;
@@ -24,7 +23,7 @@ public class RouterBuilder extends Builder {
 
     public static final String LOGIN = "login";
 
-    public Map run(Template template) throws BuilderException {
+    public Map run() throws BuilderException {
         Map result = new HashMap();
         try {
             String routerPath = PluginSystem.getProperty("routerPath");

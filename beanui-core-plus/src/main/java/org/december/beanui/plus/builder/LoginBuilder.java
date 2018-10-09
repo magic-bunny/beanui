@@ -1,6 +1,5 @@
 package org.december.beanui.plus.builder;
 
-import freemarker.template.Template;
 import org.december.beanui.i18n.annotation.I18N;
 import org.december.beanui.plugin.face.Builder;
 import org.december.beanui.plugin.face.bean.Element;
@@ -17,7 +16,7 @@ import java.util.Map;
 
 public class LoginBuilder extends Builder {
 
-    public Map run(Template template) throws BuilderException {
+    public Map run() throws BuilderException {
         if(super.getTemplateClass() == null) {
             throw new BuilderException("No builder template class can be found");
         }

@@ -2,7 +2,6 @@ package org.december.beanui.plugin.builder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import freemarker.template.Template;
 import org.december.beanui.i18n.annotation.I18N;
 import org.december.beanui.plugin.face.Builder;
 import org.december.beanui.plugin.face.exception.BuilderException;
@@ -16,7 +15,7 @@ import java.util.Set;
 
 public class LangBuilder extends Builder {
     @Override
-    public Map run(Template template) throws BuilderException {
+    public Map run() throws BuilderException {
         ObjectMapper objectMapper = new ObjectMapper();
         Map tree = new HashMap();
         Map results = new HashMap();

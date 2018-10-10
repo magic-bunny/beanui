@@ -145,7 +145,6 @@ placeholder="请选择"
 <el-form-item prop="testChart"
   label=""
 >
-    <script>import demo_view_chart_testchart from './chart/demo.view.chart.TestChart'</script>
     <demo_view_chart_testchart :chart-data="testForm.testChart"></demo_view_chart_testchart>
 </el-form-item>
 <el-form-item prop="test"
@@ -301,7 +300,6 @@ placeholder="请选择"
 <el-form-item prop="testChart"
   label=""
 >
-    <script>import demo_view_chart_testchart from './chart/demo.view.chart.TestChart'</script>
     <demo_view_chart_testchart :chart-data="testForm2.testChart"></demo_view_chart_testchart>
 </el-form-item>
 <el-form-item prop="test"
@@ -326,12 +324,16 @@ type="primary"
 </template>
 <script>
 import request from '@/utils/request'
+import demo_view_chart_testchart from './chart/demo.view.chart.TestChart'
 
   export default {
     created: function() {
     this.created_testForm_testForm();
     this.created_testForm2_testForm2();
-        },
+    },
+    components: {
+        demo_view_chart_testchart
+    },
     data() {
       return {
             testForm_loading: false,

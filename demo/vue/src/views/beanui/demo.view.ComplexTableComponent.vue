@@ -175,7 +175,9 @@ import request from '@/utils/request'
   export default {
     created: function() {
     this.created_complexTableDataForm_complexTableDataForm();
-        },
+    },
+    components: {
+    },
     data() {
       return {
             complexTableEditForm_loading: false,

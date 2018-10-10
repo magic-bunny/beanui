@@ -92,7 +92,9 @@ import request from '@/utils/request'
   export default {
     created: function() {
     this.created_DragTableComponent_DragTableComponent();
-        },
+    },
+    components: {
+    },
     data() {
       return {
             DragTableComponent_loading: false,

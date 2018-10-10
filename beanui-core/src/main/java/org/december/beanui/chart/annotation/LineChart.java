@@ -12,7 +12,7 @@ public @interface LineChart {
     @Inherited
     @Retention(RetentionPolicy.RUNTIME)
     @interface Series {
-        String type() default "";
+        String type() default "line";
         String id() default "";
         String name() default "";
         String coordinateSystem() default "";

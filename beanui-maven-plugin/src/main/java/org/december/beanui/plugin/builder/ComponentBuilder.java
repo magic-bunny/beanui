@@ -27,6 +27,8 @@ import java.util.*;
 public class ComponentBuilder extends Builder {
     private static RestReader pathBuilder;
 
+    private List<Map> childComponents = new ArrayList();
+
     public Map run() throws BuilderException {
         Map result = new HashMap();
         try {
@@ -136,6 +138,7 @@ public class ComponentBuilder extends Builder {
             }
             component.setChildren(elements);
             result.put("component", component);
+            result.put("childComponents", childComponents);
         } catch (Exception e) {
             throw new ComponentBuilderException(e);
         }
@@ -255,7 +258,10 @@ public class ComponentBuilder extends Builder {
                     content.put("path", "./chart/" + field.getType().getName());
                     content.put("label", "");
                     element.setContent(content);
-                    String distPath = "${workPath}/src/views/beanui/chart/" + field.getType() + ".vue";
+                    if(!childComponents.contains(content)) {
+                        childComponents.add(content);
+                    }
+                    String distPath = "${workPath}/src/views/beanui/chart/" + field.getType().getName() + ".vue";
                     ChartBuilder chartBuilder = new ChartBuilder();
                     chartBuilder.setTemplateName("Chart.ftl");
                     chartBuilder.setClassLoader(this.getClassLoader());

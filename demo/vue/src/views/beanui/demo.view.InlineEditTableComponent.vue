@@ -112,7 +112,9 @@ import request from '@/utils/request'
   export default {
     created: function() {
     this.created_InlineEditTableComponent_InlineEditTableComponent();
-        },
+    },
+    components: {
+    },
     data() {
       return {
             InlineEditTableComponent_loading: false,

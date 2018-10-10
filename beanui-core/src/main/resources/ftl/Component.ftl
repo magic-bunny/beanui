@@ -167,13 +167,21 @@ ${key}="${content[key]}"
 </template>
 <script>
 import request from '@/utils/request'
+<#list childComponents as childComponent>
+import ${childComponent.name} from '${childComponent.path}'
+</#list>
 
   export default {
     created: function() {
         <#list component.children as element>
             <@createCreatedEventMethods formId=element.id element=element/>
         </#list>
-        },
+    },
+    components: {
+    <#list childComponents as childComponent>
+        ${childComponent.name}<#if childComponent_has_next>,</#if>
+    </#list>
+    },
     data() {
       return {
         <#list component.children as form>

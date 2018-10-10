@@ -101,7 +101,9 @@ import request from '@/utils/request'
 
   export default {
     created: function() {
-        },
+    },
+    components: {
+    },
     data() {
       return {
             userQuery_loading: false,

@@ -12,7 +12,7 @@ public @interface BarChart {
     @Inherited
     @Retention(RetentionPolicy.RUNTIME)
     @interface Series {
-        String type() default "";
+        String type() default "bar";
         String id() default "";
         String name() default "";
         String legendHoverLink() default "";

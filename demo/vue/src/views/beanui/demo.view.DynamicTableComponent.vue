@@ -131,7 +131,9 @@ import request from '@/utils/request'
   export default {
     created: function() {
     this.created_DynamicTableComponent_DynamicTableComponent();
-        },
+    },
+    components: {
+    },
     data() {
       return {
             DynamicTableComponent_loading: false,

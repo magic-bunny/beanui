@@ -28,7 +28,6 @@
 <#elseif object.type="Dropdown">
     <@createDropdown formId=formId scope=formId element=object/>
 <#elseif object.type="Chart">
-    <script>import ${object.content.name} from '${object.content.path}'</script>
     <${object.content.name} :chart-data="${formId}.${object.id}"></${object.content.name}>
 <#else>
     <@createElement formId=formId scope=formId element=object/>

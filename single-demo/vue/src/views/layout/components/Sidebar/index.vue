@@ -20,8 +20,9 @@ import { mapGetters } from 'vuex'
 import SidebarItem from './SidebarItem'
 
 export default {
-  data() { return {
-      title: "BEANUI example"
+  data() {
+    return {
+      title: 'single-demo'
     }
   },
   components: { SidebarItem },
@@ -31,8 +32,8 @@ export default {
       'sidebar'
     ]),
     isCollapse() {
-      if(this.sidebar.opened) {
-        this.title = "BEANUI example"
+      if (this.sidebar.opened) {
+        this.title = 'single-demo'
       } else {
         this.title = this.title.substring(0, 1)
       }

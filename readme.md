@@ -43,8 +43,8 @@
 ![example](example.png)
 
 ## Dependencies
-1. 如果是linux系统需要安装npm：install [nodejs 10.0.0](https://nodejs.org) or [npm 6.2.0](https://www.npmjs.com/);
-2. install [apache maven](http://maven.apache.org);
+1. 需要安装npm：install [nodejs 10.0.0](https://nodejs.org) or [npm 6.2.0](https://www.npmjs.com/);
+2. 需要安装[apache maven](http://maven.apache.org);
 
 ## 安装BeanUI
 1. `git clone https://github.com/magic-bunny/beanui`
@@ -53,9 +53,10 @@
 
 ## 安装和运行BeanUI example
 1. `cd beanui/demo`
-2. `mvn package`
-3. `java -jar demo-[version].jar`
-4. 打开浏览器，输入`http://localhost:8080`
+2. `cd beanui/demo/vue` and `npm install` at first
+3. `mvn package`
+4. `java -jar demo-[version].jar`
+5. 打开浏览器，输入`http://localhost:8080`
 
 ## 在DEV模式下运行BeanUI examle
 1. 将 [pom.xml](demo/pom.xml)文件的运行模式修改为dev ` <mode>dev</mode>`

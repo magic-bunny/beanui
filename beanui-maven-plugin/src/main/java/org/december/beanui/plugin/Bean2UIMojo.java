@@ -12,6 +12,7 @@ import org.december.beanui.plugin.face.Builder;
 import org.december.beanui.plugin.face.bean.Router;
 import org.december.beanui.plugin.face.exception.BuilderException;
 import org.december.beanui.plugin.face.util.FileUtil;
+import org.december.beanui.plugin.face.util.Platform;
 import org.december.beanui.plugin.face.util.PluginSystem;
 
 import java.io.File;
@@ -33,7 +34,7 @@ public class Bean2UIMojo extends AbstractMojo {
     private String workPath = System.getProperty("user.dir") + File.separator + "vue";
 
     @Parameter(property = "nodePath")
-    private String nodePath = System.getProperty("user.dir") + File.separator + "node";
+    private String nodePath = Platform.isWin()?System.getProperty("user.dir") + File.separator + "node":"";
 
     @Parameter(property = "projectName")
     private String projectName;
@@ -64,7 +65,12 @@ public class Bean2UIMojo extends AbstractMojo {
 
             FileUtil.deleteDir( "${workPath}/index.html");
             FileUtil.deleteDir( "${workPath}/src/router");
+            FileUtil.deleteDir( "${workPath}/src/lang");
             FileUtil.deleteDir( "${workPath}/src/views/beanui");
+            FileUtil.createDir( "${workPath}/src/router");
+            FileUtil.createDir( "${workPath}/src/lang");
+            FileUtil.createDir( "${workPath}/src/views/beanui");
+            FileUtil.createDir( "${workPath}/src/views/beanui/chart");
             String routerDistPath = "${workPath}/src/router/index.js";
             String indexDistPath = "${workPath}/index.html";
             String sidebarDistPath = "${workPath}/src/views/layout/components/Sidebar/index.vue";

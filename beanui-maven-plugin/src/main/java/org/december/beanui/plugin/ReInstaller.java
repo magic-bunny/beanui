@@ -8,6 +8,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.december.beanui.plugin.face.util.ConsoleUtil;
 import org.december.beanui.plugin.face.util.FileUtil;
+import org.december.beanui.plugin.face.util.Platform;
 
 import java.io.File;
 import java.util.List;
@@ -25,7 +26,7 @@ public class ReInstaller extends AbstractMojo {
     private String workPath = System.getProperty("user.dir") + File.separator + "vue";
 
     @Parameter(property = "nodePath")
-    private String nodePath = System.getProperty("user.dir") + File.separator + "node";
+    private String nodePath = Platform.isWin()?System.getProperty("user.dir") + File.separator + "node":"";
 
     @Parameter(property = "projectName")
     private String projectName;

@@ -56,6 +56,17 @@ public class FileUtil {
         }
     }
 
+    public static boolean createDir(String path){
+        path = Path.e(path);
+        File file = new File(path);
+        if(file.exists()) {
+            return false;
+        } else {
+            file.mkdirs();
+            return true;
+        }
+    }
+
     public static boolean deleteDir(String path){
         path = Path.e(path);
         File file = new File(path);

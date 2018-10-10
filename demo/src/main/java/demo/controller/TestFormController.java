@@ -1,5 +1,6 @@
 package demo.controller;
 
+import demo.view.chart.TestChart;
 import demo.view.form.TestForm;
 import demo.view.form.UserQueryForm;
 import demo.view.table.UserRow;
@@ -73,6 +74,13 @@ public class TestFormController {
         testForm.setAddress(new ArrayList<String>() {{
             add("2");
         }});
+
+        TestChart testChart = new TestChart();
+        int[] line1 = {743,465,6653,31232,66576};
+        int[] line2 = {3443,657676,3443,2323,46,123,213};
+        testChart.setLine1(line1);
+        testChart.setLine2(line2);
+        testForm.setTestChart(testChart);
         return testForm;
     }
 

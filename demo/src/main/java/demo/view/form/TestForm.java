@@ -1,7 +1,9 @@
 package demo.view.form;
 
 import demo.controller.TestFormController;
+import demo.view.chart.TestChart;
 import demo.view.table.UserRow;
+import org.december.beanui.chart.annotation.LineChart;
 import org.december.beanui.element.Type;
 import org.december.beanui.element.Icon;
 import org.december.beanui.element.annotation.*;
@@ -51,6 +53,9 @@ public class TestForm {
     private List<String> address;
 
     private List<Transfer.Data> addressData;
+
+    @LineChart
+    private TestChart testChart;
 
     @FormItem(prop = "test")
     @Click(rest = TestFormController.class, func = "test3")
@@ -164,5 +169,13 @@ public class TestForm {
 
     public void setAddressData(List<Transfer.Data> addressData) {
         this.addressData = addressData;
+    }
+
+    public TestChart getTestChart() {
+        return testChart;
+    }
+
+    public void setTestChart(TestChart testChart) {
+        this.testChart = testChart;
     }
 }

@@ -75,12 +75,29 @@ export default {
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
       this.chart.setOption({
-        <#list options?keys as option>
-        ${key} : {
-          <#list option?keys as key>
-          ${key}: ${option[key]}<#if key_has_next?>,</#if>
-          </#list>
-        }<#if option_has_next?>,</#if>
+        <#list options?keys as name>
+        <#if name='Series'>
+            ${name}: [
+              <#list options[name] as series>
+              {
+                <#list series?keys as key>
+                  <#if series[key]!="''">
+                  ${key}: ${series[key]}<#if key_has_next>,</#if>
+                  </#if>
+                </#list>
+              }<#if series_has_next>,</#if>
+              </#list>
+            ]
+        <#else>
+            ${name}: {
+              <#list options[name]?keys as key>
+              <#if options[name][key]!="''">
+              ${key}: ${options[name][key]}<#if key_has_next>,</#if>
+              </#if>
+              </#list>
+            }
+        </#if>
+        <#if name_has_next>,</#if>
         </#list>
       })
     }

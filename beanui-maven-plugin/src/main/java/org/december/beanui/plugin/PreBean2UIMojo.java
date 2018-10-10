@@ -53,7 +53,7 @@ public class PreBean2UIMojo extends AbstractMojo {
                 FileUtil.loadRecourseFromJarByFolder("/node/", System.getProperty("user.dir"), PreBean2UIMojo.class);
                 getLog().info("Copy npm is finished");
             }
-            if(new File(workPath).exists()) {
+            if(new File(workPath).exists() && !new File(workPath + File.separator + "node_modules").exists()) {
                 getLog().info("\"" +  workPath +  "\" " + nodePath + File.separator + "npm install");
                 ConsoleUtil.exec(nodePath + File.separator + "npm install", workPath);
             }

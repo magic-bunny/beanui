@@ -10,36 +10,40 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class ChartBuilder extends Builder {
     public Map run() throws BuilderException, SpringReaderException {
         final Map result = new HashMap();
         Class chartClass = this.getTemplateClass();
-        Annotation[] annotations = chartClass.getAnnotations();
-        for(Annotation annotation:annotations) {
-            String packageName = annotation.annotationType().getPackage().getName();
-            if(LineChart.class.getPackage().getName().equals(packageName)) {
-                Field[] fields = chartClass.getFields();
-                for(Field field:fields) {
-                    Annotation[] fieldAnnotations = field.getAnnotations();
-                    if(fieldAnnotations.length > 0) {
-                        Map content = annotation2map(fieldAnnotations[0]);
-                        Object data = content.get("data");
-                        if(data != null) {
-                            content.put("data", "this.chartData." + field.getName());
-                        }
-                        result.put(fieldAnnotations[0].annotationType().getSimpleName(), content);
-                    }
+        Field[] fields = chartClass.getDeclaredFields();
+        Field.setAccessible(fields, true);
+        for(Field field:fields) {
+            Annotation[] fieldAnnotations = field.getAnnotations();
+            for(Annotation fieldAnnotation:fieldAnnotations) {
+                Map content = annotation2map(fieldAnnotation);
+                Object data = content.get("data");
+                if(data != null) {
+                    content.put("data", "this.chartData." + field.getName());
                 }
-                return new HashMap() {{
-                  put("options", result);
-                }};
+                if(fieldAnnotation.annotationType().getName().endsWith("Series")) {
+                    String name = fieldAnnotation.annotationType().getSimpleName();
+                    if(result.containsKey(name)) {
+                        List list = (List)result.get(name);
+                        list.add(content);
+                    } else {
+                        List list = new ArrayList();
+                        list.add(content);
+                        result.put(name, list);
+                    }
+                } else {
+                    result.put(fieldAnnotation.annotationType().getSimpleName(), content);
+                }
             }
         }
-        throw new BuilderException(chartClass.getName() + " is not a Chart");
+        return new HashMap() {{
+            put("options", result);
+        }};
     }
 
     private Map annotation2map(Annotation annotation) {
@@ -54,9 +58,6 @@ public class ChartBuilder extends Builder {
             while (iterator.hasNext()) {
                 String key = (String)iterator.next();
                 Object object = map.get(key);
-                if(!"data".equals(key)) {
-                    results.put(key, "'" + object + "'");
-                }
                 if(object instanceof String) {
                     String value = (String)object;
                     if(value.startsWith(":") || value.startsWith("$")) {
@@ -66,6 +67,9 @@ public class ChartBuilder extends Builder {
                     results.put(key.replaceAll("_", "-"), value);
                 } else {
                     results.put(key.replaceAll("_", "-"), object);
+                }
+                if(!"data".equals(key)) {
+                    results.put(key, "'" + object + "'");
                 }
             }
             return results;

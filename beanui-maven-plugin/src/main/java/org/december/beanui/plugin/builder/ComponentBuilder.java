@@ -247,18 +247,20 @@ public class ComponentBuilder extends Builder {
                     }
                 }
                 if (LineChart.class.getPackage().getName().equals(packageName)) {
+                    isComponent = true;
                     element.setType("Chart");
                     element.setId(field.getName());
-                    Map conetent = new HashMap();
-                    conetent.put("name", clazz.getName().toLowerCase().replaceAll(".", "_") + "_" + field.getName().toLowerCase());
-                    conetent.put("path", "./chart/" + clazz.getName() + "." + field.getName());
-                    element.setContent(conetent);
-                    String distPath = "${workPath}/src/views/beanui/chart/" + clazz.getName() + "." + field.getName() + ".vue";
+                    Map content = new HashMap();
+                    content.put("name", field.getType().getName().toLowerCase().replaceAll("\\.", "_"));
+                    content.put("path", "./chart/" + field.getType().getName());
+                    content.put("label", "");
+                    element.setContent(content);
+                    String distPath = "${workPath}/src/views/beanui/chart/" + field.getType() + ".vue";
                     ChartBuilder chartBuilder = new ChartBuilder();
                     chartBuilder.setTemplateName("Chart.ftl");
                     chartBuilder.setClassLoader(this.getClassLoader());
                     chartBuilder.setDistPath(distPath);
-                    chartBuilder.setTemplateClass(clazz);
+                    chartBuilder.setTemplateClass(field.getType());
                     chartBuilder.create();
                 }
                 if (Click.class.getPackage().getName().equals(packageName)) {

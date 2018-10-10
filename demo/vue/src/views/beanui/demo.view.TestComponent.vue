@@ -142,6 +142,12 @@ placeholder="请选择"
 {{testForm.address}}
 </el-transfer>
 </el-form-item>
+<el-form-item prop="testChart"
+  label=""
+>
+    <script>import demo_view_chart_testchart from './chart/demo.view.chart.TestChart'</script>
+    <demo_view_chart_testchart :chart-data="testForm.testChart"></demo_view_chart_testchart>
+</el-form-item>
 <el-form-item prop="test"
   label=""
 >
@@ -291,6 +297,12 @@ placeholder="请选择"
  >
 {{testForm2.address}}
 </el-transfer>
+</el-form-item>
+<el-form-item prop="testChart"
+  label=""
+>
+    <script>import demo_view_chart_testchart from './chart/demo.view.chart.TestChart'</script>
+    <demo_view_chart_testchart :chart-data="testForm2.testChart"></demo_view_chart_testchart>
 </el-form-item>
 <el-form-item prop="test"
   label=""
@@ -478,6 +490,14 @@ import request from '@/utils/request'
 
 
     ,
+    placeholder_testForm_testChart() {
+      }
+    
+
+
+
+
+    ,
     click_testForm_button() {
         var data = this.testForm;
         function submitRequest(self) {
@@ -648,6 +668,14 @@ import request from '@/utils/request'
 
     ,
     placeholder_testForm2_address() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_testChart() {
       }
     
 

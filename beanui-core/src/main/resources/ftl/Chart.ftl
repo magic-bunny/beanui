@@ -45,7 +45,6 @@ export default {
       window.addEventListener('resize', this.__resizeHanlder)
     }
 
-    // 监听侧边栏的变化
     const sidebarElm = document.getElementsByClassName('sidebar-container')[0]
     sidebarElm.addEventListener('transitionend', this.__resizeHanlder)
   },
@@ -82,8 +81,9 @@ export default {
               {
                 <#list series?keys as key>
                   <#if series[key]!="''">
-                  ${key}: ${series[key]}<#if key_has_next>,</#if>
+                  ${key}: ${series[key]},
                   </#if>
+                  <#if key?is_last>d:''</#if>
                 </#list>
               }<#if series_has_next>,</#if>
               </#list>
@@ -92,8 +92,9 @@ export default {
             ${name}: {
               <#list options[name]?keys as key>
               <#if options[name][key]!="''">
-              ${key}: ${options[name][key]}<#if key_has_next>,</#if>
+              ${key}: ${options[name][key]},
               </#if>
+              <#if key?is_last>d:''</#if>
               </#list>
             }
         </#if>

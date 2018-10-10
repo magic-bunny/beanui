@@ -45,10 +45,12 @@ public class PreBean2UIMojo extends AbstractMojo {
                 getLog().info("Copy vue work path to your project path: " + System.getProperty("user.dir"));
                 String[] filters = {"node_modules", "dist"};
                 FileUtil.loadRecourseFromJarByFolder("/vue/", System.getProperty("user.dir"), PreBean2UIMojo.class, filters);
-                getLog().info("Copy is finished");
+                getLog().info("Copy vue is finished");
             }
             if(!new File(nodePath).exists()) {
+                getLog().info("Copy npm work path to your project path: " + System.getProperty("user.dir"));
                 FileUtil.loadRecourseFromJarByFolder("/node/", System.getProperty("user.dir"), PreBean2UIMojo.class);
+                getLog().info("Copy npm is finished");
             }
             if(new File(workPath).exists()) {
                 getLog().info("\"" +  workPath +  "\" " + nodePath + File.separator + "npm install");

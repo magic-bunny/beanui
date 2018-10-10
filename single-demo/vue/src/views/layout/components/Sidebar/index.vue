@@ -21,7 +21,7 @@ import SidebarItem from './SidebarItem'
 
 export default {
   data() { return {
-      title: "single-demo"
+      title: "BEANUI example"
     }
   },
   components: { SidebarItem },
@@ -32,7 +32,7 @@ export default {
     ]),
     isCollapse() {
       if(this.sidebar.opened) {
-        this.title = "single-demo"
+        this.title = "BEANUI example"
       } else {
         this.title = this.title.substring(0, 1)
       }

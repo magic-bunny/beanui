@@ -2,6 +2,7 @@ package org.december.beanui.plugin.builder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.december.beanui.chart.annotation.LineChart;
 import org.december.beanui.element.annotation.*;
 import org.december.beanui.event.annotation.Click;
 import org.december.beanui.event.annotation.Created;
@@ -232,7 +233,7 @@ public class ComponentBuilder extends Builder {
                                 element.setI18n(clazz.getName() + "." + field.getName());
                             }
                             element.setType(type.getSimpleName());
-                            if (annotation.annotationType() == Table.class) {
+                            if(annotation.annotationType() == Table.class) {
                                 if (field.getType() == List.class) {
                                     ParameterizedType pt = (ParameterizedType) field.getGenericType();
                                     element.setChildren(buildTable(formId, (Class) pt.getActualTypeArguments()[0]));
@@ -244,6 +245,21 @@ public class ComponentBuilder extends Builder {
                             element.setContent(map);
                         }
                     }
+                }
+                if (LineChart.class.getPackage().getName().equals(packageName)) {
+                    element.setType("Chart");
+                    element.setId(field.getName());
+                    Map conetent = new HashMap();
+                    conetent.put("name", clazz.getName().toLowerCase().replaceAll(".", "_") + "_" + field.getName().toLowerCase());
+                    conetent.put("path", "./chart/" + clazz.getName() + "." + field.getName());
+                    element.setContent(conetent);
+                    String distPath = "${workPath}/src/views/beanui/chart/" + clazz.getName() + "." + field.getName() + ".vue";
+                    ChartBuilder chartBuilder = new ChartBuilder();
+                    chartBuilder.setTemplateName("Chart.ftl");
+                    chartBuilder.setClassLoader(this.getClassLoader());
+                    chartBuilder.setDistPath(distPath);
+                    chartBuilder.setTemplateClass(clazz);
+                    chartBuilder.create();
                 }
                 if (Click.class.getPackage().getName().equals(packageName)) {
                     events.add(buildEvent(annotation));

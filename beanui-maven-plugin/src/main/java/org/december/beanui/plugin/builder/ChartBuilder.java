@@ -1,10 +1,8 @@
 package org.december.beanui.plugin.builder;
 
-import org.december.beanui.chart.annotation.LineChart;
 import org.december.beanui.plugin.face.Builder;
 import org.december.beanui.plugin.face.exception.BuilderException;
 import org.december.beanui.plugin.face.exception.SpringReaderException;
-import org.december.beanui.plugin.face.util.ClassUtil;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -22,22 +20,23 @@ public class ChartBuilder extends Builder {
             Annotation[] fieldAnnotations = field.getAnnotations();
             for(Annotation fieldAnnotation:fieldAnnotations) {
                 Map content = annotation2map(fieldAnnotation);
-                Object data = content.get("data");
-                if(data != null) {
-                    content.put("data", "this.chartData." + field.getName());
+                String value = (String)content.get("data");
+                if(value != null && "''".equals(value)) {
+                    content.put("data", "data." + field.getName());
                 }
-                if(fieldAnnotation.annotationType().getName().endsWith("Series")) {
-                    String name = fieldAnnotation.annotationType().getSimpleName();
-                    if(result.containsKey(name)) {
-                        List list = (List)result.get(name);
+                String tag = ((String)content.get("tag"));
+                content.remove("tag");
+                if("series".equals(tag)) {
+                    if(result.containsKey(tag)) {
+                        List list = (List)result.get(tag);
                         list.add(content);
                     } else {
                         List list = new ArrayList();
                         list.add(content);
-                        result.put(name, list);
+                        result.put(tag, list);
                     }
                 } else {
-                    result.put(fieldAnnotation.annotationType().getSimpleName(), content);
+                    result.put(tag, content);
                 }
             }
         }
@@ -57,21 +56,17 @@ public class ChartBuilder extends Builder {
             Iterator iterator = map.keySet().iterator();
             while (iterator.hasNext()) {
                 String key = (String)iterator.next();
-                Object object = map.get(key);
-                if(object instanceof String) {
-                    String value = (String)object;
-                    if(value.startsWith(":") || value.startsWith("$")) {
-                        key = ":" + key;
-                        value = value.substring(1);
-                    }
-                    results.put(key.replaceAll("_", "-"), value);
+                String value = (String)map.get(key);
+                if((value.startsWith("[") && value.endsWith("]")) || (value.startsWith("{") && value.endsWith("}"))) {
+                    results.put(key, value);
                 } else {
-                    results.put(key.replaceAll("_", "-"), object);
+                    if("tag".equals(key)) {
+                        results.put(key, value);
+                    } else {
+                        results.put(key, "'" + value + "'");
+                    }
                 }
-                if(!"data".equals(key)) {
-                    results.put(key, "'" + object + "'");
-                }
-            }
+        }
             return results;
         } catch (NoSuchFieldException e) {
             e.printStackTrace();

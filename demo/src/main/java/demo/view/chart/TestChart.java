@@ -9,7 +9,6 @@ public class TestChart {
     private String[] x;
     @YAxis
     private int[] y;
-
     @LineChart.Series
     private int[] line1;
     @LineChart.Series

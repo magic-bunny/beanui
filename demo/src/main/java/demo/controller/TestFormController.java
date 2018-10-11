@@ -76,14 +76,12 @@ public class TestFormController {
         }});
 
         TestChart testChart = new TestChart();
-        int[] line1 = {743,465,6653,3123,6657};
-        int[] line2 = {3443,656,3443,2323,46,123,213};
-        String[] x = {"1","2","3","4","5"};
-        int[] y = {100,500,1000,1500,2000,2500,6000};
+        int[] line1 = {743,465,665,3123,665};
+        int[] line2 = {3443,656,3443,2323,46};
+        String[] x = {"Mon","Tue","Wed","Thu","Fri"};
         testChart.setLine1(line1);
         testChart.setLine2(line2);
         testChart.setX(x);
-        testChart.setY(y);
         testForm.setTestChart(testChart);
         return testForm;
     }

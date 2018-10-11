@@ -35,7 +35,6 @@ export default {
     }
   },
   mounted() {
-    this.initChart()
     if (this.autoResize) {
       this.__resizeHanlder = debounce(() => {
         if (this.chart) {
@@ -66,24 +65,24 @@ export default {
     chartData: {
       deep: true,
       handler(val) {
-        this.chart.setOption(val)
+        this.initChart(val)
       }
     }
   },
   methods: {
-    initChart() {
+    initChart(data) {
       this.chart = echarts.init(this.$el, 'macarons')
       this.chart.setOption({
         <#list options?keys as name>
-        <#if name='Series'>
+        <#if name='series'>
             ${name}: [
               <#list options[name] as series>
               {
                 <#list series?keys as key>
                   <#if series[key]!="''">
-                  ${key}: ${series[key]},
+                  ${key}: ${series[key]}<#if key_has_next>,</#if>
                   </#if>
-                  <#if key?is_last>d:''</#if>
+
                 </#list>
               }<#if series_has_next>,</#if>
               </#list>
@@ -92,9 +91,8 @@ export default {
             ${name}: {
               <#list options[name]?keys as key>
               <#if options[name][key]!="''">
-              ${key}: ${options[name][key]},
+              ${key}: ${options[name][key]}<#if key_has_next>,</#if>
               </#if>
-              <#if key?is_last>d:''</#if>
               </#list>
             }
         </#if>

@@ -8,6 +8,7 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
+@Repeatable(Clear.Values.class)
 public @interface Clear {
     String type() default "clear";
     Class rest() default Clear.class;
@@ -21,4 +22,12 @@ public @interface Clear {
     String confirmMessage() default "";
     String beforeRequest() default "";
     String afterRequest() default "";
+
+    @Documented
+    @Target(ElementType.FIELD)
+    @Inherited
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface Values {
+        Clear[] value();
+    }
 }

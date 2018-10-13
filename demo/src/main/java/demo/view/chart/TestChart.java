@@ -1,18 +1,31 @@
 package demo.view.chart;
 
-import org.december.beanui.chart.annotation.LineChart;
-import org.december.beanui.chart.annotation.XAxis;
-import org.december.beanui.chart.annotation.YAxis;
+import org.december.beanui.chart.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+@Title(text = "abc")
+@Toolbox(feature = "$feature")
 public class TestChart {
     @XAxis
     private String[] x;
     @YAxis
     private int[] y;
-    @LineChart.Series
+    @LineChart.Series(areaStyle = "{}")
     private int[] line1;
-    @LineChart.Series
+    @LineChart.Series(areaStyle = "{}")
     private int[] line2;
+
+    private Map feature = new HashMap() {{
+        put("magicType", new HashMap() {{
+            put("type", new ArrayList() {{
+                add("line");
+                add("bar");
+            }});
+        }});
+    }};
 
     public int[] getLine1() {
         return line1;
@@ -44,5 +57,13 @@ public class TestChart {
 
     public void setY(int[] y) {
         this.y = y;
+    }
+
+    public Map getFeature() {
+        return feature;
+    }
+
+    public void setFeature(Map feature) {
+        this.feature = feature;
     }
 }

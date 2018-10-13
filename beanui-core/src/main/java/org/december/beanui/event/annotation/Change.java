@@ -8,6 +8,7 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
+@Repeatable(Change.Values.class)
 public @interface Change {
     String type() default "change";
     Class rest() default Change.class;
@@ -21,4 +22,12 @@ public @interface Change {
     String confirmMessage() default "";
     String beforeRequest() default "";
     String afterRequest() default "";
+
+    @Documented
+    @Target(ElementType.FIELD)
+    @Inherited
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface Values {
+        Change[] value();
+    }
 }

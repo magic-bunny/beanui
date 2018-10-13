@@ -176,7 +176,10 @@ public class ClassUtil {
                 Object object = map.get(key);
                 if(object instanceof String) {
                     String value = (String)object;
-                    if(value.startsWith(":") || value.startsWith("$")) {
+                    if((value.startsWith("[")&&value.endsWith("]")) || (value.startsWith("{")&&value.endsWith("}"))) {
+                        key = ":" + key;
+                    }
+                    if(value.startsWith("$")) {
                         key = ":" + key;
                         value = value.substring(1);
                     }

@@ -8,6 +8,7 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
+@Repeatable(Mousemove.Values.class)
 public @interface Mousemove {
     String type() default "mousemove";
     Class rest() default Mousemove.class;
@@ -21,4 +22,12 @@ public @interface Mousemove {
     String confirmMessage() default "";
     String beforeRequest() default "";
     String afterRequest() default "";
+
+    @Documented
+    @Target(ElementType.FIELD)
+    @Inherited
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface Values {
+        Mousemove[] value();
+    }
 }

@@ -79,10 +79,7 @@ export default {
               <#list options[name] as series>
               {
                 <#list series?keys as key>
-                  <#if series[key]!="''">
                   ${key}: ${series[key]}<#if key_has_next>,</#if>
-                  </#if>
-
                 </#list>
               }<#if series_has_next>,</#if>
               </#list>
@@ -90,9 +87,7 @@ export default {
         <#else>
             ${name}: {
               <#list options[name]?keys as key>
-              <#if options[name][key]!="''">
               ${key}: ${options[name][key]}<#if key_has_next>,</#if>
-              </#if>
               </#list>
             }
         </#if>

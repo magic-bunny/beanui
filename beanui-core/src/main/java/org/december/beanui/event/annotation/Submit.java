@@ -8,6 +8,7 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
+@Repeatable(Submit.Values.class)
 public @interface Submit {
     String type() default "submit";
     Class rest() default Submit.class;
@@ -21,4 +22,12 @@ public @interface Submit {
     String confirmMessage() default "";
     String beforeRequest() default "";
     String afterRequest() default "";
+
+    @Documented
+    @Target(ElementType.FIELD)
+    @Inherited
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface Values {
+        Submit[] value();
+    }
 }

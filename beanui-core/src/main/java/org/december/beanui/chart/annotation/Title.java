@@ -1,9 +1,11 @@
 package org.december.beanui.chart.annotation;
 
+import org.december.beanui.chart.Config;
+
 import java.lang.annotation.*;
 
 @Documented
-@Target(ElementType.TYPE)
+@Target({ElementType.TYPE, ElementType.FIELD})
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Title {
@@ -16,7 +18,7 @@ public @interface Title {
 //[ default: true ]
 //    是否显示标题组件。
 
-    String text() default "";// string
+    String text() default Config.DEFAULT_PROPERTY;// string
 //[ default: '' ]
 //    主标题文本，支持使用 \n 换行。
 

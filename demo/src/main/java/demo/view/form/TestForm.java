@@ -49,7 +49,7 @@ public class TestForm {
 
     private List<Select.Option> options;
 
-    @Transfer(titles = ":['1','2']", data = "$addressData")
+    @Transfer(titles = "['1','2']", data = "$addressData")
     private List<String> address;
 
     private List<Transfer.Data> addressData;
@@ -145,7 +145,6 @@ public class TestForm {
     public void setAddress(List<String> address) {
         this.address = address;
     }
-
 
     public String getTest() {
         return test;

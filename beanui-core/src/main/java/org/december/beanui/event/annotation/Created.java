@@ -8,6 +8,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
+@Repeatable(Created.Values.class)
 public @interface Created {
     String type() default "created";
     Class rest() default Created.class;
@@ -20,4 +21,12 @@ public @interface Created {
     String confirmMessage() default "";
     String beforeRequest() default "";
     String afterRequest() default "";
+
+    @Documented
+    @Target(ElementType.TYPE)
+    @Inherited
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface Values {
+        Created[] value();
+    }
 }

@@ -78,7 +78,7 @@ public class TestFormController {
         TestChart testChart = new TestChart();
         int[] line1 = {743,465,665,3123,665};
         int[] line2 = {3443,656,3443,2323,46};
-        String[] x = {"Mon","Tue","Wed","Thu","Fri"};
+        String[] x = {"Mon","Tue","Wed","Thu","Fri","test"};
         testChart.setLine1(line1);
         testChart.setLine2(line2);
         testChart.setX(x);

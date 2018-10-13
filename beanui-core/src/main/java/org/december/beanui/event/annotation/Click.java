@@ -8,6 +8,7 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
+@Repeatable(Click.Values.class)
 public @interface Click {
     String type() default "click";
     Class rest() default Click.class;
@@ -21,4 +22,12 @@ public @interface Click {
     String confirmMessage() default "";
     String beforeRequest() default "";
     String afterRequest() default "";
+
+    @Documented
+    @Target(ElementType.FIELD)
+    @Inherited
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface Values {
+        Click[] value();
+    }
 }

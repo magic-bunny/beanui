@@ -14,7 +14,7 @@ tag="el-dialog"
 label-width="150px"
 >
 <el-form-item prop="type"
-  label="Type"
+  label="Config"
 >
 <el-input v-model="complexTableEditForm.type"  >
 {{complexTableEditForm.type}}
@@ -172,220 +172,111 @@ style="position: absolute;left: 150px;top: 10px;"
 <script>
 import request from '@/utils/request'
 
-  export default {
-    created: function() {
-    this.created_complexTableDataForm_complexTableDataForm();
-    },
-    components: {
-    },
-    data() {
-      return {
-            complexTableEditForm_loading: false,
-            complexTableEditForm: {}
-            ,
-            complexTableDataForm_loading: false,
-            complexTableDataForm: {}
-      }
-    },
-    methods: {
+export default {
+  created: function() {
+    this.created_complexTableDataForm_complexTableDataForm()
+  },
+  components: {
+  },
+  data() {
+    return {
+      complexTableEditForm_loading: false,
+      complexTableEditForm: {},
+      complexTableDataForm_loading: false,
+      complexTableDataForm: {}
+    }
+  },
+  methods: {
 
-    
     placeholder_complexTableEditForm_complexTableEditForm() {
-      }
-    
-
-
-    ,
+    },
     placeholder_complexTableEditForm_type() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_complexTableEditForm_date() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_complexTableEditForm_title() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_complexTableEditForm_status() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_complexTableEditForm_imp() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_complexTableEditForm_remark() {
-      }
-    
-
-
-
-
-
-        ,
-    
+    },
     created_complexTableDataForm_complexTableDataForm() {
-        var data = this.complexTableDataForm;
-        function submitRequest(self) {
-            self.complexTableDataForm_loading = true;
-            request({
-                url: "/complex-table/init-complex-table-data-form",
-                method: "get"
-            }).then(res => {
-                self.complexTableDataForm = res.data;
-                self.complexTableDataForm_loading = false;
-            }).catch(err => {
-                self.complexTableDataForm_loading = false;
-            });
-        }
-        submitRequest(this);
+      var data = this.complexTableDataForm
+      function submitRequest(self) {
+        self.complexTableDataForm_loading = true
+        request({
+          url: '/complex-table/init-complex-table-data-form',
+          method: 'get'
+        }).then(res => {
+          self.complexTableDataForm = res.data
+          self.complexTableDataForm_loading = false
+        }).catch(err => {
+          self.complexTableDataForm_loading = false
+        })
       }
-    
-
-
-    ,
+      submitRequest(this)
+    },
     current_change_complexTableDataForm_table(val) {
-        this.complexTableDataForm.table = [val];
+      this.complexTableDataForm.table = [val]
     },
     selection_change__complexTableDataForm_table(val) {
-        this.complexTableDataForm.table = val;
+      this.complexTableDataForm.table = val
     },
     placeholder_complexTableDataForm_table() {
-      }
-    
-
-
-    ,
+    },
     placeholder_complexTableDataForm_id() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_complexTableDataForm_date() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_complexTableDataForm_author() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_complexTableDataForm_importance() {
-      }
-    
-
-
-
-
-    ,
+    },
     click_complexTableDataForm_readings() {
-        var data = this.complexTableDataForm;
-        function submitRequest(self) {
-            self.complexTableDataForm_loading = true;
-            request({
-                url: "/complex-table/init-complex-table-edit-form",
-                method: "get"
-            }).then(res => {
-                self.complexTableEditForm = res.data;
-                self.complexTableDataForm_loading = false;
-            }).catch(err => {
-                self.complexTableDataForm_loading = false;
-            });
-        }
-        submitRequest(this);
+      var data = this.complexTableDataForm
+      function submitRequest(self) {
+        self.complexTableDataForm_loading = true
+        request({
+          url: '/complex-table/init-complex-table-edit-form',
+          method: 'get'
+        }).then(res => {
+          self.complexTableEditForm = res.data
+          self.complexTableDataForm_loading = false
+        }).catch(err => {
+          self.complexTableDataForm_loading = false
+        })
       }
-    
-
-
-
-
-    ,
+      submitRequest(this)
+    },
     placeholder_complexTableDataForm_title() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_complexTableDataForm_status() {
-      }
-    
-
-
-
-
-    ,
+    },
     click_complexTableDataForm_actionEdit() {
-        var data = this.complexTableDataForm;
-        function submitRequest(self) {
-            self.complexTableDataForm_loading = true;
-            request({
-                url: "/complex-table/init-complex-table-edit-form",
-                method: "get"
-            }).then(res => {
-                self.complexTableEditForm = res.data;
-                self.complexTableDataForm_loading = false;
-            }).catch(err => {
-                self.complexTableDataForm_loading = false;
-            });
-        }
-        submitRequest(this);
+      var data = this.complexTableDataForm
+      function submitRequest(self) {
+        self.complexTableDataForm_loading = true
+        request({
+          url: '/complex-table/init-complex-table-edit-form',
+          method: 'get'
+        }).then(res => {
+          self.complexTableEditForm = res.data
+          self.complexTableDataForm_loading = false
+        }).catch(err => {
+          self.complexTableDataForm_loading = false
+        })
       }
-    
-
-
-    ,
+      submitRequest(this)
+    },
     placeholder_complexTableDataForm_actionPublish() {
-      }
-    
-
-
-    ,
+    },
     placeholder_complexTableDataForm_actionDelete() {
-      }
-    
-
-
-
-
-
-
-        
     }
+
   }
+}
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .ComplexTableComponent-container {

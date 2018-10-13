@@ -1,5 +1,7 @@
 package org.december.beanui.chart.annotation;
 
+import org.december.beanui.chart.Config;
+
 import java.lang.annotation.*;
 
 @Documented
@@ -196,7 +198,7 @@ public @interface YAxis {
     String splitArea() default "";// Object
 //    坐标轴在 grid 区域中的分隔区域，默认不显示。
 
-    String data() default "";// Object
+    String data() default Config.DEFAULT_PROPERTY;// Object
 //    类目数据，在类目轴（type: 'category'）中有效。
 //
 //    如果没有设置 type，但是设置了 axis.data，则认为 type 是 'category'。

@@ -6,7 +6,7 @@ import org.december.beanui.element.annotation.Rate;
 
 @Form(label_width = "150px")
 public class ComplexTableEditForm {
-    @Input(label = "Type")
+    @Input(label = "Config")
     private String type;
     @Input(label = "Date")
     private String date;

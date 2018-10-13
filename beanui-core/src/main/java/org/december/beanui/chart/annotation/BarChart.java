@@ -1,5 +1,7 @@
 package org.december.beanui.chart.annotation;
 
+import org.december.beanui.chart.Config;
+
 import java.lang.annotation.*;
 
 @Documented
@@ -39,7 +41,7 @@ public @interface BarChart {
         String encode() default "";
         String seriesLayoutBy() default "";
         String datasetIndex() default "";
-        String data() default "";
+        String data() default Config.DEFAULT_PROPERTY;
         String markPoint() default "";
         String markLine() default "";
         String markArea() default "";

@@ -255,15 +255,16 @@ public class ComponentBuilder extends Builder {
                     element.setId(field.getName());
                     Map content = new HashMap();
                     content.put("name", field.getType().getName().toLowerCase().replaceAll("\\.", "_"));
-                    content.put("path", "./chart/" + field.getType().getName());
+                    content.put("path", "./" + field.getType().getName());
                     content.put("label", "");
                     element.setContent(content);
                     if(!childComponents.contains(content)) {
                         childComponents.add(content);
                     }
-                    String distPath = "${workPath}/src/views/beanui/chart/" + field.getType().getName() + ".vue";
+                    String distPath = "${workPath}/src/views/beanui/" + field.getType().getName() + ".vue";
                     ChartBuilder chartBuilder = new ChartBuilder();
                     chartBuilder.setTemplateName("Chart.ftl");
+                    chartBuilder.setFieldAnnotation(annotation);
                     chartBuilder.setClassLoader(this.getClassLoader());
                     chartBuilder.setDistPath(distPath);
                     chartBuilder.setTemplateClass(field.getType());

@@ -1,8 +1,8 @@
 package demo.controller.table;
 
-import demo.view.form.ComplexTableDataForm;
-import demo.view.form.ComplexTableEditForm;
-import demo.view.table.ComplexRow;
+import demo.view.table.complex.ComplexTableDataForm;
+import demo.view.table.complex.ComplexTableEditForm;
+import demo.view.table.complex.ComplexRow;
 import org.december.beanui.element.Type;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

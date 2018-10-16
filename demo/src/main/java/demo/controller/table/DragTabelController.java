@@ -1,7 +1,7 @@
 package demo.controller.table;
 
-import demo.view.DragTableComponent;
-import demo.view.table.DragRow;
+import demo.view.table.drag.DragTableComponent;
+import demo.view.table.drag.DragRow;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;

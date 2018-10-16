@@ -3,25 +3,31 @@ component: demo.view.LoginComponent
 children:
   - title: home
     icon: star
-    component: demo.view.TestComponent
+    component: demo.view.home.Dashboard
   - path: /test
     title: test
     icon: example
-    component: demo.view.ABCDComponent
+    children:
+    - title: test1
+      path: /test1
+      component: demo.view.test.test1.TestComponent
+    - title: test2
+      path: /test2
+      component: demo.view.test.test2.ABCDComponent
   - title: Table
     icon: table
     path: /table
     children:
     - title: Dynamic Table
       path: /dynamic-table
-      component: demo.view.DynamicTableComponent
+      component: demo.view.table.dynamic.DynamicTableComponent
       roles: [admin]
     - title: Drag Table
       path: drag-table
-      component: demo.view.DragTableComponent
+      component: demo.view.table.drag.DragTableComponent
     - title: Inline Edit
       path: /inline-edit-table
-      component: demo.view.InlineEditTableComponent
+      component: demo.view.table.inline.InlineEditTableComponent
     - title: Complex Table
       path: /complex-table
-      component: demo.view.ComplexTableComponent
+      component: demo.view.table.complex.ComplexTableComponent

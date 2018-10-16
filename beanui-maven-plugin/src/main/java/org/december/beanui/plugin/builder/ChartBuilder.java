@@ -1,9 +1,11 @@
 package org.december.beanui.plugin.builder;
 
 import org.december.beanui.chart.Config;
+import org.december.beanui.chart.annotation.RadarChart;
 import org.december.beanui.plugin.face.Builder;
 import org.december.beanui.plugin.face.exception.BuilderException;
 import org.december.beanui.plugin.face.exception.SpringReaderException;
+import org.december.beanui.plugin.face.util.TypeUtil;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -12,8 +14,13 @@ import java.lang.reflect.Proxy;
 import java.util.*;
 
 public class ChartBuilder extends Builder {
+    private Annotation fieldAnnotation;
+
     public Map run() throws BuilderException, SpringReaderException {
         final Map result = new HashMap();
+        if(fieldAnnotation.annotationType() == RadarChart.class) {
+            biuldOption(fieldAnnotation, result);
+        }
         Class chartClass = this.getTemplateClass();
         Annotation[] annotations = chartClass.getAnnotations();
         for (Annotation annotation:annotations) {
@@ -74,31 +81,28 @@ public class ChartBuilder extends Builder {
             while (iterator.hasNext()) {
                 String key = (String)iterator.next();
                 String value = (String)map.get(key);
-                if("".equals(value)) {
-                    continue;
-                }
                 if(Config.DEFAULT_PROPERTY.equals(value)) {
                     results.put(Config.DEFAULT_PROPERTY, key);
                 }
-                if(value.startsWith("$")) {
+                if("".equals(value)) {
+                    continue;
+                } else if(value.startsWith("$")) {
                     value = value.substring(1);
                     if(!value.contains(".")) {
                         value = "data." + value;
                     }
                     results.put(key, value);
                     continue;
-                }
-                if((value.startsWith("[") && value.endsWith("]")) || (value.startsWith("{") && value.endsWith("}"))) {
+                } else if(TypeUtil.isJSON(value) || TypeUtil.isNumber(value) || TypeUtil.isTrue(value) || TypeUtil.isFalse(value)) {
                     results.put(key, value);
                     continue;
-                }
-
-                if("tag".equals(key)) {
+                } else if("tag".equals(key)) {
                     results.put(key, value);
                     continue;
+                } else {
+                    results.put(key, "'" + value + "'");
                 }
 
-                results.put(key, "'" + value + "'");
             }
             return results;
         } catch (NoSuchFieldException e) {
@@ -107,5 +111,13 @@ public class ChartBuilder extends Builder {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Annotation getFieldAnnotation() {
+        return fieldAnnotation;
+    }
+
+    public void setFieldAnnotation(Annotation fieldAnnotation) {
+        this.fieldAnnotation = fieldAnnotation;
     }
 }

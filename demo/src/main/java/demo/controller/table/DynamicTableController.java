@@ -1,7 +1,7 @@
 package demo.controller.table;
 
-import demo.view.DynamicTableComponent;
-import demo.view.table.DynamicRow;
+import demo.view.table.dynamic.DynamicTableComponent;
+import demo.view.table.dynamic.DynamicRow;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;

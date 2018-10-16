@@ -1,7 +1,7 @@
 package demo.controller.table;
 
-import demo.view.InlineEditTableComponent;
-import demo.view.table.InlineEditRow;
+import demo.view.table.inline.InlineEditTableComponent;
+import demo.view.table.inline.InlineEditRow;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;

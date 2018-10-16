@@ -5,7 +5,7 @@ import org.december.beanui.chart.Config;
 import java.lang.annotation.*;
 
 @Documented
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD, ElementType.TYPE})
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface XAxis {

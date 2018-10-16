@@ -2,15 +2,16 @@ package demo.view.home;
 
 import org.december.beanui.chart.annotation.*;
 
-@Legend(data = "['expected', 'actual']")
-@XAxis(data = "$xAxisData", boundaryGap = "false")
 @YAxis
 @Grid(left = "1%", right = "1%", bottom = "1%", containLabel = "true")
 public class Chart1 {
+    @Legend
+    private String[] legendData = {"expected", "actual"};
     @LineChart.Series(name = "expected")
     private int[] line1;
     @LineChart.Series(name = "actual")
     private int[] line2;
+    @XAxis(boundaryGap = "false")
     private String[] xAxisData = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 
     public int[] getLine1() {
@@ -35,5 +36,13 @@ public class Chart1 {
 
     public void setxAxisData(String[] xAxisData) {
         this.xAxisData = xAxisData;
+    }
+
+    public String[] getLegendData() {
+        return legendData;
+    }
+
+    public void setLegendData(String[] legendData) {
+        this.legendData = legendData;
     }
 }

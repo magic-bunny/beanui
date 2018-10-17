@@ -2,7 +2,9 @@ package demo.view.home;
 
 import org.december.beanui.chart.KV;
 import org.december.beanui.chart.annotation.PieChart;
+import org.december.beanui.chart.annotation.Tooltip;
 
+@Tooltip(trigger = Tooltip.Trigger.ITEM)
 public class Chart3 {
     @PieChart.Series(roseType = PieChart.Series.RoseType.RADIUS)
     private KV[] data1;

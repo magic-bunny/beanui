@@ -17,4 +17,14 @@ public @interface Progress {
     String width() default "";//	环形进度条画布宽度（只在 type=circle 时可用）	number		126
     String show_text() default "";//	是否显示进度条文字内容	boolean	—	true
     String tag() default "el-progress";
+
+    class Type {
+        public static final String LINE = "line";
+        public static final String CIRCLE = "circle";
+    }
+
+    class Status {
+        public static final String SUCCESS = "success";
+        public static final String EXCEPTION = "exception";
+    }
 }

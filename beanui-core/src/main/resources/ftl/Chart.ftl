@@ -84,6 +84,8 @@ export default {
               }<#if series_has_next>,</#if>
               </#list>
             ]
+        <#elseif name='color'>
+            ${name}: ${options[name]['value']}
         <#else>
             ${name}: {
               <#list options[name]?keys as key>

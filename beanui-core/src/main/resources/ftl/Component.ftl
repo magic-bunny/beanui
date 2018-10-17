@@ -14,6 +14,7 @@
 <#include "/I18N.ftl">
 <#include "/Dialog.ftl">
 <#include "/Badge.ftl">
+<#include "/Link.ftl">
 <#include "/Tooltip.ftl">
 <#include "/Breadcrumb.ftl">
 <#include "/Card.ftl">

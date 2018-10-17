@@ -10,6 +10,7 @@ public class Element {
     private Map content;
     private Map badge;
     private Map tooltip;
+    private Map link;
     private List<Map> events;
     private String rules;
     private int[] subplot;
@@ -109,5 +110,13 @@ public class Element {
 
     public void setTooltip(Map tooltip) {
         this.tooltip = tooltip;
+    }
+
+    public Map getLink() {
+        return link;
+    }
+
+    public void setLink(Map link) {
+        this.link = link;
     }
 }

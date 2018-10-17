@@ -227,6 +227,8 @@ public class ComponentBuilder extends Builder {
                     if (annotation.annotationType() != FormItem.class) {
                         if(annotation.annotationType() == Badge.class) {
                             element.setBadge(ClassUtil.annotation2map(annotation));
+                        } else if (annotation.annotationType() == Link.class) {
+                            element.setLink(ClassUtil.annotation2map(annotation));
                         } else if (annotation.annotationType() == Tooltip.class) {
                             element.setTooltip(ClassUtil.annotation2map(annotation));
                         } else {
@@ -362,6 +364,8 @@ public class ComponentBuilder extends Builder {
                         isCompoent = true;
                         if(annotation.annotationType() == Badge.class) {
                             element.setBadge(ClassUtil.annotation2map(annotation));
+                        } else if(annotation.annotationType() == Link.class) {
+                            element.setLink(ClassUtil.annotation2map(annotation));
                         } else if(annotation.annotationType() == Tooltip.class) {
                             element.setTooltip(ClassUtil.annotation2map(annotation));
                         } else {

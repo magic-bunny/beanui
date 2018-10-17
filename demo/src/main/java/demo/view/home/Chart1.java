@@ -4,6 +4,7 @@ import org.december.beanui.chart.annotation.*;
 
 @YAxis
 @Grid(left = "1%", right = "1%", bottom = "1%", containLabel = "true")
+@Tooltip(trigger = Tooltip.Trigger.AXIS)
 public class Chart1 {
     @Legend
     private String[] legendData = {"expected", "actual"};

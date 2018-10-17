@@ -26,7 +26,9 @@ import request from '@/utils/request'
   export default {
     created: function() {
     this.created_Helloworld_Helloworld();
-        },
+    },
+    components: {
+    },
     data() {
       return {
             Helloworld_loading: false,

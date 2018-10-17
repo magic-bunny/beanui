@@ -1,4 +1,5 @@
 <#macro createSteps formId, scope, element>
+<@createLink scope=scope element=element>
 <@createBadge scope=scope element=element>
 <@createTooltip scope=scope element=element>
 <el-steps v-model="${scope}.${element.id}" <@createAttrs scope=scope content=element.content/> <@createEvents formId=formId element=element/>>
@@ -9,4 +10,5 @@
 </el-steps>
 </@createTooltip>
 </@createBadge>
+</@createLink>
 </#macro>

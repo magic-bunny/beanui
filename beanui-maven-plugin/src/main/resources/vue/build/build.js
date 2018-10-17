@@ -1,5 +1,5 @@
 'use strict'
-require('./check-versions')()
+//require('./check-versions')()
 
 const ora = require('ora')
 const rm = require('rimraf')

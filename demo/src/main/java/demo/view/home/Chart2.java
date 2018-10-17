@@ -3,10 +3,12 @@ package demo.view.home;
 import org.december.beanui.chart.KV;
 import org.december.beanui.chart.annotation.Legend;
 import org.december.beanui.chart.annotation.RadarChart;
+import org.december.beanui.chart.annotation.Tooltip;
 
+@Tooltip(trigger = Tooltip.Trigger.ITEM)
 public class Chart2 {
     @Legend
-    private String[] legendData = {"预算分配（Allocated Budget）", "实际开销（Actual Spending）"};
+    private String[] legendData = {"预算分配", "实际开销"};
 
     @RadarChart.Series
     private KV[] data1;

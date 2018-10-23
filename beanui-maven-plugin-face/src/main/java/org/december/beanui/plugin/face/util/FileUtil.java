@@ -6,6 +6,7 @@ import java.io.*;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -125,7 +126,7 @@ public class FileUtil {
      * @throws IOException
      */
     private static void copyFileResources(URL url, String folderPath,String targetFolderPath, Class clazz,  String[] filters) throws IOException {
-        File root = new File(url.getPath());
+        File root = new File(URLEncoder.encode(url.getPath(), "UTF-8"));
         if (root.isDirectory()) {
             File[] files = root.listFiles();
             for (File file : files) {

@@ -11,17 +11,18 @@ import org.december.beanui.plugin.builder.RouterBuilder;
 import org.december.beanui.plugin.face.Builder;
 import org.december.beanui.plugin.face.bean.Router;
 import org.december.beanui.plugin.face.exception.BuilderException;
+import org.december.beanui.plugin.face.util.ConsoleUtil;
 import org.december.beanui.plugin.face.util.FileUtil;
-import org.december.beanui.plugin.face.util.Platform;
 import org.december.beanui.plugin.face.util.PluginSystem;
 
 import java.io.File;
+import java.net.Socket;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
 import java.util.Map;
 
-@Mojo(name="bean2ui")
+@Mojo(name="run")
 public class Bean2UIMojo extends AbstractMojo {
 
     @Parameter(property = "routerPath")
@@ -34,7 +35,7 @@ public class Bean2UIMojo extends AbstractMojo {
     private String workPath = System.getProperty("user.dir") + File.separator + "vue";
 
     @Parameter(property = "nodePath")
-    private String nodePath = Platform.isWin()?System.getProperty("user.dir") + File.separator + "node":"";
+    private String nodePath = "";
 
     @Parameter(property = "projectName")
     private String projectName;
@@ -50,6 +51,15 @@ public class Bean2UIMojo extends AbstractMojo {
 
     public void execute() {
         try {
+            if(!new File(workPath).exists()) {
+                throw new BuilderException(workPath + " not found!");
+            }
+
+            if(new File(workPath).exists() && !new File(workPath + File.separator + "node_modules").exists()) {
+                getLog().info("\"" +  workPath +  "\" " + nodePath + File.separator + "npm install");
+                ConsoleUtil.exec(nodePath + "npm install", workPath);
+            }
+
             PluginSystem.setPropertie("routerPath", routerPath);
             PluginSystem.setPropertie("workPath", workPath);
             PluginSystem.setPropertie("staticPath", staticPath);
@@ -119,6 +129,25 @@ public class Bean2UIMojo extends AbstractMojo {
             langSelectBuilder.create();
 
             this.exec3RDBuilder(classLoader);
+
+            if("dev".equals(mode)) {
+                Socket socket = null;
+                try {
+                    socket = new Socket("localhost", 9527);
+                } catch (Exception e) {
+                    getLog().info("\"" +  workPath +  "\" " + "npm run dev");
+                    ConsoleUtil.exec(nodePath + "npm run build:prod", workPath);
+                } finally {
+                    socket.close();
+                }
+            }
+            if("prd".equals(mode)) {
+                getLog().info("\"" +  workPath +  "\" " + "npm run build:prod");
+                ConsoleUtil.exec(nodePath + "npm run build:prod",  workPath);
+                String oldPath = new File(workPath + File.separator + "dist").getPath();
+                String newPath = classLoader.getResource("").getPath() + File.separator + staticPath;
+                FileUtil.copyDir(oldPath, newPath);
+            }
         } catch (Exception e) {
             getLog().error(e.getMessage());
         }

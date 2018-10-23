@@ -196,4 +196,23 @@ public class ClassUtil {
         }
         return null;
     }
+
+    public static void copyProperties(Object source, Object target) {
+        Class sourceClass = source.getClass();
+        Class targetClass = target.getClass();
+        Field[] sourceFields = sourceClass.getDeclaredFields();
+        Field[] targetFields = targetClass.getDeclaredFields();
+        Field.setAccessible(sourceFields, true);
+        Field.setAccessible(targetFields, true);
+        for(Field sourceField:sourceFields) {
+            try {
+                Field targetField = targetClass.getDeclaredField(sourceField.getName());
+                targetField.set(target, sourceField.get(source));
+            } catch (NoSuchFieldException e) {
+                continue;
+            } catch (IllegalAccessException e) {
+                continue;
+            }
+        }
+    }
 }

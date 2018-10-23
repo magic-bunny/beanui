@@ -37,29 +37,6 @@
                         <version>1.0</version>
                     </dependency>
                 </dependencies>
-                <executions>
-                    <execution>
-                        <id>pre-bean2ui</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>pre-bean2ui</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>bean2ui</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>bean2ui</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>post-bean2ui</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>post-bean2ui</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

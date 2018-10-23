@@ -1,6 +1,7 @@
 .DS_Store
 demo/vue/node_modules
 single-demo/vue/node_modules
+vue/node_modules
 dist
 npm-debug.log*
 yarn-debug.log*

@@ -27,6 +27,9 @@
                 <groupId>org.december</groupId>
                 <artifactId>beanui-maven-plugin</artifactId>
                 <version>1.0</version>
+                <configuration>
+                    <mode>prd</mode>
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.december</groupId>

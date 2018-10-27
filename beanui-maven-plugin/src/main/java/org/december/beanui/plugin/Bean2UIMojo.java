@@ -136,7 +136,7 @@ public class Bean2UIMojo extends AbstractMojo {
                     socket = new Socket("localhost", 9527);
                 } catch (Exception e) {
                     getLog().info("\"" +  workPath +  "\" " + "npm run dev");
-                    ConsoleUtil.exec(nodePath + "npm run build:prod", workPath);
+                    ConsoleUtil.exec(nodePath + "npm run dev", workPath);
                 } finally {
                     socket.close();
                 }

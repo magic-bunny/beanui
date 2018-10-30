@@ -62,6 +62,18 @@ ${key}="${content[key]}"
 </#if>
 </#macro>
 
+<#macro createReturnData form>
+${form.id}_loading: false,
+${form.id}: {}
+<#if form.content[':rules']??>
+,${form.content[':rules']}: {
+<#list form.children as object>
+    <#if object.rules??>${object.id}: ${object.rules}<#if object_has_next>,</#if></#if>
+</#list>
+}
+</#if>
+</#macro>
+
 <#macro createEventMethods formId, element, isFirst>
 <#if element??>
 <#if element.events??>
@@ -186,31 +198,21 @@ import ${childComponent.name} from '${childComponent.path}'
     data() {
       return {
         <#list component.children as form>
-            <#if form.type='Dialog'>
-                <#assign form=form.children[0]>
-            </#if>
-            ${form.id}_loading: false,
-            ${form.id}: {}
-            <#if form.content[':rules']??>
-            ,${form.content[':rules']}: {
-            <#list form.children as object>
-                <#if object.rules??>${object.id}: ${object.rules}<#if object_has_next>,</#if></#if>
-            </#list>
-            }
-            </#if>
-            <#if form_has_next>
-            ,
-            </#if>
+            <#if form.type='Dialog' || form.type='Card' || form.type='Carousel'>
+                <@createReturnData form=form.children[0]/>
+            <#else>
+                <@createReturnData form=form/>
+            </#if><#if form_has_next>,</#if>
         </#list>
       }
     },
     methods: {
     <#list component.children as element>
-        <#if element.type='Dialog'>
-            <#assign element=element.children[0]>
-        </#if>
-        <@createEventMethods formId=element.id element=element isFirst=true/>
-        <#if element_has_next>,</#if>
+        <#if element.type='Dialog' || element.type='Card' || element.type='Carousel'>
+            <@createEventMethods formId=element.children[0].id element=element.children[0] isFirst=true/>
+        <#else>
+            <@createEventMethods formId=element.id element=element isFirst=true/>
+        </#if><#if element_has_next>,</#if>
     </#list>
     }
   }

@@ -38,6 +38,11 @@ public class TestForm {
     @Table()
     private List<UserRow> users;
 
+    @Cascader(options = "$cascaderOptions")
+    private String[] cascader;
+
+    private List<Cascader.Option> cascaderOptions;
+
     private String test;
 
     @Rate
@@ -175,5 +180,21 @@ public class TestForm {
 
     public void setTestChart(TestChart testChart) {
         this.testChart = testChart;
+    }
+
+    public String[] getCascader() {
+        return cascader;
+    }
+
+    public void setCascader(String[] cascader) {
+        this.cascader = cascader;
+    }
+
+    public List<Cascader.Option> getCascaderOptions() {
+        return cascaderOptions;
+    }
+
+    public void setCascaderOptions(List<Cascader.Option> cascaderOptions) {
+        this.cascaderOptions = cascaderOptions;
     }
 }

@@ -128,166 +128,80 @@
 <script>
 import request from '@/utils/request'
 
-  export default {
-    created: function() {
-    this.created_DynamicTableComponent_DynamicTableComponent();
-    },
-    components: {
-    },
-    data() {
-      return {
-            DynamicTableComponent_loading: false,
-            DynamicTableComponent: {}
-      }
-    },
-    methods: {
-    
+export default {
+  created: function() {
+    this.created_DynamicTableComponent_DynamicTableComponent()
+  },
+  components: {
+  },
+  data() {
+    return {
+      DynamicTableComponent_loading: false,
+      DynamicTableComponent: {}
+
+    }
+  },
+  methods: {
+
     created_DynamicTableComponent_DynamicTableComponent() {
-        var data = this.DynamicTableComponent;
-        function submitRequest(self) {
-            self.DynamicTableComponent_loading = true;
-            request({
-                url: "/dynamic-table/init",
-                method: "get"
-            }).then(res => {
-                self.DynamicTableComponent = res.data;
-                self.DynamicTableComponent_loading = false;
-            }).catch(err => {
-                self.DynamicTableComponent_loading = false;
-            });
-        }
-        submitRequest(this);
+      var data = this.DynamicTableComponent
+      function submitRequest(self) {
+        self.DynamicTableComponent_loading = true
+        request({
+          url: '/dynamic-table/init',
+          method: 'get'
+        }).then(res => {
+          self.DynamicTableComponent = res.data
+          self.DynamicTableComponent_loading = false
+        }).catch(err => {
+          self.DynamicTableComponent_loading = false
+        })
       }
-    
-
-
-    ,
+      submitRequest(this)
+    },
     placeholder_DynamicTableComponent_label1() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_DynamicTableComponent_checkbox1() {
-      }
-    
-
-
-
-
-    ,
+    },
     current_change_DynamicTableComponent_table1(val) {
-        this.DynamicTableComponent.table1 = [val];
+      this.DynamicTableComponent.table1 = [val]
     },
     selection_change__DynamicTableComponent_table1(val) {
-        this.DynamicTableComponent.table1 = val;
+      this.DynamicTableComponent.table1 = val
     },
     placeholder_DynamicTableComponent_table1() {
-      }
-    
-
-
-    ,
+    },
     placeholder_DynamicTableComponent_fruitName() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_DynamicTableComponent_apple() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_DynamicTableComponent_banana() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_DynamicTableComponent_orange() {
-      }
-    
-
-
-
-
-
-
-    ,
+    },
     placeholder_DynamicTableComponent_label2() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_DynamicTableComponent_checkbox2() {
-      }
-    
-
-
-
-
-    ,
+    },
     current_change_DynamicTableComponent_table2(val) {
-        this.DynamicTableComponent.table2 = [val];
+      this.DynamicTableComponent.table2 = [val]
     },
     selection_change__DynamicTableComponent_table2(val) {
-        this.DynamicTableComponent.table2 = val;
+      this.DynamicTableComponent.table2 = val
     },
     placeholder_DynamicTableComponent_table2() {
-      }
-    
-
-
-    ,
+    },
     placeholder_DynamicTableComponent_fruitName() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_DynamicTableComponent_apple() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_DynamicTableComponent_banana() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_DynamicTableComponent_orange() {
-      }
-    
-
-
-
-
-
-
-        
     }
+
   }
+}
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .DynamicTableComponent-container {

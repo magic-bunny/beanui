@@ -109,126 +109,66 @@ size="mini"
 <script>
 import request from '@/utils/request'
 
-  export default {
-    created: function() {
-    this.created_InlineEditTableComponent_InlineEditTableComponent();
-    },
-    components: {
-    },
-    data() {
-      return {
-            InlineEditTableComponent_loading: false,
-            InlineEditTableComponent: {}
-      }
-    },
-    methods: {
-    
+export default {
+  created: function() {
+    this.created_InlineEditTableComponent_InlineEditTableComponent()
+  },
+  components: {
+  },
+  data() {
+    return {
+      InlineEditTableComponent_loading: false,
+      InlineEditTableComponent: {}
+
+    }
+  },
+  methods: {
+
     created_InlineEditTableComponent_InlineEditTableComponent() {
-        var data = this.InlineEditTableComponent;
-        function submitRequest(self) {
-            self.InlineEditTableComponent_loading = true;
-            request({
-                url: "/inline-edit-table/init",
-                method: "get"
-            }).then(res => {
-                self.InlineEditTableComponent = res.data;
-                self.InlineEditTableComponent_loading = false;
-            }).catch(err => {
-                self.InlineEditTableComponent_loading = false;
-            });
-        }
-        submitRequest(this);
+      var data = this.InlineEditTableComponent
+      function submitRequest(self) {
+        self.InlineEditTableComponent_loading = true
+        request({
+          url: '/inline-edit-table/init',
+          method: 'get'
+        }).then(res => {
+          self.InlineEditTableComponent = res.data
+          self.InlineEditTableComponent_loading = false
+        }).catch(err => {
+          self.InlineEditTableComponent_loading = false
+        })
       }
-    
-
-
-    ,
+      submitRequest(this)
+    },
     current_change_InlineEditTableComponent_table(val) {
-        this.InlineEditTableComponent.table = [val];
+      this.InlineEditTableComponent.table = [val]
     },
     selection_change__InlineEditTableComponent_table(val) {
-        this.InlineEditTableComponent.table = val;
+      this.InlineEditTableComponent.table = val
     },
     placeholder_InlineEditTableComponent_table() {
-      }
-    
-
-
-    ,
+    },
     placeholder_InlineEditTableComponent_id() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_InlineEditTableComponent_date() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_InlineEditTableComponent_author() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_InlineEditTableComponent_importance() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_InlineEditTableComponent_readings() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_InlineEditTableComponent_title() {
-      }
-    
-
-
-    ,
+    },
     placeholder_InlineEditTableComponent_cancel() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_InlineEditTableComponent_status() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_InlineEditTableComponent_action() {
-      }
-    
-
-
-
-
-
-
-        
     }
+
   }
+}
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .InlineEditTableComponent-container {

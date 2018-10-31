@@ -27,6 +27,10 @@
     <@createSteps formId=formId scope=formId element=object/>
 <#elseif object.type="Dropdown">
     <@createDropdown formId=formId scope=formId element=object/>
+<#elseif object.type="Cascader">
+    <@createCascader formId=formId scope=formId element=object/>
+<#elseif object.type="Tree">
+    <@createTree formId=formId scope=formId element=object/>
 <#elseif object.type="Chart">
     <${object.content.name} :chart-data="${formId}.${object.id}"></${object.content.name}>
 <#else>

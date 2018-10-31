@@ -28,6 +28,10 @@
         <@createSteps formId=formId scope="scope.row" element=object/>
     <#elseif object.type="Dropdown">
         <@createDropdown formId=formId scope="scope.row" element=object/>
+    <#elseif object.type="Cascader">
+        <@createCascader formId=formId scope="scope.row" element=object/>
+    <#elseif object.type="Tree">
+        <@createTree formId=formId scope="scope.row" element=object/>
     <#else>
         <@createElement formId=formId scope="scope.row" element=object/>
     </#if>

@@ -4,6 +4,7 @@ import demo.view.test.test1.TestChart;
 import demo.view.test.test1.TestForm;
 import demo.view.test.test2.UserQueryForm;
 import demo.view.test.test2.UserRow;
+import org.december.beanui.element.annotation.Cascader;
 import org.december.beanui.element.annotation.Select;
 import org.december.beanui.element.annotation.Transfer;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -66,6 +67,16 @@ public class TestFormController {
 
         addressData.add(new Transfer.Data("1", "address1"));
         addressData.add(new Transfer.Data("2", "address2"));
+
+        List<Cascader.Option> cascaderOptions = new ArrayList<Cascader.Option>();
+        List<Cascader.Option> cascaderOptions2 = new ArrayList<Cascader.Option>();
+        cascaderOptions2.add(new Cascader.Option("3", "aa1"));
+        cascaderOptions2.add(new Cascader.Option("4", "aa2"));
+        cascaderOptions.add(new Cascader.Option("1", "a1", cascaderOptions2));
+        cascaderOptions.add(new Cascader.Option("2", "a2", cascaderOptions2));
+        testForm.setCascaderOptions(cascaderOptions);
+        String[] casscader = {"1", "3"};
+        testForm.setCascader(casscader);
 
         testForm.setOptions(options);
         testForm.setDetail("");

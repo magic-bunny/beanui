@@ -1,6 +1,7 @@
 package org.december.beanui.element.annotation;
 
 import java.lang.annotation.*;
+import java.util.List;
 
 @Documented
 @Target(ElementType.FIELD)
@@ -22,4 +23,63 @@ public @interface Cascader {
     String change_on_select() default "";//	是否允许选择任意一级的选项	boolean	—	false
     String size() default "";//	尺寸	string	medium / small / mini	—
     String before_filter() default "";//	筛选之前的钩子，参数为输入的值，若返回 false 或者返回 Promise 且被 reject，则停止筛选	function(value)	—	—
+    String label() default "";
+    String tag() default "el-cascader";
+
+    class Option {
+        public Option(String value, String label) {
+            this.value = value;
+            this.label = label;
+        }
+
+        public Option(String value, String label, List<Option> children) {
+            this.value = value;
+            this.label = label;
+            this.children = children;
+        }
+
+        public Option(String value, String label, boolean disabled, List<Option> children) {
+            this.value = value;
+            this.label = label;
+            this.disabled = disabled;
+            this.children = children;
+        }
+
+        private String value;
+        private String label;
+        private boolean disabled;
+        private List<Option> children;
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+
+        public void setLabel(String label) {
+            this.label = label;
+        }
+
+        public boolean isDisabled() {
+            return disabled;
+        }
+
+        public void setDisabled(boolean disabled) {
+            this.disabled = disabled;
+        }
+
+        public List<Option> getChildren() {
+            return children;
+        }
+
+        public void setChildren(List<Option> children) {
+            this.children = children;
+        }
+    }
 }

@@ -89,112 +89,62 @@ highlight-current-row="true"
 <script>
 import request from '@/utils/request'
 
-  export default {
-    created: function() {
-    this.created_DragTableComponent_DragTableComponent();
-    },
-    components: {
-    },
-    data() {
-      return {
-            DragTableComponent_loading: false,
-            DragTableComponent: {}
-      }
-    },
-    methods: {
-    
+export default {
+  created: function() {
+    this.created_DragTableComponent_DragTableComponent()
+  },
+  components: {
+  },
+  data() {
+    return {
+      DragTableComponent_loading: false,
+      DragTableComponent: {}
+
+    }
+  },
+  methods: {
+
     created_DragTableComponent_DragTableComponent() {
-        var data = this.DragTableComponent;
-        function submitRequest(self) {
-            self.DragTableComponent_loading = true;
-            request({
-                url: "/drag-table/init",
-                method: "get"
-            }).then(res => {
-                self.DragTableComponent = res.data;
-                self.DragTableComponent_loading = false;
-            }).catch(err => {
-                self.DragTableComponent_loading = false;
-            });
-        }
-        submitRequest(this);
+      var data = this.DragTableComponent
+      function submitRequest(self) {
+        self.DragTableComponent_loading = true
+        request({
+          url: '/drag-table/init',
+          method: 'get'
+        }).then(res => {
+          self.DragTableComponent = res.data
+          self.DragTableComponent_loading = false
+        }).catch(err => {
+          self.DragTableComponent_loading = false
+        })
       }
-    
-
-
-    ,
+      submitRequest(this)
+    },
     current_change_DragTableComponent_table(val) {
-        this.DragTableComponent.table = [val];
+      this.DragTableComponent.table = [val]
     },
     selection_change__DragTableComponent_table(val) {
-        this.DragTableComponent.table = val;
+      this.DragTableComponent.table = val
     },
     placeholder_DragTableComponent_table() {
-      }
-    
-
-
-    ,
+    },
     placeholder_DragTableComponent_id() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_DragTableComponent_date() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_DragTableComponent_title() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_DragTableComponent_author() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_DragTableComponent_importance() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_DragTableComponent_readings() {
-      }
-    
-
-
-
-
-    ,
+    },
     placeholder_DragTableComponent_status() {
-      }
-    
-
-
-
-
-
-
-        
     }
+
   }
+}
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .DragTableComponent-container {

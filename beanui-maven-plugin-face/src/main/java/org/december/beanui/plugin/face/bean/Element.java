@@ -14,6 +14,7 @@ public class Element {
     private List<Map> events;
     private String rules;
     private int[] subplot;
+    private String init;
     private List<Element> children;
 
     public Element() {
@@ -118,5 +119,13 @@ public class Element {
 
     public void setLink(Map link) {
         this.link = link;
+    }
+
+    public String getInit() {
+        return init;
+    }
+
+    public void setInit(String init) {
+        this.init = init;
     }
 }

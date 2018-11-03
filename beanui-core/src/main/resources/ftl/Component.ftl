@@ -35,15 +35,7 @@ ${key}="${content[key]}"
 </#if></#list>
 </#macro>
 
-<#macro createEvents formId, element>
-<#if element.events??>
-<#list element.events as event>
-<#if event.type!='placeholder'>
-@${event.type}="${event.type}_${formId}_${element.id}"
-</#if>
-</#list>
-</#if>
-</#macro>
+<#macro createEvents formId, element><#if element.events??><#list element.events as event><#if event.type!='placeholder'> @${event.type}="${event.type}_${formId}_${element.id}"</#if></#list></#if></#macro>
 
 <#macro createCreatedEventMethods formId, element>
 <#if element??>
@@ -66,7 +58,7 @@ ${key}="${content[key]}"
 
 <#macro createReturnData form>
 ${form.id}_loading: false,
-${form.id}: {}
+${form.id}: ${form.init}
 <#if form.content[':rules']??>
 ,${form.content[':rules']}: {
 <#list form.children as object>
@@ -170,7 +162,13 @@ ${form.id}: {}
         <@createDialog element=object/>
     </#if>
     <#if object.type='Card'>
-        <@createCard element=object/>
+        <@createCard element=object>
+        <#list object.children as child>
+        <#if child.type="Form">
+        <@createForm element=child/>
+        </#if>
+        </#list>
+        </@createCard>
     </#if>
     <#if object.type='Carousel'>
         <@createCarousel element=object/>

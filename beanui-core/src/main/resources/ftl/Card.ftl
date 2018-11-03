@@ -10,10 +10,6 @@ ${key}="${element.content[key]}"
         <span>${element.content.title}</span>
     </div>
     </#if>
-    <#list element.children as child>
-    <#if child.type="Form">
-    <@createForm element=child/>
-    </#if>
-    </#list>
+    <#nested>
 </el-card>
 </#macro>

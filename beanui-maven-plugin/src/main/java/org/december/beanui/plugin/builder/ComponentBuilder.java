@@ -1,5 +1,6 @@
 package org.december.beanui.plugin.builder;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.december.beanui.chart.annotation.LineChart;
@@ -29,7 +30,20 @@ public class ComponentBuilder extends Builder {
 
     private List<Map> childComponents = new ArrayList();
 
+    private ObjectMapper objectMapper = new ObjectMapper();
+
     public Map run() throws BuilderException {
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        Map jsonEditor = new HashMap() {{
+           put("name", "JsonEditor");
+           put("path", "@/components/JsonEditor");
+        }};
+        Map markdownEditor = new HashMap() {{
+            put("name", "MarkdownEditor");
+            put("path", "@/components/MarkdownEditor");
+        }};
+        childComponents.add(jsonEditor);
+        childComponents.add(markdownEditor);
         Map result = new HashMap();
         try {
             int[] defaultSubplot = {1, 1, 1};
@@ -145,12 +159,13 @@ public class ComponentBuilder extends Builder {
         return result;
     }
 
-    private Element buildForm(String formId, Class formType, Annotation[] formAnnotations) throws SpringReaderException, IllegalAccessException, NoSuchFieldException, JsonProcessingException, BuilderException {
+    private Element buildForm(String formId, Class formType, Annotation[] formAnnotations) throws SpringReaderException, IllegalAccessException, NoSuchFieldException, JsonProcessingException, BuilderException, InstantiationException {
         if(formType.getAnnotation(Form.class) == null) {
             throw new BuilderException(formType.getName() + " is note a Form");
         }
 
         Element element = new Element();
+        element.setInit(objectMapper.writeValueAsString(formType.newInstance()));
         List<Map> events = new ArrayList<Map>();
         for (Annotation formAnnotation : formAnnotations) {
             if (Created.class.getPackage().getName().equals(formAnnotation.annotationType().getPackage().getName())) {

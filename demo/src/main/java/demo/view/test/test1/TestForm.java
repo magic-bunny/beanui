@@ -11,6 +11,8 @@ import org.december.beanui.event.annotation.Created;
 import org.december.beanui.i18n.annotation.I18N;
 import org.december.beanui.rule.annotation.Rule;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,7 +43,7 @@ public class TestForm {
     @Cascader(options = "$cascaderOptions")
     private String[] cascader;
 
-    private List<Cascader.Option> cascaderOptions;
+    private List<Cascader.Option> cascaderOptions = new ArrayList<Cascader.Option>();
 
     private String test;
 
@@ -60,6 +62,9 @@ public class TestForm {
 
     @LineChart
     private TestChart testChart;
+
+    @Upload(icon = Icon.UPLOAD, text = "将文件拖到此处", drag = "true")
+    private File file;
 
     @FormItem(prop = "test")
     @Click(rest = TestFormController.class, func = "test3")
@@ -196,5 +201,13 @@ public class TestForm {
 
     public void setCascaderOptions(List<Cascader.Option> cascaderOptions) {
         this.cascaderOptions = cascaderOptions;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 }

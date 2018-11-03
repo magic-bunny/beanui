@@ -31,3 +31,13 @@ children:
     - title: Complex Table
       path: /complex-table
       component: demo.view.table.complex.ComplexTableComponent
+  - title: Component
+    icon: component
+    path: /component
+    children:
+    - title: JSON Editor
+      path: /json-editor
+      component: demo.view.component.JsonEditorComponent
+    - title: Markdown Editor
+      path: /markdown-editor
+      component: demo.view.component.MarkdownEditorComponent

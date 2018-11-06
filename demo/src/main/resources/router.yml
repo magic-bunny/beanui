@@ -35,6 +35,9 @@ children:
     icon: component
     path: /component
     children:
+    - title: Word Editor
+      path: /word-editor
+      component: demo.view.component.WordEditorComponent
     - title: JSON Editor
       path: /json-editor
       component: demo.view.component.JsonEditorComponent

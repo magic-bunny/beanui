@@ -42,8 +42,18 @@ public class ComponentBuilder extends Builder {
             put("name", "MarkdownEditor");
             put("path", "@/components/MarkdownEditor");
         }};
+        Map backToTop = new HashMap() {{
+            put("name", "BackToTop");
+            put("path", "@/components/BackToTop");
+        }};
+        Map tinymce = new HashMap() {{
+            put("name", "Tinymce");
+            put("path", "@/components/Tinymce");
+        }};
         childComponents.add(jsonEditor);
         childComponents.add(markdownEditor);
+        childComponents.add(backToTop);
+        childComponents.add(tinymce);
         Map result = new HashMap();
         try {
             int[] defaultSubplot = {1, 1, 1};

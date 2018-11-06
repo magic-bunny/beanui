@@ -1,17 +1,17 @@
 path: /login
 component: demo.view.LoginComponent
 children:
-  - title: home
+  - title: Home
     icon: star
     component: demo.view.home.Dashboard
   - path: /test
-    title: test
+    title: Test
     icon: example
     children:
-    - title: test1
+    - title: Test1
       path: /test1
       component: demo.view.test.test1.TestComponent
-    - title: test2
+    - title: Test2
       path: /test2
       component: demo.view.test.test2.ABCDComponent
   - title: Table

@@ -8,7 +8,6 @@
   }
   // 侧边栏
   .sidebar-container {
-    background: #304156;
     transition: width 0.28s;
     width: 180px !important;
     height: 100%;
@@ -17,7 +16,6 @@
     top: 0;
     bottom: 0;
     left: 0;
-    padding: 20px 0 0 0;
     z-index: 1001;
     overflow: hidden;
     //reset element-ui css
@@ -26,6 +24,9 @@
     }
     .scrollbar-wrapper {
       overflow-x: hidden!important;
+      .el-scrollbar__view {
+        height: 100%;
+      }
     }
     .is-horizontal {
       display: none;

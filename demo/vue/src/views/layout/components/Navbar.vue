@@ -1,9 +1,7 @@
 <template>
   <el-menu class="navbar" mode="horizontal">
-    <div style="font-size: 18px; font-weight: 300; color: rgb(48, 65, 86); float: left; display: inline-block; margin-left: 10px; margin-right: 10px;">BEANUI example</div>
-
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
-
+    <div style="font-size: 18px; font-weight: 300; color: rgb(48, 65, 86); float: left; display: inline-block; margin-left: 10px; margin-right: 10px;">BEANUI example</div>
     <breadcrumb class="breadcrumb-container"></breadcrumb>
 
     <div class="right-menu">

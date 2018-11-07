@@ -154,13 +154,22 @@ placeholder="请选择"
 >
     <demo_view_test_test1_testchart :chart-data="testForm.testChart"></demo_view_test_test1_testchart>
 </el-form-item>
+<el-form-item prop="file"
+  label=""
+>
+<el-upload icon="el-icon-upload"
+drag="true"
+ >
+  <i class="el-icon-upload"></i>
+  <div class="el-upload__text">将文件拖到此处</div>
+</el-upload>
+</el-form-item>
 <el-form-item prop="test"
   label=""
 >
 <el-button icon="el-icon-upload"
 type="primary"
- @click="click_testForm_button"
->
+  @click="click_testForm_button">
     upload
 </el-button>
 <el-button  >
@@ -316,13 +325,22 @@ placeholder="请选择"
 >
     <demo_view_test_test1_testchart :chart-data="testForm2.testChart"></demo_view_test_test1_testchart>
 </el-form-item>
+<el-form-item prop="file"
+  label=""
+>
+<el-upload icon="el-icon-upload"
+drag="true"
+ >
+  <i class="el-icon-upload"></i>
+  <div class="el-upload__text">将文件拖到此处</div>
+</el-upload>
+</el-form-item>
 <el-form-item prop="test"
   label=""
 >
 <el-button icon="el-icon-upload"
 type="primary"
- @click="click_testForm2_button"
->
+  @click="click_testForm2_button">
     upload
 </el-button>
 <el-button  >
@@ -333,193 +351,480 @@ type="primary"
 </el-card>
 </el-col>
 </el-row>
+<el-tooltip placement="top" content="Back to top">
+  <back-to-top transitionName="fade" :customStyle="myBackToTopStyle" :visibilityHeight="300" :backPosition="50"></back-to-top>
+</el-tooltip>
 </div>
 </div>
 </template>
 <script>
 import request from '@/utils/request'
+import JsonEditor from '@/components/JsonEditor'
+import MarkdownEditor from '@/components/MarkdownEditor'
+import BackToTop from '@/components/BackToTop'
+import Tinymce from '@/components/Tinymce'
 import demo_view_test_test1_testchart from './demo.view.test.test1.TestChart'
 
-export default {
-  created: function() {
-    this.created_testForm_testForm()
-    this.created_testForm2_testForm2()
-  },
-  components: {
-    demo_view_test_test1_testchart
-  },
-  data() {
-    return {
-      testForm_loading: false,
-      testForm: {},
-      testForm_rules: {
-        username: [{ 'min': '', 'len': '', 'max': '', 'pattern': '', 'trigger': '', 'type': '', 'message': '', 'required': 'true' }],
-        password: [{ 'min': '', 'len': '', 'max': '', 'pattern': '', 'trigger': '', 'type': '', 'message': '', 'required': 'true' }]
-
-      },
-      testForm2_loading: false,
-      testForm2: {},
-      testForm2_rules: {
-        username: [{ 'min': '', 'len': '', 'max': '', 'pattern': '', 'trigger': '', 'type': '', 'message': '', 'required': 'true' }],
-        password: [{ 'min': '', 'len': '', 'max': '', 'pattern': '', 'trigger': '', 'type': '', 'message': '', 'required': 'true' }]
+  export default {
+    created: function() {
+    this.created_testForm_testForm();
+    this.created_testForm2_testForm2();
+    },
+    components: {
+        JsonEditor,
+        MarkdownEditor,
+        BackToTop,
+        Tinymce,
+        demo_view_test_test1_testchart
+    },
+    data() {
+      return {
+        myBackToTopStyle: {
+            right: '50px',
+            bottom: '50px',
+            width: '40px',
+            height: '40px',
+            'border-radius': '4px',
+            'line-height': '45px',
+            background: '#e7eaf1'
+        },
+testForm_loading: false,
+testForm: {"cascaderOptions":[],"level":0,"admin":false}
+,testForm_rules: {
+    username: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
+    password: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+,
+testForm2_loading: false,
+testForm2: {"cascaderOptions":[],"level":0,"admin":false}
+,testForm2_rules: {
+    username: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
+    password: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
 
       }
-
-    }
-  },
-  methods: {
-
+    },
+    methods: {
+    
     created_testForm_testForm() {
-      var data = this.testForm
-      function submitRequest(self) {
-        self.testForm_loading = true
-        request({
-          url: '/demo3',
-          method: 'get'
-        }).then(res => {
-          self.testForm = res.data
-          self.testForm_loading = false
-        }).catch(err => {
-          self.testForm_loading = false
-        })
+        var data = this.testForm;
+        function submitRequest(self) {
+            self.testForm_loading = true;
+            request({
+                url: "/demo3",
+                method: "get"
+            }).then(res => {
+                self.testForm = res.data;
+                self.testForm_loading = false;
+            }).catch(err => {
+                self.testForm_loading = false;
+            });
+        }
+        submitRequest(this);
       }
-      submitRequest(this)
-    },
+    
+
+
+    ,
     placeholder_testForm_username() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_password() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_isAdmin() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_lastDate() {
-    },
+      }
+    
+
+
+
+
+    ,
     current_change_testForm_users(val) {
-      this.testForm.users = [val]
+        this.testForm.users = [val];
     },
     selection_change__testForm_users(val) {
-      this.testForm.users = val
+        this.testForm.users = val;
     },
     placeholder_testForm_users() {
-    },
+      }
+    
+
+
+    ,
     placeholder_testForm_id() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_name() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_age() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_stature() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_weight() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_lastDate() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_option() {
-    },
+      }
+    
+
+
+
+
+
+
+    ,
     placeholder_testForm_cascader() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_level() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_detail() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_address() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_testChart() {
-    },
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm_file() {
+      }
+    
+
+
+
+
+    ,
     click_testForm_button() {
-      var data = this.testForm
-      function submitRequest(self) {
-        self.testForm_loading = true
-        request({
-          url: '/demo3',
-          method: 'get'
-        }).then(res => {
-          self.testForm = res.data
-          self.testForm_loading = false
-        }).catch(err => {
-          self.testForm_loading = false
-        })
+        var data = this.testForm;
+        function submitRequest(self) {
+            self.testForm_loading = true;
+            request({
+                url: "/demo3",
+                method: "get"
+            }).then(res => {
+                self.testForm = res.data;
+                self.testForm_loading = false;
+            }).catch(err => {
+                self.testForm_loading = false;
+            });
+        }
+        submitRequest(this);
       }
-      submitRequest(this)
-    },
+    
+
+
+    ,
     placeholder_testForm_button2() {
-    },
-    created_testForm2_testForm2() {
-      var data = this.testForm2
-      function submitRequest(self) {
-        self.testForm2_loading = true
-        request({
-          url: '/demo3',
-          method: 'get'
-        }).then(res => {
-          self.testForm2 = res.data
-          self.testForm2_loading = false
-        }).catch(err => {
-          self.testForm2_loading = false
-        })
       }
-      submitRequest(this)
-    },
+    
+
+
+
+
+,
+    
+    created_testForm2_testForm2() {
+        var data = this.testForm2;
+        function submitRequest(self) {
+            self.testForm2_loading = true;
+            request({
+                url: "/demo3",
+                method: "get"
+            }).then(res => {
+                self.testForm2 = res.data;
+                self.testForm2_loading = false;
+            }).catch(err => {
+                self.testForm2_loading = false;
+            });
+        }
+        submitRequest(this);
+      }
+    
+
+
+    ,
     placeholder_testForm2_username() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm2_password() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm2_isAdmin() {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm2_lastDate() {
-    },
+      }
+    
+
+
+
+
+    ,
     current_change_testForm2_users(val) {
-      this.testForm2.users = [val]
+        this.testForm2.users = [val];
     },
     selection_change__testForm2_users(val) {
-      this.testForm2.users = val
+        this.testForm2.users = val;
     },
     placeholder_testForm2_users() {
-    },
-    placeholder_testForm2_id() {
-    },
-    placeholder_testForm2_name() {
-    },
-    placeholder_testForm2_age() {
-    },
-    placeholder_testForm2_stature() {
-    },
-    placeholder_testForm2_weight() {
-    },
-    placeholder_testForm2_lastDate() {
-    },
-    placeholder_testForm2_option() {
-    },
-    placeholder_testForm2_cascader() {
-    },
-    placeholder_testForm2_level() {
-    },
-    placeholder_testForm2_detail() {
-    },
-    placeholder_testForm2_address() {
-    },
-    placeholder_testForm2_testChart() {
-    },
-    click_testForm2_button() {
-      var data = this.testForm2
-      function submitRequest(self) {
-        self.testForm2_loading = true
-        request({
-          url: '/demo3',
-          method: 'get'
-        }).then(res => {
-          self.testForm2 = res.data
-          self.testForm2_loading = false
-        }).catch(err => {
-          self.testForm2_loading = false
-        })
       }
-      submitRequest(this)
-    },
-    placeholder_testForm2_button2() {
-    }
+    
 
+
+    ,
+    placeholder_testForm2_id() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_name() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_age() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_stature() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_weight() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_lastDate() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_option() {
+      }
+    
+
+
+
+
+
+
+    ,
+    placeholder_testForm2_cascader() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_level() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_detail() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_address() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_testChart() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_file() {
+      }
+    
+
+
+
+
+    ,
+    click_testForm2_button() {
+        var data = this.testForm2;
+        function submitRequest(self) {
+            self.testForm2_loading = true;
+            request({
+                url: "/demo3",
+                method: "get"
+            }).then(res => {
+                self.testForm2 = res.data;
+                self.testForm2_loading = false;
+            }).catch(err => {
+                self.testForm2_loading = false;
+            });
+        }
+        submitRequest(this);
+      }
+    
+
+
+    ,
+    placeholder_testForm2_button2() {
+      }
+    
+
+
+
+
+
+    }
   }
-}
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .TestComponent-container {

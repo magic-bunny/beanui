@@ -1,5 +1,7 @@
 <template>
   <el-menu class="navbar" mode="horizontal">
+    <div style="font-size: 18px; font-weight: 300; color: rgb(48, 65, 86); float: left; display: inline-block; margin-left: 10px; margin-right: 10px;">BEANUI example</div>
+
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
 
     <breadcrumb class="breadcrumb-container"></breadcrumb>
@@ -7,23 +9,15 @@
     <div class="right-menu">
       <error-log class="errLog-container right-menu-item"></error-log>
 
-      <!--
-      <el-tooltip effect="dark" :content="screenfull" placement="bottom">
+      <el-tooltip effect="dark" :content="$t('navbar.screenfull')" placement="bottom">
         <screenfull class="screenfull right-menu-item"></screenfull>
       </el-tooltip>
-      -->
 
       <lang-select class="international right-menu-item"></lang-select>
 
-      <!--
-      <el-tooltip effect="dark" :content="theme" placement="bottom">
+      <el-tooltip effect="dark" :content="$t('navbar.theme')" placement="bottom">
         <theme-picker class="theme-switch right-menu-item"></theme-picker>
       </el-tooltip>
-      -->
-
-      <el-input class="right-menu-item search" placeholder="Search" suffix-icon="el-icon-search" size="mini"></el-input>
-
-      <span class="right-menu-item username">{{name}}</span>
 
       <el-dropdown class="avatar-container right-menu-item" trigger="click">
         <div class="avatar-wrapper">
@@ -33,11 +27,16 @@
         <el-dropdown-menu slot="dropdown">
           <router-link to="/">
             <el-dropdown-item>
-              Your settings
+              {{$t('navbar.dashboard')}}
             </el-dropdown-item>
           </router-link>
+          <a target='_blank' href="https://github.com/PanJiaChen/vue-element-admin/">
+            <el-dropdown-item>
+              {{$t('navbar.github')}}
+            </el-dropdown-item>
+          </a>
           <el-dropdown-item divided>
-            <span @click="logout" style="display:block;">Log out</span>
+            <span @click="logout" style="display:block;">{{$t('navbar.logOut')}}</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -116,15 +115,6 @@ export default {
     }
     .international{
       vertical-align: top;
-    }
-    .username {
-      vertical-align: top;
-      color:#606266;
-      font-size: 14px;
-    }
-    .search {
-      vertical-align: top;
-      width: 150px;
     }
     .theme-switch {
       vertical-align: 15px;

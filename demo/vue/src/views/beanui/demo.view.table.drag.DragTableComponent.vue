@@ -83,68 +83,139 @@ highlight-current-row="true"
 </el-form>
 </el-col>
 </el-row>
+<el-tooltip placement="top" content="Back to top">
+  <back-to-top transitionName="fade" :customStyle="myBackToTopStyle" :visibilityHeight="300" :backPosition="50"></back-to-top>
+</el-tooltip>
 </div>
 </div>
 </template>
 <script>
 import request from '@/utils/request'
+import JsonEditor from '@/components/JsonEditor'
+import MarkdownEditor from '@/components/MarkdownEditor'
+import BackToTop from '@/components/BackToTop'
+import Tinymce from '@/components/Tinymce'
 
-export default {
-  created: function() {
-    this.created_DragTableComponent_DragTableComponent()
-  },
-  components: {
-  },
-  data() {
-    return {
-      DragTableComponent_loading: false,
-      DragTableComponent: {}
-
-    }
-  },
-  methods: {
-
-    created_DragTableComponent_DragTableComponent() {
-      var data = this.DragTableComponent
-      function submitRequest(self) {
-        self.DragTableComponent_loading = true
-        request({
-          url: '/drag-table/init',
-          method: 'get'
-        }).then(res => {
-          self.DragTableComponent = res.data
-          self.DragTableComponent_loading = false
-        }).catch(err => {
-          self.DragTableComponent_loading = false
-        })
+  export default {
+    created: function() {
+    this.created_DragTableComponent_DragTableComponent();
+    },
+    components: {
+        JsonEditor,
+        MarkdownEditor,
+        BackToTop,
+        Tinymce
+    },
+    data() {
+      return {
+        myBackToTopStyle: {
+            right: '50px',
+            bottom: '50px',
+            width: '40px',
+            height: '40px',
+            'border-radius': '4px',
+            'line-height': '45px',
+            background: '#e7eaf1'
+        },
+DragTableComponent_loading: false,
+DragTableComponent: {}
+            
       }
-      submitRequest(this)
-    },
+    },
+    methods: {
+    
+    created_DragTableComponent_DragTableComponent() {
+        var data = this.DragTableComponent;
+        function submitRequest(self) {
+            self.DragTableComponent_loading = true;
+            request({
+                url: "/drag-table/init",
+                method: "get"
+            }).then(res => {
+                self.DragTableComponent = res.data;
+                self.DragTableComponent_loading = false;
+            }).catch(err => {
+                self.DragTableComponent_loading = false;
+            });
+        }
+        submitRequest(this);
+      }
+    
+
+
+    ,
     current_change_DragTableComponent_table(val) {
-      this.DragTableComponent.table = [val]
+        this.DragTableComponent.table = [val];
     },
     selection_change__DragTableComponent_table(val) {
-      this.DragTableComponent.table = val
+        this.DragTableComponent.table = val;
     },
     placeholder_DragTableComponent_table() {
-    },
-    placeholder_DragTableComponent_id() {
-    },
-    placeholder_DragTableComponent_date() {
-    },
-    placeholder_DragTableComponent_title() {
-    },
-    placeholder_DragTableComponent_author() {
-    },
-    placeholder_DragTableComponent_importance() {
-    },
-    placeholder_DragTableComponent_readings() {
-    },
-    placeholder_DragTableComponent_status() {
-    }
+      }
+    
 
+
+    ,
+    placeholder_DragTableComponent_id() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_DragTableComponent_date() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_DragTableComponent_title() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_DragTableComponent_author() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_DragTableComponent_importance() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_DragTableComponent_readings() {
+      }
+    
+
+
+
+
+    ,
+    placeholder_DragTableComponent_status() {
+      }
+    
+
+
+
+
+
+
+        
+    }
   }
-}
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .DragTableComponent-container {

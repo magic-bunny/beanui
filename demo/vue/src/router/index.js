@@ -32,16 +32,16 @@ export default new Router({
 export const asyncRouterMap = [
     {
         path: '',
-        name: 'home',
+        name: 'Home',
         component: Layout
         ,redirect: '/index',
         children: [
             {
                 path: 'index',
                 component:() => import('@/views/beanui/demo.view.home.Dashboard'),
-                name: 'home',
+                name: 'Home',
                 meta: {
-                  title: 'home'
+                  title: 'Home'
                   ,icon: 'star'
                   
                 }
@@ -51,21 +51,21 @@ export const asyncRouterMap = [
     ,
     {
         path: '/test',
-        name: 'test',
+        name: 'Test',
         component: Layout
         ,alwaysShow: true,
         meta: {
-          title: 'test'
+          title: 'Test'
           ,icon: 'example'
           
         }
         ,children: [
       {
         path: '/test1',
-        name: 'test1'
+        name: 'Test1'
         ,component: () => import('@/views/beanui/demo.view.test.test1.TestComponent')
         ,meta: {
-          title: 'test1'
+          title: 'Test1'
           
           
         }
@@ -74,10 +74,10 @@ export const asyncRouterMap = [
       ,
       {
         path: '/test2',
-        name: 'test2'
+        name: 'Test2'
         ,component: () => import('@/views/beanui/demo.view.test.test2.ABCDComponent')
         ,meta: {
-          title: 'test2'
+          title: 'Test2'
           
           
         }
@@ -141,6 +141,57 @@ export const asyncRouterMap = [
         ,component: () => import('@/views/beanui/demo.view.table.complex.ComplexTableComponent')
         ,meta: {
           title: 'Complex Table'
+          
+          
+        }
+        
+      }
+      
+]
+
+    }
+    ,
+    {
+        path: '/component',
+        name: 'Component',
+        component: Layout
+        ,alwaysShow: true,
+        meta: {
+          title: 'Component'
+          ,icon: 'component'
+          
+        }
+        ,children: [
+      {
+        path: '/word-editor',
+        name: 'Word Editor'
+        ,component: () => import('@/views/beanui/demo.view.component.WordEditorComponent')
+        ,meta: {
+          title: 'Word Editor'
+          
+          
+        }
+        
+      }
+      ,
+      {
+        path: '/json-editor',
+        name: 'JSON Editor'
+        ,component: () => import('@/views/beanui/demo.view.component.JsonEditorComponent')
+        ,meta: {
+          title: 'JSON Editor'
+          
+          
+        }
+        
+      }
+      ,
+      {
+        path: '/markdown-editor',
+        name: 'Markdown Editor'
+        ,component: () => import('@/views/beanui/demo.view.component.MarkdownEditorComponent')
+        ,meta: {
+          title: 'Markdown Editor'
           
           
         }

@@ -7,6 +7,7 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Iframe {
+    String label() default "";
     String tag() default "iframe";
     String src() default "";
     String height() default "";

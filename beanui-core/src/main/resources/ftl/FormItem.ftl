@@ -31,6 +31,8 @@
     <@createCascader formId=formId scope=formId element=object/>
 <#elseif object.type="Tree">
     <@createTree formId=formId scope=formId element=object/>
+<#elseif object.type="HTML">
+    <@createHTML formId=formId scope=formId element=object/>
 <#elseif object.type="Iframe">
     <@createIframe formId=formId scope=formId element=object/>
 <#elseif object.type="Chart">

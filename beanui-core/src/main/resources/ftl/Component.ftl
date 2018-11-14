@@ -25,6 +25,7 @@
 <#include "/Cascader.ftl">
 <#include "/Tree.ftl">
 <#include "/Iframe.ftl">
+<#include "/HTML.ftl">
 
 <#macro createAttrs scope, content>
 <#list content?keys as key><#if content[key]!='' && key!='label' && key!=':label' && key!='tag' && key!='text'>

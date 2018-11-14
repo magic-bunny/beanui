@@ -143,19 +143,19 @@ width="240"
 size="mini"
 style="position: absolute;left: 0px;top: 10px;"
   @click="click_complexTableDataForm_actionEdit">
-    Edit
+{{scope.row.actionEdit}}
 </el-button>
 <el-button type="success"
 size="mini"
 style="position: absolute;left: 60px;top: 10px;"
  >
-    Publish
+{{scope.row.actionPublish}}
 </el-button>
 <el-button type="danger"
 size="mini"
 style="position: absolute;left: 150px;top: 10px;"
  >
-    Delete
+{{scope.row.actionDelete}}
 </el-button>
     </template>
     </el-table-column>
@@ -265,10 +265,16 @@ complexTableDataForm: {}
     
     created_complexTableDataForm_complexTableDataForm() {
         var data = this.complexTableDataForm;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.complexTableDataForm_loading = true;
             request({
-                url: "/complex-table/init-complex-table-data-form",
+                url: "/complex-table/init-complex-table-data-form" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.complexTableDataForm = res.data;
@@ -329,10 +335,16 @@ complexTableDataForm: {}
     ,
     click_complexTableDataForm_readings() {
         var data = this.complexTableDataForm;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.complexTableDataForm_loading = true;
             request({
-                url: "/complex-table/init-complex-table-edit-form",
+                url: "/complex-table/init-complex-table-edit-form" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.complexTableEditForm = res.data;
@@ -367,10 +379,16 @@ complexTableDataForm: {}
     ,
     click_complexTableDataForm_actionEdit() {
         var data = this.complexTableDataForm;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.complexTableDataForm_loading = true;
             request({
-                url: "/complex-table/init-complex-table-edit-form",
+                url: "/complex-table/init-complex-table-edit-form" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.complexTableEditForm = res.data;

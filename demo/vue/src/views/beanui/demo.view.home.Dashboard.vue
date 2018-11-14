@@ -245,10 +245,16 @@ top5Form: {"vue":0,"javascript":0,"css":0,"eslint":0}
     
     created_chartForm1_chartForm1() {
         var data = this.chartForm1;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.chartForm1_loading = true;
             request({
-                url: "dashboard/init_form1",
+                url: "dashboard/init_form1" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.chartForm1 = res.data;
@@ -274,10 +280,16 @@ top5Form: {"vue":0,"javascript":0,"css":0,"eslint":0}
     
     created_chartForm2_chartForm2() {
         var data = this.chartForm2;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.chartForm2_loading = true;
             request({
-                url: "dashboard/init_form2",
+                url: "dashboard/init_form2" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.chartForm2 = res.data;
@@ -303,10 +315,16 @@ top5Form: {"vue":0,"javascript":0,"css":0,"eslint":0}
     
     created_chartForm3_chartForm3() {
         var data = this.chartForm3;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.chartForm3_loading = true;
             request({
-                url: "dashboard/init_form3",
+                url: "dashboard/init_form3" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.chartForm3 = res.data;
@@ -332,10 +350,16 @@ top5Form: {"vue":0,"javascript":0,"css":0,"eslint":0}
     
     created_chartForm4_chartForm4() {
         var data = this.chartForm4;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.chartForm4_loading = true;
             request({
-                url: "dashboard/init_form4",
+                url: "dashboard/init_form4" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.chartForm4 = res.data;
@@ -361,10 +385,16 @@ top5Form: {"vue":0,"javascript":0,"css":0,"eslint":0}
     
     created_tableForm_tableForm() {
         var data = this.tableForm;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.tableForm_loading = true;
             request({
-                url: "dashboard/init_form5",
+                url: "dashboard/init_form5" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.tableForm = res.data;

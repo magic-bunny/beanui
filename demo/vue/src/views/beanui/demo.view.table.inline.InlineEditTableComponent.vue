@@ -73,7 +73,7 @@ type="warning"
 size="mini"
 style="position: absolute;right: 15px;top: 10px;"
  >
-    cancel
+{{scope.row.cancel}}
 </el-button>
     </template>
     </el-table-column>
@@ -94,7 +94,7 @@ style="position: absolute;right: 15px;top: 10px;"
 type="primary"
 size="mini"
  >
-    Edit
+{{scope.row.action}}
 </el-button>
     </template>
     </el-table-column>
@@ -146,10 +146,16 @@ InlineEditTableComponent: {}
     
     created_InlineEditTableComponent_InlineEditTableComponent() {
         var data = this.InlineEditTableComponent;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.InlineEditTableComponent_loading = true;
             request({
-                url: "/inline-edit-table/init",
+                url: "/inline-edit-table/init" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.InlineEditTableComponent = res.data;

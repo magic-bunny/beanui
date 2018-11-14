@@ -126,10 +126,16 @@ DragTableComponent: {}
     
     created_DragTableComponent_DragTableComponent() {
         var data = this.DragTableComponent;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.DragTableComponent_loading = true;
             request({
-                url: "/drag-table/init",
+                url: "/drag-table/init" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.DragTableComponent = res.data;

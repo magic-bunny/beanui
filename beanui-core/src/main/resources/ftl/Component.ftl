@@ -91,13 +91,16 @@ ${form.id}: ${form.init}
         <#else>
         var data = this.${formId};
         </#if>
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
-            <#if event.path?starts_with('router:')>
-            this.$router.push("${event.path?replace('router:', '')}")
-            <#else>
             self.${formId}_loading = true;
             request({
-                url: "${event.path}",
+                url: "${event.path}" + (requestParams=="?"?"":requestParams),
                 method: "${event.method}"
                 <#if event.method=="post">
                 ,data
@@ -118,7 +121,6 @@ ${form.id}: ${form.init}
             }).catch(err => {
                 self.${formId}_loading = false;
             });
-            </#if>
         }
         <#if event.confirmMessage!=''>
         this.$confirm(<#if event.confirmMessage?starts_with('$t')>this.${event.confirmMessage}<#else>'${event.confirmMessage}'</#if>, 'Confirm', {

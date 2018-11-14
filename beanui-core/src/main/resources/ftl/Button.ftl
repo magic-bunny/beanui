@@ -3,7 +3,7 @@
 <@createBadge scope=scope element=element>
 <@createTooltip scope=scope element=element>
 <el-button <@createAttrs scope=scope content=element.content/> <@createEvents formId=formId element=element/>>
-    ${element.content.text}
+${r'{{'}${scope}.${element.id}${r'}}'}
 </el-button>
 </@createTooltip>
 </@createBadge>

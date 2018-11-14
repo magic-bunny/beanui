@@ -67,7 +67,7 @@ width="50"
     <template slot-scope="scope">
 <el-button size="mini"
  >
-    edit
+{{scope.row.option}}
 </el-button>
     </template>
     </el-table-column>
@@ -80,12 +80,12 @@ width="50"
 type="primary"
 size="mini"
   @click="click_userQuery_button">
-    Query
+{{userQuery.button}}
 </el-button>
 <el-button icon="el-icon-search"
 type="danger"
   @click="click_userQuery_button2">
-    Save
+{{userQuery.button2}}
 </el-button>
 </el-form-item>
 </el-form>
@@ -209,10 +209,16 @@ userQuery: {}
     ,
     click_userQuery_button() {
         var data = this.userQuery;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.userQuery_loading = true;
             request({
-                url: "/demo2",
+                url: "/demo2" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.userQuery = res.data;
@@ -229,10 +235,16 @@ userQuery: {}
     ,
     click_userQuery_button2() {
         var data = this.userQuery;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.userQuery_loading = true;
             request({
-                url: "/demo4",
+                url: "/demo4" + (requestParams=="?"?"":requestParams),
                 method: "post"
                 ,data
             }).then(res => {

@@ -110,7 +110,7 @@ width="50"
     <template slot-scope="scope">
 <el-button size="mini"
  >
-    edit
+{{scope.row.option}}
 </el-button>
     </template>
     </el-table-column>
@@ -170,10 +170,10 @@ drag="true"
 <el-button icon="el-icon-upload"
 type="primary"
   @click="click_testForm_button">
-    upload
+{{testForm.button}}
 </el-button>
 <el-button  >
-    clear
+{{testForm.button2}}
 </el-button>
 </el-form-item>
 </el-form>
@@ -281,7 +281,7 @@ width="50"
     <template slot-scope="scope">
 <el-button size="mini"
  >
-    edit
+{{scope.row.option}}
 </el-button>
     </template>
     </el-table-column>
@@ -341,10 +341,10 @@ drag="true"
 <el-button icon="el-icon-upload"
 type="primary"
   @click="click_testForm2_button">
-    upload
+{{testForm2.button}}
 </el-button>
 <el-button  >
-    clear
+{{testForm2.button2}}
 </el-button>
 </el-form-item>
 </el-form>
@@ -428,10 +428,16 @@ testForm2: {"cascaderOptions":[],"level":0,"admin":false}
     
     created_testForm_testForm() {
         var data = this.testForm;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.testForm_loading = true;
             request({
-                url: "/demo3",
+                url: "/demo3" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.testForm = res.data;
@@ -598,10 +604,16 @@ testForm2: {"cascaderOptions":[],"level":0,"admin":false}
     ,
     click_testForm_button() {
         var data = this.testForm;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.testForm_loading = true;
             request({
-                url: "/demo3",
+                url: "/demo3" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.testForm = res.data;
@@ -627,10 +639,16 @@ testForm2: {"cascaderOptions":[],"level":0,"admin":false}
     
     created_testForm2_testForm2() {
         var data = this.testForm2;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.testForm2_loading = true;
             request({
-                url: "/demo3",
+                url: "/demo3" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.testForm2 = res.data;
@@ -797,10 +815,16 @@ testForm2: {"cascaderOptions":[],"level":0,"admin":false}
     ,
     click_testForm2_button() {
         var data = this.testForm2;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.testForm2_loading = true;
             request({
-                url: "/demo3",
+                url: "/demo3" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.testForm2 = res.data;

@@ -165,10 +165,16 @@ DynamicTableComponent: {}
     
     created_DynamicTableComponent_DynamicTableComponent() {
         var data = this.DynamicTableComponent;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.DynamicTableComponent_loading = true;
             request({
-                url: "/dynamic-table/init",
+                url: "/dynamic-table/init" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.DynamicTableComponent = res.data;

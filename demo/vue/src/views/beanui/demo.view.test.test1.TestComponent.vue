@@ -365,490 +365,227 @@ import BackToTop from '@/components/BackToTop'
 import Tinymce from '@/components/Tinymce'
 import demo_view_test_test1_testchart from './demo.view.test.test1.TestChart'
 
-  export default {
-    created: function() {
-    this.created_testForm_testForm();
-    this.created_testForm2_testForm2();
-    },
-    components: {
-        JsonEditor,
-        MarkdownEditor,
-        BackToTop,
-        Tinymce,
-        demo_view_test_test1_testchart
-    },
-    data() {
-      return {
-        myBackToTopStyle: {
-            right: '50px',
-            bottom: '50px',
-            width: '40px',
-            height: '40px',
-            'border-radius': '4px',
-            'line-height': '45px',
-            background: '#e7eaf1'
-        },
-testForm_loading: false,
-testForm: {"cascaderOptions":[],"level":0,"admin":false}
-,testForm_rules: {
-    username: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
-    password: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}
-,
-testForm2_loading: false,
-testForm2: {"cascaderOptions":[],"level":0,"admin":false}
-,testForm2_rules: {
-    username: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
-    password: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}
+export default {
+  created: function() {
+    this.created_testForm_testForm()
+    this.created_testForm2_testForm2()
+  },
+  components: {
+    JsonEditor,
+    MarkdownEditor,
+    BackToTop,
+    Tinymce,
+    demo_view_test_test1_testchart
+  },
+  data() {
+    return {
+      myBackToTopStyle: {
+        right: '50px',
+        bottom: '50px',
+        width: '40px',
+        height: '40px',
+        'border-radius': '4px',
+        'line-height': '45px',
+        background: '#e7eaf1'
+      },
+      testForm_loading: false,
+      testForm: { 'cascaderOptions': [], 'level': 0, 'admin': false },
+      testForm_rules: {
+        username: [{ 'min': '', 'len': '', 'max': '', 'pattern': '', 'trigger': '', 'type': '', 'message': '', 'required': 'true' }],
+        password: [{ 'min': '', 'len': '', 'max': '', 'pattern': '', 'trigger': '', 'type': '', 'message': '', 'required': 'true' }]
+
+      },
+      testForm2_loading: false,
+      testForm2: { 'cascaderOptions': [], 'level': 0, 'admin': false },
+      testForm2_rules: {
+        username: [{ 'min': '', 'len': '', 'max': '', 'pattern': '', 'trigger': '', 'type': '', 'message': '', 'required': 'true' }],
+        password: [{ 'min': '', 'len': '', 'max': '', 'pattern': '', 'trigger': '', 'type': '', 'message': '', 'required': 'true' }]
 
       }
-    },
-    methods: {
-    
-    created_testForm_testForm() {
-        var data = this.testForm;
-        var params = this.$router.params;
-        var requestParams = "?"
-        for(var key in params) {
-            var value = params[key];
-            requestParams += ("&" + key + "=" + value);
-        }
-        function submitRequest(self) {
-            self.testForm_loading = true;
-            request({
-                url: "/demo3" + (requestParams=="?"?"":requestParams),
-                method: "get"
-            }).then(res => {
-                self.testForm = res.data;
-                self.testForm_loading = false;
-            }).catch(err => {
-                self.testForm_loading = false;
-            });
-        }
-        submitRequest(this);
-      }
-    
-
-
-    ,
-    placeholder_testForm_username() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm_password() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm_isAdmin() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm_lastDate() {
-      }
-    
-
-
-
-
-    ,
-    current_change_testForm_users(val) {
-        this.testForm.users = [val];
-    },
-    selection_change__testForm_users(val) {
-        this.testForm.users = val;
-    },
-    placeholder_testForm_users() {
-      }
-    
-
-
-    ,
-    placeholder_testForm_id() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm_name() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm_age() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm_stature() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm_weight() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm_lastDate() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm_option() {
-      }
-    
-
-
-
-
-
-
-    ,
-    placeholder_testForm_cascader() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm_level() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm_detail() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm_address() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm_testChart() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm_file() {
-      }
-    
-
-
-
-
-    ,
-    click_testForm_button() {
-        var data = this.testForm;
-        var params = this.$router.params;
-        var requestParams = "?"
-        for(var key in params) {
-            var value = params[key];
-            requestParams += ("&" + key + "=" + value);
-        }
-        function submitRequest(self) {
-            self.testForm_loading = true;
-            request({
-                url: "/demo3" + (requestParams=="?"?"":requestParams),
-                method: "get"
-            }).then(res => {
-                self.testForm = res.data;
-                self.testForm_loading = false;
-            }).catch(err => {
-                self.testForm_loading = false;
-            });
-        }
-        submitRequest(this);
-      }
-    
-
-
-    ,
-    placeholder_testForm_button2() {
-      }
-    
-
-
-
-
-,
-    
-    created_testForm2_testForm2() {
-        var data = this.testForm2;
-        var params = this.$router.params;
-        var requestParams = "?"
-        for(var key in params) {
-            var value = params[key];
-            requestParams += ("&" + key + "=" + value);
-        }
-        function submitRequest(self) {
-            self.testForm2_loading = true;
-            request({
-                url: "/demo3" + (requestParams=="?"?"":requestParams),
-                method: "get"
-            }).then(res => {
-                self.testForm2 = res.data;
-                self.testForm2_loading = false;
-            }).catch(err => {
-                self.testForm2_loading = false;
-            });
-        }
-        submitRequest(this);
-      }
-    
-
-
-    ,
-    placeholder_testForm2_username() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm2_password() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm2_isAdmin() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm2_lastDate() {
-      }
-    
-
-
-
-
-    ,
-    current_change_testForm2_users(val) {
-        this.testForm2.users = [val];
-    },
-    selection_change__testForm2_users(val) {
-        this.testForm2.users = val;
-    },
-    placeholder_testForm2_users() {
-      }
-    
-
-
-    ,
-    placeholder_testForm2_id() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm2_name() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm2_age() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm2_stature() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm2_weight() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm2_lastDate() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm2_option() {
-      }
-    
-
-
-
-
-
-
-    ,
-    placeholder_testForm2_cascader() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm2_level() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm2_detail() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm2_address() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm2_testChart() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_testForm2_file() {
-      }
-    
-
-
-
-
-    ,
-    click_testForm2_button() {
-        var data = this.testForm2;
-        var params = this.$router.params;
-        var requestParams = "?"
-        for(var key in params) {
-            var value = params[key];
-            requestParams += ("&" + key + "=" + value);
-        }
-        function submitRequest(self) {
-            self.testForm2_loading = true;
-            request({
-                url: "/demo3" + (requestParams=="?"?"":requestParams),
-                method: "get"
-            }).then(res => {
-                self.testForm2 = res.data;
-                self.testForm2_loading = false;
-            }).catch(err => {
-                self.testForm2_loading = false;
-            });
-        }
-        submitRequest(this);
-      }
-    
-
-
-    ,
-    placeholder_testForm2_button2() {
-      }
-    
-
-
-
-
 
     }
+  },
+  methods: {
+
+    created_testForm_testForm(param1, param2, param3, param4) {
+      var data = this.testForm
+      var params = this.$router.params
+      var requestParams = '?'
+      for (var key in params) {
+        var value = params[key]
+        requestParams += ('&' + key + '=' + value)
+      }
+      function submitRequest(self) {
+        self.testForm_loading = true
+        request({
+          url: '/demo3' + (requestParams == '?' ? '' : requestParams),
+          method: 'get'
+        }).then(res => {
+          self.testForm = res.data
+          self.testForm_loading = false
+        }).catch(err => {
+          self.testForm_loading = false
+        })
+      }
+      submitRequest(this)
+    },
+    placeholder_testForm_username(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_password(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_isAdmin(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_lastDate(param1, param2, param3, param4) {
+    },
+    current_change_testForm_users(val) {
+      this.testForm.users = [val]
+    },
+    selection_change__testForm_users(val) {
+      this.testForm.users = val
+    },
+    placeholder_testForm_users(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_id(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_name(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_age(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_stature(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_weight(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_lastDate(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_option(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_cascader(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_level(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_detail(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_address(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_testChart(param1, param2, param3, param4) {
+    },
+    placeholder_testForm_file(param1, param2, param3, param4) {
+    },
+    click_testForm_button(param1, param2, param3, param4) {
+      var data = this.testForm
+      var params = this.$router.params
+      var requestParams = '?'
+      for (var key in params) {
+        var value = params[key]
+        requestParams += ('&' + key + '=' + value)
+      }
+      function submitRequest(self) {
+        self.testForm_loading = true
+        request({
+          url: '/demo3' + (requestParams == '?' ? '' : requestParams),
+          method: 'get'
+        }).then(res => {
+          self.testForm = res.data
+          self.testForm_loading = false
+        }).catch(err => {
+          self.testForm_loading = false
+        })
+      }
+      submitRequest(this)
+    },
+    placeholder_testForm_button2(param1, param2, param3, param4) {
+    },
+    created_testForm2_testForm2(param1, param2, param3, param4) {
+      var data = this.testForm2
+      var params = this.$router.params
+      var requestParams = '?'
+      for (var key in params) {
+        var value = params[key]
+        requestParams += ('&' + key + '=' + value)
+      }
+      function submitRequest(self) {
+        self.testForm2_loading = true
+        request({
+          url: '/demo3' + (requestParams == '?' ? '' : requestParams),
+          method: 'get'
+        }).then(res => {
+          self.testForm2 = res.data
+          self.testForm2_loading = false
+        }).catch(err => {
+          self.testForm2_loading = false
+        })
+      }
+      submitRequest(this)
+    },
+    placeholder_testForm2_username(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_password(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_isAdmin(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_lastDate(param1, param2, param3, param4) {
+    },
+    current_change_testForm2_users(val) {
+      this.testForm2.users = [val]
+    },
+    selection_change__testForm2_users(val) {
+      this.testForm2.users = val
+    },
+    placeholder_testForm2_users(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_id(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_name(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_age(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_stature(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_weight(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_lastDate(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_option(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_cascader(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_level(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_detail(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_address(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_testChart(param1, param2, param3, param4) {
+    },
+    placeholder_testForm2_file(param1, param2, param3, param4) {
+    },
+    click_testForm2_button(param1, param2, param3, param4) {
+      var data = this.testForm2
+      var params = this.$router.params
+      var requestParams = '?'
+      for (var key in params) {
+        var value = params[key]
+        requestParams += ('&' + key + '=' + value)
+      }
+      function submitRequest(self) {
+        self.testForm2_loading = true
+        request({
+          url: '/demo3' + (requestParams == '?' ? '' : requestParams),
+          method: 'get'
+        }).then(res => {
+          self.testForm2 = res.data
+          self.testForm2_loading = false
+        }).catch(err => {
+          self.testForm2_loading = false
+        })
+      }
+      submitRequest(this)
+    },
+    placeholder_testForm2_button2(param1, param2, param3, param4) {
+    }
+
   }
+}
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .TestComponent-container {

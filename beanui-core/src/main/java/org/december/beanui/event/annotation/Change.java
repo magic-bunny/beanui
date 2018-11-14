@@ -22,6 +22,8 @@ public @interface Change {
     String confirmMessage() default "";
     String beforeRequest() default "";
     String afterRequest() default "";
+    @Param1
+    String text() default "";
 
     @Documented
     @Target(ElementType.FIELD)

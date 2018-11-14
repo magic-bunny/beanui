@@ -84,12 +84,24 @@ ${form.id}: ${form.init}
     </#if>
     <#local isFirst=false>
     <#list element.events as event>
-    ${event.type}_${formId}_${element.id}() {
+    ${event.type}_${formId}_${element.id}(param1, param2, param3, param4) {
         <#if event.type!='placeholder'>
         <#if event.requestForm!=''>
         var data = this.${event.requestForm?substring(1)};
         <#else>
         var data = this.${formId};
+        <#if event.param1!=''>
+        data.${event.param1} = param1;
+        </#if>
+        <#if event.param2!=''>
+        data.${event.param2} = param2;
+        </#if>
+        <#if event.param3!=''>
+        data.${event.param3} = param3;
+        </#if>
+        <#if event.param4!=''>
+        data.${event.param4} = param4;
+        </#if>
         </#if>
         var params = this.$router.params;
         var requestParams = "?"

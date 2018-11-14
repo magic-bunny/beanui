@@ -5,8 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.december.beanui.chart.annotation.LineChart;
 import org.december.beanui.element.annotation.*;
-import org.december.beanui.event.annotation.Click;
-import org.december.beanui.event.annotation.Created;
+import org.december.beanui.event.annotation.*;
 import org.december.beanui.i18n.annotation.I18N;
 import org.december.beanui.plugin.face.Builder;
 import org.december.beanui.plugin.face.bean.Element;
@@ -19,10 +18,7 @@ import org.december.beanui.rule.annotation.Rule;
 import org.december.beanui.rule.annotation.Rules;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Proxy;
+import java.lang.reflect.*;
 import java.util.*;
 
 public class ComponentBuilder extends Builder {
@@ -337,6 +333,22 @@ public class ComponentBuilder extends Builder {
         Map map = new HashMap();
         try {
             map = annotation2map(annotation);
+            map.put("param1", "");
+            map.put("param2", "");
+            map.put("param3", "");
+            map.put("param4", "");
+            Method[] methods = annotation.getClass().getMethods();
+            for(Method method:methods) {
+                Annotation p1 = method.getAnnotation(Param1.class);
+                Annotation p2 = method.getAnnotation(Param2.class);
+                Annotation p3 = method.getAnnotation(Param3.class);
+                Annotation p4 = method.getAnnotation(Param4.class);
+                if(p1 != null || p2 != null || p3 != null || p4 != null) {
+                    Object value = map.get(method.getName());
+                    map.put("param1", value);
+                    map.remove(method.getName());
+                }
+            }
             String path = (String) map.get("path");
             if ("".equals(path)) {
                 Class clz = (Class) map.get("rest");

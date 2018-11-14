@@ -192,316 +192,201 @@ import demo_view_home_chart2 from './demo.view.home.Chart2'
 import demo_view_home_chart3 from './demo.view.home.Chart3'
 import demo_view_home_chart4 from './demo.view.home.Chart4'
 
-  export default {
-    created: function() {
-    this.created_chartForm1_chartForm1();
-    this.created_chartForm2_chartForm2();
-    this.created_chartForm3_chartForm3();
-    this.created_chartForm4_chartForm4();
-    this.created_tableForm_tableForm();
-    },
-    components: {
-        JsonEditor,
-        MarkdownEditor,
-        BackToTop,
-        Tinymce,
-        demo_view_home_chart1,
-        demo_view_home_chart2,
-        demo_view_home_chart3,
-        demo_view_home_chart4
-    },
-    data() {
-      return {
-        myBackToTopStyle: {
-            right: '50px',
-            bottom: '50px',
-            width: '40px',
-            height: '40px',
-            'border-radius': '4px',
-            'line-height': '45px',
-            background: '#e7eaf1'
-        },
-chartForm1_loading: false,
-chartForm1: {}
-,
-chartForm2_loading: false,
-chartForm2: {}
-,
-chartForm3_loading: false,
-chartForm3: {}
-,
-chartForm4_loading: false,
-chartForm4: {}
-,
-tableForm_loading: false,
-tableForm: {}
-,
-top5Form_loading: false,
-top5Form: {"vue":0,"javascript":0,"css":0,"eslint":0}
-
-      }
-    },
-    methods: {
-    
-    created_chartForm1_chartForm1() {
-        var data = this.chartForm1;
-        var params = this.$router.params;
-        var requestParams = "?"
-        for(var key in params) {
-            var value = params[key];
-            requestParams += ("&" + key + "=" + value);
-        }
-        function submitRequest(self) {
-            self.chartForm1_loading = true;
-            request({
-                url: "dashboard/init_form1" + (requestParams=="?"?"":requestParams),
-                method: "get"
-            }).then(res => {
-                self.chartForm1 = res.data;
-                self.chartForm1_loading = false;
-            }).catch(err => {
-                self.chartForm1_loading = false;
-            });
-        }
-        submitRequest(this);
-      }
-    
-
-
-    ,
-    placeholder_chartForm1_chart1() {
-      }
-    
-
-
-
-
-,
-    
-    created_chartForm2_chartForm2() {
-        var data = this.chartForm2;
-        var params = this.$router.params;
-        var requestParams = "?"
-        for(var key in params) {
-            var value = params[key];
-            requestParams += ("&" + key + "=" + value);
-        }
-        function submitRequest(self) {
-            self.chartForm2_loading = true;
-            request({
-                url: "dashboard/init_form2" + (requestParams=="?"?"":requestParams),
-                method: "get"
-            }).then(res => {
-                self.chartForm2 = res.data;
-                self.chartForm2_loading = false;
-            }).catch(err => {
-                self.chartForm2_loading = false;
-            });
-        }
-        submitRequest(this);
-      }
-    
-
-
-    ,
-    placeholder_chartForm2_chart2() {
-      }
-    
-
-
-
-
-,
-    
-    created_chartForm3_chartForm3() {
-        var data = this.chartForm3;
-        var params = this.$router.params;
-        var requestParams = "?"
-        for(var key in params) {
-            var value = params[key];
-            requestParams += ("&" + key + "=" + value);
-        }
-        function submitRequest(self) {
-            self.chartForm3_loading = true;
-            request({
-                url: "dashboard/init_form3" + (requestParams=="?"?"":requestParams),
-                method: "get"
-            }).then(res => {
-                self.chartForm3 = res.data;
-                self.chartForm3_loading = false;
-            }).catch(err => {
-                self.chartForm3_loading = false;
-            });
-        }
-        submitRequest(this);
-      }
-    
-
-
-    ,
-    placeholder_chartForm3_chart3() {
-      }
-    
-
-
-
-
-,
-    
-    created_chartForm4_chartForm4() {
-        var data = this.chartForm4;
-        var params = this.$router.params;
-        var requestParams = "?"
-        for(var key in params) {
-            var value = params[key];
-            requestParams += ("&" + key + "=" + value);
-        }
-        function submitRequest(self) {
-            self.chartForm4_loading = true;
-            request({
-                url: "dashboard/init_form4" + (requestParams=="?"?"":requestParams),
-                method: "get"
-            }).then(res => {
-                self.chartForm4 = res.data;
-                self.chartForm4_loading = false;
-            }).catch(err => {
-                self.chartForm4_loading = false;
-            });
-        }
-        submitRequest(this);
-      }
-    
-
-
-    ,
-    placeholder_chartForm4_chart4() {
-      }
-    
-
-
-
-
-,
-    
-    created_tableForm_tableForm() {
-        var data = this.tableForm;
-        var params = this.$router.params;
-        var requestParams = "?"
-        for(var key in params) {
-            var value = params[key];
-            requestParams += ("&" + key + "=" + value);
-        }
-        function submitRequest(self) {
-            self.tableForm_loading = true;
-            request({
-                url: "dashboard/init_form5" + (requestParams=="?"?"":requestParams),
-                method: "get"
-            }).then(res => {
-                self.tableForm = res.data;
-                self.tableForm_loading = false;
-            }).catch(err => {
-                self.tableForm_loading = false;
-            });
-        }
-        submitRequest(this);
-      }
-    
-
-
-    ,
-    current_change_tableForm_tableRow(val) {
-        this.tableForm.tableRow = [val];
-    },
-    selection_change__tableForm_tableRow(val) {
-        this.tableForm.tableRow = val;
-    },
-    placeholder_tableForm_tableRow() {
-      }
-    
-
-
-    ,
-    placeholder_tableForm_orderNumber() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_tableForm_currency() {
-      }
-    
-
-
-    ,
-    placeholder_tableForm_price() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_tableForm_status() {
-      }
-    
-
-
-
-
-
-
-,
-    
-    placeholder_top5Form_top5Form() {
-      }
-    
-
-
-    ,
-    placeholder_top5Form_image() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_top5Form_vue() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_top5Form_javascript() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_top5Form_css() {
-      }
-    
-
-
-
-
-    ,
-    placeholder_top5Form_eslint() {
-      }
-    
-
-
-
-
+export default {
+  created: function() {
+    this.created_chartForm1_chartForm1()
+    this.created_chartForm2_chartForm2()
+    this.created_chartForm3_chartForm3()
+    this.created_chartForm4_chartForm4()
+    this.created_tableForm_tableForm()
+  },
+  components: {
+    JsonEditor,
+    MarkdownEditor,
+    BackToTop,
+    Tinymce,
+    demo_view_home_chart1,
+    demo_view_home_chart2,
+    demo_view_home_chart3,
+    demo_view_home_chart4
+  },
+  data() {
+    return {
+      myBackToTopStyle: {
+        right: '50px',
+        bottom: '50px',
+        width: '40px',
+        height: '40px',
+        'border-radius': '4px',
+        'line-height': '45px',
+        background: '#e7eaf1'
+      },
+      chartForm1_loading: false,
+      chartForm1: {},
+      chartForm2_loading: false,
+      chartForm2: {},
+      chartForm3_loading: false,
+      chartForm3: {},
+      chartForm4_loading: false,
+      chartForm4: {},
+      tableForm_loading: false,
+      tableForm: {},
+      top5Form_loading: false,
+      top5Form: { 'vue': 0, 'javascript': 0, 'css': 0, 'eslint': 0 }
 
     }
+  },
+  methods: {
+
+    created_chartForm1_chartForm1(param1, param2, param3, param4) {
+      var data = this.chartForm1
+      var params = this.$router.params
+      var requestParams = '?'
+      for (var key in params) {
+        var value = params[key]
+        requestParams += ('&' + key + '=' + value)
+      }
+      function submitRequest(self) {
+        self.chartForm1_loading = true
+        request({
+          url: 'dashboard/init_form1' + (requestParams == '?' ? '' : requestParams),
+          method: 'get'
+        }).then(res => {
+          self.chartForm1 = res.data
+          self.chartForm1_loading = false
+        }).catch(err => {
+          self.chartForm1_loading = false
+        })
+      }
+      submitRequest(this)
+    },
+    placeholder_chartForm1_chart1(param1, param2, param3, param4) {
+    },
+    created_chartForm2_chartForm2(param1, param2, param3, param4) {
+      var data = this.chartForm2
+      var params = this.$router.params
+      var requestParams = '?'
+      for (var key in params) {
+        var value = params[key]
+        requestParams += ('&' + key + '=' + value)
+      }
+      function submitRequest(self) {
+        self.chartForm2_loading = true
+        request({
+          url: 'dashboard/init_form2' + (requestParams == '?' ? '' : requestParams),
+          method: 'get'
+        }).then(res => {
+          self.chartForm2 = res.data
+          self.chartForm2_loading = false
+        }).catch(err => {
+          self.chartForm2_loading = false
+        })
+      }
+      submitRequest(this)
+    },
+    placeholder_chartForm2_chart2(param1, param2, param3, param4) {
+    },
+    created_chartForm3_chartForm3(param1, param2, param3, param4) {
+      var data = this.chartForm3
+      var params = this.$router.params
+      var requestParams = '?'
+      for (var key in params) {
+        var value = params[key]
+        requestParams += ('&' + key + '=' + value)
+      }
+      function submitRequest(self) {
+        self.chartForm3_loading = true
+        request({
+          url: 'dashboard/init_form3' + (requestParams == '?' ? '' : requestParams),
+          method: 'get'
+        }).then(res => {
+          self.chartForm3 = res.data
+          self.chartForm3_loading = false
+        }).catch(err => {
+          self.chartForm3_loading = false
+        })
+      }
+      submitRequest(this)
+    },
+    placeholder_chartForm3_chart3(param1, param2, param3, param4) {
+    },
+    created_chartForm4_chartForm4(param1, param2, param3, param4) {
+      var data = this.chartForm4
+      var params = this.$router.params
+      var requestParams = '?'
+      for (var key in params) {
+        var value = params[key]
+        requestParams += ('&' + key + '=' + value)
+      }
+      function submitRequest(self) {
+        self.chartForm4_loading = true
+        request({
+          url: 'dashboard/init_form4' + (requestParams == '?' ? '' : requestParams),
+          method: 'get'
+        }).then(res => {
+          self.chartForm4 = res.data
+          self.chartForm4_loading = false
+        }).catch(err => {
+          self.chartForm4_loading = false
+        })
+      }
+      submitRequest(this)
+    },
+    placeholder_chartForm4_chart4(param1, param2, param3, param4) {
+    },
+    created_tableForm_tableForm(param1, param2, param3, param4) {
+      var data = this.tableForm
+      var params = this.$router.params
+      var requestParams = '?'
+      for (var key in params) {
+        var value = params[key]
+        requestParams += ('&' + key + '=' + value)
+      }
+      function submitRequest(self) {
+        self.tableForm_loading = true
+        request({
+          url: 'dashboard/init_form5' + (requestParams == '?' ? '' : requestParams),
+          method: 'get'
+        }).then(res => {
+          self.tableForm = res.data
+          self.tableForm_loading = false
+        }).catch(err => {
+          self.tableForm_loading = false
+        })
+      }
+      submitRequest(this)
+    },
+    current_change_tableForm_tableRow(val) {
+      this.tableForm.tableRow = [val]
+    },
+    selection_change__tableForm_tableRow(val) {
+      this.tableForm.tableRow = val
+    },
+    placeholder_tableForm_tableRow(param1, param2, param3, param4) {
+    },
+    placeholder_tableForm_orderNumber(param1, param2, param3, param4) {
+    },
+    placeholder_tableForm_currency(param1, param2, param3, param4) {
+    },
+    placeholder_tableForm_price(param1, param2, param3, param4) {
+    },
+    placeholder_tableForm_status(param1, param2, param3, param4) {
+    },
+    placeholder_top5Form_top5Form(param1, param2, param3, param4) {
+    },
+    placeholder_top5Form_image(param1, param2, param3, param4) {
+    },
+    placeholder_top5Form_vue(param1, param2, param3, param4) {
+    },
+    placeholder_top5Form_javascript(param1, param2, param3, param4) {
+    },
+    placeholder_top5Form_css(param1, param2, param3, param4) {
+    },
+    placeholder_top5Form_eslint(param1, param2, param3, param4) {
+    }
+
   }
+}
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .Dashboard-container {

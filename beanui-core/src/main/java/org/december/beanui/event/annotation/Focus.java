@@ -22,6 +22,7 @@ public @interface Focus {
     String confirmMessage() default "";
     String beforeRequest() default "";
     String afterRequest() default "";
+    String val1() default "";
 
     @Documented
     @Target(ElementType.FIELD)

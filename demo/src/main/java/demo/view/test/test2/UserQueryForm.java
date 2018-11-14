@@ -18,13 +18,13 @@ public class UserQueryForm {
 
     @FormItem(prop = "a")
     @Click(rest = TestFormController.class, func = "test2")
-    @Button(text = "Query", type = Type.PRIMARY, icon = Icon.SEARCH, size = Size.MINI)
-    private String button;
+    @Button(type = Type.PRIMARY, icon = Icon.SEARCH, size = Size.MINI)
+    private String button = "Query";
 
     @FormItem(prop = "a")
     @Click(rest = TestFormController.class, func = "test4", confirmMessage = "$t('demo.view.test.test2.UserQueryFormMessage.confirmMessage')", message = "$t('demo.view.test.test2.UserQueryFormMessage.message')")
-    @Button(text = "Save", type = Type.DANGER, icon = Icon.SEARCH)
-    private String button2;
+    @Button(type = Type.DANGER, icon = Icon.SEARCH)
+    private String button2 = "Save";
 
     public List<UserRow> getUsers() {
         return users;

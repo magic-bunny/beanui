@@ -96,81 +96,132 @@ import MarkdownEditor from '@/components/MarkdownEditor'
 import BackToTop from '@/components/BackToTop'
 import Tinymce from '@/components/Tinymce'
 
-export default {
-  created: function() {
-    this.created_DragTableComponent_DragTableComponent()
-  },
-  components: {
-    JsonEditor,
-    MarkdownEditor,
-    BackToTop,
-    Tinymce
-  },
-  data() {
-    return {
-      myBackToTopStyle: {
-        right: '50px',
-        bottom: '50px',
-        width: '40px',
-        height: '40px',
-        'border-radius': '4px',
-        'line-height': '45px',
-        background: '#e7eaf1'
-      },
-      DragTableComponent_loading: false,
-      DragTableComponent: {}
-
-    }
-  },
-  methods: {
-
+  export default {
+    created: function() {
+    this.created_DragTableComponent_DragTableComponent();
+    },
+    components: {
+        JsonEditor,
+        MarkdownEditor,
+        BackToTop,
+        Tinymce
+    },
+    data() {
+      return {
+        myBackToTopStyle: {
+            right: '50px',
+            bottom: '50px',
+            width: '40px',
+            height: '40px',
+            'border-radius': '4px',
+            'line-height': '45px',
+            background: '#e7eaf1'
+        },
+DragTableComponent_loading: false,
+DragTableComponent: {}
+            
+      }
+    },
+    methods: {
+    
     created_DragTableComponent_DragTableComponent(param1, param2, param3, param4) {
-      var data = this.DragTableComponent
-      var params = this.$router.params
-      var requestParams = '?'
-      for (var key in params) {
-        var value = params[key]
-        requestParams += ('&' + key + '=' + value)
+        var data = this.DragTableComponent;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
+        function submitRequest(self) {
+            self.DragTableComponent_loading = true;
+            request({
+                url: "/drag-table/init" + (requestParams=="?"?"":requestParams),
+                method: "get"
+            }).then(res => {
+                self.DragTableComponent = res.data;
+                self.DragTableComponent_loading = false;
+            }).catch(err => {
+                self.DragTableComponent_loading = false;
+            });
+        }
+        submitRequest(this);
       }
-      function submitRequest(self) {
-        self.DragTableComponent_loading = true
-        request({
-          url: '/drag-table/init' + (requestParams == '?' ? '' : requestParams),
-          method: 'get'
-        }).then(res => {
-          self.DragTableComponent = res.data
-          self.DragTableComponent_loading = false
-        }).catch(err => {
-          self.DragTableComponent_loading = false
-        })
-      }
-      submitRequest(this)
-    },
+    
+
+
+    ,
     current_change_DragTableComponent_table(val) {
-      this.DragTableComponent.table = [val]
+        this.DragTableComponent.table = [val];
     },
     selection_change__DragTableComponent_table(val) {
-      this.DragTableComponent.table = val
+        this.DragTableComponent.table = val;
     },
     placeholder_DragTableComponent_table(param1, param2, param3, param4) {
-    },
-    placeholder_DragTableComponent_id(param1, param2, param3, param4) {
-    },
-    placeholder_DragTableComponent_date(param1, param2, param3, param4) {
-    },
-    placeholder_DragTableComponent_title(param1, param2, param3, param4) {
-    },
-    placeholder_DragTableComponent_author(param1, param2, param3, param4) {
-    },
-    placeholder_DragTableComponent_importance(param1, param2, param3, param4) {
-    },
-    placeholder_DragTableComponent_readings(param1, param2, param3, param4) {
-    },
-    placeholder_DragTableComponent_status(param1, param2, param3, param4) {
-    }
+      }
+    
 
+
+    ,
+    placeholder_DragTableComponent_id(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_DragTableComponent_date(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_DragTableComponent_title(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_DragTableComponent_author(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_DragTableComponent_importance(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_DragTableComponent_readings(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_DragTableComponent_status(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+
+
+        
+    }
   }
-}
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .DragTableComponent-container {

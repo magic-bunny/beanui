@@ -135,99 +135,186 @@ import MarkdownEditor from '@/components/MarkdownEditor'
 import BackToTop from '@/components/BackToTop'
 import Tinymce from '@/components/Tinymce'
 
-export default {
-  created: function() {
-    this.created_DynamicTableComponent_DynamicTableComponent()
-  },
-  components: {
-    JsonEditor,
-    MarkdownEditor,
-    BackToTop,
-    Tinymce
-  },
-  data() {
-    return {
-      myBackToTopStyle: {
-        right: '50px',
-        bottom: '50px',
-        width: '40px',
-        height: '40px',
-        'border-radius': '4px',
-        'line-height': '45px',
-        background: '#e7eaf1'
-      },
-      DynamicTableComponent_loading: false,
-      DynamicTableComponent: {}
-
-    }
-  },
-  methods: {
-
+  export default {
+    created: function() {
+    this.created_DynamicTableComponent_DynamicTableComponent();
+    },
+    components: {
+        JsonEditor,
+        MarkdownEditor,
+        BackToTop,
+        Tinymce
+    },
+    data() {
+      return {
+        myBackToTopStyle: {
+            right: '50px',
+            bottom: '50px',
+            width: '40px',
+            height: '40px',
+            'border-radius': '4px',
+            'line-height': '45px',
+            background: '#e7eaf1'
+        },
+DynamicTableComponent_loading: false,
+DynamicTableComponent: {}
+            
+      }
+    },
+    methods: {
+    
     created_DynamicTableComponent_DynamicTableComponent(param1, param2, param3, param4) {
-      var data = this.DynamicTableComponent
-      var params = this.$router.params
-      var requestParams = '?'
-      for (var key in params) {
-        var value = params[key]
-        requestParams += ('&' + key + '=' + value)
+        var data = this.DynamicTableComponent;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
+        function submitRequest(self) {
+            self.DynamicTableComponent_loading = true;
+            request({
+                url: "/dynamic-table/init" + (requestParams=="?"?"":requestParams),
+                method: "get"
+            }).then(res => {
+                self.DynamicTableComponent = res.data;
+                self.DynamicTableComponent_loading = false;
+            }).catch(err => {
+                self.DynamicTableComponent_loading = false;
+            });
+        }
+        submitRequest(this);
       }
-      function submitRequest(self) {
-        self.DynamicTableComponent_loading = true
-        request({
-          url: '/dynamic-table/init' + (requestParams == '?' ? '' : requestParams),
-          method: 'get'
-        }).then(res => {
-          self.DynamicTableComponent = res.data
-          self.DynamicTableComponent_loading = false
-        }).catch(err => {
-          self.DynamicTableComponent_loading = false
-        })
-      }
-      submitRequest(this)
-    },
+    
+
+
+    ,
     placeholder_DynamicTableComponent_label1(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_DynamicTableComponent_checkbox1(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     current_change_DynamicTableComponent_table1(val) {
-      this.DynamicTableComponent.table1 = [val]
+        this.DynamicTableComponent.table1 = [val];
     },
     selection_change__DynamicTableComponent_table1(val) {
-      this.DynamicTableComponent.table1 = val
+        this.DynamicTableComponent.table1 = val;
     },
     placeholder_DynamicTableComponent_table1(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+    ,
     placeholder_DynamicTableComponent_fruitName(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_DynamicTableComponent_apple(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_DynamicTableComponent_banana(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_DynamicTableComponent_orange(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+
+
+    ,
     placeholder_DynamicTableComponent_label2(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_DynamicTableComponent_checkbox2(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     current_change_DynamicTableComponent_table2(val) {
-      this.DynamicTableComponent.table2 = [val]
+        this.DynamicTableComponent.table2 = [val];
     },
     selection_change__DynamicTableComponent_table2(val) {
-      this.DynamicTableComponent.table2 = val
+        this.DynamicTableComponent.table2 = val;
     },
     placeholder_DynamicTableComponent_table2(param1, param2, param3, param4) {
-    },
-    placeholder_DynamicTableComponent_fruitName(param1, param2, param3, param4) {
-    },
-    placeholder_DynamicTableComponent_apple(param1, param2, param3, param4) {
-    },
-    placeholder_DynamicTableComponent_banana(param1, param2, param3, param4) {
-    },
-    placeholder_DynamicTableComponent_orange(param1, param2, param3, param4) {
-    }
+      }
+    
 
+
+    ,
+    placeholder_DynamicTableComponent_fruitName(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_DynamicTableComponent_apple(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_DynamicTableComponent_banana(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_DynamicTableComponent_orange(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+
+
+        
+    }
   }
-}
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .DynamicTableComponent-container {

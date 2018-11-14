@@ -28,16 +28,16 @@ public class ComplexRow {
     private String statusType;
     @Click(rest = ComplexTabelController.class, func = "initComplexTableEditForm", responseForm = "$complexTableEditForm")
     @TableColum(label = "actions", width = "240", prop = "actions")
-    @Button(text = "Edit", size = Size.MINI, type = Type.PRIMARY, style = "position: absolute;left: 0px;top: 10px;")
-    private String actionEdit;
+    @Button(size = Size.MINI, type = Type.PRIMARY, style = "position: absolute;left: 0px;top: 10px;")
+    private String actionEdit = "Edit";
 
     @TableColum(label = "actions", width = "240", prop = "actions")
-    @Button(text = "Publish", size = Size.MINI, type = Type.SUCCESS, style = "position: absolute;left: 60px;top: 10px;")
-    private String actionPublish;
+    @Button(size = Size.MINI, type = Type.SUCCESS, style = "position: absolute;left: 60px;top: 10px;")
+    private String actionPublish = "Publish";
 
     @TableColum(label = "actions", width = "240", prop = "actions")
-    @Button(text = "Delete", size = Size.MINI, type = Type.DANGER, style = "position: absolute;left: 150px;top: 10px;")
-    private String actionDelete;
+    @Button(size = Size.MINI, type = Type.DANGER, style = "position: absolute;left: 150px;top: 10px;")
+    private String actionDelete = "Delete";
 
     public String getId() {
         return id;

@@ -104,121 +104,182 @@ import MarkdownEditor from '@/components/MarkdownEditor'
 import BackToTop from '@/components/BackToTop'
 import Tinymce from '@/components/Tinymce'
 
-export default {
-  created: function() {
-  },
-  components: {
-    JsonEditor,
-    MarkdownEditor,
-    BackToTop,
-    Tinymce
-  },
-  data() {
-    return {
-      myBackToTopStyle: {
-        right: '50px',
-        bottom: '50px',
-        width: '40px',
-        height: '40px',
-        'border-radius': '4px',
-        'line-height': '45px',
-        background: '#e7eaf1'
-      },
-      userQuery_loading: false,
-      userQuery: {}
-
-    }
-  },
-  methods: {
-
+  export default {
+    created: function() {
+    },
+    components: {
+        JsonEditor,
+        MarkdownEditor,
+        BackToTop,
+        Tinymce
+    },
+    data() {
+      return {
+        myBackToTopStyle: {
+            right: '50px',
+            bottom: '50px',
+            width: '40px',
+            height: '40px',
+            'border-radius': '4px',
+            'line-height': '45px',
+            background: '#e7eaf1'
+        },
+userQuery_loading: false,
+userQuery: {"button":"Query","button2":"Save"}
+            
+      }
+    },
+    methods: {
+    
     placeholder_userQuery_userQuery(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+    ,
     current_change_userQuery_user(val) {
-      this.userQuery.user = [val]
+        this.userQuery.user = [val];
     },
     selection_change__userQuery_user(val) {
-      this.userQuery.user = val
+        this.userQuery.user = val;
     },
     placeholder_userQuery_user(param1, param2, param3, param4) {
-    },
-    placeholder_userQuery_id(param1, param2, param3, param4) {
-    },
-    placeholder_userQuery_name(param1, param2, param3, param4) {
-    },
-    placeholder_userQuery_age(param1, param2, param3, param4) {
-    },
-    placeholder_userQuery_stature(param1, param2, param3, param4) {
-    },
-    placeholder_userQuery_weight(param1, param2, param3, param4) {
-    },
-    placeholder_userQuery_lastDate(param1, param2, param3, param4) {
-    },
-    placeholder_userQuery_option(param1, param2, param3, param4) {
-    },
-    click_userQuery_button(param1, param2, param3, param4) {
-      var data = this.userQuery
-      var params = this.$router.params
-      var requestParams = '?'
-      for (var key in params) {
-        var value = params[key]
-        requestParams += ('&' + key + '=' + value)
       }
-      function submitRequest(self) {
-        self.userQuery_loading = true
-        request({
-          url: '/demo2' + (requestParams == '?' ? '' : requestParams),
-          method: 'get'
-        }).then(res => {
-          self.userQuery = res.data
-          self.userQuery_loading = false
-        }).catch(err => {
-          self.userQuery_loading = false
-        })
-      }
-      submitRequest(this)
-    },
-    click_userQuery_button2(param1, param2, param3, param4) {
-      var data = this.userQuery
-      var params = this.$router.params
-      var requestParams = '?'
-      for (var key in params) {
-        var value = params[key]
-        requestParams += ('&' + key + '=' + value)
-      }
-      function submitRequest(self) {
-        self.userQuery_loading = true
-        request({
-          url: '/demo4' + (requestParams == '?' ? '' : requestParams),
-          method: 'post',
-          data
-        }).then(res => {
-          self.userQuery = res.data
-          self.userQuery_loading = false
-          self.$message({
-            type: 'success',
-            message: this.$t('demo.view.test.test2.UserQueryFormMessage.message')
-          })
-        }).catch(err => {
-          self.userQuery_loading = false
-        })
-      }
-      this.$confirm(this.$t('demo.view.test.test2.UserQueryFormMessage.confirmMessage'), 'Confirm', {
-        confirmButtonText: 'Ok',
-        cancelButtonText: 'Cancel',
-        type: 'warning'
-      }).then(() => {
-        submitRequest(this)
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: 'Cancel this option!'
-        })
-        this.userQuery_loading = false
-      })
-    }
+    
 
+
+    ,
+    placeholder_userQuery_id(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_userQuery_name(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_userQuery_age(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_userQuery_stature(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_userQuery_weight(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_userQuery_lastDate(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_userQuery_option(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+
+
+    ,
+    click_userQuery_button(param1, param2, param3, param4) {
+        var data = this.userQuery;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
+        function submitRequest(self) {
+            self.userQuery_loading = true;
+            request({
+                url: "/demo2" + (requestParams=="?"?"":requestParams),
+                method: "get"
+            }).then(res => {
+                self.userQuery = res.data;
+                self.userQuery_loading = false;
+            }).catch(err => {
+                self.userQuery_loading = false;
+            });
+        }
+        submitRequest(this);
+      }
+    
+
+
+    ,
+    click_userQuery_button2(param1, param2, param3, param4) {
+        var data = this.userQuery;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
+        function submitRequest(self) {
+            self.userQuery_loading = true;
+            request({
+                url: "/demo4" + (requestParams=="?"?"":requestParams),
+                method: "post"
+                ,data
+            }).then(res => {
+                self.userQuery = res.data;
+                self.userQuery_loading = false;
+                self.$message({
+                    type: 'success',
+                    message: this.$t('demo.view.test.test2.UserQueryFormMessage.message')
+                  });
+            }).catch(err => {
+                self.userQuery_loading = false;
+            });
+        }
+        this.$confirm(this.$t('demo.view.test.test2.UserQueryFormMessage.confirmMessage'), 'Confirm', {
+          confirmButtonText: 'Ok',
+          cancelButtonText: 'Cancel',
+          type: 'warning'
+        }).then(() => {
+          submitRequest(this);
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Cancel this option!'
+          });
+          this.userQuery_loading = false;
+        });
+      }
+    
+
+
+
+
+        
+    }
   }
-}
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .ABCDComponent-container {

@@ -18,7 +18,6 @@ public @interface Button {
         }
     }
 
-    String text() default "";
     String size() default "";//尺寸	string	medium / small / mini	—
     String type() default "";//类型	string	primary / success / warning / danger / info / text	—
     String plain() default "";//是否朴素按钮	boolean	—	false

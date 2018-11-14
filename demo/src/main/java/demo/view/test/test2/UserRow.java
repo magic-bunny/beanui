@@ -30,8 +30,8 @@ public class UserRow {
     private Date lastDate;
     @I18N(en = "Options", zh_CN = "操作")
     @TableColum(label = "edit")
-    @Button(text = "edit", size = Size.MINI)
-    private String option;
+    @Button(size = Size.MINI)
+    private String option = "Edit";
 
     public int getId() {
         return id;

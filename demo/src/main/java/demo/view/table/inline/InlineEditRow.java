@@ -5,7 +5,7 @@ import org.december.beanui.element.Size;
 import org.december.beanui.element.Type;
 import org.december.beanui.element.annotation.*;
 
-public class InlineEditRow {
+public class  InlineEditRow {
     @TableColum(label = "ID", width = "60")
     private String id;
     @TableColum(label = "Date", width = "150")
@@ -21,14 +21,14 @@ public class InlineEditRow {
     @Input(size = Size.MINI, style="padding-right: 100px;")
     private String title;
     @TableColum(width = "120", prop = "title")
-    @Button(text = "cancel", icon = Icon.REFRESH, size = Size.MINI, type = Type.WARNING, style = "position: absolute;right: 15px;top: 10px;")
-    private String cancel;
+    @Button(icon = Icon.REFRESH, size = Size.MINI, type = Type.WARNING, style = "position: absolute;right: 15px;top: 10px;")
+    private String cancel = "Cancel";
     @Tag
     @TableColum(label = "Status", width = "100")
     private String status;
     @TableColum(label = "actions", width = "150")
-    @Button(text = "Edit", icon = Icon.EDIT, size = Size.MINI, type = Type.PRIMARY)
-    private String action;
+    @Button(icon = Icon.EDIT, size = Size.MINI, type = Type.PRIMARY)
+    private String action = "Edit";
 
     public String getId() {
         return id;

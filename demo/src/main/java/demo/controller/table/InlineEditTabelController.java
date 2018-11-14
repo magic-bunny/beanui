@@ -25,7 +25,6 @@ public class InlineEditTabelController {
         inlineEditRow.setImportance(3);
         inlineEditRow.setReadings(3788);
         inlineEditRow.setStatus("deleted");
-        inlineEditRow.setAction("1");
         tableData.add(inlineEditRow);
 
         inlineEditRow = new InlineEditRow();
@@ -36,7 +35,6 @@ public class InlineEditTabelController {
         inlineEditRow.setReadings(2264);
         inlineEditRow.setStatus("draft");
         inlineEditRow.setImportance(1);
-        inlineEditRow.setAction("1");
         tableData.add(inlineEditRow);
 
         inlineEditRow = new InlineEditRow();

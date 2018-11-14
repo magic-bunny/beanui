@@ -68,12 +68,12 @@ public class TestForm {
 
     @FormItem(prop = "test")
     @Click(rest = TestFormController.class, func = "test3")
-    @Button(text = "upload", type = Type.PRIMARY, icon = Icon.UPLOAD)
-    private String button;
+    @Button(type = Type.PRIMARY, icon = Icon.UPLOAD)
+    private String button = "Upload";
 
     @FormItem(prop = "test")
-    @Button(text = "clear")
-    private String button2;
+    @Button
+    private String button2 = "Clear";
 
     public String getUsername() {
         return username;

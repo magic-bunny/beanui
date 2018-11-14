@@ -116,85 +116,146 @@ import MarkdownEditor from '@/components/MarkdownEditor'
 import BackToTop from '@/components/BackToTop'
 import Tinymce from '@/components/Tinymce'
 
-export default {
-  created: function() {
-    this.created_InlineEditTableComponent_InlineEditTableComponent()
-  },
-  components: {
-    JsonEditor,
-    MarkdownEditor,
-    BackToTop,
-    Tinymce
-  },
-  data() {
-    return {
-      myBackToTopStyle: {
-        right: '50px',
-        bottom: '50px',
-        width: '40px',
-        height: '40px',
-        'border-radius': '4px',
-        'line-height': '45px',
-        background: '#e7eaf1'
-      },
-      InlineEditTableComponent_loading: false,
-      InlineEditTableComponent: {}
-
-    }
-  },
-  methods: {
-
+  export default {
+    created: function() {
+    this.created_InlineEditTableComponent_InlineEditTableComponent();
+    },
+    components: {
+        JsonEditor,
+        MarkdownEditor,
+        BackToTop,
+        Tinymce
+    },
+    data() {
+      return {
+        myBackToTopStyle: {
+            right: '50px',
+            bottom: '50px',
+            width: '40px',
+            height: '40px',
+            'border-radius': '4px',
+            'line-height': '45px',
+            background: '#e7eaf1'
+        },
+InlineEditTableComponent_loading: false,
+InlineEditTableComponent: {}
+            
+      }
+    },
+    methods: {
+    
     created_InlineEditTableComponent_InlineEditTableComponent(param1, param2, param3, param4) {
-      var data = this.InlineEditTableComponent
-      var params = this.$router.params
-      var requestParams = '?'
-      for (var key in params) {
-        var value = params[key]
-        requestParams += ('&' + key + '=' + value)
+        var data = this.InlineEditTableComponent;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
+        function submitRequest(self) {
+            self.InlineEditTableComponent_loading = true;
+            request({
+                url: "/inline-edit-table/init" + (requestParams=="?"?"":requestParams),
+                method: "get"
+            }).then(res => {
+                self.InlineEditTableComponent = res.data;
+                self.InlineEditTableComponent_loading = false;
+            }).catch(err => {
+                self.InlineEditTableComponent_loading = false;
+            });
+        }
+        submitRequest(this);
       }
-      function submitRequest(self) {
-        self.InlineEditTableComponent_loading = true
-        request({
-          url: '/inline-edit-table/init' + (requestParams == '?' ? '' : requestParams),
-          method: 'get'
-        }).then(res => {
-          self.InlineEditTableComponent = res.data
-          self.InlineEditTableComponent_loading = false
-        }).catch(err => {
-          self.InlineEditTableComponent_loading = false
-        })
-      }
-      submitRequest(this)
-    },
+    
+
+
+    ,
     current_change_InlineEditTableComponent_table(val) {
-      this.InlineEditTableComponent.table = [val]
+        this.InlineEditTableComponent.table = [val];
     },
     selection_change__InlineEditTableComponent_table(val) {
-      this.InlineEditTableComponent.table = val
+        this.InlineEditTableComponent.table = val;
     },
     placeholder_InlineEditTableComponent_table(param1, param2, param3, param4) {
-    },
-    placeholder_InlineEditTableComponent_id(param1, param2, param3, param4) {
-    },
-    placeholder_InlineEditTableComponent_date(param1, param2, param3, param4) {
-    },
-    placeholder_InlineEditTableComponent_author(param1, param2, param3, param4) {
-    },
-    placeholder_InlineEditTableComponent_importance(param1, param2, param3, param4) {
-    },
-    placeholder_InlineEditTableComponent_readings(param1, param2, param3, param4) {
-    },
-    placeholder_InlineEditTableComponent_title(param1, param2, param3, param4) {
-    },
-    placeholder_InlineEditTableComponent_cancel(param1, param2, param3, param4) {
-    },
-    placeholder_InlineEditTableComponent_status(param1, param2, param3, param4) {
-    },
-    placeholder_InlineEditTableComponent_action(param1, param2, param3, param4) {
-    }
+      }
+    
 
+
+    ,
+    placeholder_InlineEditTableComponent_id(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_InlineEditTableComponent_date(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_InlineEditTableComponent_author(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_InlineEditTableComponent_importance(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_InlineEditTableComponent_readings(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_InlineEditTableComponent_title(param1, param2, param3, param4) {
+      }
+    
+
+
+    ,
+    placeholder_InlineEditTableComponent_cancel(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_InlineEditTableComponent_status(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_InlineEditTableComponent_action(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+
+
+        
+    }
   }
-}
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .InlineEditTableComponent-container {

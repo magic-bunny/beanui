@@ -29,7 +29,7 @@ public class Bean2UIMojo extends AbstractMojo {
     private String routerPath;
 
     @Parameter(property = "staticPath")
-    private String staticPath = "static";
+    private String staticPath;
 
     @Parameter(property = "workPath")
     private String workPath = System.getProperty("user.dir") + File.separator + "vue";
@@ -41,7 +41,7 @@ public class Bean2UIMojo extends AbstractMojo {
     private String projectName;
 
     @Parameter(property = "mode")
-    private String mode = "dev";
+    private String mode = "prd";
 
     @Parameter(property = "builders")
     private List<Map> builders;
@@ -60,11 +60,6 @@ public class Bean2UIMojo extends AbstractMojo {
                 ConsoleUtil.exec(nodePath + "npm install", workPath);
             }
 
-            PluginSystem.setPropertie("routerPath", routerPath);
-            PluginSystem.setPropertie("workPath", workPath);
-            PluginSystem.setPropertie("staticPath", staticPath);
-            PluginSystem.setPropertie("projectName", projectName==null?project.getName():projectName);
-
             List runtimeClasspathElements = project.getRuntimeClasspathElements();
             URL[] runtimeUrls = new URL[runtimeClasspathElements.size()];
             for (int i = 0; i < runtimeClasspathElements.size(); i++) {
@@ -72,6 +67,14 @@ public class Bean2UIMojo extends AbstractMojo {
                 runtimeUrls[i] = new File(element).toURI().toURL();
             }
             ClassLoader classLoader = new URLClassLoader(runtimeUrls, Thread.currentThread().getContextClassLoader());
+            if(staticPath==null) {
+                staticPath = classLoader.getResource("").getPath() + File.separator + "static";
+            }
+
+            PluginSystem.setPropertie("routerPath", routerPath);
+            PluginSystem.setPropertie("workPath", workPath);
+            PluginSystem.setPropertie("staticPath", staticPath);
+            PluginSystem.setPropertie("projectName", projectName==null?project.getName():projectName);
 
             FileUtil.deleteDir( "${workPath}/index.html");
             FileUtil.deleteDir( "${workPath}/src/router");
@@ -145,8 +148,7 @@ public class Bean2UIMojo extends AbstractMojo {
                 getLog().info("\"" +  workPath +  "\" " + "npm run build:prod");
                 ConsoleUtil.exec(nodePath + "npm run build:prod",  workPath);
                 String oldPath = new File(workPath + File.separator + "dist").getPath();
-                String newPath = classLoader.getResource("").getPath() + File.separator + staticPath;
-                FileUtil.copyDir(oldPath, newPath);
+                FileUtil.copyDir(oldPath, staticPath);
             }
         } catch (Exception e) {
             getLog().error(e.getMessage());

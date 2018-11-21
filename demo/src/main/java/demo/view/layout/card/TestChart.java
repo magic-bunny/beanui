@@ -1,4 +1,4 @@
-package demo.view.test.test1;
+package demo.view.layout.card;
 
 import org.december.beanui.chart.annotation.*;
 

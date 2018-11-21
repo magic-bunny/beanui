@@ -4,16 +4,25 @@ children:
   - title: Home
     icon: star
     component: demo.view.home.Dashboard
-  - path: /test
-    title: Test
+  - path: /layout
+    title: Layout
     icon: example
     children:
-    - title: Test1
-      path: /test1
-      component: demo.view.test.test1.TestComponent
-    - title: Test2
-      path: /test2
-      component: demo.view.test.test2.ABCDComponent
+    - title: Card
+      path: /card
+      component: demo.view.layout.card.CardComponent
+    - title: Tabs
+      path: /tabs
+      component: demo.view.layout.tabs.TabsComponent
+    - title: Carousel
+      path: /carousel
+      component: demo.view.layout.carousel.CarouselComponent
+    - title: Collapse
+      path: /collapse
+      component: demo.view.layout.collapse.CollapseComponent
+    - title: Test
+      path: /layout
+      component: demo.view.layout.test2.ABCDComponent
   - title: Table
     icon: table
     path: /table

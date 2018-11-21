@@ -59,111 +59,6 @@ label-width="150px"
 </el-dialog>
 </el-col>
 </el-row>
-<el-row>
-<el-col :span="24/1" style="padding: 10px;">
-<el-form v-loading="complexTableDataForm_loading" ref="complexTableDataForm" :model="complexTableDataForm"
->
-<el-form-item prop="table"
-  label=""
->
-<el-table :data="complexTableDataForm.tableData"
-  current-change="current_change_complexTableDataForm_table" @selection-change="selection_change__complexTableDataForm_table">
- <el-table-column width="60"
- label="ID"
->
-    <template slot-scope="scope">
-<span v-model="scope.row.id"  >
-{{scope.row.id}}
-</span>
-    </template>
-    </el-table-column>
- <el-table-column width="150"
- label="Date"
->
-    <template slot-scope="scope">
-<span v-model="scope.row.date"  >
-{{scope.row.date}}
-</span>
-    </template>
-    </el-table-column>
- <el-table-column width="100"
- label="Author"
->
-    <template slot-scope="scope">
-<span v-model="scope.row.author"  >
-{{scope.row.author}}
-</span>
-    </template>
-    </el-table-column>
- <el-table-column width="150"
- label="Importance"
->
-    <template slot-scope="scope">
-<el-rate v-model="scope.row.importance"  >
-{{scope.row.importance}}
-</el-rate>
-    </template>
-    </el-table-column>
- <el-table-column width="100"
- label="Readings"
->
-    <template slot-scope="scope">
-<span v-model="scope.row.readings"   @click="click_complexTableDataForm_readings">
-{{scope.row.readings}}
-</span>
-    </template>
-    </el-table-column>
- <el-table-column prop="title"
-width="300"
- label="Title"
->
-    <template slot-scope="scope">
-<el-input v-model="scope.row.title" size="mini"
- >
-{{scope.row.title}}
-</el-input>
-    </template>
-    </el-table-column>
- <el-table-column width="100"
- label="Status"
->
-    <template slot-scope="scope">
-<el-tag :type="scope.row.statusType"
- >
-{{scope.row.status}}
-</el-tag>
-    </template>
-    </el-table-column>
- <el-table-column prop="actions"
-width="240"
- label="actions"
->
-    <template slot-scope="scope">
-<el-button type="primary"
-size="mini"
-style="position: absolute;left: 0px;top: 10px;"
-  @click="click_complexTableDataForm_actionEdit">
-{{scope.row.actionEdit}}
-</el-button>
-<el-button type="success"
-size="mini"
-style="position: absolute;left: 60px;top: 10px;"
- >
-{{scope.row.actionPublish}}
-</el-button>
-<el-button type="danger"
-size="mini"
-style="position: absolute;left: 150px;top: 10px;"
- >
-{{scope.row.actionDelete}}
-</el-button>
-    </template>
-    </el-table-column>
-</el-table>
-</el-form-item>
-</el-form>
-</el-col>
-</el-row>
 <el-tooltip placement="top" content="Back to top">
   <back-to-top transitionName="fade" :customStyle="myBackToTopStyle" :visibilityHeight="300" :backPosition="50"></back-to-top>
 </el-tooltip>
@@ -177,250 +72,50 @@ import MarkdownEditor from '@/components/MarkdownEditor'
 import BackToTop from '@/components/BackToTop'
 import Tinymce from '@/components/Tinymce'
 
-  export default {
-    created: function() {
-    this.created_complexTableDataForm_complexTableDataForm();
-    },
-    components: {
-        JsonEditor,
-        MarkdownEditor,
-        BackToTop,
-        Tinymce
-    },
-    data() {
-      return {
-        myBackToTopStyle: {
-            right: '50px',
-            bottom: '50px',
-            width: '40px',
-            height: '40px',
-            'border-radius': '4px',
-            'line-height': '45px',
-            background: '#e7eaf1'
-        },
-complexTableEditForm_loading: false,
-complexTableEditForm: {"imp":0,"show":false}
-,
-complexTableDataForm_loading: false,
-complexTableDataForm: {}
-            
-      }
-    },
-    methods: {
-    
-    placeholder_complexTableEditForm_complexTableEditForm(param1, param2, param3, param4) {
-      }
-    
+export default {
+  created: function() {
+  },
+  components: {
+    JsonEditor,
+    MarkdownEditor,
+    BackToTop,
+    Tinymce
+  },
+  data() {
+    return {
+      myBackToTopStyle: {
+        right: '50px',
+        bottom: '50px',
+        width: '40px',
+        height: '40px',
+        'border-radius': '4px',
+        'line-height': '45px',
+        background: '#e7eaf1'
+      },
+      complexTableEditForm_loading: false,
+      complexTableEditForm: { 'imp': 0, 'show': false }
 
-
-    ,
-    placeholder_complexTableEditForm_type(param1, param2, param3, param4) {
-      }
-    
-
-
-
-
-    ,
-    placeholder_complexTableEditForm_date(param1, param2, param3, param4) {
-      }
-    
-
-
-
-
-    ,
-    placeholder_complexTableEditForm_title(param1, param2, param3, param4) {
-      }
-    
-
-
-
-
-    ,
-    placeholder_complexTableEditForm_status(param1, param2, param3, param4) {
-      }
-    
-
-
-
-
-    ,
-    placeholder_complexTableEditForm_imp(param1, param2, param3, param4) {
-      }
-    
-
-
-
-
-    ,
-    placeholder_complexTableEditForm_remark(param1, param2, param3, param4) {
-      }
-    
-
-
-
-
-,
-    
-    created_complexTableDataForm_complexTableDataForm(param1, param2, param3, param4) {
-        var data = this.complexTableDataForm;
-        var params = this.$router.params;
-        var requestParams = "?"
-        for(var key in params) {
-            var value = params[key];
-            requestParams += ("&" + key + "=" + value);
-        }
-        function submitRequest(self) {
-            self.complexTableDataForm_loading = true;
-            request({
-                url: "/complex-table/init-complex-table-data-form" + (requestParams=="?"?"":requestParams),
-                method: "get"
-            }).then(res => {
-                self.complexTableDataForm = res.data;
-                self.complexTableDataForm_loading = false;
-            }).catch(err => {
-                self.complexTableDataForm_loading = false;
-            });
-        }
-        submitRequest(this);
-      }
-    
-
-
-    ,
-    current_change_complexTableDataForm_table(val) {
-        this.complexTableDataForm.table = [val];
-    },
-    selection_change__complexTableDataForm_table(val) {
-        this.complexTableDataForm.table = val;
-    },
-    placeholder_complexTableDataForm_table(param1, param2, param3, param4) {
-      }
-    
-
-
-    ,
-    placeholder_complexTableDataForm_id(param1, param2, param3, param4) {
-      }
-    
-
-
-
-
-    ,
-    placeholder_complexTableDataForm_date(param1, param2, param3, param4) {
-      }
-    
-
-
-
-
-    ,
-    placeholder_complexTableDataForm_author(param1, param2, param3, param4) {
-      }
-    
-
-
-
-
-    ,
-    placeholder_complexTableDataForm_importance(param1, param2, param3, param4) {
-      }
-    
-
-
-
-
-    ,
-    click_complexTableDataForm_readings(param1, param2, param3, param4) {
-        var data = this.complexTableDataForm;
-        var params = this.$router.params;
-        var requestParams = "?"
-        for(var key in params) {
-            var value = params[key];
-            requestParams += ("&" + key + "=" + value);
-        }
-        function submitRequest(self) {
-            self.complexTableDataForm_loading = true;
-            request({
-                url: "/complex-table/init-complex-table-edit-form" + (requestParams=="?"?"":requestParams),
-                method: "get"
-            }).then(res => {
-                self.complexTableEditForm = res.data;
-                self.complexTableDataForm_loading = false;
-            }).catch(err => {
-                self.complexTableDataForm_loading = false;
-            });
-        }
-        submitRequest(this);
-      }
-    
-
-
-
-
-    ,
-    placeholder_complexTableDataForm_title(param1, param2, param3, param4) {
-      }
-    
-
-
-
-
-    ,
-    placeholder_complexTableDataForm_status(param1, param2, param3, param4) {
-      }
-    
-
-
-
-
-    ,
-    click_complexTableDataForm_actionEdit(param1, param2, param3, param4) {
-        var data = this.complexTableDataForm;
-        var params = this.$router.params;
-        var requestParams = "?"
-        for(var key in params) {
-            var value = params[key];
-            requestParams += ("&" + key + "=" + value);
-        }
-        function submitRequest(self) {
-            self.complexTableDataForm_loading = true;
-            request({
-                url: "/complex-table/init-complex-table-edit-form" + (requestParams=="?"?"":requestParams),
-                method: "get"
-            }).then(res => {
-                self.complexTableEditForm = res.data;
-                self.complexTableDataForm_loading = false;
-            }).catch(err => {
-                self.complexTableDataForm_loading = false;
-            });
-        }
-        submitRequest(this);
-      }
-    
-
-
-    ,
-    placeholder_complexTableDataForm_actionPublish(param1, param2, param3, param4) {
-      }
-    
-
-
-    ,
-    placeholder_complexTableDataForm_actionDelete(param1, param2, param3, param4) {
-      }
-    
-
-
-
-
-
-
-        
     }
+  },
+  methods: {
+
+    placeholder_complexTableEditForm_complexTableEditForm(param1, param2, param3, param4) {
+    },
+    placeholder_complexTableEditForm_type(param1, param2, param3, param4) {
+    },
+    placeholder_complexTableEditForm_date(param1, param2, param3, param4) {
+    },
+    placeholder_complexTableEditForm_title(param1, param2, param3, param4) {
+    },
+    placeholder_complexTableEditForm_status(param1, param2, param3, param4) {
+    },
+    placeholder_complexTableEditForm_imp(param1, param2, param3, param4) {
+    },
+    placeholder_complexTableEditForm_remark(param1, param2, param3, param4) {
+    }
+
   }
+}
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .ComplexTableComponent-container {

@@ -73,7 +73,7 @@
 ### 单页面router实例
 ```yml
 path: /test
-component: demo.view.test.test1.TestComponent
+component: demo.view.layout.card.CardComponent
 ```
 
 ### 带左侧菜单router
@@ -82,7 +82,7 @@ name: root
 children:
   - title: home
     icon: star
-    component: demo.view.test.test1.TestComponent
+    component: demo.view.layout.card.CardComponent
 ```
 
 ### 带登录页面以及菜单router
@@ -92,7 +92,7 @@ component: demo.view.LoginComponent
 children:
   - title: home
     icon: star
-    component: demo.view.test.test1.TestComponent
+    component: demo.view.layout.card.CardComponent
 ```
 
 ## Javabean注解说明

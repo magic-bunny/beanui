@@ -32,49 +32,40 @@ import MarkdownEditor from '@/components/MarkdownEditor'
 import BackToTop from '@/components/BackToTop'
 import Tinymce from '@/components/Tinymce'
 
-  export default {
-    created: function() {
-    },
-    components: {
-        JsonEditor,
-        MarkdownEditor,
-        BackToTop,
-        Tinymce
-    },
-    data() {
-      return {
-        myBackToTopStyle: {
-            right: '50px',
-            bottom: '50px',
-            width: '40px',
-            height: '40px',
-            'border-radius': '4px',
-            'line-height': '45px',
-            background: '#e7eaf1'
-        },
-MarkdownEditorComponent_loading: false,
-MarkdownEditorComponent: {"content":"**this is test**\n\n* vue\n* element\n* webpack\n\n## Simplemde"}
-            
-      }
-    },
-    methods: {
-    
-    placeholder_MarkdownEditorComponent_MarkdownEditorComponent(param1, param2, param3, param4) {
-      }
-    
+export default {
+  created: function() {
+  },
+  components: {
+    JsonEditor,
+    MarkdownEditor,
+    BackToTop,
+    Tinymce
+  },
+  data() {
+    return {
+      myBackToTopStyle: {
+        right: '50px',
+        bottom: '50px',
+        width: '40px',
+        height: '40px',
+        'border-radius': '4px',
+        'line-height': '45px',
+        background: '#e7eaf1'
+      },
+      MarkdownEditorComponent_loading: false,
+      MarkdownEditorComponent: { 'content': '**this is layout**\n\n* vue\n* element\n* webpack\n\n## Simplemde' }
 
-
-    ,
-    placeholder_MarkdownEditorComponent_content(param1, param2, param3, param4) {
-      }
-    
-
-
-
-
-        
     }
+  },
+  methods: {
+
+    placeholder_MarkdownEditorComponent_MarkdownEditorComponent(param1, param2, param3, param4) {
+    },
+    placeholder_MarkdownEditorComponent_content(param1, param2, param3, param4) {
+    }
+
   }
+}
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .MarkdownEditorComponent-container {

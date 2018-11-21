@@ -1,13 +1,14 @@
-package demo.view.test.test1;
+package demo.view.layout.card;
 
 import org.december.beanui.element.annotation.Card;
 import org.december.beanui.element.annotation.Component;
 import org.december.beanui.element.annotation.Subplot;
+import org.december.beanui.element.annotation.Tabs;
 
-@Component("/test")
-public class TestComponent {
+@Component
+public class CardComponent {
     @Subplot({1, 2, 1})
-    @Card(title = "test")
+    @Card(title = "layout")
     private TestForm testForm;
 
     @Subplot({1, 2, 2})
@@ -29,4 +30,4 @@ public class TestComponent {
     public void setTestForm2(TestForm testForm2) {
         this.testForm2 = testForm2;
     }
-}
+    }

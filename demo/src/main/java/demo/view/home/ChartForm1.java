@@ -6,7 +6,7 @@ import org.december.beanui.element.annotation.Form;
 import org.december.beanui.event.annotation.Created;
 
 @Form
-@Created(rest = DashboardController.class, func = "test1")
+@Created(rest = DashboardController.class, func = "card")
 public class ChartForm1 {
     @LineChart
     private Chart1 chart1;

@@ -12,10 +12,10 @@ public class WebApplication {
         SpringApplication.run(WebApplication.class, args);
     }
 
-    @GetMapping("/test")
+    @GetMapping("/layout")
     public Helloworld test() {
         Helloworld helloworld = new Helloworld();
-        helloworld.setInput("test");
+        helloworld.setInput("layout");
         return helloworld;
     }
 }

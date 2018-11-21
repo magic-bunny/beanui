@@ -1,9 +1,9 @@
-package demo.controller.test;
+package demo.controller.layout;
 
-import demo.view.test.test1.TestChart;
-import demo.view.test.test1.TestForm;
-import demo.view.test.test2.UserQueryForm;
-import demo.view.test.test2.UserRow;
+import demo.view.layout.card.TestChart;
+import demo.view.layout.card.TestForm;
+import demo.view.layout.test2.UserQueryForm;
+import demo.view.layout.test2.UserRow;
 import org.december.beanui.element.annotation.Cascader;
 import org.december.beanui.element.annotation.Select;
 import org.december.beanui.element.annotation.Transfer;
@@ -89,7 +89,7 @@ public class TestFormController {
         TestChart testChart = new TestChart();
         int[] line1 = {743,465,665,3123,665};
         int[] line2 = {3443,656,3443,2323,46};
-        String[] x = {"Mon","Tue","Wed","Thu","Fri","test"};
+        String[] x = {"Mon","Tue","Wed","Thu","Fri","layout"};
         testChart.setLine1(line1);
         testChart.setLine2(line2);
         testChart.setX(x);

@@ -26,6 +26,8 @@
 <#include "/Tree.ftl">
 <#include "/Iframe.ftl">
 <#include "/HTML.ftl">
+<#include "/Tabs.ftl">
+<#include "/Collapse.ftl">
 
 <#macro createAttrs scope, content>
 <#list content?keys as key><#if content[key]!='' && key!='label' && key!=':label' && key!='tag' && key!='text'>
@@ -189,6 +191,12 @@ ${form.id}: ${form.init}
     <#if object.type='Carousel'>
         <@createCarousel element=object/>
     </#if>
+    <#if object.type='Tabs'>
+        <@createTabs element=object/>
+    </#if>
+    <#if object.type='Collapse'>
+        <@createCollapse element=object/>
+    </#if>
     </@createSubplot>
 </#list>
 <el-tooltip placement="top" content="Back to top">
@@ -206,7 +214,15 @@ import ${childComponent.name} from '${childComponent.path}'
   export default {
     created: function() {
         <#list component.children as element>
-            <@createCreatedEventMethods formId=element.id element=element/>
+            <#if element.type='Dialog' || element.type='Card'>
+                <@createCreatedEventMethods formId=element.children[0].id element=element.children[0]/>
+            <#elseif element.type='Carousel' || element.type='Tabs' || element.type='Collapse'>
+                <#list element.children as e>
+                <@createCreatedEventMethods formId=e.children[0].id element=e.children[0]/>
+                </#list>
+            <#else>
+                <@createCreatedEventMethods formId=element.id element=element/>
+            </#if>
         </#list>
     },
     components: {
@@ -226,8 +242,12 @@ import ${childComponent.name} from '${childComponent.path}'
             background: '#e7eaf1'
         },
         <#list component.children as form>
-            <#if form.type='Dialog' || form.type='Card' || form.type='Carousel'>
+            <#if form.type='Dialog' || form.type='Card'>
                 <@createReturnData form=form.children[0]/>
+            <#elseif form.type='Carousel' || form.type='Tabs' || form.type='Collapse'>
+                <#list form.children as e>
+                <@createReturnData form=e.children[0]/><#if e_has_next>,</#if>
+                </#list>
             <#else>
                 <@createReturnData form=form/>
             </#if><#if form_has_next>,</#if>
@@ -236,8 +256,12 @@ import ${childComponent.name} from '${childComponent.path}'
     },
     methods: {
     <#list component.children as element>
-        <#if element.type='Dialog' || element.type='Card' || element.type='Carousel'>
+        <#if element.type='Dialog' || element.type='Card'>
             <@createEventMethods formId=element.children[0].id element=element.children[0] isFirst=true/>
+        <#elseif element.type='Carousel' || element.type='Tabs' || element.type='Collapse'>
+            <#list element.children as e>
+            <@createEventMethods formId=e.children[0].id element=e.children[0] isFirst=true/><#if e_has_next>,</#if>
+            </#list>
         <#else>
             <@createEventMethods formId=element.id element=element isFirst=true/>
         </#if><#if element_has_next>,</#if>

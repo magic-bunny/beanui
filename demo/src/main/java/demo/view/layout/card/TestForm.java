@@ -1,7 +1,7 @@
-package demo.view.test.test1;
+package demo.view.layout.card;
 
-import demo.controller.test.TestFormController;
-import demo.view.test.test2.UserRow;
+import demo.controller.layout.TestFormController;
+import demo.view.layout.test2.UserRow;
 import org.december.beanui.chart.annotation.LineChart;
 import org.december.beanui.element.Type;
 import org.december.beanui.element.Icon;
@@ -66,12 +66,12 @@ public class TestForm {
     @Upload(icon = Icon.UPLOAD, text = "将文件拖到此处", drag = "true")
     private File file;
 
-    @FormItem(prop = "test")
+    @FormItem(prop = "layout")
     @Click(rest = TestFormController.class, func = "test3")
     @Button(type = Type.PRIMARY, icon = Icon.UPLOAD)
     private String button = "Upload";
 
-    @FormItem(prop = "test")
+    @FormItem(prop = "layout")
     @Button
     private String button2 = "Clear";
 

@@ -15,6 +15,14 @@ public @interface Carousel {
     String indicator_position() default "";//	指示器的位置	string	outside/none	—
     String arrow() default "";//	切换箭头的显示时机	string	always/hover/never	hover
     String type() default "";//	走马灯的类型	string	card	—
-    String tag() default "el-carousel";
     String[] data() default {};
+
+    @Documented
+    @Target(ElementType.FIELD)
+    @Inherited
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface Item {
+        String name() default "";
+        String label() default "";
+    }
 }

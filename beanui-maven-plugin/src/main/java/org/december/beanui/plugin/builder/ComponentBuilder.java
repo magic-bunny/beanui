@@ -82,54 +82,95 @@ public class ComponentBuilder extends Builder {
                 elements.add(element);
             } else {
                 Set<Field> formFieldSet = new HashSet<Field>();
-                for (Field field : formFields) {
-                    field.setAccessible(true);
-                    Subplot subplot = field.getAnnotation(Subplot.class);
-                    if (field.getAnnotation(Dialog.class) != null || field.getAnnotation(Card.class) != null || field.getAnnotation(Carousel.class) != null) {
+                for (Field formField : formFields) {
+                    formField.setAccessible(true);
+                    Subplot subplot = formField.getAnnotation(Subplot.class);
+                    formFieldSet.add(formField);
+                    if (formField.getAnnotation(Dialog.class) != null || formField.getAnnotation(Card.class) != null) {
                         Element element = new Element();
                         if(subplot == null) {
                             element.setSubplot(defaultSubplot);
                         } else {
                             element.setSubplot(subplot.value());
                         }
-                        Annotation[] othersAnnotations = field.getAnnotations();
+                        Annotation[] othersAnnotations = formField.getAnnotations();
+                        for(Annotation annotation:othersAnnotations) {
+                            if(annotation.annotationType() == Subplot.class) {
+                                continue;
+                            }
+                            Map content = ClassUtil.annotation2map(annotation);
+                            Annotation[] formAnnotations = formField.getType().getAnnotations();
+                            element.setId(formField.getName());
+                            element.setType(annotation.annotationType().getSimpleName());
+                            Element formElement = buildForm(formField.getName(), formField.getType(), formAnnotations);
+                            if(element.getChildren() == null) {
+                                List<Element> otherElementChildren = new ArrayList<Element>();
+                                otherElementChildren.add(formElement);
+                                element.setChildren(otherElementChildren);
+                            } else {
+                                element.getChildren().add(formElement);
+                            }
+                            element.setType(annotation.annotationType().getSimpleName());
+                            content.remove(":data");
+                            content.remove("data");
+                            element.setContent(content);
+                        }
+                        elements.add(element);
+                    } else if (formField.getAnnotation(Carousel.class) != null || formField.getAnnotation(Tabs.class) != null || formField.getAnnotation(Collapse.class) != null) {
+                        Element element = new Element();
+                        element.setId(formField.getName());
+                        if(subplot == null) {
+                            element.setSubplot(defaultSubplot);
+                        } else {
+                            element.setSubplot(subplot.value());
+                        }
+
+                        Annotation[] othersAnnotations = formField.getAnnotations();
                         for(Annotation annotation:othersAnnotations) {
                             if(annotation.annotationType() == Subplot.class) {
                                 continue;
                             }
                             Map content = ClassUtil.annotation2map(annotation);
                             String[] datas = (String[])content.get("data");
-                            if(datas.length > 0) {
-                                for(String data:datas) {
-                                    Field formField = this.getTemplateClass().getDeclaredField(data.startsWith("$")?data.substring(1):data);
-                                    formField.setAccessible(true);
-                                    formFieldSet.add(formField);
-                                    element.setId(formField.getName());
-                                    element.setType(annotation.annotationType().getSimpleName());
-                                    Annotation[] formAnnotations = formField.getType().getAnnotations();
-                                    Element formElement = buildForm(formField.getName(), formField.getType(), formAnnotations);
-                                    if(element.getChildren() == null) {
-                                        List<Element> otherElementChildren = new ArrayList<Element>();
-                                        otherElementChildren.add(formElement);
-                                        element.setChildren(otherElementChildren);
-                                    } else {
-                                        element.getChildren().add(formElement);
-                                    }
+                            for(String data:datas) {
+                                Field field = this.getTemplateClass().getDeclaredField(data.startsWith("$")?data.substring(1):data);
+                                field.setAccessible(true);
+                                Element childElement = new Element();
+                                if(field.getAnnotation(Carousel.Item.class) != null) {
+                                    Carousel.Item carousel = field.getAnnotation(Carousel.Item.class);
+                                    Map c = ClassUtil.annotation2map(carousel);
+                                    childElement.setContent(c);
+                                    childElement.setId(field.getName());
+                                    childElement.setType(Carousel.Item.class.getSimpleName());
                                 }
-                            } else {
-                                Field formField = field;
-                                formField.setAccessible(true);
-                                formFieldSet.add(formField);
-                                Annotation[] formAnnotations = formField.getType().getAnnotations();
-                                element.setId(formField.getName());
+                                if(field.getAnnotation(Tabs.Item.class) != null) {
+                                    Tabs.Item tabs = field.getAnnotation(Tabs.Item.class);
+                                    Map c = ClassUtil.annotation2map(tabs);
+                                    childElement.setContent(c);
+                                    childElement.setId(field.getName());
+                                    childElement.setType(Tabs.Item.class.getSimpleName());
+                                }
+                                if(field.getAnnotation(Collapse.Item.class) != null) {
+                                    Collapse.Item collapse = field.getAnnotation(Collapse.Item.class);
+                                    Map c = ClassUtil.annotation2map(collapse);
+                                    childElement.setContent(c);
+                                    childElement.setId(field.getName());
+                                    childElement.setType(Collapse.Item.class.getSimpleName());
+                                }
+
                                 element.setType(annotation.annotationType().getSimpleName());
-                                Element formElement = buildForm(formField.getName(), formField.getType(), formAnnotations);
+                                Annotation[] formAnnotations = field.getType().getAnnotations();
+                                Element formElement = buildForm(field.getName(), field.getType(), formAnnotations);
+
+                                List<Element> childElementChildren = new ArrayList<Element>();
+                                childElementChildren.add(formElement);
+                                childElement.setChildren(childElementChildren);
                                 if(element.getChildren() == null) {
                                     List<Element> otherElementChildren = new ArrayList<Element>();
-                                    otherElementChildren.add(formElement);
+                                    otherElementChildren.add(childElement);
                                     element.setChildren(otherElementChildren);
                                 } else {
-                                    element.getChildren().add(formElement);
+                                    element.getChildren().add(childElement);
                                 }
                             }
                             element.setType(annotation.annotationType().getSimpleName());

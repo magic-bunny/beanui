@@ -14,3 +14,9 @@ target
 *.iws
 *.iml
 *.iprhome\
+/**/.settings
+/**/.classpath
+/**/.project
+/**/target
+/**/*.log
+/**/*.log.*

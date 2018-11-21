@@ -252,7 +252,7 @@ top5Form: {"vue":0,"javascript":0,"css":0,"eslint":0}
         function submitRequest(self) {
             self.chartForm1_loading = true;
             request({
-                url: "" + (requestParams=="?"?"":requestParams),
+                url: "dashboard/init_form1" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.chartForm1 = res.data;
@@ -287,7 +287,7 @@ top5Form: {"vue":0,"javascript":0,"css":0,"eslint":0}
         function submitRequest(self) {
             self.chartForm2_loading = true;
             request({
-                url: "" + (requestParams=="?"?"":requestParams),
+                url: "dashboard/init_form2" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.chartForm2 = res.data;

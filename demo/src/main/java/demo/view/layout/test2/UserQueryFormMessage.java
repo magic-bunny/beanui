@@ -1,4 +1,4 @@
-package demo.view.layout.test;
+package demo.view.layout.test2;
 
 import org.december.beanui.i18n.annotation.I18N;
 

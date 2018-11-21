@@ -2,8 +2,8 @@ package demo.controller.layout;
 
 import demo.view.layout.card.TestChart;
 import demo.view.layout.card.TestForm;
-import demo.view.layout.test2.UserQueryForm;
-import demo.view.layout.test2.UserRow;
+import demo.view.layout.test.UserQueryForm;
+import demo.view.layout.test.UserRow;
 import org.december.beanui.element.annotation.Cascader;
 import org.december.beanui.element.annotation.Select;
 import org.december.beanui.element.annotation.Transfer;

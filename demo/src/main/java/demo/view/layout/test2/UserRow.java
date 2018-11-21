@@ -1,4 +1,4 @@
-package demo.view.layout.test;
+package demo.view.layout.test2;
 
 import org.december.beanui.element.annotation.*;
 import org.december.beanui.element.Size;

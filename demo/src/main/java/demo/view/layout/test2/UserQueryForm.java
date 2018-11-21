@@ -1,4 +1,4 @@
-package demo.view.layout.test;
+package demo.view.layout.test2;
 
 import demo.controller.layout.TestFormController;
 import org.december.beanui.element.Size;
@@ -22,7 +22,7 @@ public class UserQueryForm {
     private String button = "Query";
 
     @FormItem(prop = "a")
-    @Click(rest = TestFormController.class, func = "test4", confirmMessage = "$t('demo.view.layout.test.UserQueryFormMessage.confirmMessage')", message = "$t('demo.view.layout.test.UserQueryFormMessage.message')")
+    @Click(rest = TestFormController.class, func = "test4", confirmMessage = "$t('demo.view.layout.test.UserQueryFormMessage.confirmMessage')", message = "$t('demo.view.layout.test2.UserQueryFormMessage.message')")
     @Button(type = Type.DANGER, icon = Icon.SEARCH)
     private String button2 = "Save";
 

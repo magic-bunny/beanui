@@ -60,6 +60,28 @@ public class TestFormController {
     @RequestMapping(value="/demo3",  method = RequestMethod.GET)
     public TestForm test3() {
         TestForm testForm = new TestForm();
+
+        List<UserRow> users = new ArrayList<UserRow>();
+        UserRow user = new UserRow();
+        user.setName("Jack");
+        user.setAge(20);
+        user.setLastDate(new Date());
+        users.add(user);
+
+        user = new UserRow();
+        user.setName("Mary");
+        user.setAge(25);
+        user.setLastDate(new Date());
+        users.add(user);
+
+        user = new UserRow();
+        user.setName("eric");
+        user.setAge(30);
+        user.setLastDate(new Date());
+        users.add(user);
+
+        testForm.setUserData(users);
+
         List<Select.Option> options = new ArrayList<Select.Option>();
         List<Transfer.Data> addressData = new ArrayList<Transfer.Data>();
         options.add(new Select.Option("t1", "text1"));

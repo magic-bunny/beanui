@@ -111,7 +111,7 @@ export const asyncRouterMap = [
       {
         path: '/test',
         name: 'Test'
-        ,component: () => import('@/views/beanui/demo.view.layout.test.ABCDComponent')
+        ,component: () => import('@/views/beanui/demo.view.layout.test2.ABCDComponent')
         ,meta: {
           title: 'Test'
           

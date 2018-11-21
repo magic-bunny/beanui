@@ -53,13 +53,14 @@ placement="right"
 <el-form-item prop="users"
   label=""
 >
-<el-table   current-change="current_change_testForm_users" @selection-change="selection_change__testForm_users">
+<el-table :data="testForm.userData"
+  current-change="current_change_testForm_users" @selection-change="selection_change__testForm_users">
  <el-table-column type="selection"
 width="50"
  label=""
 >
     </el-table-column>
- <el-table-column  :label="$t('demo.view.layout.test.UserRow.name')"
+ <el-table-column  :label="$t('demo.view.layout.test2.UserRow.name')"
 >
     <template slot-scope="scope">
 <el-input v-model="scope.row.name" size="mini"
@@ -68,7 +69,7 @@ width="50"
 </el-input>
     </template>
     </el-table-column>
- <el-table-column  :label="$t('demo.view.layout.test.UserRow.age')"
+ <el-table-column  :label="$t('demo.view.layout.test2.UserRow.age')"
 >
     <template slot-scope="scope">
 <el-input-number v-model="scope.row.age" size="mini"
@@ -77,7 +78,7 @@ width="50"
 </el-input-number>
     </template>
     </el-table-column>
- <el-table-column  :label="$t('demo.view.layout.test.UserRow.stature')"
+ <el-table-column  :label="$t('demo.view.layout.test2.UserRow.stature')"
 >
     <template slot-scope="scope">
 <span v-model="scope.row.stature"  >
@@ -85,7 +86,7 @@ width="50"
 </span>
     </template>
     </el-table-column>
- <el-table-column  :label="$t('demo.view.layout.test.UserRow.weight')"
+ <el-table-column  :label="$t('demo.view.layout.test2.UserRow.weight')"
 >
     <template slot-scope="scope">
 <el-input-number v-model="scope.row.weight" size="mini"
@@ -95,7 +96,7 @@ width="50"
     </template>
     </el-table-column>
  <el-table-column width="240"
- :label="$t('demo.view.layout.test.UserRow.lastDate')"
+ :label="$t('demo.view.layout.test2.UserRow.lastDate')"
 >
     <template slot-scope="scope">
 <el-date-picker v-model="scope.row.lastDate" size="mini"
@@ -104,7 +105,7 @@ width="50"
 </el-date-picker>
     </template>
     </el-table-column>
- <el-table-column  :label="$t('demo.view.layout.test.UserRow.option')"
+ <el-table-column  :label="$t('demo.view.layout.test2.UserRow.option')"
 >
     <template slot-scope="scope">
 <el-button size="mini"
@@ -224,13 +225,14 @@ placement="right"
 <el-form-item prop="users"
   label=""
 >
-<el-table   current-change="current_change_testForm2_users" @selection-change="selection_change__testForm2_users">
+<el-table :data="testForm2.userData"
+  current-change="current_change_testForm2_users" @selection-change="selection_change__testForm2_users">
  <el-table-column type="selection"
 width="50"
  label=""
 >
     </el-table-column>
- <el-table-column  :label="$t('demo.view.layout.test.UserRow.name')"
+ <el-table-column  :label="$t('demo.view.layout.test2.UserRow.name')"
 >
     <template slot-scope="scope">
 <el-input v-model="scope.row.name" size="mini"
@@ -239,7 +241,7 @@ width="50"
 </el-input>
     </template>
     </el-table-column>
- <el-table-column  :label="$t('demo.view.layout.test.UserRow.age')"
+ <el-table-column  :label="$t('demo.view.layout.test2.UserRow.age')"
 >
     <template slot-scope="scope">
 <el-input-number v-model="scope.row.age" size="mini"
@@ -248,7 +250,7 @@ width="50"
 </el-input-number>
     </template>
     </el-table-column>
- <el-table-column  :label="$t('demo.view.layout.test.UserRow.stature')"
+ <el-table-column  :label="$t('demo.view.layout.test2.UserRow.stature')"
 >
     <template slot-scope="scope">
 <span v-model="scope.row.stature"  >
@@ -256,7 +258,7 @@ width="50"
 </span>
     </template>
     </el-table-column>
- <el-table-column  :label="$t('demo.view.layout.test.UserRow.weight')"
+ <el-table-column  :label="$t('demo.view.layout.test2.UserRow.weight')"
 >
     <template slot-scope="scope">
 <el-input-number v-model="scope.row.weight" size="mini"
@@ -266,7 +268,7 @@ width="50"
     </template>
     </el-table-column>
  <el-table-column width="240"
- :label="$t('demo.view.layout.test.UserRow.lastDate')"
+ :label="$t('demo.view.layout.test2.UserRow.lastDate')"
 >
     <template slot-scope="scope">
 <el-date-picker v-model="scope.row.lastDate" size="mini"
@@ -275,7 +277,7 @@ width="50"
 </el-date-picker>
     </template>
     </el-table-column>
- <el-table-column  :label="$t('demo.view.layout.test.UserRow.option')"
+ <el-table-column  :label="$t('demo.view.layout.test2.UserRow.option')"
 >
     <template slot-scope="scope">
 <el-button size="mini"
@@ -363,225 +365,488 @@ import BackToTop from '@/components/BackToTop'
 import Tinymce from '@/components/Tinymce'
 import demo_view_layout_card_testchart from './demo.view.layout.card.TestChart'
 
-export default {
-  created: function() {
-    this.created_testForm_testForm()
-    this.created_testForm2_testForm2()
-  },
-  components: {
-    JsonEditor,
-    MarkdownEditor,
-    BackToTop,
-    Tinymce,
-    demo_view_layout_card_testchart
-  },
-  data() {
-    return {
-      myBackToTopStyle: {
-        right: '50px',
-        bottom: '50px',
-        width: '40px',
-        height: '40px',
-        'border-radius': '4px',
-        'line-height': '45px',
-        background: '#e7eaf1'
-      },
-      testForm_loading: false,
-      testForm: { 'cascaderOptions': [], 'level': 0, 'button': 'Upload', 'button2': 'Clear', 'admin': false },
-      testForm_rules: {
-        username: [{ 'min': '', 'len': '', 'max': '', 'pattern': '', 'trigger': '', 'type': '', 'message': '', 'required': 'true' }],
-        password: [{ 'min': '', 'len': '', 'max': '', 'pattern': '', 'trigger': '', 'type': '', 'message': '', 'required': 'true' }]
-
-      },
-      testForm2_loading: false,
-      testForm2: { 'cascaderOptions': [], 'level': 0, 'button': 'Upload', 'button2': 'Clear', 'admin': false },
-      testForm2_rules: {
-        username: [{ 'min': '', 'len': '', 'max': '', 'pattern': '', 'trigger': '', 'type': '', 'message': '', 'required': 'true' }],
-        password: [{ 'min': '', 'len': '', 'max': '', 'pattern': '', 'trigger': '', 'type': '', 'message': '', 'required': 'true' }]
+  export default {
+    created: function() {
+    this.created_testForm_testForm();
+    this.created_testForm2_testForm2();
+    },
+    components: {
+        JsonEditor,
+        MarkdownEditor,
+        BackToTop,
+        Tinymce,
+        demo_view_layout_card_testchart
+    },
+    data() {
+      return {
+        myBackToTopStyle: {
+            right: '50px',
+            bottom: '50px',
+            width: '40px',
+            height: '40px',
+            'border-radius': '4px',
+            'line-height': '45px',
+            background: '#e7eaf1'
+        },
+testForm_loading: false,
+testForm: {"cascaderOptions":[],"level":0,"button":"Upload","button2":"Clear","admin":false}
+,testForm_rules: {
+    username: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
+    password: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+,
+testForm2_loading: false,
+testForm2: {"cascaderOptions":[],"level":0,"button":"Upload","button2":"Clear","admin":false}
+,testForm2_rules: {
+    username: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
+    password: [{"min":"","len":"","max":"","pattern":"","trigger":"","type":"","message":"","required":"true"}],
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
 
       }
-
-    }
-  },
-  methods: {
-
+    },
+    methods: {
+    
     created_testForm_testForm(param1, param2, param3, param4) {
-      var data = this.testForm
-      var params = this.$router.params
-      var requestParams = '?'
-      for (var key in params) {
-        var value = params[key]
-        requestParams += ('&' + key + '=' + value)
+        var data = this.testForm;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
+        function submitRequest(self) {
+            self.testForm_loading = true;
+            request({
+                url: "/demo3" + (requestParams=="?"?"":requestParams),
+                method: "get"
+            }).then(res => {
+                self.testForm = res.data;
+                self.testForm_loading = false;
+            }).catch(err => {
+                self.testForm_loading = false;
+            });
+        }
+        submitRequest(this);
       }
-      function submitRequest(self) {
-        self.testForm_loading = true
-        request({
-          url: '/demo3' + (requestParams == '?' ? '' : requestParams),
-          method: 'get'
-        }).then(res => {
-          self.testForm = res.data
-          self.testForm_loading = false
-        }).catch(err => {
-          self.testForm_loading = false
-        })
-      }
-      submitRequest(this)
-    },
+    
+
+
+    ,
     placeholder_testForm_username(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_password(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_isAdmin(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_lastDate(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     current_change_testForm_users(val) {
-      this.testForm.users = [val]
+        this.testForm.users = [val];
     },
     selection_change__testForm_users(val) {
-      this.testForm.users = val
+        this.testForm.users = val;
     },
     placeholder_testForm_users(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+    ,
     placeholder_testForm_id(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_name(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_age(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_stature(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_weight(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_lastDate(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_option(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+
+
+    ,
     placeholder_testForm_cascader(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_level(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_detail(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_address(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_testChart(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm_file(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     click_testForm_button(param1, param2, param3, param4) {
-      var data = this.testForm
-      var params = this.$router.params
-      var requestParams = '?'
-      for (var key in params) {
-        var value = params[key]
-        requestParams += ('&' + key + '=' + value)
+        var data = this.testForm;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
+        function submitRequest(self) {
+            self.testForm_loading = true;
+            request({
+                url: "/demo3" + (requestParams=="?"?"":requestParams),
+                method: "get"
+            }).then(res => {
+                self.testForm = res.data;
+                self.testForm_loading = false;
+            }).catch(err => {
+                self.testForm_loading = false;
+            });
+        }
+        submitRequest(this);
       }
-      function submitRequest(self) {
-        self.testForm_loading = true
-        request({
-          url: '/demo3' + (requestParams == '?' ? '' : requestParams),
-          method: 'get'
-        }).then(res => {
-          self.testForm = res.data
-          self.testForm_loading = false
-        }).catch(err => {
-          self.testForm_loading = false
-        })
-      }
-      submitRequest(this)
-    },
+    
+
+
+    ,
     placeholder_testForm_button2(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+,
+    
     created_testForm2_testForm2(param1, param2, param3, param4) {
-      var data = this.testForm2
-      var params = this.$router.params
-      var requestParams = '?'
-      for (var key in params) {
-        var value = params[key]
-        requestParams += ('&' + key + '=' + value)
+        var data = this.testForm2;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
+        function submitRequest(self) {
+            self.testForm2_loading = true;
+            request({
+                url: "/demo3" + (requestParams=="?"?"":requestParams),
+                method: "get"
+            }).then(res => {
+                self.testForm2 = res.data;
+                self.testForm2_loading = false;
+            }).catch(err => {
+                self.testForm2_loading = false;
+            });
+        }
+        submitRequest(this);
       }
-      function submitRequest(self) {
-        self.testForm2_loading = true
-        request({
-          url: '/demo3' + (requestParams == '?' ? '' : requestParams),
-          method: 'get'
-        }).then(res => {
-          self.testForm2 = res.data
-          self.testForm2_loading = false
-        }).catch(err => {
-          self.testForm2_loading = false
-        })
-      }
-      submitRequest(this)
-    },
+    
+
+
+    ,
     placeholder_testForm2_username(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm2_password(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm2_isAdmin(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_testForm2_lastDate(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     current_change_testForm2_users(val) {
-      this.testForm2.users = [val]
+        this.testForm2.users = [val];
     },
     selection_change__testForm2_users(val) {
-      this.testForm2.users = val
+        this.testForm2.users = val;
     },
     placeholder_testForm2_users(param1, param2, param3, param4) {
-    },
-    placeholder_testForm2_id(param1, param2, param3, param4) {
-    },
-    placeholder_testForm2_name(param1, param2, param3, param4) {
-    },
-    placeholder_testForm2_age(param1, param2, param3, param4) {
-    },
-    placeholder_testForm2_stature(param1, param2, param3, param4) {
-    },
-    placeholder_testForm2_weight(param1, param2, param3, param4) {
-    },
-    placeholder_testForm2_lastDate(param1, param2, param3, param4) {
-    },
-    placeholder_testForm2_option(param1, param2, param3, param4) {
-    },
-    placeholder_testForm2_cascader(param1, param2, param3, param4) {
-    },
-    placeholder_testForm2_level(param1, param2, param3, param4) {
-    },
-    placeholder_testForm2_detail(param1, param2, param3, param4) {
-    },
-    placeholder_testForm2_address(param1, param2, param3, param4) {
-    },
-    placeholder_testForm2_testChart(param1, param2, param3, param4) {
-    },
-    placeholder_testForm2_file(param1, param2, param3, param4) {
-    },
-    click_testForm2_button(param1, param2, param3, param4) {
-      var data = this.testForm2
-      var params = this.$router.params
-      var requestParams = '?'
-      for (var key in params) {
-        var value = params[key]
-        requestParams += ('&' + key + '=' + value)
       }
-      function submitRequest(self) {
-        self.testForm2_loading = true
-        request({
-          url: '/demo3' + (requestParams == '?' ? '' : requestParams),
-          method: 'get'
-        }).then(res => {
-          self.testForm2 = res.data
-          self.testForm2_loading = false
-        }).catch(err => {
-          self.testForm2_loading = false
-        })
-      }
-      submitRequest(this)
-    },
-    placeholder_testForm2_button2(param1, param2, param3, param4) {
-    }
+    
 
+
+    ,
+    placeholder_testForm2_id(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_name(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_age(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_stature(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_weight(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_lastDate(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_option(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+
+
+    ,
+    placeholder_testForm2_cascader(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_level(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_detail(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_address(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_testChart(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    placeholder_testForm2_file(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+    ,
+    click_testForm2_button(param1, param2, param3, param4) {
+        var data = this.testForm2;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
+        function submitRequest(self) {
+            self.testForm2_loading = true;
+            request({
+                url: "/demo3" + (requestParams=="?"?"":requestParams),
+                method: "get"
+            }).then(res => {
+                self.testForm2 = res.data;
+                self.testForm2_loading = false;
+            }).catch(err => {
+                self.testForm2_loading = false;
+            });
+        }
+        submitRequest(this);
+      }
+    
+
+
+    ,
+    placeholder_testForm2_button2(param1, param2, param3, param4) {
+      }
+    
+
+
+
+
+
+    }
   }
-}
 </script>

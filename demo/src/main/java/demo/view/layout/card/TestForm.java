@@ -37,8 +37,10 @@ public class TestForm {
     @DatePicker
     private Date lastDate;
 
-    @Table()
+    @Table(data = "$userData")
     private List<UserRow> users;
+
+    private List<UserRow> userData;
 
     @Cascader(options = "$cascaderOptions")
     private String[] cascader;
@@ -209,5 +211,13 @@ public class TestForm {
 
     public void setFile(File file) {
         this.file = file;
+    }
+
+    public List<UserRow> getUserData() {
+        return userData;
+    }
+
+    public void setUserData(List<UserRow> userData) {
+        this.userData = userData;
     }
 }

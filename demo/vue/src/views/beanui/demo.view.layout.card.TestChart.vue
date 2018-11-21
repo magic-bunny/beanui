@@ -73,31 +73,35 @@ export default {
     initChart(data) {
       this.chart = echarts.init(this.$el, 'macarons')
       this.chart.setOption({
-        yAxis: {
-          data: data.y
-        },
-        xAxis: {
-          data: data.x
-        },
-        series: [
-          {
-            areaStyle: {},
-            data: data.line1,
-            type: 'line'
-          },
-          {
-            areaStyle: {},
-            data: data.line2,
-            type: 'line'
-          }
-        ],
-        toolbox: {
-          feature: data.feature
-        },
-        title: {
-          text: 'abc'
-        }
-
+                    yAxis: {
+              data: data.y
+            }
+        ,
+            xAxis: {
+              data: data.x
+            }
+        ,
+            series: [
+              {
+                  areaStyle: {},
+                  data: data.line1,
+                  type: 'line'
+              },
+              {
+                  areaStyle: {},
+                  data: data.line2,
+                  type: 'line'
+              }
+            ]
+        ,
+            toolbox: {
+              feature: data.feature
+            }
+        ,
+            title: {
+              text: 'abc'
+            }
+        
       })
     }
   }

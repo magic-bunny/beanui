@@ -1,7 +1,7 @@
 package demo.view.layout.card;
 
 import demo.controller.layout.TestFormController;
-import demo.view.layout.test2.UserRow;
+import demo.view.layout.test.UserRow;
 import org.december.beanui.chart.annotation.LineChart;
 import org.december.beanui.element.Type;
 import org.december.beanui.element.Icon;

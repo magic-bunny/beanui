@@ -1,8 +1,7 @@
 
 
 <template>
-<div class="Helloworld-container">
-<div class="Helloworld-inner-container">
+<div style="padding:15px; background: #FCFCFC">
 <el-row>
 <el-col :span="24/1" style="padding: 10px;">
 <el-form v-loading="Helloworld_loading" ref="Helloworld" :model="Helloworld"
@@ -17,32 +16,58 @@
 </el-form>
 </el-col>
 </el-row>
-</div>
+<el-tooltip placement="top" content="Back to top">
+  <back-to-top transitionName="fade" :customStyle="myBackToTopStyle" :visibilityHeight="300" :backPosition="50"></back-to-top>
+</el-tooltip>
 </div>
 </template>
 <script>
 import request from '@/utils/request'
+import JsonEditor from '@/components/JsonEditor'
+import MarkdownEditor from '@/components/MarkdownEditor'
+import BackToTop from '@/components/BackToTop'
+import Tinymce from '@/components/Tinymce'
 
   export default {
     created: function() {
     this.created_Helloworld_Helloworld();
     },
     components: {
+        JsonEditor,
+        MarkdownEditor,
+        BackToTop,
+        Tinymce
     },
     data() {
       return {
-            Helloworld_loading: false,
-            Helloworld: {}
+        myBackToTopStyle: {
+            right: '50px',
+            bottom: '50px',
+            width: '40px',
+            height: '40px',
+            'border-radius': '4px',
+            'line-height': '45px',
+            background: '#e7eaf1'
+        },
+Helloworld_loading: false,
+Helloworld: {}
+            
       }
     },
     methods: {
     
-    created_Helloworld_Helloworld() {
+    created_Helloworld_Helloworld(param1, param2, param3, param4) {
         var data = this.Helloworld;
+        var params = this.$router.params;
+        var requestParams = "?"
+        for(var key in params) {
+            var value = params[key];
+            requestParams += ("&" + key + "=" + value);
+        }
         function submitRequest(self) {
             self.Helloworld_loading = true;
             request({
-                url: "/test",
+                url: "/layout" + (requestParams=="?"?"":requestParams),
                 method: "get"
             }).then(res => {
                 self.Helloworld = res.data;
@@ -57,7 +82,7 @@ import request from '@/utils/request'
 
 
     ,
-    placeholder_Helloworld_input() {
+    placeholder_Helloworld_input(param1, param2, param3, param4) {
       }
     
 
@@ -68,11 +93,3 @@ import request from '@/utils/request'
     }
   }
 </script>
-<style rel="stylesheet/scss" lang="scss">
-    .Helloworld-container {
-
-    }
-    .Helloworld-inner-container {
-        margin: 20px;
-    }
-</style>

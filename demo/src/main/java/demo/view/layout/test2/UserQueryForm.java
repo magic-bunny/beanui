@@ -17,12 +17,12 @@ public class UserQueryForm {
     private List<UserRow> users;
 
     @FormItem(prop = "a")
-    @Click(rest = TestFormController.class, func = "test2")
+    @Click(rest = TestFormController.class, func = "test")
     @Button(type = Type.PRIMARY, icon = Icon.SEARCH, size = Size.MINI)
     private String button = "Query";
 
     @FormItem(prop = "a")
-    @Click(rest = TestFormController.class, func = "test4", confirmMessage = "$t('demo.view.layout.test2.UserQueryFormMessage.confirmMessage')", message = "$t('demo.view.layout.test2.UserQueryFormMessage.message')")
+    @Click(rest = TestFormController.class, func = "test4", confirmMessage = "$t('demo.view.layout.test.UserQueryFormMessage.confirmMessage')", message = "$t('demo.view.layout.test2.UserQueryFormMessage.message')")
     @Button(type = Type.DANGER, icon = Icon.SEARCH)
     private String button2 = "Save";
 

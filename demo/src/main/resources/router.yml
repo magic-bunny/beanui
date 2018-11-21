@@ -22,7 +22,7 @@ children:
       component: demo.view.layout.collapse.CollapseComponent
     - title: Test
       path: /test
-      component: demo.view.layout.test.ABCDComponent
+      component: demo.view.layout.test2.ABCDComponent
   - title: Table
     icon: table
     path: /table

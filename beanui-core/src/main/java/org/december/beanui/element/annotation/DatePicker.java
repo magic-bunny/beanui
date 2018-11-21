@@ -30,4 +30,5 @@ public @interface DatePicker {
     String prefix_icon() default "";//	自定义头部图标的类名	string	—	el_icon_date
     String clear_icon() default "";//	自定义清空图标的类名	string	—	el_icon_circle_close
     String tag() default "el-date-picker";
+    String v_model() default "";
 }

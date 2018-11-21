@@ -14,4 +14,5 @@ public @interface Image {
     String width() default "";
     String alt() default "";
     String tag() default "img";
+    String v_model() default "";
 }

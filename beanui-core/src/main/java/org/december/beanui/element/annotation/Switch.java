@@ -20,4 +20,5 @@ public @interface Switch {
     String name() default "";//	switch 对应的 name 属性	string
     String label() default "";
     String tag() default "el-switch";
+    String v_model() default "";
 }

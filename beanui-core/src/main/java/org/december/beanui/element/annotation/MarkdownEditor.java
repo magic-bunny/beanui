@@ -11,4 +11,5 @@ public @interface MarkdownEditor {
     String id() default "contentEditor";
     String tag() default "markdown-editor";
     String ref() default "contentEditor";
+    String v_model() default "";
 }

@@ -21,6 +21,7 @@ public @interface Transfer {
     String left_default_checked() default "";//	初始状态下左侧列表的已勾选项的 key 数组	array	—	[ ]
     String right_default_checked() default "";//	初始状态下右侧列表的已勾选项的 key 数组	array	—	[ ]
     String tag() default "el-transfer";
+    String v_model() default "";
 
     class Data {
         public Data(String key, String label, boolean disabled) {

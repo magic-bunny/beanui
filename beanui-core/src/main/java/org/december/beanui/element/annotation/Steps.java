@@ -15,6 +15,7 @@ public @interface Steps {
     String align_center() default "";//	进行居中对齐	boolean	_	false
     String simple() default "";//	是否应用简洁风格	boolean	_	false
     String tag() default "el-steps";
+    String v_model() default "";
 
     class Step {
         class Status {

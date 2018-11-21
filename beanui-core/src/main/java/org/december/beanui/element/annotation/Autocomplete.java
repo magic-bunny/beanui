@@ -24,4 +24,5 @@ public @interface Autocomplete {
     String hide_loading() default "";//	是否隐藏远程加载时的加载图标	boolean	—	false
     String popper_append_to_body() default "";//	是否将下拉列表插入至 body 元素。在下拉列表的定位出现问题时，可将该属性设置为 false	boolean	_	true
     String tag() default "el-autocomplete";
+    String v_model() default "";
 }

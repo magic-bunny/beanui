@@ -17,6 +17,7 @@ public @interface Dropdown {
     String hide_timeout() default "";//	收起下拉菜单的延时（仅在 trigger 为 hover 时有效）	number	—	150
     String data() default "";
     String tag() default "el-dropdown";
+    String v_model() default "";
 
     class Item {
         public Item(String text) {

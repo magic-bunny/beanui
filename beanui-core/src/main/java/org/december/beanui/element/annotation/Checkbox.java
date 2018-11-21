@@ -18,4 +18,5 @@ public @interface Checkbox {
     String checked() default "";//	当前是否勾选	boolean	—	false
     String indeterminate() default "";//	设置 indeterminate 状态，只负责样式控制	boolean	—	false
     String tag() default "el-checkbox";
+    String v_model() default "";
 }

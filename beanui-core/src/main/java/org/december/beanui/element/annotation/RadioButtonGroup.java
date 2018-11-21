@@ -12,6 +12,7 @@ public @interface RadioButtonGroup {
     String text_color() default "";//	按钮形式的 Radio 激活时的文本颜色	string	—	#ffffff
     String fill() default "";//	按钮形式的 Radio 激活时的填充色和边框色	string	—	#409EFF
     String tag() default "el-radio-group";
+    String v_model() default "";
 
     class RadioButton {
         public RadioButton(String label, String key, boolean disabled) {

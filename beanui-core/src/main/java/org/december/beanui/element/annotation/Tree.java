@@ -28,6 +28,7 @@ public @interface Tree {
     String allow_drop() default ""; //	拖拽时判定目标节点能否被放置。type 参数有三种情况：'prev'、'inner' 和 'next'，分别表示放置在目标节点前、插入至目标节点和放置在目标节点后	Function(draggingNode, dropNode, type)	—	—
     String tag() default "el-tree";
     String label() default "";
+    String v_model() default "";
 
     class Node {
         public Node(String label, List<Node> children) {

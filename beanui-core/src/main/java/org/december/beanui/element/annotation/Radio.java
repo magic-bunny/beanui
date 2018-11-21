@@ -13,4 +13,5 @@ public @interface Radio {
     String size() default "";//	Radio 的尺寸，仅在 border 为真时有效	string	medium / small / mini	—
     String name() default "";//	原生 name 属性	string	—	—
     String tag() default "el-radio";
+    String v_model() default "";
 }

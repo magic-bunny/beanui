@@ -16,6 +16,7 @@ public @interface CheckboxButtonGroup {
     String data() default "";
     String label() default "";
     String tag() default "el-checkbox-group";
+    String v_model() default "";
 
     class CheckboxButton {
         public CheckboxButton(String label, String key, boolean disabled) {

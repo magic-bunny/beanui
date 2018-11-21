@@ -35,4 +35,5 @@ public @interface Upload {
     String limit() default "";//	最大允许上传个数	number	—	—
     String on_exceed() default "";//	文件超出个数限制时的钩子	function(files, fileList)	—	_
     String tag() default "el-upload";
+    String v_model() default "";
 }

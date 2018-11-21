@@ -19,4 +19,5 @@ public @interface InputNumber {
     String name() default "";//	原生属性	string	—	—
     String label() default "";//	输入框关联的label文字	string	—	—
     String tag() default "el-input-number";
+    String v_model() default "";
 }

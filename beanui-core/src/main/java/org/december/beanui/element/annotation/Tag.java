@@ -15,4 +15,5 @@ public @interface Tag {
     String color() default "";//	背景色	string	—	—
     String size() default "";//	尺寸	string	medium / small / mini	—
     String tag() default "el-tag";
+    String v_model() default "";
 }

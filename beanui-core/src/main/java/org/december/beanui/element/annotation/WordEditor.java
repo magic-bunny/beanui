@@ -9,4 +9,5 @@ import java.lang.annotation.*;
 public @interface WordEditor {
     String label() default "";
     String tag() default "tinymce";
+    String v_model() default "";
 }

@@ -10,4 +10,5 @@ public @interface JsonEditor {
     String label() default "";
     String tag() default "json-editor";
     String ref() default "jsonEditor";
+    String v_model() default "";
 }

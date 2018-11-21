@@ -29,4 +29,5 @@ public @interface TimePicker {
     String prefix_icon() default "";//	自定义头部图标的类名	string	—	el_icon_time
     String clear_icon() default "";//	自定义清空图标的类名	string	—	el_icon_circle_close
     String tag() default "el-time-select";
+    String v_model() default "";
 }

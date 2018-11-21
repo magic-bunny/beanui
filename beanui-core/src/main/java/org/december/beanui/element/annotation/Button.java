@@ -31,4 +31,5 @@ public @interface Button {
     String style() default "";
     String label() default "";
     String tag() default "el-button";
+    String v_model() default "";
 }

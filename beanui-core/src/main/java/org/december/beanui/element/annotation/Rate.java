@@ -25,4 +25,5 @@ public @interface Rate {
     String texts() default "";//	辅助文字数组	array	—	['极差', '失望', '一般', '满意', '惊喜']
     String score_template() default "";//	分数显示模板	string	—	{value}
     String tag() default "el-rate";
+    String v_model() default "";
 }

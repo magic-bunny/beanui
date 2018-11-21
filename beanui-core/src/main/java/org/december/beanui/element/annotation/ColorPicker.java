@@ -15,4 +15,5 @@ public @interface ColorPicker {
     String popper_class() default "";//	ColorPicker 下拉框的类名	string	—	—
     String predefine() default "";//	预定义颜色	array	—	—
     String tag() default "el-color-picker";
+    String v_model() default "";
 }

@@ -24,4 +24,5 @@ public @interface Slider {
     String debounce() default "";//	输入时的去抖延迟，毫秒，仅在show_input等于true时有效	number	—	300
     String tooltip_class() default "";//	tooltip 的自定义类名	string	—	—
     String tag() default "el-slider";
+    String v_model() default "";
 }

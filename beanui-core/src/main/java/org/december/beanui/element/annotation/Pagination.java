@@ -22,4 +22,5 @@ public @interface Pagination {
     String next_text() default "";//	替代图标显示的下一页文字	string	—	—
     String disabled() default "";//	是否禁用	boolean	—	false
     String tag() default "el-pagination";
+    String v_model() default "";
 }

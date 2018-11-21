@@ -11,4 +11,5 @@ public @interface RadioButton {
     String disabled() default "";//	是否禁用	boolean	—	false
     String name() default "";//	原生 name 属性	string	—	—
     String tag() default "el-radio-button";
+    String v_model() default "";
 }

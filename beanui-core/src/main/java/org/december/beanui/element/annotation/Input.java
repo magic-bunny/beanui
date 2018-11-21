@@ -50,4 +50,5 @@ public @interface Input {
     String label() default "";//	输入框关联的label文字	string	—	—
     String tabindex() default "";//	输入框的tabindex	string	-	-
     String tag() default "el-input";
+    String v_model() default "";
 }

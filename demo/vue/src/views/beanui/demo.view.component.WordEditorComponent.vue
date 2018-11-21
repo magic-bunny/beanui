@@ -1,8 +1,7 @@
 
 
 <template>
-<div class="WordEditorComponent-container">
-<div class="WordEditorComponent-inner-container">
+<div style="padding:15px; background: #FCFCFC">
 <el-row>
 <el-col :span="24/1" style="padding: 10px;">
 <el-form v-loading="WordEditorComponent_loading" ref="WordEditorComponent" :model="WordEditorComponent"
@@ -20,7 +19,6 @@
 <el-tooltip placement="top" content="Back to top">
   <back-to-top transitionName="fade" :customStyle="myBackToTopStyle" :visibilityHeight="300" :backPosition="50"></back-to-top>
 </el-tooltip>
-</div>
 </div>
 </template>
 <script>
@@ -74,11 +72,3 @@ WordEditorComponent: {}
     }
   }
 </script>
-<style rel="stylesheet/scss" lang="scss">
-    .WordEditorComponent-container {
-
-    }
-    .WordEditorComponent-inner-container {
-        margin: 20px;
-    }
-</style>

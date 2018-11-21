@@ -1,8 +1,7 @@
 
 
 <template>
-<div class="ComplexTableComponent-container">
-<div class="ComplexTableComponent-inner-container">
+<div style="padding:15px; background: #FCFCFC">
 <el-row>
 <el-col :span="24/1" style="padding: 10px;">
 <el-dialog
@@ -63,7 +62,6 @@ label-width="150px"
   <back-to-top transitionName="fade" :customStyle="myBackToTopStyle" :visibilityHeight="300" :backPosition="50"></back-to-top>
 </el-tooltip>
 </div>
-</div>
 </template>
 <script>
 import request from '@/utils/request'
@@ -72,56 +70,87 @@ import MarkdownEditor from '@/components/MarkdownEditor'
 import BackToTop from '@/components/BackToTop'
 import Tinymce from '@/components/Tinymce'
 
-export default {
-  created: function() {
-  },
-  components: {
-    JsonEditor,
-    MarkdownEditor,
-    BackToTop,
-    Tinymce
-  },
-  data() {
-    return {
-      myBackToTopStyle: {
-        right: '50px',
-        bottom: '50px',
-        width: '40px',
-        height: '40px',
-        'border-radius': '4px',
-        'line-height': '45px',
-        background: '#e7eaf1'
-      },
-      complexTableEditForm_loading: false,
-      complexTableEditForm: { 'imp': 0, 'show': false }
+  export default {
+    created: function() {
+    },
+    components: {
+        JsonEditor,
+        MarkdownEditor,
+        BackToTop,
+        Tinymce
+    },
+    data() {
+      return {
+        myBackToTopStyle: {
+            right: '50px',
+            bottom: '50px',
+            width: '40px',
+            height: '40px',
+            'border-radius': '4px',
+            'line-height': '45px',
+            background: '#e7eaf1'
+        },
+complexTableEditForm_loading: false,
+complexTableEditForm: {"imp":0,"show":false}
 
-    }
-  },
-  methods: {
-
+      }
+    },
+    methods: {
+    
     placeholder_complexTableEditForm_complexTableEditForm(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+    ,
     placeholder_complexTableEditForm_type(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_complexTableEditForm_date(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_complexTableEditForm_title(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_complexTableEditForm_status(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_complexTableEditForm_imp(param1, param2, param3, param4) {
-    },
+      }
+    
+
+
+
+
+    ,
     placeholder_complexTableEditForm_remark(param1, param2, param3, param4) {
-    }
+      }
+    
 
+
+
+
+
+    }
   }
-}
 </script>
-<style rel="stylesheet/scss" lang="scss">
-    .ComplexTableComponent-container {
-
-    }
-    .ComplexTableComponent-inner-container {
-        margin: 20px;
-    }
-</style>

@@ -1,8 +1,7 @@
 
 
 <template>
-<div class="InlineEditTableComponent-container">
-<div class="InlineEditTableComponent-inner-container">
+<div style="padding:15px; background: #FCFCFC">
 <el-row>
 <el-col :span="24/1" style="padding: 10px;">
 <el-form v-loading="InlineEditTableComponent_loading" ref="InlineEditTableComponent" :model="InlineEditTableComponent"
@@ -106,7 +105,6 @@ size="mini"
 <el-tooltip placement="top" content="Back to top">
   <back-to-top transitionName="fade" :customStyle="myBackToTopStyle" :visibilityHeight="300" :backPosition="50"></back-to-top>
 </el-tooltip>
-</div>
 </div>
 </template>
 <script>
@@ -257,11 +255,3 @@ InlineEditTableComponent: {}
     }
   }
 </script>
-<style rel="stylesheet/scss" lang="scss">
-    .InlineEditTableComponent-container {
-
-    }
-    .InlineEditTableComponent-inner-container {
-        margin: 20px;
-    }
-</style>

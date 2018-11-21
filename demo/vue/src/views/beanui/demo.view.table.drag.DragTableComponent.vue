@@ -1,8 +1,7 @@
 
 
 <template>
-<div class="DragTableComponent-container">
-<div class="DragTableComponent-inner-container">
+<div style="padding:15px; background: #FCFCFC">
 <el-row>
 <el-col :span="24/1" style="padding: 10px;">
 <el-form v-loading="DragTableComponent_loading" ref="DragTableComponent" :model="DragTableComponent"
@@ -86,7 +85,6 @@ highlight-current-row="true"
 <el-tooltip placement="top" content="Back to top">
   <back-to-top transitionName="fade" :customStyle="myBackToTopStyle" :visibilityHeight="300" :backPosition="50"></back-to-top>
 </el-tooltip>
-</div>
 </div>
 </template>
 <script>
@@ -223,11 +221,3 @@ DragTableComponent: {}
     }
   }
 </script>
-<style rel="stylesheet/scss" lang="scss">
-    .DragTableComponent-container {
-
-    }
-    .DragTableComponent-inner-container {
-        margin: 20px;
-    }
-</style>

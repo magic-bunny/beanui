@@ -8,4 +8,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Component {
     String value() default "";
+    String style() default "padding:15px; background: #FCFCFC";
 }

@@ -21,8 +21,8 @@ children:
       path: /collapse
       component: demo.view.layout.collapse.CollapseComponent
     - title: Test
-      path: /layout
-      component: demo.view.layout.test2.ABCDComponent
+      path: /test
+      component: demo.view.layout.test.ABCDComponent
   - title: Table
     icon: table
     path: /table

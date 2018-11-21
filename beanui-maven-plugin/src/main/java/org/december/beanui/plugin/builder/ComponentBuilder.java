@@ -61,6 +61,7 @@ public class ComponentBuilder extends Builder {
             boolean isForm = false;
             component.setId(this.getTemplateClass().getSimpleName());
             component.setType(Component.class.getSimpleName());
+
             for (Annotation annotation : annotations) {
                 if (annotation.annotationType() == Component.class) {
                     component.setContent(ClassUtil.annotation2map(annotation));

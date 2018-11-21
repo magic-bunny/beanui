@@ -169,8 +169,7 @@ ${form.id}: ${form.init}
 </#macro>
 
 <template>
-<div class="${component.id}-container">
-<div class="${component.id}-inner-container">
+<div style="${component.content.style}">
 <#list component.children as object>
     <@createSubplot values=object.subplot>
     <#if object.type="Form">
@@ -202,7 +201,6 @@ ${form.id}: ${form.init}
 <el-tooltip placement="top" content="Back to top">
   <back-to-top transitionName="fade" :customStyle="myBackToTopStyle" :visibilityHeight="300" :backPosition="50"></back-to-top>
 </el-tooltip>
-</div>
 </div>
 </template>
 <script>
@@ -269,11 +267,3 @@ import ${childComponent.name} from '${childComponent.path}'
     }
   }
 </script>
-<style rel="stylesheet/scss" lang="scss">
-    .${component.id}-container {
-
-    }
-    .${component.id}-inner-container {
-        margin: 20px;
-    }
-</style>

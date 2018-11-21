@@ -6,7 +6,7 @@ import org.december.beanui.element.annotation.Tabs;
 
 @Component
 public class TabsComponent {
-    @Tabs(data={"$testForm", "$testForm2"}, type = Tabs.Type.CARD)
+    @Tabs(value = "a", data={"$testForm", "$testForm2"}, type = Tabs.Type.CARD)
     private String test;
 
     @Tabs.Item(name = "a", label = "title1")

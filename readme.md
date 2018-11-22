@@ -52,12 +52,11 @@
 3. `mvn install`
 
 ## 安装和运行BeanUI example
-1. `cd beanui/demo`
-2. `cp beanui/vue $your_project/vue`
-3. `cd beanui/demo/vue` and `npm install` at first
-4. `mvn org.december:beanui-maven-plugin:1.0:run`
-5. `java -jar demo-[version].jar`
-6. 打开浏览器，输入`http://localhost:8080`
+1. 将`beanui/vue`目录拷贝到任意目录`%your_vue_path%`
+2. `cd %your_vue_path%` and `npm install`
+3. `cd beanui/demo` and `mvn package`
+4. `java -jar demo-[version].jar`
+5. 打开浏览器，输入`http://localhost:8080`
 
 ## 在DEV模式下运行BeanUI examle
 1. 将 [pom.xml](demo/pom.xml)文件的运行模式修改为dev ` <mode>dev</mode>`

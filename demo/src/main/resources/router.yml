@@ -53,3 +53,10 @@ children:
     - title: Markdown Editor
       path: /markdown-editor
       component: demo.view.component.MarkdownEditorComponent
+  - title: Icon
+    icon: icon
+    path: /icon
+    children:
+      - title: Icon Button
+        path: /icon-button
+        component: demo.view.icon.IconButtonComponent

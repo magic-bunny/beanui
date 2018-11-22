@@ -250,7 +250,7 @@ public class ComponentBuilder extends Builder {
             Annotation[] annotations = field.getAnnotations();
             FormItem formItem = field.getAnnotation(FormItem.class);
             formItemElement.setId(field.getName());
-            formItemElement.setType(FormItem.class.getName());
+            formItemElement.setType(FormItem.class.getSimpleName());
             String prop = "";
             Class type = null;
             if (formItem != null) {

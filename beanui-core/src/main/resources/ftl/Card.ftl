@@ -7,6 +7,9 @@ ${key}="${element.content[key]}"
 </#list>>
     <#if element.content.title!=''>
     <div slot="header">
+        <#if element.content.svg!=''>
+        <svg-icon icon-class="${element.content.svg}" />
+        </#if>
         <span>${element.content.title}</span>
     </div>
     </#if>

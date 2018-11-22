@@ -1,13 +1,13 @@
 package demo.view.icon;
 
-import org.december.beanui.element.annotation.Component;
-import org.december.beanui.element.annotation.Form;
-import org.december.beanui.element.annotation.FormItem;
-import org.december.beanui.element.annotation.SVG;
+import org.december.beanui.element.annotation.*;
 
 @Component
 @Form
 public class SVGIconComponent {
+    @Link(to = "http://iconfont.cn")
+    @Alert(title = "前往iconfont.cn获得更多svg图标")
+    private String alert;
     @FormItem(prop = "line1") @SVG(icon_class = "404", style = "margin: 20px;height: 50px; width: 50px;") private String svg404 = "404";
     @FormItem(prop = "line1") @SVG(icon_class = "bug", style = "margin: 20px;height: 50px; width: 50px;") private String bug = "bug";
     @FormItem(prop = "line1") @SVG(icon_class = "chart", style = "margin: 20px;height: 50px; width: 50px;") private String chart = "chart";
@@ -43,6 +43,14 @@ public class SVGIconComponent {
     @FormItem(prop = "line6") @SVG(icon_class = "user", style = "margin: 20px;height: 50px; width: 50px;") private String user = "user";
     @FormItem(prop = "line6") @SVG(icon_class = "wechat", style = "margin: 20px;height: 50px; width: 50px;") private String wechat = "wechat";
     @FormItem(prop = "line6") @SVG(icon_class = "zip", style = "margin: 20px;height: 50px; width: 50px;") private String zip = "zip";
+
+    public String getAlert() {
+        return alert;
+    }
+
+    public void setAlert(String alert) {
+        this.alert = alert;
+    }
 
     public String getSvg404() {
         return svg404;

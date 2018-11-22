@@ -60,3 +60,6 @@ children:
       - title: Icon Button
         path: /icon-button
         component: demo.view.icon.IconButtonComponent
+      - title: SVG Icon
+        path: /svg-icon
+        component: demo.view.icon.SVGIconComponent

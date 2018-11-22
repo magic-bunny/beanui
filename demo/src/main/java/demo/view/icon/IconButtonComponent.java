@@ -4,148 +4,288 @@ import org.december.beanui.element.Icon;
 import org.december.beanui.element.annotation.Button;
 import org.december.beanui.element.annotation.Component;
 import org.december.beanui.element.annotation.Form;
+import org.december.beanui.element.annotation.FormItem;
 
 @Component
 @Form
 public class IconButtonComponent {
+    @FormItem(prop = "line1")
     @Button(icon = Icon.INFO)
 	private String info = "info";
+
+    @FormItem(prop = "line1")
     @Button(icon = Icon.ERROR)
 	private String error = "error";
+
+    @FormItem(prop = "line1")
     @Button(icon = Icon.SUCCESS)
 	private String success = "success";
+
+    @FormItem(prop = "line1")
     @Button(icon = Icon.WARNING)
 	private String warning = "warning";
+
+    @FormItem(prop = "line1")
     @Button(icon = Icon.QUESTION)
 	private String question = "question";
+
+    @FormItem(prop = "line1")
     @Button(icon = Icon.BACK)
 	private String back = "back";
+
+    @FormItem(prop = "line2")
     @Button(icon = Icon.ARROW_LEFT)
 	private String arrow_left = "arrow_left";
+
+    @FormItem(prop = "line2")
     @Button(icon = Icon.ARROW_DOWN)
 	private String arrow_down = "arrow_down";
+
+    @FormItem(prop = "line2")
     @Button(icon = Icon.ARROW_RIGHT)
 	private String arrow_right = "arrow_right";
+
+    @FormItem(prop = "line2")
     @Button(icon = Icon.ARROW_UP)
 	private String arrow_up = "arrow_up";
+
+    @FormItem(prop = "line2")
     @Button(icon = Icon.CARET_LEFT)
 	private String caret_left = "caret_left";
+
+    @FormItem(prop = "line2")
     @Button(icon = Icon.CARET_BOTTOM)
 	private String caret_bottom = "caret_bottom";
+
+    @FormItem(prop = "line3")
     @Button(icon = Icon.CARET_TOP)
 	private String caret_top = "caret_top";
+
+    @FormItem(prop = "line3")
     @Button(icon = Icon.CARET_RIGHT)
 	private String caret_right = "caret_right";
+
+    @FormItem(prop = "line3")
     @Button(icon = Icon.D_ARROW_LEFT)
 	private String d_arrow_left = "d_arrow_left";
+
+    @FormItem(prop = "line3")
     @Button(icon = Icon.D_ARROW_RIGHT)
 	private String d_arrow_right = "d_arrow_right";
+
+    @FormItem(prop = "line3")
     @Button(icon = Icon.MINUS)
 	private String minus = "minus";
+
+    @FormItem(prop = "line3")
     @Button(icon = Icon.PLUS)
 	private String plus = "plus";
+
+    @FormItem(prop = "line4")
     @Button(icon = Icon.REMOVE )
 	private String remove = "remove";
+
+    @FormItem(prop = "line4")
     @Button(icon = Icon.CIRCLE_PLUS)
 	private String circle_plus = "circle_plus";
+
+    @FormItem(prop = "line4")
     @Button(icon = Icon.REMOVE_OUTLINE)
 	private String remove_outline = "remove_outline";
+
+    @FormItem(prop = "line4")
     @Button(icon = Icon.CIRCLE_PLUS_OUTLINE)
 	private String circle_plus_outline = "circle_plus_outline";
+
+    @FormItem(prop = "line4")
     @Button(icon = Icon.CLOSE)
 	private String close = "close";
+
+    @FormItem(prop = "line4")
     @Button(icon = Icon.CHECK)
 	private String check = "check";
+
+    @FormItem(prop = "line5")
     @Button(icon = Icon.CIRCLE_CLOS)
 	private String circle_clos = "circle_close";
+
+    @FormItem(prop = "line5")
     @Button(icon = Icon.CIRCLE_CHECK)
 	private String circle_check = "circle_check";
+
+    @FormItem(prop = "line5")
     @Button(icon = Icon.CIRCLE_CLOSE_OUTLINE)
 	private String circle_close_outline = "circle_close_outline";
+
+    @FormItem(prop = "line5")
     @Button(icon = Icon.CIRCLE_CHECK_OUTLINE)
 	private String circle_check_outline = "circle_check_outline";
+
+    @FormItem(prop = "line5")
     @Button(icon = Icon.ZOOM_OUT)
 	private String zoom_out = "zoom_out";
+
+    @FormItem(prop = "line5")
     @Button(icon = Icon.ZOOM_IN)
 	private String zoom_in = "zoom_in";
+
+    @FormItem(prop = "line6")
     @Button(icon = Icon.D_CARET)
 	private String d_caret = "d_caret";
+
+    @FormItem(prop = "line6")
     @Button(icon = Icon.SORT)
 	private String sort = "sort";
+
+    @FormItem(prop = "line6")
     @Button(icon = Icon.SORT_DOWN)
 	private String sort_down = "sort_down";
+
+    @FormItem(prop = "line6")
     @Button(icon = Icon.SORT_UP)
 	private String sort_up = "sort_up";
+
+    @FormItem(prop = "line6")
     @Button(icon = Icon.TICKET )
 	private String ticket = "tickets";
+
+    @FormItem(prop = "line6")
     @Button(icon = Icon.DOCUMENT)
 	private String document = "document";
+
+    @FormItem(prop = "line7")
     @Button(icon = Icon.GOODS)
 	private String goods = "goods";
+
+    @FormItem(prop = "line7")
     @Button(icon = Icon.SOLD_OUT)
 	private String sold_out = "sold_out";
+
+    @FormItem(prop = "line7")
     @Button(icon = Icon.NEWS)
 	private String news = "news";
+
+    @FormItem(prop = "line7")
     @Button(icon = Icon.MESSAGE)
 	private String message = "message";
+
+    @FormItem(prop = "line7")
     @Button(icon = Icon.DATE)
 	private String date = "date";
+
+    @FormItem(prop = "line7")
     @Button(icon = Icon.PRINTER)
 	private String printer = "printer";
+
+    @FormItem(prop = "line8")
     @Button(icon = Icon.TIME)
 	private String time = "time";
+
+    @FormItem(prop = "line8")
     @Button(icon = Icon.BELL)
 	private String bell = "bell";
+
+    @FormItem(prop = "line8")
     @Button(icon = Icon.MOBILE_PHONE)
 	private String mobile_phone = "mobile_phone";
+
+    @FormItem(prop = "line8")
     @Button(icon = Icon.SERVICE)
 	private String service = "service";
+
+    @FormItem(prop = "line8")
     @Button(icon = Icon.VIEW)
 	private String view = "view";
+
+    @FormItem(prop = "line8")
     @Button(icon = Icon.MENU)
 	private String menu = "menu";
+
+    @FormItem(prop = "line9")
     @Button(icon = Icon.MORE)
 	private String more = "more";
+
+    @FormItem(prop = "line9")
     @Button(icon = Icon.MORE_OUTLINE)
 	private String more_outline = "more_outline";
+
+    @FormItem(prop = "line9")
     @Button(icon = Icon.STAR_ON)
 	private String star_on = "star_on";
+
+    @FormItem(prop = "line9")
     @Button(icon = Icon.STAR_OFF)
 	private String star_off = "star_off";
+
+    @FormItem(prop = "line9")
     @Button(icon = Icon.LOCATION)
 	private String location = "location";
+
+    @FormItem(prop = "line9")
     @Button(icon = Icon.LOCATION_OUTLINE)
 	private String location_outline = "location_outline";
+
+    @FormItem(prop = "line10")
     @Button(icon = Icon.ICON_PHONE)
 	private String icon_phone = "phone";
+
+    @FormItem(prop = "line10")
     @Button(icon = Icon.PHONE_OUTLINE)
 	private String phone_outline = "phone_outline";
+
+    @FormItem(prop = "line10")
     @Button(icon = Icon.PICTUR )
 	private String pictur = "picture";
+
+    @FormItem(prop = "line10")
     @Button(icon = Icon.PICTURE_OUTLINE)
 	private String picture_outline = "picture_outline";
+
+    @FormItem(prop = "line10")
     @Button(icon = Icon.DELETE )
 	private String delete = "delete";
+
+    @FormItem(prop = "line10")
     @Button(icon = Icon.SEARCH )
 	private String search = "search";
+
+    @FormItem(prop = "line11")
     @Button(icon = Icon.EDIT )
 	private String edit = "edit";
+
+    @FormItem(prop = "line11")
     @Button(icon = Icon.EDIT_OUTLINE)
 	private String edit_outline = "edit_outline";
+
+    @FormItem(prop = "line11")
     @Button(icon = Icon.RANK)
 	private String rank = "rank";
+
+    @FormItem(prop = "line11")
     @Button(icon = Icon.REFRESH)
 	private String refresh = "refresh";
+
+    @FormItem(prop = "line11")
     @Button(icon = Icon.SHARE)
 	private String share = "share";
+
+    @FormItem(prop = "line11")
     @Button(icon = Icon.SETTING)
 	private String setting = "setting";
+
+    @FormItem(prop = "line12")
     @Button(icon = Icon.UPLOAD )
 	private String upload = "upload";
+
+    @FormItem(prop = "line12")
     @Button(icon = Icon.UPLOAD2)
 	private String upload2 = "upload2";
+
+    @FormItem(prop = "line12")
     @Button(icon = Icon.DOWNLOAD)
 	private String download = "download";
+
+    @FormItem(prop = "line12")
     @Button(icon = Icon.LOADING)
 	private String loading = "loading";
 

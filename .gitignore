@@ -1,6 +1,4 @@
 .DS_Store
-demo/vue/node_modules
-single-demo/vue/node_modules
 vue/node_modules
 dist
 npm-debug.log*
@@ -20,4 +18,4 @@ target
 /**/target
 /**/*.log
 /**/*.log.*
-/**/vue/src
+/*/vue

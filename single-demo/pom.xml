@@ -17,7 +17,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>RELEASE</version>
+            <version>2.1.0.RELEASE</version>
         </dependency>
     </dependencies>
 
@@ -27,9 +27,6 @@
                 <groupId>org.december</groupId>
                 <artifactId>beanui-maven-plugin</artifactId>
                 <version>1.0</version>
-                <configuration>
-                    <mode>prd</mode>
-                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.december</groupId>
@@ -42,6 +39,19 @@
                         <phase>compile</phase>
                         <goals>
                             <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.1.0.RELEASE</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>

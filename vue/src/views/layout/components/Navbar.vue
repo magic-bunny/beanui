@@ -1,29 +1,15 @@
 <template>
-  <el-menu class="navbar" mode="horizontal">
+  <div class="navbar" mode="horizontal">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
-
+    <div style="font-size: 16px; font-weight: 600; color: rgb(48, 65, 86); float: left; display: inline-block; margin-right: 15px; margin-left: 15px;">BEANUI example</div>
     <breadcrumb class="breadcrumb-container"></breadcrumb>
 
     <div class="right-menu">
       <error-log class="errLog-container right-menu-item"></error-log>
 
-      <!--
-      <el-tooltip effect="dark" :content="screenfull" placement="bottom">
-        <screenfull class="screenfull right-menu-item"></screenfull>
-      </el-tooltip>
-      -->
-
       <lang-select class="international right-menu-item"></lang-select>
 
-      <!--
-      <el-tooltip effect="dark" :content="theme" placement="bottom">
-        <theme-picker class="theme-switch right-menu-item"></theme-picker>
-      </el-tooltip>
-      -->
-
-      <el-input class="right-menu-item search" placeholder="Search" suffix-icon="el-icon-search" size="mini"></el-input>
-
-      <span class="right-menu-item username">{{name}}</span>
+      <div class="username right-menu-item">{{name}}</div>
 
       <el-dropdown class="avatar-container right-menu-item" trigger="click">
         <div class="avatar-wrapper">
@@ -33,16 +19,16 @@
         <el-dropdown-menu slot="dropdown">
           <router-link to="/">
             <el-dropdown-item>
-              Your settings
+              Your Setting
             </el-dropdown-item>
           </router-link>
           <el-dropdown-item divided>
-            <span @click="logout" style="display:block;">Log out</span>
+            <span @click="logout" style="display:block;">Log Out</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-  </el-menu>
+  </div>
 </template>
 
 <script>
@@ -116,6 +102,11 @@ export default {
     }
     .international{
       vertical-align: top;
+    }
+    .username{
+      vertical-align: top;
+      color: #606266;
+      font-size: 14px;
     }
     .theme-switch {
       vertical-align: 15px;

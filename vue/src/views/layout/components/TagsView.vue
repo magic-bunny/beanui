@@ -121,8 +121,10 @@ export default {
     background: #fff;
     height: 34px;
     border-bottom: 1px solid #d8dce5;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);
+    //box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);
     .tags-view-item {
+      border-top-left-radius:2px;
+      border-top-right-radius:2px;
       display: inline-block;
       position: relative;
       height: 26px;
@@ -133,7 +135,7 @@ export default {
       padding: 0 8px;
       font-size: 12px;
       margin-left: 5px;
-      margin-top: 4px;
+      margin-top: 8px;
       &:first-of-type {
         margin-left: 15px;
       }
@@ -141,6 +143,7 @@ export default {
         background-color: #42b983;
         color: #fff;
         border-color: #42b983;
+        border-bottom: 0px;
         &::before {
           content: '';
           background: #fff;

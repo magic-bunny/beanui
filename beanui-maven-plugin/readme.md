@@ -99,11 +99,11 @@ npm run dev or npm run prod
 ```
 
 ## Maven Plugin Parameters
-- **routerPath**  menu config file(yaml) path
-- **workPath**  html template file path, now based on element ui
-- **nodePath**  npm home path
-- **staticPath**  dist to Java WEB-INF/static
-- **projectName**  web project title
+- **routerPath**  左侧菜单配置文件路径，默认会读取工程resource目录下的router.yml, 如果不需要左侧菜单可以不配置
+- **workPath**  vue编译工作目录地址，多个工程科共享同一个工作目录，默认将读取工程下的vue目录
+- **nodePath**  nodejs的安装目录，默认会从环境变量的PATH中获取nodejs
+- **staticPath**  最终生成的HTML文件会输出到target中的static目录，也可自行定义
+- **projectName**  项目名称，将会显示到页面顶端以及title标签中
 - **mode**  可选参数为dev/prd，如果您还未建立spring boot工程，则可先使用dev模式
 - **builders**  自定义扩展builder
     1. builderClass 扩展编译类路径

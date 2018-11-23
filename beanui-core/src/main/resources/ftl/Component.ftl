@@ -28,6 +28,7 @@
 <#include "/HTML.ftl">
 <#include "/Tabs.ftl">
 <#include "/Collapse.ftl">
+<#include "/CardPanel.ftl">
 
 <#macro createAttrs scope, content>
 <#list content?keys as key><#if content[key]!='' && key!='label' && key!=':label' && key!='tag' && key!='text'>

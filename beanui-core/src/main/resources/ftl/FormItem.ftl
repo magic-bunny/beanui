@@ -29,6 +29,8 @@
     <@createDropdown formId=formId scope=formId element=object/>
 <#elseif object.type="Cascader">
     <@createCascader formId=formId scope=formId element=object/>
+<#elseif object.type="CardPanel">
+    <@createCardPanel formId=formId scope=formId element=object/>
 <#elseif object.type="Tree">
     <@createTree formId=formId scope=formId element=object/>
 <#elseif object.type="HTML">

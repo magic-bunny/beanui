@@ -6,27 +6,31 @@ import org.december.beanui.element.annotation.Subplot;
 
 @Component
 public class Dashboard {
-    @Subplot({3, 1, 1})
+    @Subplot({4, 1, 1})
+    @Card
+    private CardForm cardForm;
+
+    @Subplot({4, 1, 2})
     @Card
     private ChartForm1 chartForm1;
 
-    @Subplot({3, 3, 2})
+    @Subplot({4, 3, 3})
     @Card
     private ChartForm2 chartForm2;
 
-    @Subplot({3, 3, 3})
+    @Subplot({4, 3, 4})
     @Card
     private ChartForm3 chartForm3;
 
-    @Subplot({3, 3, 4})
+    @Subplot({4, 3, 5})
     @Card
     private ChartForm4 chartForm4;
 
-    @Subplot({3, 2, 5})
+    @Subplot({4, 2, 7})
     @Card
     private TableForm tableForm;
 
-    @Subplot({3, 2, 6})
+    @Subplot({4, 2, 8})
     @Card
     private Top5Form top5Form;
 
@@ -68,5 +72,21 @@ public class Dashboard {
 
     public void setTableForm(TableForm tableForm) {
         this.tableForm = tableForm;
+    }
+
+    public CardForm getCardForm() {
+        return cardForm;
+    }
+
+    public void setCardForm(CardForm cardForm) {
+        this.cardForm = cardForm;
+    }
+
+    public Top5Form getTop5Form() {
+        return top5Form;
+    }
+
+    public void setTop5Form(Top5Form top5Form) {
+        this.top5Form = top5Form;
     }
 }

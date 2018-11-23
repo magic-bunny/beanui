@@ -42,6 +42,10 @@ public class ComponentBuilder extends Builder {
             put("name", "BackToTop");
             put("path", "@/components/BackToTop");
         }};
+        Map cardPanel = new HashMap() {{
+            put("name", "CardPanel");
+            put("path", "@/components/CardPanel");
+        }};
         Map tinymce = new HashMap() {{
             put("name", "Tinymce");
             put("path", "@/components/Tinymce");
@@ -50,6 +54,7 @@ public class ComponentBuilder extends Builder {
         childComponents.add(markdownEditor);
         childComponents.add(backToTop);
         childComponents.add(tinymce);
+        childComponents.add(cardPanel);
         Map result = new HashMap();
         try {
             int[] defaultSubplot = {1, 1, 1};
